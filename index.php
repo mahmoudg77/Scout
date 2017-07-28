@@ -1,0 +1,92 @@
+<?
+session_start();
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);//
+
+define('SCRIPT_DIR',"");
+define('PATH',$_SERVER["DOCUMENT_ROOT"].SCRIPT_DIR."/");
+
+include "framework/init.php";
+include "models/init.php";
+
+use App\Models\Auth\User as User;
+use Framework\Request as Request;
+use Framework\Context as Context;
+use Framework\APPException as APPException;
+
+function CustomException($number=0,$message){
+    if($number==8) return;
+ return view('error',compact('number','message'));
+ exit();
+}
+
+//set_error_handler('CustomException');
+
+$context=new Context();
+$controller__path=$_GET['controller'];
+
+$context->method=$_GET['method'];
+
+
+define('LANG',$_GET['lang']);
+
+if(!$controller__path)$controller__path="home";
+if(!$context->method)$context->method="index";
+
+if(in_array($controller__path,$APP_Controllers)){
+     include('framework/controller/'.str_replace(".","/",$controller__path).'.php');
+}else{
+     include('controller/'.str_replace(".","/",$controller__path).'.php');
+}
+
+
+ $class=explode(".",$controller__path);
+ //echo $class[count($class)-1];
+ $context->controller_name="App\\Controllers\\".$class[count($class)-1];
+ $context->controller_path=$controller__path;
+
+ $request=new Request();
+
+if(!$request->Check_CSRF()){
+     if($request->UseApi()){
+          json_error("Invalid Request");
+          exit();
+      }else{
+          echo "Invalied Request !" ;
+           exit();
+      }
+}
+ if(isset($_SESSION['USER_TOKEN'])){
+     $user=new User();
+     $user=$user->where('token',$_SESSION['USER_TOKEN'])->limit(1)->supperUser()->get();
+     $user=$user[0];
+     $context->user=$user;
+     $context->userid=$user->data[$user->col_pk];
+    // $context->accountid=$user->accid->id;
+ }
+ $context->controller=new $context->controller_name;
+ $context->request= $request;
+ GV();
+
+  try{
+      if($request->isBody()){
+          $method="body".ucwords($context->method);
+      }elseif($request->isPost()){
+          $method="post".ucwords($context->method);
+      }else{
+          $method=$context->method;
+      }
+    if(method_exists($context->controller,$method)){
+		$context->controller->$method($request);
+	}else{
+		header("HTTP/1.0 404 Not Found");
+		return $context->controller->view("Error/index",['ErrorNumber'=>404]);
+	}
+  }catch(Exception $ex){
+    $message=$ex->getMessage();
+    $trace=$ex->getTrace();
+    //print_r($trace);
+    return view('error',compact('message','trace'));
+  }
+?>
