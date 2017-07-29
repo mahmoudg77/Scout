@@ -11,14 +11,18 @@ class Waitinglist extends BLL{
 	var $fields=[
 	    ];
 
-			function __construct(){
+	function __set($key,$value){
+        parent::__set($key,$value);
+		if($key!="model_name") return;
 
-				$this->fields['model_id']=['name'=>'Releted Record',
-						'type'=>'Many2one',
-						'serialize'=>true,
-						'relation'=>['class'=>$this->model,'classid'=>'id','controller'=>'Comp']];
-						parent::__construct();
-			}
+        if($this->model_name=="") return;
+
+        $c=new $this->model_name;
+		$this->fields['model_id']=['name'=>'Releted Record',
+			'type'=>'Many2one','visible'=>true,
+			'serialize'=>true,
+			'relation'=>['class'=>$this->model_name,'classid'=>$c->getPKname(),'controller'=>'Comp']];
+	}
 
 }
 ?>

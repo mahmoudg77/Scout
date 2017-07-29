@@ -171,5 +171,9 @@ function guid(){
         return $uuid;
     }
 }
-
+function env($key,$default=''){
+  $ini = parse_ini_file(PATH.'.env');
+  if($ini[$key]!='') return $ini[$key];
+  return $default;
+}
 ?>
