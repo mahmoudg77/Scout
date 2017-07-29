@@ -10,26 +10,22 @@ class Images extends BLL{
 
 
 	var $fields=[
-				// 'model_id'=>['name'=>'Releted Record',
-				// 	'type'=>'Many2one',
-				// 	'serialize'=>true,
-				// 	'relation'=>['class'=>'App\Models\Profile\Profile','classid'=>'Profile_ID','controller'=>'Profile']]
+		
 	    ];
 
 
-			function relatedModel(){
-				if($this->model_name=="") return;
+	function __set($key,$value){
+        parent::__set($key,$value);
+		if($key!="model_name") return;
 
-					$c=new $this->model_name;
-					//print_r($c);
-					// $this->fields['model_id']=['name'=>'Releted Record',
-					// 		'type'=>'Many2one',
-					// 		'serialize'=>true,
-					// 		'relation'=>['class'=>$this->model_name,'classid'=>$c->getPKname(),'controller'=>'Comp']];
-					//
+        if($this->model_name=="") return;
 
-				return $this->Many2one($this->model_name,$c->getPKname());
-			}
+        $c=new $this->model_name;
+		$this->fields['model_id']=['name'=>'Releted Record',
+			'type'=>'Many2one','visible'=>true,
+			'serialize'=>true,
+			'relation'=>['class'=>$this->model_name,'classid'=>$c->getPKname(),'controller'=>'Comp']];
+	}
 
 }
 ?>

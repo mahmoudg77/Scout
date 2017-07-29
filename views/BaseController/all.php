@@ -6,8 +6,8 @@
     ?>
     <td><?=ucwords(str_replace("_"," ",$key))?></td>
 		<?}
-}?>
-<td>View</td><td>Delete</td></tr>
+      }?>
+                         <td>Edit</td><td>View</td><td>Delete</td></tr>
 <?
 foreach($data as $key=>$row){
     ?><tr>
@@ -17,10 +17,12 @@ foreach($data as $key=>$row){
 
     <td><?$row->DrawField($key)?></td>
 			<?}
-			}?>
+          }?>
         <td>
-            <a class="btn btn-primary"  href="item/<?=$row->{$row->col_pk}?>">view</a>
-
+            <a class="btn btn-default" href="item/<?=$row->{$row->col_pk}?>">view</a>
+        </td>
+        <td>
+            <a class="btn btn-primary" href="edit/<?=$row->{$row->col_pk}?>">Edit</a>
         </td>
          <td>
         <?if(!$row->is_deleted){?>

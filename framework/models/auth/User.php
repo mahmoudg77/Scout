@@ -40,7 +40,7 @@ class User extends BLL{
 			$new_models[]=$itm."\*";
 		}
 
-    	$arr=$class->where("model","in",$new_models)
+    	$arr=$class->where("model_name","in",$new_models)
 				   ->where("accesstype",$access)
 				   ->where("groupid","in",array_getcolumn($this->groups,"id"))
 				   ->get();
@@ -58,7 +58,7 @@ class User extends BLL{
 			$itm.=(($itm=="")?"":"\\").$m;
 			$new_models[]=$itm."\*";
 		}
-      $class->where("model","in",$new_models) ;
+        $class->where("model_name","in",$new_models) ;
     	$class->where("accesstype",$access);
      	$class->where("groupid","in",array_getcolumn($this->groups,"id"));
 		// 	if($groupkey!='') $list->where("groupid",array_column($this->groups,"id"));
