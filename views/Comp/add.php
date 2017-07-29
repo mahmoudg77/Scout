@@ -3,8 +3,8 @@
  <?if(!is_array($data)){$data=[$data];}?>
  <?foreach($data as $item){?>
      <form action="" method="post">
-       <?=App\Framework\Request::CSRF()?>
-        <table class="table" > 
+       <?=Framework\Request::CSRF()?>
+        <table class="table" >
             <?foreach($item->fields as $key=>$field){if($field['visible']){?>
                 <?if($field==$item->col_pk){?>
                 `
