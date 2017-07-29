@@ -17,59 +17,59 @@ use Framework\APPException as APPException;
 
 function CustomException($number=0,$message){
     if($number==8) return;
- return view('error',compact('number','message'));
- exit();
+    return view('error',compact('number','message'));
+    exit();
 }
 
 //set_error_handler('CustomException');
+try{
+    $context=new Context();
+    $controller__path=$_GET['controller'];
 
-$context=new Context();
-$controller__path=$_GET['controller'];
-
-$context->method=$_GET['method'];
-
-
-define('LANG',$_GET['lang']);
-
-if(!$controller__path)$controller__path="home";
-if(!$context->method)$context->method="index";
-
-if(in_array($controller__path,$APP_Controllers)){
-     include('framework/controller/'.str_replace(".","/",$controller__path).'.php');
-}else{
-     include('controller/'.str_replace(".","/",$controller__path).'.php');
-}
+    $context->method=$_GET['method'];
 
 
- $class=explode(".",$controller__path);
- //echo $class[count($class)-1];
- $context->controller_name="App\\Controllers\\".$class[count($class)-1];
- $context->controller_path=$controller__path;
+    define('LANG',$_GET['lang']);
 
- $request=new Request();
+    if(!$controller__path)$controller__path="home";
+    if(!$context->method)$context->method="index";
 
-if(!$request->Check_CSRF()){
-     if($request->UseApi()){
-          json_error("Invalid Request");
-          exit();
-      }else{
-          echo "Invalied Request !" ;
-           exit();
-      }
-}
- if(isset($_SESSION['USER_TOKEN'])){
-     $user=new User();
-     $user=$user->where('token',$_SESSION['USER_TOKEN'])->limit(1)->supperUser()->get();
-     $user=$user[0];
-     $context->user=$user;
-     $context->userid=$user->data[$user->col_pk];
-    // $context->accountid=$user->accid->id;
- }
- $context->controller=new $context->controller_name;
- $context->request= $request;
- GV();
+    if(in_array($controller__path,$APP_Controllers)){
+         include('framework/controller/'.str_replace(".","/",$controller__path).'.php');
+    }else{
+         include('controller/'.str_replace(".","/",$controller__path).'.php');
+    }
 
-  try{
+
+     $class=explode(".",$controller__path);
+     //echo $class[count($class)-1];
+     $context->controller_name="App\\Controllers\\".$class[count($class)-1];
+     $context->controller_path=$controller__path;
+
+     $request=new Request();
+
+    if(!$request->Check_CSRF()){
+         if($request->UseApi()){
+              json_error("Invalid Request");
+              exit();
+          }else{
+              echo "Invalied Request !" ;
+               exit();
+          }
+    }
+     if(isset($_SESSION['USER_TOKEN'])){
+         $user=new User();
+         $user=$user->where('token',$_SESSION['USER_TOKEN'])->limit(1)->supperUser()->get();
+         $user=$user[0];
+         $context->user=$user;
+         $context->userid=$user->data[$user->col_pk];
+        // $context->accountid=$user->accid->id;
+     }
+     $context->controller=new $context->controller_name;
+     $context->request= $request;
+     GV();
+
+
       if($request->isBody()){
           $method="body".ucwords($context->method);
       }elseif($request->isPost()){
