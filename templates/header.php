@@ -63,11 +63,11 @@
 	    <!--
 	    Start Preloader
 	    ==================================== -->
-		<div id="loading-mask">
+		<!-- <div id="loading-mask">
 			<div class="loading-img">
 				<img alt="Arab Scout" src="<?=assets('img/loader 2.gif')?>"  />
 			</div>
-		</div>
+		</div> -->
         <!--
         End Preloader
         ==================================== -->

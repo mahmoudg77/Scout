@@ -1,24 +1,41 @@
-<?if(!$request->isAjax())include(PATH.'templates/header.php');?>
+<?if(!$request->isAjax())include(PATH.'templates/cpheader.php');?>
 
- <?if(!is_array($data)){$data=[$data];}?>
- <?foreach($data as $item){?>
-     <form action="" method="post">
+
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="box box-primary">
+        <div class="box-body no-padding">
+
+      <form action="" method="post">
        <?=Framework\Request::CSRF()?>
         <table class="table" >
-            <?foreach($item->fields as $key=>$field){if($field['visible']){?>
-                <?if($field==$item->col_pk){?>
+            <?foreach($data->fields as $key=>$field){if($field['visible']){?>
+                <?if($field==$data->col_pk){?>
                 `
                 <?}else{?>
 
                 <tr><td><?=ucwords(str_replace("_"," ",$field['name']))?> :</td><td>
                     <?
-                    $item->DrawField($key)?>
+                    $data->DrawField($key)?>
                     </td></tr>
                 <?}?>
             <?}}?>
             <tr><td></td><td><input class="btn btn-success" type="submit" value="Save"/></td></tr>
         </table>
      </form>
- <?}?>
 
- <?if(!$request->isAjax())include(PATH.'templates/footer.php');?>
+
+
+ </div>
+ </div>
+  			 </div>
+  			 <!-- /.col -->
+  		 </div>
+  		 <!-- /.row -->
+  	 </section>
+  	 <!-- /.content -->
+
+
+  <?if(!$request->isAjax())include(PATH.'templates/cpfooter.php');?>

@@ -18,7 +18,7 @@ class BaseController{
         return $this->class;
     }
     function index($request){
-            return $this->view();
+            return $this->all($request);
     }
     function add($request){
          return $this->view();
@@ -40,6 +40,10 @@ class BaseController{
 
 
             $data= $data::find($request->get['id']);
+            if(!$data){
+              header("HTTP/1.0 404 Not Found");
+          		return $this->view("Error/index",['ErrorNumber'=>404]);
+            }
             $data->mode='view';
 
            if($request->isAjax() ){
@@ -65,6 +69,10 @@ class BaseController{
 
 
         $data= $data::find($request->get['id']);
+        if(!$data){
+          header("HTTP/1.0 404 Not Found");
+          return $this->view("Error/index",['ErrorNumber'=>404]);
+        }
         $data->mode='edit';
 
          return $this->view(compact('data'));

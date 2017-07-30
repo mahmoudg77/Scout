@@ -331,8 +331,7 @@ var $mode="view";
 		$t=new $class;
 
 		if($classid=='')$classid=$t->tablename."_id";
-
-        $rows= $t->where('id','in_query' ,"select $classid from {$interClass->tablename} where $foraginkey='".$this->data[id]."'")->supperUser()->get();
+         $rows= $t->where($t->col_pk,'in_query' ,"select $classid from {$interClass->tablename} where $foraginkey='".$this->{$this->col_pk}."'")->supperUser()->get();
         if($where!=null)$t->where($where);
 	    //   if(!$rows) $rows=[$t];
 	     // echo $t->tablename,$classid ,$foraginkey,"\n\r";

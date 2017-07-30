@@ -184,4 +184,18 @@ function fileds_cmp($a, $b)
 {
     return ($a["sequence"]<$b["sequence"])?true:false;
 }
+function actionLink($action='',$controller='',$data=[]){
+  if($controller=='')$controller=str_replace("App\Controllers\\","",CONTROLLER_PATH);
+  //if($action=='')$action="index";
+  if(array_key_exists('id',$data))$id=$data['id'];
+  $qs="";
+  foreach($data as $key=>$value){
+    if($key!='id'){
+        $qs.=($qs==''?'':'&').$key."=".$value;
+    }
+  }
+
+    return "/".LANG."/".$controller.($action==''?'':"/".$action).($id==''?'':"/".$id).($qs==''?'':'?'.$qs);
+
+}
 ?>
