@@ -179,50 +179,50 @@ class BaseController{
       }
 
     }
-    function find1($request){
-        try{
-            $validate=new Validator();
-            $validate->validate($request->get,['id'=>'Requierd|Integer']);
-
-            $id=$request->get['id'];
-              $i= $this->model;
-              $data=$i::find($id);
-              $data->mode='view';
-              $prop=$request->get['prop'];
-
-               if(isset($prop)){
-                    $data->$prop;
-
-                  if($data->$prop){
-
-                     $d=$data->$prop;
-
-                    if($request->UseApi() ){
-                        return json_success("Success",$d);
-                    }else{
-                        $type=get_class($d[0]);
-                        $s=new $type;
-                        return view('BaseController/list',['data'=>$d]);
-                    }
-                  }else{
-                      throw new Exception("Invalid Request !");
-                      exit();
-                  }
-
-              }
-           if($request->UseApi() ){
-                return json_success("Success",$data);
-            }else{
-                return $this->view(compact('data'));
-            }
-        }catch(Exception $ex){
-            if($request->UseApi() ){
-                return json_error($ex->getMessage());
-            }else{
-                echo $ex->getMessage();
-            }
-        }
-    }
+    // function find1($request){
+    //     try{
+    //         $validate=new Validator();
+    //         $validate->validate($request->get,['id'=>'Requierd|Integer']);
+    //
+    //         $id=$request->get['id'];
+    //           $i= $this->model;
+    //           $data=$i::find($id);
+    //           $data->mode='view';
+    //           $prop=$request->get['prop'];
+    //
+    //            if(isset($prop)){
+    //                 $data->$prop;
+    //
+    //               if($data->$prop){
+    //
+    //                  $d=$data->$prop;
+    //
+    //                 if($request->UseApi() ){
+    //                     return json_success("Success",$d);
+    //                 }else{
+    //                     $type=get_class($d[0]);
+    //                     $s=new $type;
+    //                     return view('BaseController/list',['data'=>$d]);
+    //                 }
+    //               }else{
+    //                   throw new Exception("Invalid Request !");
+    //                   exit();
+    //               }
+    //
+    //           }
+    //        if($request->UseApi() ){
+    //             return json_success("Success",$data);
+    //         }else{
+    //             return $this->view(compact('data'));
+    //         }
+    //     }catch(Exception $ex){
+    //         if($request->UseApi() ){
+    //             return json_error($ex->getMessage());
+    //         }else{
+    //             echo $ex->getMessage();
+    //         }
+    //     }
+    // }
      function kanban($request){
           $i= new $this->model;
           $data=$i->get();
@@ -290,7 +290,7 @@ class BaseController{
 
           $view="BaseController/$method";
         }
-    
+
         return view($view,$arr);
 
 
