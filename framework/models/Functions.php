@@ -176,4 +176,8 @@ function env($key,$default=''){
   if($ini[$key]!='') return $ini[$key];
   return $default;
 }
+
+function assets($path){
+  return "/templates/assets/".$path;
+}
 ?>

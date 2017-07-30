@@ -2,15 +2,15 @@
     <head>
           <meta charset="utf-8">
                   <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="/templates/assets/css/bootstrap.min.css">
-        
+        <link rel="stylesheet" href="<?=assets('css/bootstrap.min.css')?>">
+
         <!-- Optional theme -->
-        <link rel="stylesheet" href="/templates/assets/css/bootstrap-theme.min.css">
-        <script src="/templates/assets/js/jquery-3.2.1.min.js" ></script> 
-            <script src="/templates/assets/js/jquery.form.js"></script> 
+        <link rel="stylesheet" href="<?=assets('css/bootstrap-theme.min.css')?>">
+        <script src="<?=assets('js/jquery-3.2.1.min.js')?>" ></script>
+            <script src="<?=assets('js/jquery.form.js')?>"></script>
         <!-- Latest compiled and minified JavaScript -->
-        <script src="/templates/assets/js/bootstrap.min.js" ></script>
-       
+        <script src="<?=assets('js/bootstrap.min.js')?>" ></script>
+
        <script>
     //   $(function(){
     //       $(".ajax-link").click(function(e){
@@ -22,7 +22,7 @@
        </script>
     </head>
     <body>
-        
+
 <div class="row">
     <div class="container">
     <h1 class="col col-xs-6 ">Header</h1>
@@ -70,7 +70,7 @@ foreach (glob(PATH."framework/controller/auth/*.php") as $filename)
 {
     $ctr=str_replace("/",".",str_replace(PATH.'framework/controller/',"",str_replace('.php','',$filename)));
 ?>
-    <li><a class="ajax-link" href="/<?=LANG?>/<?=$ctr?>"><?=str_replace("auth.","",$ctr)?></a></li> 
+    <li><a class="ajax-link" href="/<?=LANG?>/<?=$ctr?>"><?=str_replace("auth.","",$ctr)?></a></li>
 <?
 }
 ?>
@@ -83,10 +83,10 @@ foreach (glob(PATH."framework/controller/auth/*.php") as $filename)
 </div>
 </div>
 </div>
-<!--<a href="/<?=LANG."/Account/all"?>">Account</a> | 
-<a href="/<?=LANG."/PayMethod/all"?>">Pay Methods</a> | 
-<a href="/<?=LANG."/auth.Users/all"?>">Users</a> | 
-<a href="/<?=LANG."/Articles/all"?>">Articles</a> | 
+<!--<a href="/<?=LANG."/Account/all"?>">Account</a> |
+<a href="/<?=LANG."/PayMethod/all"?>">Pay Methods</a> |
+<a href="/<?=LANG."/auth.Users/all"?>">Users</a> |
+<a href="/<?=LANG."/Articles/all"?>">Articles</a> |
 
 <a href="/<?=LANG."/auth.Login"?>">Login</a> -->
 <hr/>
