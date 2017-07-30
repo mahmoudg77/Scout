@@ -37,7 +37,9 @@ var $mode="view";
                  if(!array_key_exists($field['Field'],$this->fields)) {
                      preg_match_all("/\d+/",$field['Type'],$sizes);
                      $visible=true;
-                     if(in_array($field['Field'],['created_at','created_by','updated_at','updated_by','deleted_at','deleted_by','is_deleted'])) $visible=false;
+                     if(in_array($field['Field'],['created_at','created_by','updated_at','updated_by','deleted_at','deleted_by','is_deleted'])){
+											  $visible=false;
+											}
 
                      $this->fields[$field['Field']]=[
 	                     				'name'=>$field['Field'],
@@ -53,17 +55,23 @@ var $mode="view";
             {
                 if(!$value['type']<>"Many2many" && !$value['type']<>"One2many"){
                     $this->data[$key]=$value['default'];
-                }
+										$this->fields[$key]['sequence']=0;
+                }else{
+									  $this->fields[$key]['sequence']=555;
+								}
                 if(!array_key_exists('visible',$value)){
                  	$this->fields[$key]['visible']=true;
                 }
             }
+
 		}catch(\Exception $ex){
-           throw $ex;
+           echo $ex->getMessage();
         }
 
-
 	}
+
+
+
 	public function getPKname(){
 		return $this->col_pk;
 	}
@@ -417,7 +425,7 @@ var $mode="view";
            return $this;
 	}
 	function withDeleted(){
-	   if($this->field_exists('is_deleted')){
+		if($this->field_exists('is_deleted')){
 	       $this->showDeleted=true;
 	   }
 	   return  $this;
@@ -680,6 +688,7 @@ var $mode="view";
                         default:
                         case 'combo':?>
                             <select name="<?=$field?>" <?foreach($attrs as $key=>$attr){?><?=' '.$key.'="'.$attr.'" '?><?}?>>
+															<option value="0">Select One..</option>
                                 <?$class=$this->fields[$field]['relation']['class'];
                                     $class=new $class;
                                     $classid=$this->fields[$field]['relation']['classid'];

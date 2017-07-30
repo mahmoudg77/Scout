@@ -180,4 +180,8 @@ function env($key,$default=''){
 function assets($path){
   return "/templates/assets/".$path;
 }
+function fileds_cmp($a, $b)
+{
+    return ($a["sequence"]<$b["sequence"])?true:false;
+}
 ?>
