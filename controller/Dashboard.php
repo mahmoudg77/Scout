@@ -16,6 +16,7 @@ class Dashboard extends BaseController
     protected $authRequired=true;
 
     function index($request){
+      
         return $this->view();
     }
  }
