@@ -36,11 +36,11 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="https://adminlte.io/themes/AdminLTE/index2.html" class="logo">
+    <a href="<?=actionLink("","Dashboard")?>" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>LTE</span>
+      <span class="logo-lg"><b>Scout</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -256,7 +256,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="<?=assets('dist/img/user2-160x160.jpg')?>" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span class="hidden-xs"><?=USER_NAME?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -264,7 +264,7 @@
                 <img src="<?=assets('dist/img/user2-160x160.jpg')?>" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
+                  <?=USER_NAME?> - Web Developer
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>
@@ -308,7 +308,7 @@
           <img src="<?=assets('dist/img/user2-160x160.jpg')?>" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p><?=USER_NAME?></p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -334,8 +334,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="https://adminlte.io/themes/AdminLTE/index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-            <li><a href="https://adminlte.io/themes/AdminLTE/index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+            <li><a href="/cpHome"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -505,7 +504,7 @@
     <section class="content-header">
       <h1>
         <?=str_replace("App\Controllers\\","",CONTROLLER_PATH)?>
-        <small>Add</small>
+        <small><?=METHOD?></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>

@@ -286,8 +286,10 @@ class BaseController{
         if($view==''){
             $trace = debug_backtrace();
             $method = $trace[1]['function'];
-            if(!array_key_exists('data',$arr)){
-               $data= new $this->model;
+            if(!array_key_exists('data',$arr) && $this->model!=''){
+
+                $data= new $this->model;
+
                $data->mode=$method;
                $arr['data']=$data;
             }
@@ -298,7 +300,7 @@ class BaseController{
 
           $view="BaseController/$method";
         }
-    
+
         return view($view,$arr);
 
 
