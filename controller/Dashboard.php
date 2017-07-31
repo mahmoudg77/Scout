@@ -3,6 +3,7 @@ namespace App\Controllers;
 class Dashboard extends BaseController
 {
     protected  $model="";
+<<<<<<< HEAD
 
     function index($request){
         $Website="arabscout.net";
@@ -11,6 +12,13 @@ class Dashboard extends BaseController
     }
 
 
+=======
+    protected $authRequired=true;
+
+    function index($request){
+        return $this->view();
+    }
+>>>>>>> origin/El-Menshawy
 }
 
 ?>
