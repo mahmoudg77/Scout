@@ -11,9 +11,11 @@ include "framework/init.php";
 include "models/init.php";
 
 use App\Models\Auth\User as User;
+
+
 use Framework\Request as Request;
 use Framework\Context as Context;
-use Framework\APPException as APPException;
+use \Exception as Exception;
 
 function CustomException($number=0,$message){
     if($number==8) return;
@@ -63,10 +65,21 @@ try{
          $user=$user[0];
          $context->user=$user;
          $context->userid=$user->data[$user->col_pk];
-        // $context->accountid=$user->accid->id;
+         // $context->accountid=$user->accid->id;
      }
-     $context->controller=new $context->controller_name;
-     $context->request= $request;
+
+     if(file_exists(PATH.'Controller/'.$context->controller_path.'.php')){
+         $context->controller=new $context->controller_name;
+         $context->request= $request;
+     }else{
+         header("HTTP/1.0 404 Not Found");
+         $Error=new App\Controllers\BaseController();
+         return $Error->view("Error/index",['ErrorNumber'=>404]);
+	}
+
+
+
+
      GV();
 
 
