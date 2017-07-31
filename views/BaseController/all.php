@@ -1,5 +1,15 @@
+<?if(!$request->isAjax())include(PATH.'templates/cpheader.php');?>
 
-<?if(!$request->isAjax())include(PATH.'templates/header.php');?>
+ 
+
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="box box-primary">
+        <div class="box-body no-padding">
+
+
 <table class="table"><tr>
     <?foreach($data[0]->fields as $key=>$value){
 		if($value['visible']){
@@ -19,10 +29,8 @@ foreach($data as $key=>$row){
 			<?}
           }?>
         <td>
-            <a class="btn btn-default" href="item/<?=$row->{$row->col_pk}?>">view</a>
-        </td>
-        <td>
-            <a class="btn btn-primary" href="edit/<?=$row->{$row->col_pk}?>">Edit</a>
+            <a class="btn btn-primary"  href="<?=actionLink('item','',['id'=>$row->{$row->col_pk}])?>">view</a>
+
         </td>
          <td>
         <?if(!$row->is_deleted){?>
@@ -51,5 +59,15 @@ foreach($data as $key=>$row){
 
 ?>
 </table>
-<a href="add" class="btn btn-primary" >Add New</a>
-<?if(!$request->isAjax())include(PATH.'templates/footer.php');?>
+
+</div>
+</div>
+ 			 </div>
+ 			 <!-- /.col -->
+ 		 </div>
+ 		 <!-- /.row -->
+ 	 </section>
+ 	 <!-- /.content -->
+
+
+ <?if(!$request->isAjax())include(PATH.'templates/cpfooter.php');?>

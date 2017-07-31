@@ -17,6 +17,10 @@ class Profile extends BLL{
 					'type'=>'One2many',
 					'serialize'=>true,
 					'relation'=>['class'=>"App\Models\Profile\ContactUser",'classid'=>'userId','controller'=>'Contacts']],
+			'Hobbies'=>['name'=>'Hobbies',
+					'type'=>'Many2many',
+					'serialize'=>true,
+					'relation'=>['class'=>"App\Models\Lookup\Hobbies",'classid'=>'hobbiesId','table'=>'App\Models\Profile\HobbyUserLog','thisid'=>'userId','controller'=>'Hobbies']],
 	    ];
 
 			function name()

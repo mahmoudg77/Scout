@@ -18,7 +18,7 @@ class BaseController{
         return $this->class;
     }
     function index($request){
-            return $this->view();
+            return $this->all($request);
     }
     function add($request){
          return $this->view();
@@ -40,6 +40,10 @@ class BaseController{
 
 
             $data= $data::find($request->get['id']);
+            if(!$data){
+              header("HTTP/1.0 404 Not Found");
+          		return $this->view("Error/index",['ErrorNumber'=>404]);
+            }
             $data->mode='view';
 
            if($request->isAjax() ){
@@ -65,6 +69,10 @@ class BaseController{
 
 
         $data= $data::find($request->get['id']);
+        if(!$data){
+          header("HTTP/1.0 404 Not Found");
+          return $this->view("Error/index",['ErrorNumber'=>404]);
+        }
         $data->mode='edit';
 
          return $this->view(compact('data'));
@@ -179,50 +187,50 @@ class BaseController{
       }
 
     }
-    function find1($request){
-        try{
-            $validate=new Validator();
-            $validate->validate($request->get,['id'=>'Requierd|Integer']);
-
-            $id=$request->get['id'];
-              $i= $this->model;
-              $data=$i::find($id);
-              $data->mode='view';
-              $prop=$request->get['prop'];
-
-               if(isset($prop)){
-                    $data->$prop;
-
-                  if($data->$prop){
-
-                     $d=$data->$prop;
-
-                    if($request->UseApi() ){
-                        return json_success("Success",$d);
-                    }else{
-                        $type=get_class($d[0]);
-                        $s=new $type;
-                        return view('BaseController/list',['data'=>$d]);
-                    }
-                  }else{
-                      throw new Exception("Invalid Request !");
-                      exit();
-                  }
-
-              }
-           if($request->UseApi() ){
-                return json_success("Success",$data);
-            }else{
-                return $this->view(compact('data'));
-            }
-        }catch(Exception $ex){
-            if($request->UseApi() ){
-                return json_error($ex->getMessage());
-            }else{
-                echo $ex->getMessage();
-            }
-        }
-    }
+    // function find1($request){
+    //     try{
+    //         $validate=new Validator();
+    //         $validate->validate($request->get,['id'=>'Requierd|Integer']);
+    //
+    //         $id=$request->get['id'];
+    //           $i= $this->model;
+    //           $data=$i::find($id);
+    //           $data->mode='view';
+    //           $prop=$request->get['prop'];
+    //
+    //            if(isset($prop)){
+    //                 $data->$prop;
+    //
+    //               if($data->$prop){
+    //
+    //                  $d=$data->$prop;
+    //
+    //                 if($request->UseApi() ){
+    //                     return json_success("Success",$d);
+    //                 }else{
+    //                     $type=get_class($d[0]);
+    //                     $s=new $type;
+    //                     return view('BaseController/list',['data'=>$d]);
+    //                 }
+    //               }else{
+    //                   throw new Exception("Invalid Request !");
+    //                   exit();
+    //               }
+    //
+    //           }
+    //        if($request->UseApi() ){
+    //             return json_success("Success",$data);
+    //         }else{
+    //             return $this->view(compact('data'));
+    //         }
+    //     }catch(Exception $ex){
+    //         if($request->UseApi() ){
+    //             return json_error($ex->getMessage());
+    //         }else{
+    //             echo $ex->getMessage();
+    //         }
+    //     }
+    // }
      function kanban($request){
           $i= new $this->model;
           $data=$i->get();

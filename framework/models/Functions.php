@@ -171,5 +171,31 @@ function guid(){
         return $uuid;
     }
 }
+function env($key,$default=''){
+  $ini = parse_ini_file(PATH.'.env');
+  if($ini[$key]!='') return $ini[$key];
+  return $default;
+}
 
+function assets($path){
+  return "/templates/assets/".$path;
+}
+function fileds_cmp($a, $b)
+{
+    return ($a["sequence"]<$b["sequence"])?true:false;
+}
+function actionLink($action='',$controller='',$data=[]){
+  if($controller=='')$controller=str_replace("App\Controllers\\","",CONTROLLER_PATH);
+  //if($action=='')$action="index";
+  if(array_key_exists('id',$data))$id=$data['id'];
+  $qs="";
+  foreach($data as $key=>$value){
+    if($key!='id'){
+        $qs.=($qs==''?'':'&').$key."=".$value;
+    }
+  }
+
+    return "/".LANG."/".$controller.($action==''?'':"/".$action).($id==''?'':"/".$id).($qs==''?'':'?'.$qs);
+
+}
 ?>

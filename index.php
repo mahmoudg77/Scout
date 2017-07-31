@@ -77,7 +77,8 @@ try{
       }else{
           $method=$context->method;
       }
-    if(method_exists($context->controller,$method)){
+      //print_r($context->controller);
+  if(method_exists($context->controller,$method)){
 		$context->controller->$method($request);
 	}else{
 		header("HTTP/1.0 404 Not Found");
