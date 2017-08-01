@@ -11,22 +11,14 @@ class Dashboard extends BaseController
          return $this->view(compact('Website','Date'));
      }
 
-
-<<<<<<< HEAD
-<<<<<<< HEAD
     protected $authRequired=true;
 }
-=======
 
-    protected $authRequired=true;
+//    protected $authRequired=true;
 
     function index1($request){
       
         return $this->view();
     }
- }
->>>>>>> refs/remotes/origin/master
-
-=======
->>>>>>> refs/remotes/origin/master
+ 
 ?>
