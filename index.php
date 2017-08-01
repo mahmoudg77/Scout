@@ -68,14 +68,15 @@ try{
          // $context->accountid=$user->accid->id;
      }
 
-     if(file_exists(PATH.'Controller/'.$context->controller_path.'.php')){
+     if(file_exists(PATH.'Controller/'.str_replace(".","/",$context->controller_path).'.php') || file_exists(PATH.'framework/Controller/'.str_replace(".","/",$context->controller_path).'.php')){
          $context->controller=new $context->controller_name;
-         $context->request= $request;
+
      }else{
          header("HTTP/1.0 404 Not Found");
          $Error=new App\Controllers\BaseController();
          return $Error->view("Error/index",['ErrorNumber'=>404]);
 	}
+   $context->request= $request;
 
 
 
