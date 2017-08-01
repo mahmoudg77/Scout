@@ -12,21 +12,11 @@ class Dashboard extends BaseController
      }
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    protected $authRequired=true;
-}
-=======
 
-    protected $authRequired=true;
-
+ 
     function index1($request){
-      
+
         return $this->view();
     }
  }
->>>>>>> refs/remotes/origin/master
-
-=======
->>>>>>> refs/remotes/origin/master
-?>
+ ?>
