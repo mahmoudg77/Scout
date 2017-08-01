@@ -95,8 +95,12 @@
                             $(".ajax-form").ajaxForm({
                                 dataType: 'json',
                                 success: function (response) {
+
+                                    //----- 
                                     alert(response.message);
                                     alert("ID:" + response.result.id + "\n\r" + "Name:" + response.result.name);
+                                    //-----
+
                                 },
                                 error: function (response, status, xhr) {
                                     alert(response.responseText);
