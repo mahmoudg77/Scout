@@ -1,7 +1,7 @@
 <?include(PATH.'templates/AdminHeader.php');?>
-<div class="content-wrapper tab-content">
+
 <!-- Main content -->
-<section class="content container-fluid tab-pane fade" id="Forms">
+<!--<section class="content container-fluid tab-pane fade" id="Forms">
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#TeamR">Team Registration</a></li>
   </ul>
@@ -199,8 +199,7 @@
     	
     </div>
   </div>
-</section>
+</section>-->
 
 <!-- /.content -->
-</div>
 <?include(PATH.'templates/AdminFooter.php');?>

@@ -18,7 +18,7 @@ class BaseController{
         return $this->class;
     }
     function index($request){
-            return $this->all($request);
+          return $this->view();
     }
     function add($request){
          return $this->view();
@@ -295,7 +295,7 @@ class BaseController{
             }
             $view=str_replace("App\\Controllers\\","",$this->class)."/$method";
         }
-
+		//echo PATH.'views/'.str_replace("App\\Controllers\\","",$view).'.php';
          if(!file_exists(PATH.'views/'.str_replace("App\\Controllers\\","",$view).'.php')){
 
           $view="BaseController/$method";

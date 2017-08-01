@@ -277,10 +277,14 @@ desired effect
     </ul>
     <!-- Sidebar Menu -->
     <ul class="sidebar-menu" data-widget="tree">
-      <li><a data-toggle="tab" href="#Forms"><i class="fa fa-link"></i> <span>Forms</span></a></li>
-      <li><a data-toggle="tab" href="#Approvels"><i class="fa fa-link"></i> <span>Approvels</span></a></li>
+      <li><a class="menu-item" href="<?=actionLink("","TeamsReg")?>"><i class="fa fa-link"></i> <span>Forms</span></a></li>
+      <li><a class="menu-item" href="<?=actionLink("","ApprovalRequests")?>"><i class="fa fa-link"></i> <span>Approvels</span></a></li>
     </ul>
     <!-- /.sidebar-menu --> 
   </section>
   <!-- /.sidebar --> 
 </aside>
+    <div class="content-wrapper">
+        <div id="pageContent">
+
+        </div>
