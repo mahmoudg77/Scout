@@ -32,6 +32,10 @@ foreach($data as $key=>$row){
             <a class="btn btn-primary"  href="<?=actionLink('item','',['id'=>$row->{$row->col_pk}])?>">view</a>
 
         </td>
+          <td>
+              <a class="btn btn-default" href="<?=actionLink('edit','',['id'=>$row->{$row->col_pk}])?>">Edit</a>
+
+          </td>
          <td>
         <?if(!$row->is_deleted){?>
            <form action="delete" method="post">
