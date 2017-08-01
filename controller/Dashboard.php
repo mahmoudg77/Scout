@@ -12,13 +12,4 @@ class Dashboard extends BaseController
      }
 
 
-
-    protected $authRequired=true;
-
-    function index1($request){
-      
-        return $this->view();
-    }
- }
-
 ?>
