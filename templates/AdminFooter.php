@@ -1,4 +1,9 @@
 
+
+</div>
+
+
+
 <!-- Main Footer -->
 <footer class="main-footer"> 
   <!-- To the right -->
@@ -70,11 +75,42 @@
 <script src="<?=assets('js/jquery.min.js')?>"></script> 
 <!-- Bootstrap 3.3.7 -->
 <script src="<?=assets('js/bootstrap.min.js')?>"></script>  
+
+<!-- Ajax Form-->
+<script src="http://malsup.github.com/jquery.form.js"></script> 
+
 <!-- AdminLTE App --> 
 <script src="<?=assets('js/adminlte.min.js')?>"></script> 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
+
+
+<script>
+    $(function () {
+        $(".menu-item").click(function (event) {
+            event.preventDefault();
+            var btn = $(this);
+            $("#pageContent").load(btn.attr("href"), function () {
+                            $(".ajax-form").ajaxForm({
+                                dataType: 'json',
+                                success: function (response) {
+
+                                    //----- 
+                                    alert(response.message);
+                                    alert("ID:" + response.result.id + "\n\r" + "Name:" + response.result.name);
+                                    //-----
+
+                                },
+                                error: function (response, status, xhr) {
+                                    alert(response.responseText);
+                                }
+                            })
+                        }
+                );
+        });
+    })
+</script>
 </body>
 
 </html>

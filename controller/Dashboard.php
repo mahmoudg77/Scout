@@ -13,6 +13,7 @@ class Dashboard extends BaseController
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     protected $authRequired=true;
 }
 =======
@@ -26,4 +27,6 @@ class Dashboard extends BaseController
  }
 >>>>>>> refs/remotes/origin/master
 
+=======
+>>>>>>> refs/remotes/origin/master
 ?>
