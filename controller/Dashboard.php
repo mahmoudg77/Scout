@@ -8,7 +8,7 @@ class Dashboard extends BaseController
      function index($request){
          $Website="arabscout.net";
          $Date=Date("Y-m-d");
-         return $this->view("Dashboard",compact('Website','Date'));
+         return $this->view(compact('Website','Date'));
      }
 
 
