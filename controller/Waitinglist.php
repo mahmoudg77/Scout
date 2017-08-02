@@ -14,6 +14,7 @@ class Waitinglist extends BaseController
         $m->Notify();
     }
 
+<<<<<<< HEAD
     function index($request){
       $obj=new $this->model;
       $data=$obj->where('is_done','0')->get();
@@ -40,6 +41,9 @@ class Waitinglist extends BaseController
 
 
     }
+=======
+
+>>>>>>> 08e343a5beec8c720c3ffcde0123fd445867dee9
 }
 
 ?>
