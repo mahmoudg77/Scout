@@ -40,7 +40,7 @@ class Login extends BaseController
                 if(isset($request->get['api'])){
                       json_success("",$user);
                 }else{
-                    return redirectTo("/cPanel");
+                    return redirectTo("Dashboard");
                 }
             }catch(Exception $ex){
                 if(isset($request->get['api'])){
@@ -56,7 +56,7 @@ class Login extends BaseController
        if($request->get['next']){
            return redirectTo($request->get['next']);
        }else{
-            return redirectTo("/");
+            return redirectTo("");
        }
    }
 
