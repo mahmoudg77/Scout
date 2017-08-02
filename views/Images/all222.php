@@ -13,19 +13,10 @@ foreach($data as $key=>$row){
         <?foreach($row->fields as $key=>$field){
 
           if($field['visible']){
-          //  if($key=="model_id" && $row->model_name!=""){
-          //                $c=new $row->model_name;
-
-          //      $row->fields['model_id']=['name'=>'Releted Record',
-          //                      'type'=>'Many2one',
-          //                      'serialize'=>true,
-          //                      'relation'=>['class'=>$row->model_name,'classid'=>$c->getPKname(),'controller'=>'Profile']];
-          //  }
-				?>
+    ?>
 
     <td><?$row->DrawField($key)?></td>
-			<?}
-			}?>
+			 
         <td>
             <a class="btn btn-primary"  href="item/<?=$row->{$row->col_pk}?>">view</a>
 
@@ -50,9 +41,14 @@ foreach($data as $key=>$row){
                <input type="submit" class="btn btn-danger" value="Delete forever"/>
            </form>
            <?}?>
-        </td></tr>
-
+             
+        </td>
+    <?}}?>
+    
+    </tr>
+    
     <?
+
 }
 
 ?>

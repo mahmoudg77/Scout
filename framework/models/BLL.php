@@ -812,4 +812,14 @@ var $mode="view";
 
 	}
 }
+
+
+trait NotifyModel {
+    public function Notify() {
+        $TYPE=get_called_class();
+
+        echo $TYPE . ' Was Notified!';
+    }
+}
+
 ?>

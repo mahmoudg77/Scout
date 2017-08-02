@@ -5,6 +5,8 @@ use Framework\Database;
 use Framework\BLL;
 
 class Waitinglist extends BLL{
+    use \Framework\NotifyModel;
+
 	var $tablename="waitinglist";
 	var $col_pk="id";
 
@@ -24,5 +26,6 @@ class Waitinglist extends BLL{
 			'relation'=>['class'=>$this->model_name,'classid'=>$c->getPKname(),'controller'=>'Comp']];
 	}
 
+    
 }
 ?>

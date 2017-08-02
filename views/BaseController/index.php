@@ -1,5 +1,4 @@
-<?if(!$request->isAjax())include(PATH.'templates/cpheader.php');?>
-
+<?if(!$request->isAjax())include(PATH.'templates/AdminHeader.php');?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
@@ -36,4 +35,4 @@
  	 <!-- /.content -->
 
 
- <?if(!$request->isAjax())include(PATH.'templates/cpfooter.php');?>
+<?if(!$request->isAjax())include(PATH.'templates/AdminFooter.php');?>
