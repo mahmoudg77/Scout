@@ -5,7 +5,11 @@ use Framework\Database;
 use Framework\BLL;
 
 class Waitinglist extends BLL{
+<<<<<<< HEAD
 
+=======
+    use \Framework\NotifyModel;
+>>>>>>> 08e343a5beec8c720c3ffcde0123fd445867dee9
 
 	var $tablename="waitinglist";
 	var $col_pk="id";
@@ -27,5 +31,6 @@ class Waitinglist extends BLL{
     	}
 
 
+    
 }
 ?>
