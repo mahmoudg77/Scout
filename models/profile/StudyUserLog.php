@@ -5,7 +5,7 @@ use Framework\Database;
 use Framework\BLL;
 
 class StudyUserLog extends BLL{
-	var $tablename="hobbiesusers";
+	var $tablename="studiesusers";
 	var $col_pk="id";
 
 	var $fields=[

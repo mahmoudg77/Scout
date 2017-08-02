@@ -89,6 +89,26 @@
 		<script src="<?=assets('js/grid.js')?>"></script>
 		<!-- Custom js -->
 		<script src="<?=assets('js/custom.js')?>"></script>
+		<!-- Ajax Form-->
+		<script src="http://malsup.github.com/jquery.form.js"></script>
+<script>
+$(function(){
+	$(".ajax-form").ajaxForm({
+			dataType:"json",
+			success:function(res){
+				if(res.type=="success"){
+				alert("Save Success");
+				window.location="/";
+			}else{
+				alert(res.message);
+			}
 
+			},
+			error:function(res){
+				alert(res.responseText);
+			}
+	})
+})
+</script>
     </body>
 </html>

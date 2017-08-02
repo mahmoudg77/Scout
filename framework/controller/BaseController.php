@@ -45,7 +45,7 @@ class BaseController{
           		return $this->view("Error/index",['ErrorNumber'=>404]);
             }
             $data->mode='view';
-
+  
            if($request->isAjax() ){
                 return json_success("Success",$data);
             }else{
@@ -249,7 +249,7 @@ class BaseController{
        if(!$this->authRequired){
             $i->supperUser();
        }
-      
+
        $data=$i->get();
 
        if($request->UseApi() ){

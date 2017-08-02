@@ -9,8 +9,8 @@ class Dashboard extends BaseController
      function index($request){
       //  $data=new \App\Models\Profile\Profile;
       //  $data= $data->find(2);
-      global $context;
-if(!$context->user) return redirectTo('');
+        global $context;
+        if(!$context->user) return redirectTo('');
          $Website="arabscout.net";
          $Date=Date("Y-m-d");
          return $this->view(compact('Website','Date'));
@@ -20,5 +20,7 @@ if(!$context->user) return redirectTo('');
 
         return $this->view();
     }
+    
+
 }
 ?>
