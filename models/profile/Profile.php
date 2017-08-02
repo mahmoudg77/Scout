@@ -17,10 +17,12 @@ class Profile extends BLL{
 					'type'=>'Many2many',
 					'serialize'=>true,
 					'relation'=>['class'=>"App\Models\Profile\Comp",'classid'=>'mokhymId','table'=>'App\Models\Profile\CompUserLog','thisid'=>'userId','controller'=>'Comp']],
+
 			'Contacts'=>['name'=>'Contacts',
 					'type'=>'One2many',
 					'serialize'=>true,
 					'relation'=>['class'=>"App\Models\Profile\ContactUser",'classid'=>'userId','controller'=>'Contacts']],
+
 			'Hobbies'=>['name'=>'Hobbies',
 					'type'=>'Many2many',
 					'serialize'=>true,

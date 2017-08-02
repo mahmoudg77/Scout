@@ -815,18 +815,16 @@ var $mode="view";
 
 
 trait NotifyModel {
-<<<<<<< HEAD
-    public function notify() {
-=======
+
+
     public function Notify() {
->>>>>>> 08e343a5beec8c720c3ffcde0123fd445867dee9
-        $TYPE=get_called_class();
+         $TYPE=get_called_class();
 
         echo $TYPE . ' Was Notified!';
     }
 }
 
-<<<<<<< HEAD
+
 trait ApprovelModel {
     public function approve() {
         $TYPE=get_called_class();
@@ -840,8 +838,5 @@ trait ApprovelModel {
 		}
 }
 
-
-
-=======
->>>>>>> 08e343a5beec8c720c3ffcde0123fd445867dee9
+ 
 ?>
