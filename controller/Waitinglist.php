@@ -41,6 +41,6 @@ class Waitinglist extends BaseController
 
     }
 
-}
+ }
 
 ?>
