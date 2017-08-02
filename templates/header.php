@@ -172,6 +172,7 @@
 
 
 
+
 				<!-- /responsive nav button -->
 
 				<!-- logo -->
@@ -181,6 +182,7 @@
         						</h1>
         					</a>
 			
+
 
 
 
@@ -216,7 +218,7 @@
 
 		</div>
 	</header>
-	<div class="page-content" >
+	<div class="page-content">
 		<div class="row">
 			<div id="myModal" class="modal fade" role="dialog">
 				<div class="modal-dialog ">
@@ -224,30 +226,31 @@
 					<!-- Modal content-->
 					<div class="w3-modal-content w3-animate-opacity" style="border-radius: 20px; background-color:#333439;">
 						<div class="modal-header">
-<!--							<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+							<!--							<button type="button" class="close" data-dismiss="modal">&times;</button>-->
 							<img src="/templates/assets/img/ArabScoutHeaderLogo.png" style="display: block; margin-left: auto;
     							margin-right: auto; width:45%; " alt="ArabScout" data-pin-nopin="true">
 						</div>
 						<div class="modal-body">
-							<form action="">
+							<form action="<?=actionLink('login','auth.Login')?>" method="post">
+								<?=Framework\Request::CSRF()?>
 								<div class="form-group">
-    								<label for="pwd">User name:</label>
-    								<input style="background-color:#636466;border-radius: 20px;" type="text" class="form-control" id="pwd" placeholder="Enter your username">
-  								</div>
-  								<div class="form-group">
-    								<label for="pwd">Password:</label>
-    								<input style="background-color:#636466; border-radius: 20px;" type="password" class="form-control" id="pwd" placeholder="Enter your password">
-  								</div>
-  								<button style="border-radius: 20px;" type="submit" class="btn btn-success btn-block">Submit</button>
-  								<div class="checkbox">
-    								<label><input type="checkbox"> Remember me</label>
-  								</div>
-  								<label>forgot<a href="#"> Password</a></label>
-  								<label style="float:right">Create<a href="#"> Account</a></label>						
+									<label for="pwd">E-mail:</label>
+									<input style="background-color:#636466;border-radius: 20px;" type="text" class="form-control" id="email" name="email" placeholder="Enter your username">
+								</div>
+								<div class="form-group">
+									<label for="pwd">Password:</label>
+									<input style="background-color:#636466; border-radius: 20px;" type="password" class="form-control" name="password" id="password" placeholder="Enter your password">
+								</div>
+								<button style="border-radius: 20px;" type="submit" class="btn btn-success btn-block">Submit</button>
+								<div class="checkbox">
+									<label><input type="checkbox"> Remember me</label>
+								</div>
+								<label>forgot<a href="#"> Password</a></label>
+								<label style="float:right">Create<a href="#"> Account</a></label>
 							</form>
 						</div>
 						<div class="modal-footer">
-							<button style="border-radius: 20px;" type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+							<button style="border-radius: 20px;" type="submit" name="submit" class="btn btn-danger" data-dismiss="modal">Close</button>
 						</div>
 					</div>
 
