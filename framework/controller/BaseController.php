@@ -295,7 +295,7 @@ class BaseController{
             }
             $view=str_replace("App\\Controllers\\","",$this->class)."/$method";
         }
-		//echo PATH.'views/'.str_replace("App\\Controllers\\","",$view).'.php';
+		 //echo PATH.'views/'.str_replace("App\\Controllers\\","",$view).'.php';
          if(!file_exists(PATH.'views/'.str_replace("App\\Controllers\\","",$view).'.php')){
 
           $view="BaseController/$method";
