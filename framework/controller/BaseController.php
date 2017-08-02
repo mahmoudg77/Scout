@@ -249,7 +249,7 @@ class BaseController{
        if(!$this->authRequired){
             $i->supperUser();
        }
-
+      
        $data=$i->get();
 
        if($request->UseApi() ){

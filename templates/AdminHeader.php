@@ -18,6 +18,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- Theme style -->
 <link rel="stylesheet" href="<?=assets('css/skin/AdminLTE.min.css')?>">
 <link rel="stylesheet" href="<?=assets('css/skin/skin-green.css')?>">
+<link rel="stylesheet" href="<?=assets('css/Site.css')?>">
+
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -284,7 +286,21 @@ desired effect
   </section>
   <!-- /.sidebar --> 
 </aside>
-    <div class="content-wrapper">
-        <div id="pageContent">
 
-        </div>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1><?=str_replace("App\Controllers\\","",CONTROLLER_PATH)?>
+                <small><?=METHOD?></small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="<?=actionLink('','')?>"><?=str_replace("App\Controllers\\","",CONTROLLER_NAME)?></a></li>
+                <li class="active"><?=METHOD?></li>
+            </ol>
+        </section>
+     <hr/>
+        <section class="content">
+            <div id="pageContent">
+            </div>

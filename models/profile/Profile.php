@@ -5,8 +5,12 @@ use Framework\Database;
 use Framework\BLL;
 
 class Profile extends BLL{
+
 	var $tablename="profile";
 	var $col_pk="Profile_ID";
+	use \Framework\NotifyModel;
+  use \Framework\ApprovelModel;
+
 
 	var $fields=[
 			'Comps'=>['name'=>'Comps',

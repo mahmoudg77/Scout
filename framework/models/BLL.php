@@ -812,4 +812,29 @@ var $mode="view";
 
 	}
 }
+
+
+trait NotifyModel {
+    public function notify() {
+        $TYPE=get_called_class();
+
+        echo $TYPE . ' Was Notified!';
+    }
+}
+
+trait ApprovelModel {
+    public function approve() {
+        $TYPE=get_called_class();
+
+        echo $TYPE . ' Was Approved!';
+    }
+		public function reject() {
+				$TYPE=get_called_class();
+
+				echo $TYPE . ' Was Rejected!';
+		}
+}
+
+
+
 ?>
