@@ -1,4 +1,5 @@
- 
+<?if(!$request->isAjax())include(PATH.'templates/AdminHeader.php');?>
+
     <!-- Main content -->
     <section class="container-fluid">
         <div>
@@ -183,3 +184,4 @@
             </div>
         </div>
     </section>
+<?if(!$request->isAjax())include(PATH.'templates/AdminFooter.php');?>

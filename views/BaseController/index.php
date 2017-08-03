@@ -1,5 +1,4 @@
-<?if(!$request->isAjax())include(PATH.'templates/cpheader.php');?>
-
+<?if(!$request->isAjax())include(PATH.'templates/AdminHeader.php');?>
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
@@ -24,8 +23,28 @@
     <h1>Method: <?=$context->method?></h1>
     <h1>Paramter: <?=$context->request->get['id']?></h1>
     <a href="/<?=LANG.'/'.$context->controller_path."/all"?>">View List</a>
+    <a href="<?=actionLink('item','Profile',['id'=>2])?>" id="btntest">test</a>
+
 </center>
 
+<script>
+$(function(){
+  $("#btntest").click(function(e){
+    e.preventDefault();
+    $.ajax({
+        url:"/en/Profile/item/2",
+        type:"get",
+        dataType:"json",
+        success:function(resp){
+          alert(resp.result.First_Name);
+        },
+        error:function(err){
+          alert(err.responseText);
+        }
+    });
+  });
+});
+</script>
 </div>
 </div>
  			 </div>
@@ -36,4 +55,4 @@
  	 <!-- /.content -->
 
 
- <?if(!$request->isAjax())include(PATH.'templates/cpfooter.php');?>
+<?if(!$request->isAjax())include(PATH.'templates/AdminFooter.php');?>

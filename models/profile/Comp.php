@@ -12,7 +12,7 @@ class Comp extends BLL{
 			'Profiles'=>['name'=>'Profiles',
 					'type'=>'One2many',
 					'serialize'=>true,
-					'relation'=>['class'=>"App\Models\Profile\CompUserLog",'classid'=>'userId','controller'=>'Profile','where'=>['approval_at','>','0000-00-00 00:00:00']]],
+					'relation'=>['class'=>"App\Models\Profile\CompUserLog",'classid'=>'userId','controller'=>'Profile','where'=>['approval_request','=','1']]],
 	    ];
 
 

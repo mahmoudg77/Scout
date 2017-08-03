@@ -9,7 +9,7 @@ class CompUserLog extends BLL{
 	var $col_pk="id";
 
 	var $fields=[
-        'mokhymId'=>['name'=>'Group',
+        'campId'=>['name'=>'Group',
             'type'=>'Many2one',
             'serialize'=>true,
             'relation'=>['class'=>"App\Models\Auth\UserGroup",'classid'=>'id','controller'=>'Comp']],

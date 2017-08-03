@@ -1,5 +1,4 @@
-<?if(!$request->isAjax())include(PATH.'templates/cpheader.php');?>
-
+<?if(!$request->isAjax())include(PATH.'templates/AdminHeader.php');?>
 <!-- Main content -->
 <section class="content">
   <div class="row">
@@ -27,4 +26,4 @@
   	 <!-- /.content -->
 
 
-  <?if(!$request->isAjax())include(PATH.'templates/cpfooter.php');?>
+<?if(!$request->isAjax())include(PATH.'templates/AdminFooter.php');?>

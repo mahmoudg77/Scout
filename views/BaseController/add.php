@@ -1,4 +1,4 @@
-<?if(!$request->isAjax())include(PATH.'templates/cpheader.php');?>
+<?if(!$request->isAjax())include(PATH.'templates/AdminHeader.php');?>
 
  
 
@@ -37,4 +37,4 @@
  	 <!-- /.content -->
 
 
- <?if(!$request->isAjax())include(PATH.'templates/cpfooter.php');?>
+ <?if(!$request->isAjax())include(PATH.'templates/AdminFooter.php');?>

@@ -1,13 +1,13 @@
 <?if(!$request->isAjax())include(PATH.'templates/header.php');?>
 
- <div id="RegForm" class=" col-md-6  col-sm-5 col-md-offset-3">
+ <div class=" col-md-6  col-sm-7 col-md-offset-2">
         <h2 id="header">Scouting registration</h2>
-        <form name="form" class="ajax-form" action="" method="post" role="form">
+        <form name="form" action="" method="post" role="form">
           <?=Framework\Request::CSRF()?>
             <span>User Info</span>
-            <div class="container-fluid " id="userInfo">
-                <div class="labelCSS">
-                    <label class="col-sm-2 control-label"  for="firstname">First name</label>
+            <div class="container-fluid" id="userInfo">
+                <div>
+                    <label class="col-sm-2 control-label" for="firstname">First name</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" id="firstName" name="firstname" required />
                     </div>
@@ -58,18 +58,13 @@
                          <label class="col-sm-2 control-label" for="phone">Phone</label>
                         <div class="form-group">
                             <div class="col-sm-5 col-md-offset-0">
-                                <div class="input-group">
-  									<input type="text" class="form-control" id="phone" name="phone" required/>
-  									<a class="input-group-addon"><i class="fa fa-plus"></i></a>
-								</div>
+                                <input type="text" class="form-control" id="phone" name="phone" required/>
                             </div>
-
                         </div>
-<!--
                         <div class="col-sm-5">
+                            <a href="#" id="phoneField" class="btn btn-info fa fa-plus"></a>
                             <button class="btn btn-info  btn-lr" title="add phone numbers" onclick="addPhone()">Add</button>
                         </div>
--->
                         <div class="row"></div>
                         <!-- <div id="phoneField1" style="display:none;">
                             <div class="col-sm-5 col-md-offset-2 ">
@@ -102,8 +97,6 @@
                     <label class="col-sm-2 control-label" for="address">Address</label>
                     <!--t3diiiiiiiiiiiiiiiiilll-->
                     <div class="col-sm-9">
-                       <input type="text" class="form-control" id="address" name="address" required/>
-<!--
                         <div class="input-group">
                             <input type="text" class="form-control" id="address" name="address" required/>
                             <span class="input-group-btn">
@@ -112,7 +105,6 @@
                                          </a>
                                     </span>
                         </div>
--->
                     </div>
                 </div>
 
@@ -137,9 +129,7 @@
                     <!-- <form name="form" role="form"> -->
                         <label class="col-sm-2 control-label">Hobbies</label>
                         <div class="col-sm-5">
-
-                        <div class="input-group">
-  							<select class="form-control" id="hobbies" name="hobbiesList" required>
+                            <select id="hobbies" name="hobbiesList" required>
                             <?
                             $hobbs= new App\Models\Lookup\Hobbies;
                             foreach($hobbs->supperUser()->get() as $item){
@@ -147,15 +137,11 @@
                                 <option value="<?=$item->id?>"><?=$item->name?></option>
                               <?
                             }?>
-                        	</select>
-  							<a class="input-group-addon" onclick="Add('hobby','hobbies')"><i class="fa fa-plus" ></i></a>
-						</div>
+                        </select>
                         </div>
-<!--
                         <div class="col-sm-5">
                             <button type="button" class="btn btn-info glyphicon glyphicon-plus btn-lr" onclick="Add('hobby','hobbies')"></button>
                         </div>
--->
                     <!-- </form> -->
                 </div>
 
@@ -187,7 +173,7 @@
             <div class="container-fluid" id="Scoutinfo">
                 <div class="form-group">
                     <label class="col-sm-2" for="position">Position</label>
-                    <div class="col-sm-5">
+                    <div class="col-sm-9">
                         <div class="styled-select blue semi-square">
                             <select class="form-control" name="Position">
  							<?
@@ -201,6 +187,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row"></div>
                 <div class="container-fluid list">
                     <div id="campainees">
@@ -213,9 +200,7 @@
                     <!-- <form name="form" role="form"> -->
                         <label class="col-sm-2 control-label" for="campains">Campains</label>
                         <div class="col-sm-5">
-
-                            <div class="input-group">
-  								<select class="form-control" id="campaines" name="campainList" required>
+                            <select id="campaines" name="campainList" required>
  							<?
                             	$Comp= new App\Models\Profile\Comp;
                             	foreach($Comp->supperUser()->get() as $item){
@@ -224,15 +209,10 @@
                             <?
                             }?>
                             </select>
-  							<a class="input-group-addon" onclick="Add('campain','campaines')"><i class="fa fa-plus"></i></a>
-						</div>
-
                         </div>
-<!--
                         <div class="col-sm-5">
                             <button type="button" class="btn btn-info glyphicon glyphicon-plus btn-lr" onclick="Add('campain','campaines')"></button>
                         </div>
--->
                     <!-- </form> -->
                 </div>
 
@@ -249,9 +229,7 @@
                     <!-- <form name="form" role="form"> -->
                         <label class="col-sm-2 control-label">Trains</label>
                         <div class="col-sm-5">
-
-                            <div class="input-group">
-  								 <select class="form-control" id="trains" name="trainList" required>
+                            <select id="trains" name="trainList" required>
 							<?
                             	$Studies= new App\Models\Lookup\Studies;
                             	foreach($Studies->supperUser()->get() as $item){
@@ -260,15 +238,10 @@
                             <?
                             }?>
                             </select>
-  							<a class="input-group-addon" onclick="Add('train','trains')"><i class="fa fa-plus"></i></a>
-						</div>
-
                         </div>
-<!--
                         <div class="col-sm-5">
                             <button type="button" class="btn btn-info glyphicon glyphicon-plus btn-lr" onclick="Add('train','trains')"></button>
                         </div>
--->
                     <!-- </form> -->
                 </div>
 
@@ -284,9 +257,7 @@
                     <!-- <form name="form" role="form"> -->
                         <label class="col-sm-2 control-label">Experience</label>
                         <div class="col-sm-5">
-
-                             <div class="input-group">
-  								<select class="form-control" id="experiences" name="experienceList" required>
+                            <select id="experiences" name="experienceList" required>
               				<?
                             	$Experiences= new App\Models\Lookup\Experiences;
                             	foreach($Experiences->supperUser()->get() as $item){
@@ -295,15 +266,10 @@
                             <?
                             }?>
                              </select>
-  							<a class="input-group-addon" onclick="Add('experience','experiences')"><i class="fa fa-plus"></i></a>
-						</div>
-
                         </div>
-<!--
                         <div class="col-sm-5">
                             <button type="button" class="btn btn-info glyphicon glyphicon-plus btn-lr" onclick="Add('experience','experiences')"></button>
                         </div>
--->
                     <!-- </form> -->
                 </div>
 

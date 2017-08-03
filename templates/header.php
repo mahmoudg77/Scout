@@ -166,7 +166,7 @@
                               <span class="icon-bar"></span>
                               <span class="icon-bar"></span>
                           </button>
-			
+
 
 
 
@@ -181,7 +181,7 @@
         							<img src="<?=assets('img/ArabScoutHeaderLogo.png')?>" alt="ArabScout" />
         						</h1>
         					</a>
-			
+
 
 
 
@@ -246,7 +246,7 @@
 									<label><input type="checkbox"> Remember me</label>
 								</div>
 								<label>forgot<a href="#"> Password</a></label>
-								<label style="float:right">Create<a href="#"> Account</a></label>
+								<label style="float:right">Create<a href="<?=actionLink("","ProfileReg")?>"> Account</a></label>
 							</form>
 						</div>
 						<div class="modal-footer">

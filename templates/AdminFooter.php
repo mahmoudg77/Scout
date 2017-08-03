@@ -1,24 +1,26 @@
-
+  </div>
+ </section>
+<!-- /.content -->
 
 </div>
 
 
 
 <!-- Main Footer -->
-<footer class="main-footer"> 
+<footer class="main-footer">
   <!-- To the right -->
-  <!-- Default to the left --> 
+  <!-- Default to the left -->
   <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved. </footer>
 
 <!-- Control Sidebar -->
-<aside class="control-sidebar control-sidebar-dark"> 
+<aside class="control-sidebar control-sidebar-dark">
   <!-- Create the tabs -->
   <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
     <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
     <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
   </ul>
   <!-- Tab panes -->
-  <div class="tab-content"> 
+  <div class="tab-content">
     <!-- Home tab content -->
     <div class="tab-pane active" id="control-sidebar-home-tab">
       <h3 class="control-sidebar-heading">Recent Activity</h3>
@@ -31,7 +33,7 @@
           </a> </li>
       </ul>
       <!-- /.control-sidebar-menu -->
-      
+
       <h3 class="control-sidebar-heading">Tasks Progress</h3>
       <ul class="control-sidebar-menu">
         <li> <a href="javascript:;">
@@ -41,13 +43,13 @@
           </div>
           </a> </li>
       </ul>
-      <!-- /.control-sidebar-menu --> 
-      
+      <!-- /.control-sidebar-menu -->
+
     </div>
-    <!-- /.tab-pane --> 
+    <!-- /.tab-pane -->
     <!-- Stats tab content -->
     <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-    <!-- /.tab-pane --> 
+    <!-- /.tab-pane -->
     <!-- Settings tab content -->
     <div class="tab-pane" id="control-sidebar-settings-tab">
       <form method="post">
@@ -61,29 +63,14 @@
         <!-- /.form-group -->
       </form>
     </div>
-    <!-- /.tab-pane --> 
+    <!-- /.tab-pane -->
   </div>
 </aside>
-<!-- /.control-sidebar --> 
+<!-- /.control-sidebar -->
 <!-- Add the sidebar's background. This div must be placed
   immediately after the control sidebar -->
 <div class="control-sidebar-bg"></div>
 </div>
-<!-- ./wrapper --> 
-<!-- REQUIRED JS SCRIPTS --> 
-<!-- jQuery 3 --> 
-<script src="<?=assets('js/jquery.min.js')?>"></script> 
-<!-- Bootstrap 3.3.7 -->
-<script src="<?=assets('js/bootstrap.min.js')?>"></script>  
-
-<!-- Ajax Form-->
-<script src="http://malsup.github.com/jquery.form.js"></script> 
-
-<!-- AdminLTE App --> 
-<script src="<?=assets('js/adminlte.min.js')?>"></script> 
-<!-- Optionally, you can add Slimscroll and FastClick plugins.
-     Both of these plugins are recommended to enhance the
-     user experience. -->
 
 
 <script>
@@ -96,7 +83,7 @@
                                 dataType: 'json',
                                 success: function (response) {
 
-                                    //----- 
+                                    //-----
                                     alert(response.message);
                                     alert("ID:" + response.result.id + "\n\r" + "Name:" + response.result.name);
                                     //-----
