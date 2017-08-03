@@ -1,11 +1,33 @@
-#TeamInfo{
-	background: #E6E6E6;
-	border-radius: 5px;
-	width: 800px;
+.teamReg h1{
+	font-family: Wide Latin;
+	text-align-last: center;
+	padding-bottom: 10px;
 }
-#leaderInfo{
+.FF{
+	float: left;
+	width:45%;
+}
+.fees{
+	background: silver;
+	position: absolute;
+	width:200px;
+	height: 130px;
+	top:310px;
+	left: 1000px;
+	border-radius: 10px;
+	text-align: center;
+}
+.fees pre{
+	font-size: 25px;
+	background: #FFF;
+	font-family: Wide Latin;
+}
+.f{
 	
+	float:left
 }
-.leaderInfo div{
-	padding: 5px 35px 5px 5px;
+.BS{
+	font-family: Wide Latin;
+	text-align: center;
+	color:#2CB121;
 }
