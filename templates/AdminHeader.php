@@ -46,8 +46,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 			  <th scope="row" id='`+counter+`'>`+counter+`</th>
 			  <td><input type="text" class="form-control tdinput" id="r`+counter+`td1"  name="r1td1"></td>
 			  <td><input type="text" class="form-control tdinput" id="r`+counter+`td2"  name="r1td2"></td>
-			  <td><input type="text" class="form-control tdinput" id="r`+counter+`td3"  name="r1td3"></td>
-			  <td><input type="text" class="form-control tdinput" id="r`+counter+`td4"  name="r3td4"></td>
+			  <td><input type="number" class="form-control tdinput" id="r`+counter+`td3"  name="r1td3"></td>
+			  <td>
+				<div class="input-group">
+					<span class="input-group-addon "><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i><i class="fa fa-square-o fa-lg" aria-hidden="true"></i></span>
+					<button type="button" class="btn btn-success " disabled>Get IN</button>
+				</div></td>
 			</tr>`
 		}else{
 			alert("FUCK OFF");
