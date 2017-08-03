@@ -54,13 +54,13 @@
                 </div>
 
                 <div class="row"></div>
-                <div class="form-group">
+                <div class="form-group" id="phNos">
                          <label class="col-sm-2 control-label" for="phone">Phone</label>
                         <div class="form-group">
                             <div class="col-sm-5 col-md-offset-0">
                                 <div class="input-group">
   									<input type="text" class="form-control" id="phone" name="phone" required/>
-  									<a class="input-group-addon"><i class="fa fa-plus"></i></a>
+  									<a class="input-group-addon" onClick="addfield()"><i class="fa fa-plus"></i></a>
 								</div>
                             </div>
 

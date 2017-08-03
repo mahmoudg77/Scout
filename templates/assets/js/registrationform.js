@@ -16,15 +16,17 @@ var experiences = [];
 var counterE = 0;
 
 
-function addfield(id) {
+function addfield() {
     i++;
-    var x = document.getElementById(id + i);
-    x.style.display = 'block';
+	if(i<3){
+		var x = document.getElementById('phNos');
+    	x.innerHTML+="<div class='col-sm-5 col-md-offset-2 '><div class='input-group'><input type='text' class='form-control' 						name='phone"+i+"' required/><a class='input-group-addon' onclick='removefield("+i+")' ><div class='fa fa-minus'>				</div></a></div></div>";
+	}
+    
 }
 function removefield(id) {
-    i--;
-    var x = document.getElementById(id);
-    x.style.display = 'none';
+	$( '#phone'+id ).remove();
+	i--;
 }
 function Add(array, id) {
 		if (array === 'train') {
@@ -33,7 +35,8 @@ function Add(array, id) {
             counterT++;
             document.getElementById('traines').innerHTML += "<div class='input-group 'style='float:left;width: 120px;	border-radius:5px;background: #2F383D;margin-right: 4px;	padding-left: 4px;' id='"+trains[counterT-1] +
 				"'><input type='hidden' name='trains[]' value='" + trains[counterT-1] +
-				"'/>"+document.getElementById('trains').options[document.getElementById('trains').value-1].text+"<a class='input-group-addon' onclick=Remove('train','"+trains[counterT-1]+"')><div class='fa fa-minus'></div></a></div>";
+                "'/>"+document.getElementById('trains').options[document.getElementById('trains').value-1].text+
+                "<a class='input-group-addon' onclick=Remove('train','"+trains[counterT-1]+"')><div class='fa fa-minus'></div></a></div>";
         }
     }
     if (array === 'hobby') {
@@ -84,8 +87,8 @@ function Remove(array, itemToD) { //itemToDelete
         index = hobbys.indexOf(itemToD, 0);
         hobbys.splice(index, 1);
         elementToD.parentNode.removeChild(elementToD);
-    }alert("l  ");
-    if (array === 'train') {alert("2  ");
+    }
+    if (array === 'train') {
         elementToD = document.getElementById(itemToD);
         index= trains.indexOf(itemToD,0);
         trains.splice(index,1);
