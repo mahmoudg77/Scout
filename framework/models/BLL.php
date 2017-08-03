@@ -40,13 +40,14 @@ var $mode="view";
                      if(in_array($field['Field'],['created_at','created_by','updated_at','updated_by','deleted_at','deleted_by','is_deleted'])){
 											  $visible=false;
 											}
-
+			//print_r($field);
                      $this->fields[$field['Field']]=[
 	                     				'name'=>$field['Field'],
 	                     				'type'=>preg_replace("/\(\d+\)/","",$field['Type']),
 	                     				'size'=>$sizes[0][0],
 	                     				'default'=>'',
-	                     				'visible'=>$visible
+	                     				'visible'=>$visible,
+										 'required'=>$field['Null']=='NO'?true:false,
 	                     			    ];
                  }
             }
@@ -61,6 +62,9 @@ var $mode="view";
 								}
                 if(!array_key_exists('visible',$value)){
                  	$this->fields[$key]['visible']=true;
+                }
+				if(!array_key_exists('required',$value)){
+                 	$this->fields[$key]['required']=false;
                 }
             }
 
@@ -668,6 +672,7 @@ var $mode="view";
                 $widget='text';
             }
         }
+		//echo $this->fields[$field]['type'];
         // include_once('Request.php');
         switch($mode){
             case "edit":
@@ -686,7 +691,7 @@ var $mode="view";
                     switch($widget){
                         default:
                         case 'combo':?>
-                            <select name="<?=$field?>" <?foreach($attrs as $key=>$attr){?><?=' '.$key.'="'.$attr.'" '?><?}?>>
+                            <select  name="<?=$field?>" <?foreach($attrs as $key=>$attr){?><?=' '.$key.'="'.$attr.'" '?><?}?>     <?if($this->fields[$field]['required']){?> required <?}?>>
 															<option value="0">Select One..</option>
                                 <?$class=$this->fields[$field]['relation']['class'];
                                     $class=new $class;
@@ -706,7 +711,7 @@ var $mode="view";
                     switch($widget){
                         default:
                         case 'combo':?>
-                            <select name="<?=$field?>" <?foreach($attrs as $key=>$attr){?><?=' '.$key.'="'.$attr.'" '?><?}?>>
+                            <select name="<?=$field?>" <?foreach($attrs as $key=>$attr){?><?=' '.$key.'="'.$attr.'" '?><?}?>  <?if($this->fields[$field]['required']){?> required <?}?>>
                                     <option value="0" <?if($this->data[$field]==0){?>selected<?}?>>No</option>
                                     <option value="1" <?if($this->data[$field]==1){?>selected<?}?>>Yes</option
                             </select>
@@ -723,20 +728,21 @@ var $mode="view";
                             break;
 
                     }
+				
                 }else{
                     if($this->fields[$field]['size']>=500 || in_array($this->fields[$field]['type'],['text','longtext'])){
                      ?>
-                        <textarea  name="<?=$field?>"  <?foreach($attrs as $key=>$attr){?><?=' '.$key.'="'.$attr.'" '?><?}?>><?=$this->data[$field]?></textarea>
+                        <textarea  name="<?=$field?>"  <?foreach($attrs as $key=>$attr){?><?=' '.$key.'="'.$attr.'" '?><?}?>  <?if($this->fields[$field]['required']){?> required <?}?>><?=$this->data[$field]?></textarea>
                      <?
-                    }elseif($this->fields[$field]['type']=='timestamp' || $this->fields[$field]['type']=='datetime'){
+                    }elseif(in_array($this->fields[$field]['type'],['timestamp','datetime','date'])){
 
-                     if(array_key_exists('class',$attrs)){$attrs['class'].=' date';}else{$attrs['class'].=' datetime ';}
+                     //if(array_key_exists('class',$attrs)){$attrs['class'].=' date';}else{$attrs['class'].=' datetime ';}
                      ?>
-                       <input type="text" name="<?=$field?>" value="<?=$this->data[$field]?>"  <?foreach($attrs as $key=>$attr){?><?=' '.$key.'="'.$attr.'" '?><?}?>/>
+                       <input type="date" name="<?=$field?>" value="<?=$this->data[$field]?>"  <?foreach($attrs as $key=>$attr){?><?=' '.$key.'="'.$attr.'" '?><?}?>  <?if($this->fields[$field]['required']){?> required <?}?>/>
                      <?
                     }else{
                     ?>
-                        <input type="text" name="<?=$field?>" value="<?=$this->data[$field]?>" <?foreach($attrs as $key=>$attr){?><?=' '.$key.'="'.$attr.'" '?><?}?>/>
+                        <input type="text" name="<?=$field?>" value="<?=$this->data[$field]?>" <?foreach($attrs as $key=>$attr){?><?=' '.$key.'="'.$attr.'" '?><?}?>  <?if($this->fields[$field]['required']){?> required <?}?>/>
                      <?
 
                     }
