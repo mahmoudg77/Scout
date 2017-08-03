@@ -19,6 +19,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <link rel="stylesheet" href="<?=assets('css/skin/AdminLTE.min.css')?>">
 <link rel="stylesheet" href="<?=assets('css/skin/skin-green.css')?>">
 <link rel="stylesheet" href="<?=assets('css/Site.css')?>">
+<link rel="stylesheet" href="<?=assets('css/TeamsReg.css')?>">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
