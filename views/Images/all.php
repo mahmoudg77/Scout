@@ -1,5 +1,5 @@
-<?if(!$request->isAjax())include(PATH.'templates/AdminHeader.php');?>
-<table class="table"><thead><tr>
+<?if(!$request->isAjax())include(PATH.'templates/cpheader.php');?>
+<table class="table data-table"><thead><tr>
    <th>Image File</th>
    <th>Tag</th>
    
@@ -18,12 +18,12 @@
         <td><?=$row->tag?></td>
         
         <td>
-            <a class="btn btn-primary"  href="item/<?=$row->{$row->col_pk}?>">view</a>
+            <a class="btn btn-primary open-modal"  href="<?=actionLink('view','',['id'=>$row->{$row->col_pk}])?>">view</a>
 
         </td>
          <td>
         <?if(!$row->is_deleted){?>
-           <form action="delete" method="post">
+           <form action="delete" method="post" >
              <?=Framework\Request::CSRF()?>
                <input type="hidden" name="<?=$row->col_pk?>" value="<?=$row->{$row->col_pk}?>" />
                <input type="submit" class="btn btn-danger" value="Delete"/>
@@ -54,4 +54,4 @@
 ?>
 </table>
 <a href="add" class="btn btn-primary" >Add New</a>
-<?if(!$request->isAjax())include(PATH.'templates/AdminFooter.php');?>
+<?if(!$request->isAjax())include(PATH.'templates/cpfooter.php');?>

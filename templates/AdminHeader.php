@@ -241,12 +241,12 @@ desired effect
           <!-- Menu Toggle Button -->
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
           <!-- The user image in the navbar-->
-          <img src="<?=$context->user->accid->PersonalImage?>" class="user-image" alt="User Image">
+          <img src="<?=$context->user->accid->PersonalImage->thumb?>" class="user-image" alt="User Image">
           <!-- hidden-xs hides the username on small devices so only the image appears. -->
           <span class="hidden-xs"><?=USER_NAME?></span> </a>
           <ul class="dropdown-menu">
             <!-- The user image in the menu -->
-            <li class="user-header"> <img src="<?=$context->user->accid->PersonalImage?>" class="img-circle" alt="User Image">
+            <li class="user-header"> <img src="<?=$context->user->accid->PersonalImage->thumb?>" class="img-circle" alt="User Image">
               <p> <?=USER_NAME?> - Web Developer <small>Member since Nov. 2012</small> </p>
             </li>
             <!-- Menu Body -->
@@ -280,7 +280,7 @@ desired effect
       <div class="user-panel">
         <div class="pull-left image">
         
-          <img src="<?=$context->user->accid->PersonalImage?>" class="img-circle" alt="User Image">
+          <img src="<?=$context->user->accid->PersonalImage->thumb?>" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?=USER_ACCID_FIRST_NAME?></p>
@@ -315,14 +315,14 @@ desired effect
 				</span>
 			</a>
 			<ul class="treeview-menu">
-			<li><a href="<?=actionLink("all","Profile")?>"><i class="fa fa-circle-o"></i> Profiles</a></li>
-			<li><a href="<?=actionLink("all","Comp")?>"><i class="fa fa-circle-o"></i> Camps</a></li>
-			<li><a href="<?=actionLink("all","CompUserLog")?>"><i class="fa fa-circle-o"></i> Comps Log</a></li>
-			<li><a href="<?=actionLink("all","ExperienceUserLog")?>"><i class="fa fa-circle-o"></i> Experience Log</a></li>
-			<li><a href="<?=actionLink("all","HobbyUserLog")?>"><i class="fa fa-circle-o"></i> Hobbies Log</a></li>
-			<li><a href="<?=actionLink("all","StudyUserLog")?>"><i class="fa fa-circle-o"></i> Studies Log</a></li>
-		</ul>
-	</li>
+			<li><a class="menu-item"  href="<?=actionLink("all","Profile")?>"><i class="fa fa-circle-o"></i> Profiles</a></li>
+			<li><a class="menu-item"  href="<?=actionLink("all","Comp")?>"><i class="fa fa-circle-o"></i> Camps</a></li>
+			<li><a class="menu-item"  href="<?=actionLink("all","CompUserLog")?>"><i class="fa fa-circle-o"></i> Comps Log</a></li>
+			<li><a class="menu-item"  href="<?=actionLink("all","ExperienceUserLog")?>"><i class="fa fa-circle-o"></i> Experience Log</a></li>
+			<li><a class="menu-item"  href="<?=actionLink("all","HobbyUserLog")?>"><i class="fa fa-circle-o"></i> Hobbies Log</a></li>
+			<li><a class="menu-item"  href="<?=actionLink("all","StudyUserLog")?>"><i class="fa fa-circle-o"></i> Studies Log</a></li>
+		    </ul>
+	    </li>
 
 
 

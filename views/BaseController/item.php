@@ -1,29 +1,14 @@
-<?if(!$request->isAjax())include(PATH.'templates/AdminHeader.php');?>
-<!-- Main content -->
-<section class="content">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="box box-primary">
-        <div class="box-body no-padding">
-
-     <table class="table">
+<?if(!$request->isAjax())include(PATH.'templates/cpheader.php');?>
+      <table class="table">
         <?foreach($data->data as $key=>$value){if($data->fields[$key]['visible']){?>
             <tr><td><?=ucwords(str_replace("_"," ",$key))?> :</td><td><?=$data->DrawField($key,'','',['style'=>'color:blue','data-id'=>$key])?></td></tr>
         <?}}?>
-        <tr><td></td><td>    <a class="btn btn-primary" href="../edit/<?=$data->{$data->col_pk}?>">Edit</a>
+        <tr><td></td><td> <a class="btn btn-default open-modal" href="<?=actionLink('edit','',['id'=>$data->{$data->col_pk}])?>">Edit</a>
+
 </td></tr>
     </table>
 
+ 
 
 
- </div>
- </div>
-  			 </div>
-  			 <!-- /.col -->
-  		 </div>
-  		 <!-- /.row -->
-  	 </section>
-  	 <!-- /.content -->
-
-
-<?if(!$request->isAjax())include(PATH.'templates/AdminFooter.php');?>
+<?if(!$request->isAjax())include(PATH.'templates/cpfooter.php');?>

@@ -1,4 +1,4 @@
-<?if(!$request->isAjax())include(PATH.'templates/AdminHeader.php');?>
+<?if(!$request->isAjax())include(PATH.'templates/cpheader.php');?>
  
 <!-- Main content -->
 
@@ -13,71 +13,51 @@
 
 
 
-
-<div class="row">
-
-
-    <div class="col-md-12">
-        <div class="box box-primary">
-            <div class="box-body no-padding">
-
-
-
-                <table class="table">
+                <table class="table data-table"><thead>
                     <tr><?foreach($data[0]->fields as $key=>$value){
 		if($value['visible']){
                           ?>
-                        <td><?=ucwords(str_replace("_"," ",$key))?>
-                        </td><?}
-      }?>
-                        <td>Edit</td>
-                        <td>View</td>
-                        <td>Delete</td>
-                    </tr><?
-foreach($data as $key=>$row){
-                      ?>
+                        <th><?=ucwords(str_replace("_"," ",$key))?>
+                        </th><?}
+             }?>
+                        <th>Edit</th>
+                        <th>View</th>
+                        <th>Delete</th>
+                    </tr></thead><?foreach($data as $key=>$row){?>
                     <tr><?foreach($row->fields as $key=>$field){
-			if($field['visible']){
-                          ?>
-
+			        if($field['visible']){ ?>
                         <td><?$row->DrawField($key)?>
                         </td><?}
-          }?>
+                            }?>
                         <td>
-                            <a class="btn btn-primary" href="<?=actionLink('item','',['id'=>$row->{$row->col_pk}])?>">view</a>
-
+                            <a class="btn btn-primary open-modal" href="<?=actionLink('item','',['id'=>$row->{$row->col_pk}])?>">view</a>
                         </td>
                         <td>
-                            <a class="btn btn-default" href="<?=actionLink('edit','',['id'=>$row->{$row->col_pk}])?>">Edit</a>
-
+                            <a class="btn btn-default open-modal" href="<?=actionLink('edit','',['id'=>$row->{$row->col_pk}])?>">Edit</a>
                         </td>
                         <td><?if(!$row->is_deleted){?>
-                            <form action="delete" method="post"><?=Framework\Request::CSRF()?>
+                            <form action="<?=actionLink('delete')?>" method="post" class="ajax-form"><?=Framework\Request::CSRF()?>
                                 <input type="hidden" name="<?=$row->col_pk?>" value="<?=$row->{$row->col_pk}?>" />
                                 <input type="submit" class="btn btn-danger" value="Delete" />
                             </form><?}?><?if($row->is_deleted){?>
-                            <form action="restore" method="post"><?=Framework\Request::CSRF()?>
+                            <form action="<?=actionLink('restore')?>" method="post"  class="ajax-form"><?=Framework\Request::CSRF()?>
                                 <input type="hidden" name="<?=$row->col_pk?>" value="<?=$row->{$row->col_pk}?>" />
                                 <input type="submit" class="btn btn-info" value="Restore" />
                             </form>
-                            <form action="destroy" method="post"><?=Framework\Request::CSRF()?>
+                            <form action="<?=actionLink('destroy')?>" method="post"  class="ajax-form"><?=Framework\Request::CSRF()?>
                                 <input type="hidden" name="<?=$row->col_pk?>" value="<?=$row->{$row->col_pk}?>" />
                                 <input type="submit" class="btn btn-danger" value="Delete forever" />
                             </form><?}?>
                         </td>
                     </tr><?
-}
+                     }
                       ?>
                 </table>
-
-            </div>
-        </div>
-    </div>
-</div>
+ 
  			 <!-- /.col -->
  		 
  		 <!-- /.row -->
  	
 
 
-<?if(!$request->isAjax())include(PATH.'templates/AdminFooter.php');?>
+<?if(!$request->isAjax())include(PATH.'templates/cpfooter.php');?>

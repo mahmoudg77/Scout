@@ -766,18 +766,28 @@ var $mode="view";
                     </form>
                      <?
                 }elseif( $this->fields[$field]['type']=='Many2many'){
-                    if(array_key_exists('class',$attrs)){$attrs['class'].=' btn-link ';}else{$attrs['class'].=' btn-link ';}
-                ?>
-                  <form target="_blank" action="/<?=LANG?>/<?=$this->fields[$field]['relation']['controller']?>/search" method="post" >
-                        <?=\Framework\Request::CSRF();?>
-                        <input type="hidden" name="filter[]" value="<?=$this->fields[$field]['relation']['classid']?>" />
-                        <input type="hidden" name="value[]" value="<?=$this->{$this->col_pk}?>" />
-                        <input type="hidden" name="relation[]" value="<?=$this->fields[$field]['relation']['table']?>.<?=$this->fields[$field]['relation']['thisid']?>" />
-                        <input type="submit" name="" value="<?=count($this->$field)?>" <?foreach($attrs as $key=>$attr){?><?=' '.$key.'="'.$attr.'" '?><?}?>/>
-                    </form>
+                    switch($widget){
+                        default:
+                        case "tags":
+                                  foreach($this->$field as $itm){?>
+                                <span class="label label-warning"><?=$itm->name?></span>
+                             <?}
+                            break;
 
-                  <?
+                       case "tags":
+                            if(array_key_exists('class',$attrs)){$attrs['class'].=' btn-link ';}else{$attrs['class'].=' btn-link ';}
+                            ?>
+                              <form target="_blank" action="/<?=LANG?>/<?=$this->fields[$field]['relation']['controller']?>/search" method="post" >
+                                    <?=\Framework\Request::CSRF();?>
+                                    <input type="hidden" name="filter[]" value="<?=$this->fields[$field]['relation']['classid']?>" />
+                                    <input type="hidden" name="value[]" value="<?=$this->{$this->col_pk}?>" />
+                                    <input type="hidden" name="relation[]" value="<?=$this->fields[$field]['relation']['table']?>.<?=$this->fields[$field]['relation']['thisid']?>" />
+                                    <input type="submit" name="" value="<?=count($this->$field)?>" <?foreach($attrs as $key=>$attr){?><?=' '.$key.'="'.$attr.'" '?><?}?>/>
+                               </form>
 
+                              <?
+                            break;
+                        }
                 }elseif(in_array($this->fields[$field]['type'],["Boolean","tinyint"])){
                     switch($widget){
                         default:

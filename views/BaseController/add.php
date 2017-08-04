@@ -2,15 +2,7 @@
 
  
 
-<!-- Main content -->
-<section class="content">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="box box-primary">
-        <div class="box-body no-padding">
-
-
-              <form action="" method="post">
+              <form action="<?=actionLink('add')?>" method="post" class="ajax-form">
                  <?=Framework\Request::CSRF()?>
                 <table class="table" >
                     <?foreach($data->fields as $key=>$field){if($field['visible']){?>
@@ -25,16 +17,7 @@
                 </table>
              </form>
 
-
-
-</div>
-</div>
- 			 </div>
- 			 <!-- /.col -->
- 		 </div>
- 		 <!-- /.row -->
- 	 </section>
- 	 <!-- /.content -->
+ 
 
 
  <?if(!$request->isAjax())include(PATH.'templates/AdminFooter.php');?>
