@@ -32,11 +32,11 @@
 						<input id="teamName" type="text" class="form-control" name="teamName" placeholder="Team name">
 						<span class="input-group-addon">
 							<select name="category" id="category">
-								
+
 							</select>
 						</span>
 
-					
+
 
 
 

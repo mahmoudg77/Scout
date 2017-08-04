@@ -12,7 +12,7 @@ class BaseController{
 	global $context;
         $this->class= get_called_class();
 		if($this->authRequired && !$context->user){
-			return redirectTo('auth.Login');
+			return redirectTo('Login');
 		}
     }
     function getModel(){
@@ -56,11 +56,11 @@ class BaseController{
                 return $this->view(compact('data'));
             //}
         }catch(Exception $ex){
-            //if($request->isAjax() ){
+            // if($request->isAjax() ){
             //    return json_error($ex->getMessage());
-            //}else{
+            // }else{
                 echo $ex->getMessage();
-            //}
+            // }
         }
     }
 
@@ -90,12 +90,14 @@ class BaseController{
               }
           }
 
-          if($data->insert()){
-            redirectTo($context->controller_path."/all");
-          }else{
+          if(!$data->insert()){
+                    if($request->isAjax()) return json_error($data->error);
+                    throw new \Exception($data->error);
+                }
+                if($request->isAjax()) return json_success("Save Success !!");
 
-              echo($data->error);
-          }
+
+            redirectTo($context->controller_path."/all");
     }
     function postEdit($request){
         global $context;
