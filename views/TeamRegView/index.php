@@ -1,5 +1,7 @@
 <?if(!$request->isAjax())include(PATH.'templates/AdminHeader.php');?>
-<div class="container-fluid">
+
+<div class="container-fluid" id="widget">
+<h1 style="text-align: center">Team Registration Form</h1><hr>
 	<div class="FF">
 		<div class="form-group col-xs-8" style="white-space: nowrap">
 			<label class="control-label"  style="float: left" for="teamName">Team name:</label>
@@ -82,7 +84,8 @@
 			</tbody>
 		</table>
 	</div>
-
+	<pre class=" col-xs-10"  id="print">Save Your Team registration File and Print it Please !</pre>
+	<input class="btn btn-success btn-lg" type="button" id="btnSave" value="Save PNG"/>
 
 
 	<?if(!$request->isAjax())include(PATH.'templates/AdminFooter.php');?>

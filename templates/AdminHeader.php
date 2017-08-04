@@ -81,6 +81,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		xmlhttp.open('GET','starter.php',true);
 		xmlhttp.send();
 	}
+	
+
 </script>
 <style>
 #part1 {

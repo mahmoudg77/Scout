@@ -31,3 +31,9 @@
 	text-align: center;
 	color:#2CB121;
 }
+#print{
+	float: left;
+	color:white;
+	background: #2B2C30;
+	height: 46px;
+}
