@@ -1,4 +1,17 @@
 </div>
+
+
+        </div>
+     </div>
+   </div>
+      <!-- /.col -->
+</div>
+ <!-- /.row -->
+</section>
+ 	 <!-- /.content -->
+
+
+</div>
 <!-- /.content-wrapper -->
 
 
@@ -32,11 +45,31 @@
 <script src="<?=assets('bower_components/moment/moment.js')?>"></script>
 <script src="<?=assets('bower_components/fullcalendar/dist/fullcalendar.min.js')?>"></script>
 <!-- Page specific script -->
+
 <script>
- $(function () {
+    $(function () {
+        $(".menu-item").click(function (event) {
+            event.preventDefault();
+            var btn = $(this);
+            $("#pageContent").load(btn.attr("href"), function () {
+                            $(".ajax-form").ajaxForm({
+                                dataType: 'json',
+                                success: function (response) {
 
+                                    //-----
+                                    alert(response.message);
+                                    alert("ID:" + response.result.id + "\n\r" + "Name:" + response.result.name);
+                                    //-----
 
- })
+                                },
+                                error: function (response, status, xhr) {
+                                    alert(response.responseText);
+                                }
+                            })
+                        }
+                );
+        });
+    })
 </script>
 </body>
 

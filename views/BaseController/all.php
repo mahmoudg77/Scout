@@ -29,44 +29,38 @@
                           ?>
                         <td><?=ucwords(str_replace("_"," ",$key))?>
                         </td><?}
-      }?>
+             }?>
                         <td>Edit</td>
                         <td>View</td>
                         <td>Delete</td>
-                    </tr><?
-foreach($data as $key=>$row){
-                      ?>
+                    </tr><?foreach($data as $key=>$row){?>
                     <tr><?foreach($row->fields as $key=>$field){
-			if($field['visible']){
-                          ?>
-
+			        if($field['visible']){ ?>
                         <td><?$row->DrawField($key)?>
                         </td><?}
-          }?>
+                            }?>
                         <td>
                             <a class="btn btn-primary" href="<?=actionLink('item','',['id'=>$row->{$row->col_pk}])?>">view</a>
-
                         </td>
                         <td>
                             <a class="btn btn-default" href="<?=actionLink('edit','',['id'=>$row->{$row->col_pk}])?>">Edit</a>
-
                         </td>
                         <td><?if(!$row->is_deleted){?>
-                            <form action="delete" method="post"><?=Framework\Request::CSRF()?>
+                            <form action="delete" method="post" class="ajax-form"><?=Framework\Request::CSRF()?>
                                 <input type="hidden" name="<?=$row->col_pk?>" value="<?=$row->{$row->col_pk}?>" />
                                 <input type="submit" class="btn btn-danger" value="Delete" />
                             </form><?}?><?if($row->is_deleted){?>
-                            <form action="restore" method="post"><?=Framework\Request::CSRF()?>
+                            <form action="restore" method="post"  class="ajax-form"><?=Framework\Request::CSRF()?>
                                 <input type="hidden" name="<?=$row->col_pk?>" value="<?=$row->{$row->col_pk}?>" />
                                 <input type="submit" class="btn btn-info" value="Restore" />
                             </form>
-                            <form action="destroy" method="post"><?=Framework\Request::CSRF()?>
+                            <form action="destroy" method="post"  class="ajax-form"><?=Framework\Request::CSRF()?>
                                 <input type="hidden" name="<?=$row->col_pk?>" value="<?=$row->{$row->col_pk}?>" />
                                 <input type="submit" class="btn btn-danger" value="Delete forever" />
                             </form><?}?>
                         </td>
                     </tr><?
-}
+                     }
                       ?>
                 </table>
 

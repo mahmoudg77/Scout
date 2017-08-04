@@ -43,12 +43,12 @@ class Profile extends BLL{
 
              function PersonalImage(){
                 $p=array_filtercolumn($this->Images,[["tag","Personal"]]);
-                 return $p[0]->orignal;
+                 return $p[0];
              }
             function CoverImage(){
                 $p=array_filtercolumn($this->Images,[["tag","Cover"]]);
                 
-                 return $p[0]->orignal;
+                 return $p[0];
              }
 
 }
