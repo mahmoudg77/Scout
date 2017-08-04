@@ -34,8 +34,10 @@ class Waitinglist extends BLL{
     		$this->fields['model_id']=['name'=>'Releted Record',
     			'type'=>'Many2one','visible'=>true,
     			'serialize'=>true,
-    			'relation'=>['class'=>$this->model_name,'classid'=>$c->getPKname(),'controller'=>'Comp']];
+    			'relation'=>['class'=>$value,'classid'=>$c->getPKname(),'controller'=>'Comp']];
     	}
+
+
 
 
 

@@ -112,7 +112,7 @@ class Validator {
         return $validate;
     }
 
-    function CheckRequierd($value, $key)
+    function CheckRequired($value, $key)
     {
         $validate = ! empty($value);
         if ($validate == FALSE)

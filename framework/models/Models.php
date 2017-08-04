@@ -34,13 +34,16 @@ class Models extends BLL
 		return $list;
 	}
 function get(){
-return $this->all();
+	 $arr=$this->all();
+	 $arr=array_filtercolumn($arr,$this->where_arr);
+		return $arr;
 }
-	function Many2one($class,$foraginkey='',$classid='',$where = NULL){
+function Many2one($class,$foraginkey='',$classid='',$where = NULL){
 	    $obj=new Models;
-	    $obj->name=$this->$foraginkey;
-		return $obj;
-	}
+			$this->where_arr[]=$where;
+			$obj=$this->supperUser()->get();
+		return $obj[0];
+}
 
 
 }

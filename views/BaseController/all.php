@@ -5,11 +5,12 @@
 
 
     <div class="col-ld-6 pull-left">
-        <h2>Index</h2>
+        <h2> </h2>
     </div>
-    <div class="col-ld-6 pull-right">
+    <div class="col-ld-6 pull-right" style="padding: 10 0px;">
         <a class="btn btn-primary btn-md open-modal" href="<?=actionLink('add')?>">Create New</a>
     </div>
+
 
 
 

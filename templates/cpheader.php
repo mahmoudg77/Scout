@@ -2,37 +2,55 @@
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title><??></title>
+  <title>Arabscout|  <?=str_replace("App\Controllers\\","",CONTROLLER_PATH)?></title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="<?=assets('bower_components/bootstrap/dist/css/bootstrap.min.css')?>">
+  <link rel="stylesheet" href="<?=assets('css/bootstrap.min.css')?>">
   <link rel="stylesheet" href="<?=assets('css/jquery.dataTables.min.css')?>">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?=assets('css/font-awesome.min.css')?>">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="<?=assets('bower_components/Ionicons/css/ionicons.min.css')?>">
-  <!-- fullCalendar -->
-  <link rel="stylesheet" href="<?=assets('bower_components/fullcalendar/dist/fullcalendar.min.css')?>">
-  <link rel="stylesheet" href="<?=assets('bower_components/fullcalendar/dist/fullcalendar.print.min.css')?>" media="print">
+  <link rel="stylesheet" href="<?=assets('css/skin/ionicons.min.css')?>">
   <!-- Theme style -->
-  <link rel="stylesheet" href="<?=assets('dist/css/AdminLTE.min.css')?>">
+  <link rel="stylesheet" href="<?=assets('css/skin/AdminLTE.min.css')?>">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<?=assets('dist/css/skins/_all-skins.min.css')?>">
   <link rel="stylesheet" href="<?=assets('css/iziToast.min.css')?>">
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js')?>"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js')?>"></script>
-  <![endif]-->
-
-  <!-- Google Font -->
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="<?=assets('css/TeamsReg.css')?>">
+  <style>
+  #part1 {
+  	border: 1px solid #d9d9d9;
+  	border-radius: 10px;
+  	background: #e6e6e6;
+  	padding: 5px 0;
+  	width: 45%;
+  	float: left;
+  	margin: 0 18px;
+  	padding-bottom: 30px
+  }
+  #part2 {
+  	border: 1px solid #d9d9d9;
+  	border-radius: 10px;
+  	background: #e6e6e6;
+  	padding: 5px 0;
+  	width: 45%;
+  	float: left;
+  }
+  .tdinput {
+  	width: 80%;
+  }
+  #approveFom {
+  	background: #f2f2f2;
+  	border: 1px solid #e6e6e6;
+  	width: 45%;
+  	padding: 15px 12px;
+  	border-radius: 20px;
+  	text-align: center;
+  }
+  </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
