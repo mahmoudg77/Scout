@@ -8,10 +8,10 @@
 	width:45%;
 }
 .fees{
-	background: silver;
+	background: black;
 	position: absolute;
 	width:200px;
-	height: 130px;
+	height: 82px;
 	top:310px;
 	left: 1000px;
 	border-radius: 10px;
@@ -30,4 +30,10 @@
 	font-family: Wide Latin;
 	text-align: center;
 	color:#2CB121;
+}
+#print{
+	float: left;
+	color:white;
+	background: #2B2C30;
+	height: 46px;
 }

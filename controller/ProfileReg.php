@@ -20,9 +20,9 @@ class ProfileReg extends BaseController
       $profile=new App\Models\Profile\Profile;
       $validate=new Validator();//for valid only
       try{
-              $validate->validate($request->post,['firstname'=>'Requierd|Strings',
-                                          	      'secondname'=>'Requierd|Strings',
-                                                  'thirdname'=>'Requierd|Strings',
+              $validate->validate($request->post,['leader'=>'Requierd|Strings',
+                                          	      'leaderNId'=>'Requierd|Integer',
+                                                  'teamName'=>'Requierd|Strings',
                                                   'fourthname'=>'Requierd|Strings',
                                                   'birthdate'=>'Requierd',
                                                   'nationalId'=>'Requierd|Integer',

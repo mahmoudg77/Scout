@@ -54,7 +54,7 @@ try{
      $request=new Request();
 
     if(!$request->Check_CSRF()){
-         if($request->UseApi()){
+         if($request->isAjax()){
               json_error("Invalid Request");
               exit();
           }else{
@@ -82,7 +82,7 @@ try{
    $context->request= $request;
 
 
-
+ 
 
      GV();
 

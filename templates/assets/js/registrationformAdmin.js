@@ -15,7 +15,6 @@ var counterC = 0;
 
 var trains = [];
 var counterT = 0;
-
 var experiences = [];
 var counterE = 0;
 

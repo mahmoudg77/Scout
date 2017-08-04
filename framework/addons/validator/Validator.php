@@ -120,6 +120,14 @@ class Validator {
 
         return $validate;
     }
+    function CheckRequierd($value, $key)
+    {
+        $validate = ! empty($value);
+        if ($validate == FALSE)
+            throw new Exception("!Error: the $key is required:".$value);
+
+        return $validate;
+    }
     //  function CheckRequired($value, $key)
     // {
     //     $validate = ! empty($value);
