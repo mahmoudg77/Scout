@@ -119,20 +119,20 @@ class ProfileReg extends BaseController
 		$Contacts->supperUser()->insert();
 
 
-		//images
-		$Images=new App\Models\Media\Images;
-		// profile image
-		$Images->userId=$profile->Profile_ID;
-		$Images->orignal=$request->post['proImg'];//Name Of imag
-		$Images->model_name=$this->getModel();
-		$Images->model_id=2;
-		$Images->supperUser()->insert();
-		//Cover Image
-		$Images->userId=$profile->Profile_ID;
-		$Images->orignal=$request->post['cvrImg'];//Name Of imag
-		$Images->model_name=$this->getModel();
-		$Images->model_id=2;
-		$Images->supperUser()->insert();
+        ////images
+        //$Images=new App\Models\Media\Images;
+        //// profile image
+        //$Images->userId=$profile->Profile_ID;
+        //$Images->orignal=$request->post['proImg'];//Name Of imag
+        //$Images->model_name=$this->getModel();
+        //$Images->model_id=2;
+        //$Images->supperUser()->insert();
+        ////Cover Image
+        //$Images->userId=$profile->Profile_ID;
+        //$Images->orignal=$request->post['cvrImg'];//Name Of imag
+        //$Images->model_name=$this->getModel();
+        //$Images->model_id=2;
+        //$Images->supperUser()->insert();
 
 		// profile Camps Request
 		$Camp=new App\Models\Profile\CompUserLog;
@@ -184,6 +184,23 @@ class ProfileReg extends BaseController
 			if($Position->error!=''){
             	echo $Position->error;
         	}
+            
+            try
+            {
+            	$image=new App\Models\Media\Images($profile,"Personal",$request->files['proImg']);
+                $image->upload();
+            
+                $image=new App\Models\Media\Images($profile,"Cover",$request->files['cvrImg']);
+                $image->upload();
+            }
+            catch (\Exception $ex)
+            {
+            
+                 return json_error($ex->getMessage());
+            }
+            
+           
+
 
       if($request->isAjax()){
         return json_success("Save success !!");
@@ -191,6 +208,7 @@ class ProfileReg extends BaseController
        return redirectTo("ProfileReg/Success");
 
     }
+
 
     function Success($request){
       return $this->view();

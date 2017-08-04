@@ -1,22 +1,22 @@
-<?if(!$request->isAjax())include(PATH.'templates/header.php');?>
-<table class="table"><tr>
-    <?foreach($data[0]->fields as $key=>$value){
-		if($value['visible']){
-    ?>
-    <td><?=ucwords(str_replace("_"," ",$key))?></td>
-		<?}
-}?>
-<td>View</td><td>Delete</td></tr>
-<?
-foreach($data as $key=>$row){
+<?if(!$request->isAjax())include(PATH.'templates/AdminHeader.php');?>
+<table class="table"><thead><tr>
+   <th>Image File</th>
+   <th>Tag</th>
+   
+   <th>View</th>
+   <th>Delete</th>
+
+   </tr></thead>
+
+
+  
+<?foreach($data as $key=>$row){
     ?><tr>
-        <?foreach($row->fields as $key=>$field){
-
-          if($field['visible']){
-    ?>
-
-    <td><?$row->DrawField($key)?></td>
-			 
+        <td><img style="width:200px;" src="<?=$row->orignal?>"/>
+        <img style="width:100px;" src="<?=$row->medium?>"/>
+        <img style="width:50px;" src="<?=$row->thumb?>"/></td>
+        <td><?=$row->tag?></td>
+        
         <td>
             <a class="btn btn-primary"  href="item/<?=$row->{$row->col_pk}?>">view</a>
 
@@ -43,7 +43,7 @@ foreach($data as $key=>$row){
            <?}?>
              
         </td>
-    <?}}?>
+ 
     
     </tr>
     
@@ -54,4 +54,4 @@ foreach($data as $key=>$row){
 ?>
 </table>
 <a href="add" class="btn btn-primary" >Add New</a>
-<?if(!$request->isAjax())include(PATH.'templates/footer.php');?>
+<?if(!$request->isAjax())include(PATH.'templates/AdminFooter.php');?>

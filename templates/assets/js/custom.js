@@ -165,11 +165,11 @@ jQuery(function ($) { "use strict";
 	/*	Twitter Feed
 	/* ========================================================================= */
 	
-	$(".tweet").twittie({
-        dateFormat: "%b. %d, %Y",
-        template: "{{tweet}}",
-        count: 1
-    });
+	//$(".tweet").twittie({
+    //    dateFormat: "%b. %d, %Y",
+    //    template: "{{tweet}}",
+    //    count: 1
+    //});
 
 
 	/* ========================================================================= */
@@ -178,7 +178,7 @@ jQuery(function ($) { "use strict";
 
 	$('#og-grid').mixItUp(); // Portfolio filter
 
-	Grid.init(); //Portfolio Grid Expand
+	//Grid.init(); //Portfolio Grid Expand
 	
 	
 	/* ========================================================================= */
@@ -286,7 +286,7 @@ jQuery(function ($) { "use strict";
 
 	function initialize() {
 
-		var myLatLng = new google.maps.LatLng(22.333851, 91.812256);
+	    var myLatLng ;//= new google.maps.LatLng(22.333851, 91.812256);
 
 		var roadAtlasStyles = [{
 			"featureType": "landscape",
@@ -398,7 +398,7 @@ jQuery(function ($) { "use strict";
 		map.setMapTypeId('roadatlas');
 	}
 
-	google.maps.event.addDomListener(window, "load", initialize);
+	//google.maps.event.addDomListener(window, "load", initialize);
 
 
 });

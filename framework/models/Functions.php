@@ -1,5 +1,299 @@
 <?php
+function time_elapsed_string($ptime,$incTime=true)
+{
+global $LANG,$cLang;
+//if(!validateDate($ptime))$ptime=strtotime($ptime);
+    $etime = time() - $ptime ;
+ 
+   
+    if($etime>=86400*2 || $etime<0){
+    		$d=date("d",$ptime);
+    		$m=date("m",$ptime);
+    		$y=date("Y",$ptime);
+    		$t=date("h:i",$ptime);
+    		$A=date("A",$ptime);
+    		
+    	return  $d.' '.
+    		$LANG['Months'][$m-1].' '.
+    		$y.' '.
+    		($incTime?$t.' '.
+    		$LANG[$A]:'');// date("d-M-y h:i A",$ptime);
+    }
+     if ($etime < 1)
+    {
+        
+        	return   $LANG['now'];
+       
+    }
 
+    $a = $LANG['times_value'];
+    $a_plural = $LANG['times_name'];
+    
+   
+    foreach ($a as $secs => $str)
+    {
+        $d = $etime / $secs;
+        
+        if ($d >= 1)
+        {
+            $r = round($d);
+	        if($LANG['dir']=="rtl"){
+			return $LANG['ago'] . ' ' . $r . ' ' . ($r > 1 ? $a_plural[$str] : $str) ;	
+	        }else{
+	        	return $r . ' ' . ($r > 1 ? $a_plural[$str] : $str) . ' '.$LANG['ago'];
+	        }
+        }
+    }
+    		
+}
+function shortString($str,$count){
+$pieces = explode(" ", strip_tags($str));
+$first_part = implode(" ", array_splice($pieces, 0, $count));
+$other_part = implode(" ", array_splice($pieces, $count));
+return  $first_part ;
+}
+
+function get_word_counts($str) {
+   $counts = array();
+    preg_replace("/\W(?=.*\.[^.]*$)/", "", $str);
+   try{ 
+        $words = explode(' ', $str);
+    
+        foreach ($words as $word) {
+	        if(strlen($word)>7){
+	           $word = preg_replace("/[^$word]/", "", $word);
+	           $counts[$word] += 1;
+	        }
+        } 
+
+    arsort($counts);
+    return $counts;
+     }catch(Exception $ex){
+ 	return $counts;
+    }
+}
+function get_keywords($str,$count=5){
+global $LANG,$cLang;
+$str=strip_tags($str);
+$ignore_keywords_en=array('to','from','of','all','but','no','yes','do'.'are','is','can','not');
+$ignore_keywords_ar=array('ãä',
+				'Ýí'
+				,'Úáì'
+				,'Çáì'
+				,'áßä'
+				,'áÇ'
+				,'áã'
+				,'áä'
+				,'íßæä'
+				,'Úä'
+				,'íÓÊØíÚ'
+				,'ãäÐ'
+				,'Ãä'
+				,'åÐÇ'
+				,'Åáì'
+				,'ÍÊì'
+				,'Ãí',
+				'æ',
+				'ÇáÐí',
+				);
+				
+$str=str_replace($ignore_keywords_ar,"",$str);
+$str=str_replace($ignore_keywords_en,"",$str);
+$str=str_replace("'","",$str);
+$str=str_replace('"',"",$str);
+$str=str_replace("\\","",$str);
+
+$arr=get_word_counts($str);
+ 
+$keyword=array();
+$n=0;
+if($arr){
+	foreach($arr  as $w=>$c){
+		$keyword[]=$w;
+		$n++;
+		if($n>$count) return $keyword;
+	}
+}
+return $keyword;
+
+}
+
+
+ 
+
+function validateDate($date, $format = 'Y-m-d H:i:s')
+{
+    $d = DateTime::createFromFormat($format, $date);
+    return $d && $d->format($format) == $date;
+}
+
+function langurl($newlang="en"){
+if(!$newlang)$newlang="en";
+//global $_GET;
+$url=preg_replace('/(en|ar)\//',"$newlang/",$_SERVER['REQUEST_URI']);
+if(!preg_match('/(en|ar)\//',$_SERVER['REQUEST_URI'])){
+$url="/$newlang".$_SERVER['REQUEST_URI'];
+}
+return $url;
+
+}
+
+ 
+function reArrayFiles(&$file_post) {
+
+    $file_ary = array();
+    $file_count = count($file_post['name']);
+    $file_keys = array_keys($file_post);
+
+    for ($i=0; $i<$file_count; $i++) {
+        foreach ($file_keys as $key) {
+            $file_ary[$i][$key] = $file_post[$key][$i];
+        }
+    }
+
+    return $file_ary;
+}
+///////////////////////////////////
+function upload_image($img,$path="uploads",$allowedexts=['jpg','png','gif','jpeg'],$maxsize=4000000){
+	$arr=array();
+	if( !isset($img))
+	{
+	    $arr['error']="Error in upload image !";
+	 
+	    return $arr;
+	}
+    
+    $fileName = $img['name'];
+	$tmpName  = $img['tmp_name'];
+	$fileSize = $img['size'];
+	$fileType = $img['type'];
+    
+    if(empty($fileName))
+    {
+        $arr['error'] = "Cannot upload empty file !";
+         return $arr;
+    }
+    $fileex = explode('.', $fileName);
+    $ext = strtolower(array_pop($fileex));
+
+    if(in_array($ext, $allowedexts)=== FALSE)
+    {
+        $arr['error'] = "File type is not allowed !";
+         return $arr;
+    }
+    if ($fileSize > $maxsize)
+    {
+       $arr['error'] = "File size must be less than (".($maxsize/1024).") KB !";
+        return $arr;
+    }
+
+
+	$uploadDir=$path;
+	$dirlist=explode("/",$uploadDir);
+	$cpath='';
+
+	foreach( $dirlist as $dir){
+	    $cpath.=(($cpath=='')?'':'/').$dir;
+		if (!file_exists($cpath))
+		{
+			mkdir($cpath);
+			$indexFile=fopen($cpath."/index.html","w" );
+			fclose( $indexFile);
+		}
+		
+	}
+
+		if (!file_exists( $uploadDir."/thumb/"))
+		{
+			mkdir($uploadDir."/thumb/" )  ;
+			$indexFile=fopen($uploadDir."/thumb/index.html","w" );
+			fclose( $indexFile);
+		}
+		 if (!file_exists( $uploadDir."/orignal/")) {
+			mkdir($uploadDir."/orignal/")  ;
+			$indexFile=fopen($uploadDir."/orignal/index.html","w" );
+			fclose( $indexFile);
+		}
+		if (!file_exists( $uploadDir."/medium/")) {
+			mkdir($uploadDir."/medium/")  ;
+			$indexFile=fopen($uploadDir."/medium/index.html","w" );
+			fclose( $indexFile);
+		}
+		
+
+
+	
+		
+ 
+	 
+			$time = time();
+			$randName = md5(rand() * time());
+			$randName = substr($randName, 0, 5);
+            $nameindatabase =  $randName . '.' . $ext;
+            
+            $orignalPath = $uploadDir."/orignal/".  $randName . '.' . $ext;
+
+			$result = move_uploaded_file($tmpName, $orignalPath);
+
+	        if (!$result) {
+				return ['error'=>'Cannot upload this file !!'];
+			}
+
+            $arr['filename']=$nameindatabase;
+			$arr['orignal']=$orignalPath;
+
+            $size="thumb";
+			$wmax = 200;
+			$hmax = 150;
+			$thumb_file = "$uploadDir/$size/$nameindatabase";
+            ak_img_resize($orignalPath, $thumb_file, $wmax, $hmax, $ext);
+			
+			$arr[$size]=$thumb_file;
+			
+            $size="medium";
+			$medium_file = "$uploadDir/$size/$nameindatabase";
+			$wmax = 600;
+			$hmax = 400;
+			ak_img_resize($orignalPath, $medium_file, $wmax, $hmax, $ext);
+			
+			$arr[$size]=$thumb_file;
+
+                    /////////////////////////////////////////////////////
+	return $arr;                                                      
+	 
+}
+function ak_img_resize($target, $newcopy, $w, $h, $ext) {
+    list($w_orig, $h_orig) = getimagesize($target);
+    $scale_ratio = $w_orig / $h_orig;
+    if (($w / $h) > $scale_ratio) {
+           $w = $h * $scale_ratio;
+    } else {
+           $h = $w / $scale_ratio;
+    }
+    $img = "";
+    $ext = strtolower($ext);
+    if ($ext == "gif"){ 
+      $img = imagecreatefromgif($target);
+    } else if($ext =="png"){ 
+      $img = imagecreatefrompng($target);
+    } else { 
+      $img = imagecreatefromjpeg($target);
+    }
+    $tci = imagecreatetruecolor($w, $h);
+    // imagecopyresampled(dst_img, src_img, dst_x, dst_y, src_x, src_y, dst_w, dst_h, src_w, src_h)
+    imagecopyresampled($tci, $img, 0, 0, 0, 0, $w, $h, $w_orig, $h_orig);
+    imagejpeg($tci, $newcopy, 80);
+    
+}
+
+ 
+function sendmail($from,$to,$subject,$body,$otherheader=""){
+	$header= "From: ".$from;
+	if($otherheader!="")$header.="\r\n".$otherheader;
+	
+	if(mail($to,$subject,$body,$header)) return true;
+	else return false;
+}
  function arr_obj_group($arrayfield='data',$array,$group){
 		foreach( $array as $elem){
 			$values_arr=[];
@@ -99,6 +393,71 @@ function view($view,$arr=[]){
 		//return array_map(function($element) use($column_name){echo $column_name; return $element->$column_name;}, $array);
 
     }
+
+    function array_filtercolumn($array,$whr=[])
+    {
+
+        
+        $new_array = array_filter($array, function($index)use($array,$whr){
+                         if(!is_array($whr)) return;
+
+     	                        foreach($whr as $con){
+                                    if(count($con)==3){
+                                        $opr=$con[1];
+                                        $column_name=$con[0];
+                                        $value=$con[2];
+                                    }elseif(count($con)==2){
+                                        $opr="=";
+                                        $column_name=$con[0];
+                                        $value=$con[1];
+                                    }elseif(count($con)==1){
+                                        $opr="=";
+                                        $column_name=$con[0];
+                                        $value=true;
+                                    }
+
+                                    switch($opr){
+                                        case "=":
+                                            if($array[$index]->$column_name!=$value) return false;
+                                            break;
+                                        case "<":
+                                            if(!$array[$index]->$column_name<$value) return false;
+                                            break;
+                                        case ">":
+                                            if(!$array[$index]->$column_name>$value) return false;
+                                            break;
+                                        case "<=":
+                                            if(!$array[$index]->$column_name<=$value) return false;
+                                            break;
+                                        case ">=":
+                                            if(!$array[$index]->$column_name>=$value) return false;
+                                            break;
+                                        case "like":
+                                            if(strpos($value,$array[$index]->$column_name)===false) return false;
+                                            break;
+                                        case "not like":
+                                            if(strpos($value,$array[$index]->$column_name)===true) return false;
+                                            break;
+                                        case "in":
+                                            if(!in_array($array[$index]->$column_name,$value)) return false;
+                                            break;
+                                        case "not in":
+                                            if(in_array($array[$index]->$column_name,$value)) return false;
+                                            break;
+                                    }
+    	                              
+                                }
+	                       
+                    
+                    return true;
+             
+        },ARRAY_FILTER_USE_KEY);
+        return array_values($new_array);;
+
+    }
+
+
+
 
 
  function GV(){

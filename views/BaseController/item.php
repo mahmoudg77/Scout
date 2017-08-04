@@ -8,7 +8,7 @@
 
      <table class="table">
         <?foreach($data->data as $key=>$value){if($data->fields[$key]['visible']){?>
-            <tr><td><?=ucwords(str_replace("_"," ",$key))?> :</td><td><?=$data->DrawField($key,'','',['style'=>'color:red','data-id'=>$key])?></td></tr>
+            <tr><td><?=ucwords(str_replace("_"," ",$key))?> :</td><td><?=$data->DrawField($key,'','',['style'=>'color:blue','data-id'=>$key])?></td></tr>
         <?}}?>
         <tr><td></td><td>    <a class="btn btn-primary" href="../edit/<?=$data->{$data->col_pk}?>">Edit</a>
 </td></tr>

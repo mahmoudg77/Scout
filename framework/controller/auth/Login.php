@@ -26,8 +26,10 @@ class Login extends BaseController
                 $data=$user->where("email",$request->post['email'])->where("password",md5($request->post['password']))->supperUser()->get();
 
                 if(!$data){
-                    echo "Invalid login data !!";
-                    exit();
+                    $message= "Invalid login data !!";
+					$email=$request->post['email'];
+					$password=$request->post['password'];
+					return $this->view('auth/login',compact('message','email','password'));                     
                 }
 
                 $user=$data[0];
@@ -42,11 +44,14 @@ class Login extends BaseController
                 }else{
                     return redirectTo("Dashboard");
                 }
-            }catch(Exception $ex){
+            }catch(\Exception $ex){
                 if(isset($request->get['api'])){
                       json_success($ex);
                 }else{
-                    echo $ex->getMessage();
+                    $message= $ex->getMessage();
+					$email=$request->post['email'];
+					$password=$request->post['password'];
+					return $this->view('auth/login',compact('message','email','password'));
                 }
             }
 

@@ -23,9 +23,9 @@ var  $relatedField=array();
 var $mode="view";
 
 	function __construct(){
-
+		global $Database;
 		try{
-            $this->Database=new Database();
+            $this->Database=$Database;
 
 		    $q = $this->Database->prepare("DESCRIBE ".$this->tablename);
             $q->execute();

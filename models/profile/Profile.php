@@ -27,12 +27,29 @@ class Profile extends BLL{
 			 		'type'=>'Many2many',
 			 		'serialize'=>true,
 			 		'relation'=>['class'=>"App\Models\Lookup\Hobbies",'classid'=>'hobbiesId','table'=>'App\Models\Profile\HobbyUserLog','thisid'=>'userId','controller'=>'Hobbies']],
-	    ];
+             'Images'=>[
+                    'name'=>"Image",
+                    'serialize'=>true,
+                    'type'=>'One2many',
+                    'relation'=>['class'=>'App\Models\Media\Images','classid'=>'model_id','where'=>['model_name','App\Models\Profile\Profile'],'controller'=>'Images'],
+                ],
+           
+             ];
 
 			function name()
 		 	{
 		 		return $this->First_Name." ".$this->Second_Name." ".$this->Third_Name;
 		 	}
+
+             function PersonalImage(){
+                $p=array_filtercolumn($this->Images,[["tag","Personal"]]);
+                 return $p[0]->orignal;
+             }
+            function CoverImage(){
+                $p=array_filtercolumn($this->Images,[["tag","Cover"]]);
+                
+                 return $p[0]->orignal;
+             }
 
 }
 ?>

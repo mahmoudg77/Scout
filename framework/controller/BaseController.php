@@ -9,7 +9,11 @@ class BaseController{
     protected $authRequired=false;
     protected $class;
     function __construct(){
+	global $context;
         $this->class= get_called_class();
+		if($this->authRequired && !$context->user){
+			return redirectTo('auth.Login');
+		}
     }
     function getModel(){
         return $this->model;
@@ -139,7 +143,7 @@ class BaseController{
 
           $data=$data->supperUser()->get();
 
-          return $this->view('BaseController/all',compact('data'));
+          return $this->view('all',compact('data'));
       }
 
     }
@@ -294,13 +298,19 @@ class BaseController{
                $arr['data']=$data;
             }
             $view=str_replace("App\\Controllers\\","",$this->class)."/$method";
+        }elseif(strpos("/",$view)===false){
+            //$s=explode("/",$view);
+            //$view=array_pop($s);
+            $cntrl=get_called_class();
+            $view=$cntrl."/".$view;
+            $view=str_replace("App\\Controllers\\","",$view);
         }
 		 //echo PATH.'views/'.str_replace("App\\Controllers\\","",$view).'.php';
          if(!file_exists(PATH.'views/'.str_replace("App\\Controllers\\","",$view).'.php')){
-
+         
           $view="BaseController/$method";
         }
-
+        //echo $view;
         return view($view,$arr);
 
 
