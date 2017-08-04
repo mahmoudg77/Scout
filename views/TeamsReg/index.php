@@ -1,7 +1,7 @@
 <?if(!$request->isAjax())include(PATH.'templates/AdminHeader.php');?>
 
     <!-- Main content -->
-    <section class="container-fluid">
+    <section class="container-fluid" name="sec1">
         <div>
 		<div class="teamReg">
                 <h1 style="text-align: center;">Team registration</h1>
@@ -33,6 +33,7 @@
 						<span class="input-group-addon">
 							<select name="category" id="category">
 
+
 							</select>
 						</span>
 
@@ -43,26 +44,91 @@
 
 
 
+
+								<option value="1">براعم</option>
+								<option value="2">أشبال</option>
+								<option value="3">كشافة</option>
+								<option value="4">كشاف متقدم</option>
+								<option value="5">جوالة</option>
+							</select>
+						</span>
+
+
                             </div>
 					<div class="input-group col-xs-6 ">
 						<span class="input-group-addon"><i aria-hidden="true">Country</i></span>
-						<select id="country" type="text" class="form-control" name="country"></select>
+						<select id="country" type="text" class="form-control" name="country" onChange="getState(this.val);">
+							<option value="" selected>أختر البلد</option>
+							<?
+                            $country= new App\Models\Lookup\Teams;
+                            foreach($country->supperUser()->get() as $item){
+                               	if($item->parentId==0){
+                              ?>
+                                	<option value="<?=$item->id?>"><?=$item->name?></option>
+                              <?
+								}
+                            }?>
+						</select>
+						<script>
+						function getState(val) {alert(val);
+							$.ajax({
+							type: "POST",
+							url: "Success",
+							data:'country_id='+val,
+							success: function(data){
+								$("#organization").html(data);
+							}
+							});
+						}
+						</script>
                         </div>
 					<div class="input-group col-xs-6 ">
 						<span class="input-group-addon"><i aria-hidden="true">Organization</i></span>
-						<select id="organization" type="text" class="form-control" name="organization"></select>
+						<select id="organization" type="text" class="form-control" name="organization">
+							<option value="">Select Organization</option>
+						<?
+                            $organization= new App\Models\Lookup\Teams;
+                            foreach($organization->supperUser()->get() as $item){
+                               	if($item->parentId==post['country_id']){
+                              ?>
+                                	<option value="<?=$item->id?>"><?=$item->name?></option>
+                              <?
+								}
+                            }?>
+						</select>
                             </div>
 					<div class="input-group col-xs-6 ">
 						<span class="input-group-addon"><i aria-hidden="true">Branch</i></span>
-						<select id="branch" type="text" class="form-control" name="branch"></select>
+						<select id="branch" type="text" class="form-control" name="branch">
+							<?
+                            $Branch= new App\Models\Lookup\Teams;
+                            foreach($Branch->supperUser()->get() as $item){
+                               	if($item->parentId==post['Org_id']){
+                              ?>
+                                	<option value="<?=$item->id?>"><?=$item->name?></option>
+                              <?
+								}
+                            }?>
+						</select>
                         </div>
 					<div class="input-group col-xs-6 ">
 						<span class="input-group-addon"><i aria-hidden="true">Office</i></span>
-						<select id="office" type="text" class="form-control" name="office"></select>
+						<select id="office" type="text" class="form-control" name="office">
+							<?
+                            $Office= new App\Models\Lookup\Teams;
+                            foreach($Office->supperUser()->get() as $item){
+                               	if($item->parentId==post['brnch']){
+                              ?>
+                                	<option value="<?=$item->id?>"><?=$item->name?></option>
+                              <?
+								}
+                            }?>
+						</select>
                     </div>
                             </div>
 				<div class="fees">
 					<pre>Fees</pre>
+					<pre name="Money" id="Money">120 Egy</pre>
 
                         </div>
                     <div id="tableT">
@@ -73,17 +139,17 @@
                                     <th>Name</th>
                                     <th>Birthdate</th>
 								<th>National ID</th>
-								<th>Registe</th>
+								<th>Register</th>
                                 </tr>
                             </thead>
                             <tbody id="table">
                                 <tr>
                                     <th scope="row">1</th>
-								<td><input type="text" class="form-control tdinput" id="r1td1" required>
+								<td><input type="text" class="form-control tdinput" id="r1td1" name="name[]"    required>
 								</td>
-								<td><input type="text" class="form-control tdinput" id="r1td2" required>
+								<td><input type="text" class="form-control tdinput" id="r1td2" name="Birthdate[]"  required>
 								</td>
-								<td><input type="number" class="form-control tdinput" id="r1td3" required>
+								<td><input type="number" class="form-control tdinput" id="r1td3" name="NationalID[]"  required>
 								</td>
 								<td>
 									<div class="input-group">
@@ -94,11 +160,11 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">2</th>
-								<td><input type="text" class="form-control tdinput" id="r2td1" required>
+								<td><input type="text" class="form-control tdinput" id="r2td1" name="name[]"  required>
 								</td>
-								<td><input type="text" class="form-control tdinput" id="r2td2" required>
+								<td><input type="text" class="form-control tdinput" id="r2td2" name="Birthdate[]"  required>
 								</td>
-								<td><input type="number" class="form-control tdinput" id="r2td3" required>
+								<td><input type="number" class="form-control tdinput" id="r2td3" name="NationalID[]"  required>
 								</td>
 								<td>
 									<div class="input-group">
@@ -109,11 +175,11 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">3</th>
-								<td><input type="text" class="form-control tdinput" id="r3td1" required>
+								<td><input type="text" class="form-control tdinput" id="r3td1" name="name[]"  required>
 								</td>
-								<td><input type="text" class="form-control tdinput" id="r3td2" required>
+								<td><input type="text" class="form-control tdinput" id="r3td2" name="Birthdate[]"  required>
 								</td>
-								<td><input type="number" class="form-control tdinput" id="r3td3" required>
+								<td><input type="number" class="form-control tdinput" id="r3td3" name="NationalID[]"  required>
 								</td>
 								<td>
 									<div class="input-group">
@@ -124,11 +190,11 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">4</th>
-								<td><input type="text" class="form-control tdinput" id="r4td1" required>
+								<td><input type="text" class="form-control tdinput" id="r4td1" name="name[]"  required>
 								</td>
-								<td><input type="text" class="form-control tdinput" id="r4td2" required>
+								<td><input type="text" class="form-control tdinput" id="r4td2" name="Birthdate[]"  required>
 								</td>
-								<td><input type="number" class="form-control tdinput" id="r4td3" required>
+								<td><input type="number" class="form-control tdinput" id="r4td3" name="NationalID[]"  required>
 								</td>
 								<td>
 									<div class="input-group">
@@ -139,11 +205,11 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">5</th>
-								<td><input type="text" class="form-control tdinput" id="r5td1" required>
+								<td><input type="text" class="form-control tdinput" id="r5td1" name="name[]"  required>
 								</td>
-								<td><input type="text" class="form-control tdinput" id="r5td2" required>
+								<td><input type="text" class="form-control tdinput" id="r5td2" name="Birthdate[]"  required>
 								</td>
-								<td><input type="number" class="form-control tdinput" id="r5td3" required>
+								<td><input type="number" class="form-control tdinput" id="r5td3" name="NationalID[]"  required>
 								</td>
 								<td>
 									<div class="input-group">
@@ -154,11 +220,11 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">6</th>
-								<td><input type="text" class="form-control tdinput" id="r6td1" required>
+								<td><input type="text" class="form-control tdinput" id="r6td1" name="name[]"  required>
 								</td>
-								<td><input type="text" class="form-control tdinput" id="r6td2" required>
+								<td><input type="text" class="form-control tdinput" id="r6td2" name="Birthdate[]"  required>
 								</td>
-								<td><input type="number" class="form-control tdinput" id="r6td3" required>
+								<td><input type="number" class="form-control tdinput" id="r6td3" name="NationalID[]"  required>
 								</td>
 								<td>
 									<div class="input-group">
@@ -169,11 +235,11 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">7</th>
-								<td><input type="text" class="form-control tdinput" id="r7td1" required>
+								<td><input type="text" class="form-control tdinput" id="r7td1" name="name[]"  required>
 								</td>
-								<td><input type="text" class="form-control tdinput" id="r7td2" required>
+								<td><input type="text" class="form-control tdinput" id="r7td2" name="Birthdate[]"  required>
 								</td>
-								<td><input type="number" class="form-control tdinput" id="r7td3" required>
+								<td><input type="number" class="form-control tdinput" id="r7td3" name="NationalID[]"  required>
 								</td>
 								<td>
 									<div class="input-group">
@@ -184,11 +250,11 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">8</th>
-								<td><input type="text" class="form-control tdinput" id="r8td1" required>
+								<td><input type="text" class="form-control tdinput" id="r8td1" name="name[]"  required>
 								</td>
-								<td><input type="text" class="form-control tdinput" id="r8td2" required>
+								<td><input type="text" class="form-control tdinput" id="r8td2" name="Birthdate[]"  required>
 								</td>
-								<td><input type="number" class="form-control tdinput" id="r8td3" required>
+								<td><input type="number" class="form-control tdinput" id="r8td3" name="NationalID[]"  required>
 								</td>
 								<td>
 									<div class="input-group">
@@ -199,11 +265,11 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">9</th>
-								<td><input type="text" class="form-control tdinput" id="r9td1" required>
+								<td><input type="text" class="form-control tdinput" id="r9td1" name="name[]"  required>
 								</td>
-								<td><input type="text" class="form-control tdinput" id="r9td2" required>
+								<td><input type="text" class="form-control tdinput" id="r9td2" name="Birthdate[]"  required>
 								</td>
-								<td><input type="number" class="form-control tdinput" id="r9td3" required>
+								<td><input type="number" class="form-control tdinput" id="r9td3" name="NationalID[]"  required>
 								</td>
 								<td>
 									<div class="input-group">
@@ -214,11 +280,11 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">10</th>
-								<td><input type="text" class="form-control tdinput" id="r10td1" required>
+								<td><input type="text" class="form-control tdinput" id="r10td1" name="name[]"  required>
 								</td>
-								<td><input type="text" class="form-control tdinput" id="r10td2" required>
+								<td><input type="text" class="form-control tdinput" id="r10td2" name="Birthdate[]"  required>
 								</td>
-								<td><input type="number" class="form-control tdinput" id="r10td3" required>
+								<td><input type="number" class="form-control tdinput" id="r10td3" name="NationalID[]"  required>
 								</td>
 								<td>
 									<div class="input-group">
@@ -229,11 +295,11 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">11</th>
-								<td><input type="text" class="form-control tdinput" id="r11td1" required>
+								<td><input type="text" class="form-control tdinput" id="r11td1" name="name[]"  required>
 								</td>
-								<td><input type="text" class="form-control tdinput" id="r11td2" required>
+								<td><input type="text" class="form-control tdinput" id="r11td2" name="Birthdate[]"  required>
 								</td>
-								<td><input type="number" class="form-control tdinput" id="r11td3" required>
+								<td><input type="number" class="form-control tdinput" id="r11td3" name="NationalID[]"  required>
 								</td>
 								<td>
 									<div class="input-group">
@@ -244,11 +310,11 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">12</th>
-								<td><input type="text" class="form-control tdinput" id="r12td1" required>
+								<td><input type="text" class="form-control tdinput" id="r12td1" name="name[]"  required>
 								</td>
-								<td><input type="text" class="form-control tdinput" id="r12td2" required>
+								<td><input type="text" class="form-control tdinput" id="r12td2" name="Birthdate[]"  required>
 								</td>
-								<td><input type="number" class="form-control tdinput" id="r12td3" required>
+								<td><input type="number" class="form-control tdinput" id="r12td3" name="NationalID[]"  required>
 								</td>
 								<td>
 									<div class="input-group">
@@ -292,7 +358,7 @@
 						</div>
 						<div class="input-group ">
 							<span class="input-group-addon">Second Name</span>
-							<input id="secondName" type="text" class="form-control" name="Second Name" required>
+							<input id="secondName" type="text" class="form-control" name="SecondName" required>
 						</div>
 						<div class="input-group">
 							<span class="input-group-addon"><i aria-hidden="true">National ID</i></span>
