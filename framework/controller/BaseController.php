@@ -298,9 +298,8 @@ class BaseController{
                $arr['data']=$data;
             }
             $view=str_replace("App\\Controllers\\","",$this->class)."/$method";
-        }elseif(strpos("/",$view)===false){
-            //$s=explode("/",$view);
-            //$view=array_pop($s);
+         }elseif(strpos("/",$view)===false){
+            
             $cntrl=get_called_class();
             $view=$cntrl."/".$view;
             $view=str_replace("App\\Controllers\\","",$view);
@@ -310,7 +309,7 @@ class BaseController{
          
           $view="BaseController/$method";
         }
-        //echo $view;
+         echo $view;
         return view($view,$arr);
 
 
