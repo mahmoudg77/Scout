@@ -49,18 +49,18 @@ class BaseController{
           		return $this->view("Error/index",['ErrorNumber'=>404]);
             }
             $data->mode='view';
-  
-           if($request->isAjax() ){
-                return json_success("Success",$data);
-            }else{
+
+           //if($request->isAjax() ){
+           //     return json_success("Success",$data);
+           // }else{
                 return $this->view(compact('data'));
-            }
+            //}
         }catch(Exception $ex){
-            if($request->isAjax() ){
-                return json_error($ex->getMessage());
-            }else{
+            //if($request->isAjax() ){
+            //    return json_error($ex->getMessage());
+            //}else{
                 echo $ex->getMessage();
-            }
+            //}
         }
     }
 
@@ -105,11 +105,15 @@ class BaseController{
             if($field['type']!='One2many' && $field['type']!='Many2many')
                 $data->data[$key]=$request->post[$key];
           }
-           if($data->update()){
+          if(!$data->update()){
+                    if($request->isAjax()) return json_error($data->error);
+                    throw new \Exception($data->error);
+                }
+                if($request->isAjax()) return json_success("Save Success !!");
+
+
             redirectTo($context->controller_path."/all");
-          }else{
-              echo $data->error;
-          }
+
     }
      function search($request){
 
@@ -160,8 +164,12 @@ class BaseController{
           }else{
 
               $data->data[$data->col_pk]=$request->post[$data->col_pk];
-              $data->delete();
-              redirectTo($context->controller_path."/all");
+              if(!$data->delete()){
+                    if($request->isAjax()) return json_error($data->error);
+                    throw new \Exception($data->error);
+                }
+                if($request->isAjax()) return json_success("Delete Success !!");
+               redirectTo($context->controller_path."/all");
           }
 
     }
@@ -173,9 +181,13 @@ class BaseController{
       }else{
           $data=new $this->model;
           $data->data[$data->col_pk]=$request->post[$data->col_pk];
-          $data->destroy();
-          redirectTo($context->controller_path."/all");
-      }
+
+        if(!$data->destroy()){
+                    if($request->isAjax()) return json_error($data->error);
+                    throw new \Exception($data->error);
+                }
+                if($request->isAjax()) return json_success("Deleted forever Success !!");
+               redirectTo($context->controller_path."/all");      }
 
     }
     function postRestore($request){
@@ -186,11 +198,18 @@ class BaseController{
       }else{
           $data=new $this->model;
           $data->data[$data->col_pk]=$request->post[$data->col_pk];
-          $data->restore();
-          redirectTo($context->controller_path."/all");
+
+        if(!$data->restore()){
+                    if($request->isAjax()) return json_error($data->error);
+                    throw new \Exception($data->error);
+                }
+                if($request->isAjax()) return json_success("Restore Success !!");
+               redirectTo($context->controller_path."/all");
+
+         }
       }
 
-    }
+
     // function find1($request){
     //     try{
     //         $validate=new Validator();
@@ -300,17 +319,17 @@ class BaseController{
             $view=str_replace("App\\Controllers\\","",$this->class)."/$method";
          }
         elseif(strpos("/",$view)===false){
-            
+
             $cntrl=get_called_class();
             $view=$cntrl."/".$view;
             $view=str_replace("App\\Controllers\\","",$view);
         }
 		 //echo PATH.'views/'.str_replace("App\\Controllers\\","",$view).'.php';
          if(!file_exists(PATH.'views/'.str_replace("App\\Controllers\\","",$view).'.php')){
-         
+
           $view="BaseController/$method";
         }
-           
+
         return view($view,$arr);
 
 

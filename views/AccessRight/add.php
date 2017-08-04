@@ -1,8 +1,8 @@
-<?if(!$request->isAjax())include(PATH.'templates/header.php');?>
+<?if(!$request->isAjax())include(PATH.'templates/cpheader.php');?>
 
  <?if(!is_array($data)){$data=[$data];}?>
  <?foreach($data as $group){?>
-     <form action="" method="post">
+     <form action="<?=actionLink('add')?>" method="post" class="ajax-form">
          <?=App\Framework\Request::CSRF()?>
         <table class="table" >
         	 <tr><td>Group :</td><td><?$group->DrawField("groupid")?></td></tr>
@@ -27,4 +27,4 @@
      </form>
  <?}?>
 
-<?if(!$request->isAjax())include(PATH.'templates/footer.php');?>
+<?if(!$request->isAjax())include(PATH.'templates/cpfooter.php');?>

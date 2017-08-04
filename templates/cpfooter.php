@@ -13,7 +13,25 @@
 
 </div>
 <!-- /.content-wrapper -->
+<div id="formModel" class="modal fade" role="dialog">
+  <div class="modal-dialog">
 
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 
  <footer class="main-footer">
 	 <div class="pull-right hidden-xs">
@@ -29,6 +47,7 @@
 
 <!-- jQuery 3 -->
 <script src="<?=assets('bower_components/jquery/dist/jquery.min.js')?>"></script>
+<script src="<?=assets('js/jquery-1.12.4.js')?>"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<?=assets('bower_components/bootstrap/dist/js/bootstrap.min.js')?>"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -44,32 +63,89 @@
 <!-- fullCalendar -->
 <script src="<?=assets('bower_components/moment/moment.js')?>"></script>
 <script src="<?=assets('bower_components/fullcalendar/dist/fullcalendar.min.js')?>"></script>
+<script src="<?=assets('js/jquery.dataTables.min.js')?>"></script>
+<script src="<?=assets('js/iziToast.min.js')?>"></script>
+
+  <script src="http://malsup.github.com/jquery.form.js"></script>
 <!-- Page specific script -->
 
 <script>
     $(function () {
         $(".menu-item").click(function (event) {
             event.preventDefault();
+            $("#pageContent").html("<center><h2>L o a d i n g . . .</h2><img style='width:200px' src='<?=assets("img/loader 2.gif")?>' /></center>");
             var btn = $(this);
-            $("#pageContent").load(btn.attr("href"), function () {
-                            $(".ajax-form").ajaxForm({
-                                dataType: 'json',
-                                success: function (response) {
+            $("#pageContent").load(btn.attr("href"), function (data, status, xhr) {
+                if (status == "error") {
+                        $("#pageContent").html("<div class='alert alert-danger'><strong>Sorry; </strong>" + xhr.status + " " + xhr.statusText + "</div>");
+                        return;
+                    }
 
-                                    //-----
-                                    alert(response.message);
-                                    alert("ID:" + response.result.id + "\n\r" + "Name:" + response.result.name);
-                                    //-----
+
+                $('#pageContent .data-table').DataTable();
+                            $("#pageContent .ajax-form").ajaxForm({
+                                dataType: 'json',
+                                success: function (data) {
+
+                                    iziToast.show({
+                                        title: 'Success',
+                                        message: data.message,
+                                        color: 'green', // blue, red, green, yellow
+                                        position: 'topCenter',
+                                    });
 
                                 },
-                                error: function (response, status, xhr) {
-                                    alert(response.responseText);
+                                error: function (data, status, xhr) {
+                                   // var obj = JSON.parse(data.responseText);
+
+                                    iziToast.show({
+                                        title: 'Error',
+                                        message: data.status + " " + xhr ,
+                                        color: 'red', // blue, red, green, yellow
+                                        position: 'topCenter',
+                                    });
                                 }
-                            })
+                            });
                         }
                 );
         });
-    })
+
+$("body").on("click",".open-modal",function(e){
+    e.preventDefault();
+    $("#formModel .modal-body").html("<center><h2>L o a d i n g . . .</h2><img style='width:200px' src='<?=assets("img/loader 2.gif")?>' /></center>");
+    var btn=$(this);
+    $("#formModel .modal-body").load(btn.attr("href"),function(data, status, xhr){
+            $("#formModel").modal();
+            if (status == "error") {
+                        $("#myModal .modal-body").html("<div class='alert alert-danger'><strong>Sorry; </strong>" + xhr.status + " " + xhr.statusText + "</div>");
+                    return;
+                }
+            $(".ajax-form").ajaxForm({
+                                dataType: 'json',
+                                success: function (data) {
+                                     iziToast.show({
+                                        title: 'Success',
+                                        message: data.message,
+                                        color: 'green', // blue, red, green, yellow
+                                        position: 'topCenter',
+                                    });
+                                     $("#formModel").modal("close");
+                                },
+                                error: function (data, status, xhr) {
+                                   // var obj = JSON.parse(data.responseText);
+
+                                    iziToast.show({
+                                        title: 'Error',
+                                        message: data.status + " " + xhr ,
+                                        color: 'red', // blue, red, green, yellow
+                                        position: 'topCenter',
+                                    });
+                                }
+                            });
+        });
+});
+
+});
 </script>
 </body>
 

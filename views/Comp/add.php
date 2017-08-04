@@ -1,8 +1,8 @@
-<?if(!$request->isAjax())include(PATH.'templates/header.php');?>
+<?if(!$request->isAjax())include(PATH.'templates/cpheader.php');?>
 
  <?if(!is_array($data)){$data=[$data];}?>
  <?foreach($data as $item){?>
-     <form action="" method="post">
+     <form action="<?=actionLink('add')?>" method="post" class="ajax-form">
        <?=Framework\Request::CSRF()?>
         <table class="table" >
             <?foreach($item->fields as $key=>$field){if($field['visible']){?>
@@ -23,4 +23,4 @@
      </form>
  <?}?>
 
- <?if(!$request->isAjax())include(PATH.'templates/footer.php');?>
+<?if(!$request->isAjax())include(PATH.'templates/cpfooter.php');?>
