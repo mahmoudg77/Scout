@@ -81,7 +81,7 @@
                     </a>
                   </li>
                   <!-- end message -->
-                  
+
                 </ul>
               </li>
               <li class="footer"><a href="#">See All Messages</a></li>
@@ -103,7 +103,7 @@
                       <i class="fa fa-users text-aqua"></i> 5 new members joined today
                     </a>
                   </li>
-                 
+
                 </ul>
               </li>
               <li class="footer"><a href="#">View all</a></li>
@@ -135,7 +135,7 @@
                     </a>
                   </li>
                   <!-- end task item -->
-                   
+
                   <!-- end task item -->
                 </ul>
               </li>
@@ -217,8 +217,8 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-     
-        
+
+
         <li class="treeview">
 			<a href="#">
 				<i class="fa fa-files-o"></i>
@@ -402,7 +402,7 @@
         <li class="active"><?=METHOD?></li>
       </ol>
     </section>
-    
+
 <!-- Main content -->
 <section class="content">
   <div class="row">
@@ -410,6 +410,3 @@
       <div class="box box-primary">
         <div class="box-body">
             <div id="pageContent">
-
-
-    

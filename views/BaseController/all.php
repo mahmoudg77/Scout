@@ -1,9 +1,9 @@
 <?if(!$request->isAjax())include(PATH.'templates/cpheader.php');?>
- 
+
 <!-- Main content -->
 
 
-   
+
     <div class="col-ld-6 pull-left">
         <h2>Index</h2>
     </div>
@@ -53,11 +53,11 @@
                      }
                       ?>
                 </table>
- 
+
  			 <!-- /.col -->
- 		 
+
  		 <!-- /.row -->
- 	
+
 
 
 <?if(!$request->isAjax())include(PATH.'templates/cpfooter.php');?>
