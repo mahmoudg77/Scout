@@ -8,16 +8,18 @@ class Login extends BaseController
     protected  $authRequired=false;
 
     function index($request){
-        return view('auth/login');
+         return $this->view();
+       
     }
      function all($request){
-        return view('home');
+        return $this->view('home');
     }
    function login($request=null){
 
 
     }
     function postLogin($request){
+    
          try{
                 $validate=new Validator();
                 $validate->validate($request->post,['email'=>'Requierd|Strings','password'=>'Requierd|Strings']);
@@ -29,7 +31,7 @@ class Login extends BaseController
                     $message= "Invalid login data !!";
 					$email=$request->post['email'];
 					$password=$request->post['password'];
-					return $this->view('auth/login',compact('message','email','password'));                     
+					return $this->view("index",compact('message','email','password'));                     
                 }
 
                 $user=$data[0];
@@ -51,7 +53,7 @@ class Login extends BaseController
                     $message= $ex->getMessage();
 					$email=$request->post['email'];
 					$password=$request->post['password'];
-					return $this->view('auth/login',compact('message','email','password'));
+					return $this->view("index",compact('message','email','password'));
                 }
             }
 
