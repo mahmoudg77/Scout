@@ -39,6 +39,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <script type="text/javascript">
 	var counter =13;
+	
+	var counterFee=120;
 	function asd(){
 		if(counter<=24){
 			document.getElementById('table').innerHTML+=
@@ -53,16 +55,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
 					<button type="button" class="btn btn-success " disabled>Get IN</button>
 				</div></td>
 			</tr>`
+		counter++;
+			
+		document.getElementById('Money').innerHTML=((counter-1)*10);
 		}else{
 			alert("FUCK OFF");
 		}
-		counter++;
 	}
 	var elementToD;
 	function Removemember(){
 		if(counter>13){
 			document.getElementById("table").deleteRow(counter-2);
-			counter--;
+			--counter;
+			document.getElementById('Money').innerHTML=((counter-1)*10);	
 		}
 
 	  }
