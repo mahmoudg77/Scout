@@ -21,12 +21,12 @@ function addfield() {
 	if(i<3){
 		var x = document.getElementById('phNos');
     	x.innerHTML+="<div class='col-sm-5 col-md-offset-2 '><div class='input-group'><input type='text' class='form-control' 						name='phone"+i+"' required/><a class='input-group-addon' onclick='removefield("+i+")' ><div class='fa fa-minus'>				</div></a></div></div>";
-	}
+}
     
 }
 function removefield(id) {
 	$( '#phone'+id ).remove();
-	i--;
+    i--;
 }
 function Add(array, id) {
 		if (array === 'train') {

@@ -10,5 +10,7 @@ class ContactType extends BLL{
 
 	var $fields=[
 	    ];
+
+	
 }
 ?>

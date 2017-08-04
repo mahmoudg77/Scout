@@ -1,31 +1,31 @@
 <?if(!$request->isAjax())include(PATH.'templates/AdminHeader.php');?>
 
-<!-- Main content -->
-<section class="container-fluid">
-	<div>
+    <!-- Main content -->
+    <section class="container-fluid">
+        <div>
 		<div class="teamReg">
-			<h1 style="text-align: center;">Team registration</h1>
+                <h1 style="text-align: center;">Team registration</h1>
 			<form class="form-horizontal ajax-form" action="<?=actionLink(" add ","TeamsReg ")?>" method="post">
 				<div class="FF">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
 						<input id="leader" type="text" class="form-control" name="leader" placeholder="Leader name">
-					</div>
+                            </div>
 					<div class="input-group ">
 						<span class="input-group-addon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
 						<input id="leaderAssist" type="text" class="form-control" name="leaderAssist" placeholder="Leader Assist name">
-					</div>
-				</div>
+                        </div>
+                            </div>
 				<div class="FF">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-address-card" aria-hidden="true"></i></span>
 						<input id="leaderNId" type="text" class="form-control" name="leaderNId" placeholder="Leader NationalID">
-					</div>
+                        </div>
 					<div class="input-group ">
 						<span class="input-group-addon"><i class="fa fa-address-card-o" aria-hidden="true"></i></span>
 						<input id="leaderAssistNId" type="text" class="form-control" name="leaderAssistNId" placeholder="Leader Assist National ID">
-					</div>
-				</div>
+                            </div>
+                        </div>
 				<div class="f">
 					<div class="input-group col-xs-6 ">
 						<span class="input-group-addon"><i class="fa fa-id-card" aria-hidden="true"></i></span>
@@ -43,42 +43,42 @@
 
 
 
-					</div>
+                            </div>
 					<div class="input-group col-xs-6 ">
 						<span class="input-group-addon"><i aria-hidden="true">Country</i></span>
 						<select id="country" type="text" class="form-control" name="country"></select>
-					</div>
+                        </div>
 					<div class="input-group col-xs-6 ">
 						<span class="input-group-addon"><i aria-hidden="true">Organization</i></span>
 						<select id="organization" type="text" class="form-control" name="organization"></select>
-					</div>
+                            </div>
 					<div class="input-group col-xs-6 ">
 						<span class="input-group-addon"><i aria-hidden="true">Branch</i></span>
 						<select id="branch" type="text" class="form-control" name="branch"></select>
-					</div>
+                        </div>
 					<div class="input-group col-xs-6 ">
 						<span class="input-group-addon"><i aria-hidden="true">Office</i></span>
 						<select id="office" type="text" class="form-control" name="office"></select>
-					</div>
-				</div>
+                    </div>
+                            </div>
 				<div class="fees">
 					<pre>Fees</pre>
 
-				</div>
-				<div id="tableT">
-					<table class="table">
-						<thead class="thead-inverse">
-							<tr>
-								<th>#</th>
-								<th>Name</th>
-								<th>Birthdate</th>
+                        </div>
+                    <div id="tableT">
+                        <table class="table">
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Birthdate</th>
 								<th>National ID</th>
 								<th>Registe</th>
-							</tr>
-						</thead>
-						<tbody id="table">
-							<tr>
-								<th scope="row">1</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table">
+                                <tr>
+                                    <th scope="row">1</th>
 								<td><input type="text" class="form-control tdinput" id="r1td1" required>
 								</td>
 								<td><input type="text" class="form-control tdinput" id="r1td2" required>
@@ -91,9 +91,9 @@
 										<button type="button" class="btn btn-success " data-toggle="modal" data-target="#BoyScout">Get IN</button>
 									</div>
 								</td>
-							</tr>
-							<tr>
-								<th scope="row">2</th>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
 								<td><input type="text" class="form-control tdinput" id="r2td1" required>
 								</td>
 								<td><input type="text" class="form-control tdinput" id="r2td2" required>
@@ -106,9 +106,9 @@
 										<button type="button" class="btn btn-success " data-toggle="modal" data-target="#BoyScout" disabled>Get IN</button>
 									</div>
 								</td>
-							</tr>
-							<tr>
-								<th scope="row">3</th>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
 								<td><input type="text" class="form-control tdinput" id="r3td1" required>
 								</td>
 								<td><input type="text" class="form-control tdinput" id="r3td2" required>
@@ -121,9 +121,9 @@
 										<button type="button" class="btn btn-success " data-toggle="modal" data-target="#BoyScout" disabled>Get IN</button>
 									</div>
 								</td>
-							</tr>
-							<tr>
-								<th scope="row">4</th>
+                                </tr>
+                                <tr>
+                                    <th scope="row">4</th>
 								<td><input type="text" class="form-control tdinput" id="r4td1" required>
 								</td>
 								<td><input type="text" class="form-control tdinput" id="r4td2" required>
@@ -136,9 +136,9 @@
 										<button type="button" class="btn btn-success " data-toggle="modal" data-target="#BoyScout" disabled>Get IN</button>
 									</div>
 								</td>
-							</tr>
-							<tr>
-								<th scope="row">5</th>
+                                </tr>
+                                <tr>
+                                    <th scope="row">5</th>
 								<td><input type="text" class="form-control tdinput" id="r5td1" required>
 								</td>
 								<td><input type="text" class="form-control tdinput" id="r5td2" required>
@@ -151,9 +151,9 @@
 										<button type="button" class="btn btn-success " data-toggle="modal" data-target="#BoyScout" disabled>Get IN</button>
 									</div>
 								</td>
-							</tr>
-							<tr>
-								<th scope="row">6</th>
+                                </tr>
+                                <tr>
+                                    <th scope="row">6</th>
 								<td><input type="text" class="form-control tdinput" id="r6td1" required>
 								</td>
 								<td><input type="text" class="form-control tdinput" id="r6td2" required>
@@ -166,9 +166,9 @@
 										<button type="button" class="btn btn-success " data-toggle="modal" data-target="#BoyScout" disabled>Get IN</button>
 									</div>
 								</td>
-							</tr>
-							<tr>
-								<th scope="row">7</th>
+                                </tr>
+                                <tr>
+                                    <th scope="row">7</th>
 								<td><input type="text" class="form-control tdinput" id="r7td1" required>
 								</td>
 								<td><input type="text" class="form-control tdinput" id="r7td2" required>
@@ -181,9 +181,9 @@
 										<button type="button" class="btn btn-success " data-toggle="modal" data-target="#BoyScout" disabled>Get IN</button>
 									</div>
 								</td>
-							</tr>
-							<tr>
-								<th scope="row">8</th>
+                                </tr>
+                                <tr>
+                                    <th scope="row">8</th>
 								<td><input type="text" class="form-control tdinput" id="r8td1" required>
 								</td>
 								<td><input type="text" class="form-control tdinput" id="r8td2" required>
@@ -196,9 +196,9 @@
 										<button type="button" class="btn btn-success " data-toggle="modal" data-target="#BoyScout" disabled>Get IN</button>
 									</div>
 								</td>
-							</tr>
-							<tr>
-								<th scope="row">9</th>
+                                </tr>
+                                <tr>
+                                    <th scope="row">9</th>
 								<td><input type="text" class="form-control tdinput" id="r9td1" required>
 								</td>
 								<td><input type="text" class="form-control tdinput" id="r9td2" required>
@@ -211,9 +211,9 @@
 										<button type="button" class="btn btn-success " data-toggle="modal" data-target="#BoyScout" disabled>Get IN</button>
 									</div>
 								</td>
-							</tr>
-							<tr>
-								<th scope="row">10</th>
+                                </tr>
+                                <tr>
+                                    <th scope="row">10</th>
 								<td><input type="text" class="form-control tdinput" id="r10td1" required>
 								</td>
 								<td><input type="text" class="form-control tdinput" id="r10td2" required>
@@ -226,9 +226,9 @@
 										<button type="button" class="btn btn-success " data-toggle="modal" data-target="#BoyScout" disabled>Get IN</button>
 									</div>
 								</td>
-							</tr>
-							<tr>
-								<th scope="row">11</th>
+                                </tr>
+                                <tr>
+                                    <th scope="row">11</th>
 								<td><input type="text" class="form-control tdinput" id="r11td1" required>
 								</td>
 								<td><input type="text" class="form-control tdinput" id="r11td2" required>
@@ -241,9 +241,9 @@
 										<button type="button" class="btn btn-success " data-toggle="modal" data-target="#BoyScout" disabled>Get IN</button>
 									</div>
 								</td>
-							</tr>
-							<tr>
-								<th scope="row">12</th>
+                                </tr>
+                                <tr>
+                                    <th scope="row">12</th>
 								<td><input type="text" class="form-control tdinput" id="r12td1" required>
 								</td>
 								<td><input type="text" class="form-control tdinput" id="r12td2" required>
@@ -256,24 +256,24 @@
 										<button type="button" class="btn btn-success " data-toggle="modal" data-target="#BoyScout" disabled>Get IN</button>
 									</div>
 								</td>
-							</tr>
-						</tbody>
-					</table>
-					<div class="row" style="float:right">
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="row" style="float:right">
 						<button type="button" class="btn btn-success" onClick="Removemember()"><span class="fa fa-minus"></span></button>
 						<button type="button" class="btn btn-danger" onClick="asd()"><span class="fa fa-plus"></span></button>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<?=Framework\Request::CSRF()?>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <?=Framework\Request::CSRF()?>
 						<button class="btn btn-defualt" type="submit" style="width:80%">Submit</button>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-</section>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
 <div class="modal fade" id="BoyScout" role="dialog">
 	<div class="modal-dialog">
 

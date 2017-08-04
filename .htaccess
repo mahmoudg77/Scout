@@ -23,7 +23,7 @@ RewriteRule ^ /en%{REQUEST_URI} [L,NC,R=301]
 RewriteRule ^(en|ar)(/?)$ index.php?lang=$1 [L,QSA,NC]
 
 
-RewriteRule ^(en|ar)/(templates|icons|assets)/(.*)$ $2/$3?lang=$1 [L,QSA,NC]
+RewriteRule ^(en|ar)/(templates|icons|assets|uploads)/(.*)$ $2/$3?lang=$1 [L,QSA,NC]
 
 
 #RewriteRule ^views/(.*)$ views/$1 [L,QSA,NC]

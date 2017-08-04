@@ -10,6 +10,9 @@ define('PATH',$_SERVER["DOCUMENT_ROOT"].SCRIPT_DIR."/");
 include "framework/init.php";
 include "models/init.php";
 
+$Database=new Framework\Database();
+
+
 use App\Models\Auth\User as User;
 
 

@@ -2,7 +2,7 @@
 
  <div id="RegForm" class=" col-md-6  col-sm-5 col-md-offset-3">
         <h2 id="header">Scouting registration</h2>
-        <form name="form" class="ajax-form" action="" method="post" role="form">
+        <form name="form" class="ajax-form" action="" method="post" role="form" enctype="multipart/form-data">
           <?=Framework\Request::CSRF()?>
             <span>User Info</span>
             <div class="container-fluid " id="userInfo">
@@ -117,12 +117,12 @@
                 </div>
 
                 <!--Map------------------------------------------------>
-                <div id="light" class="white_content">
+                <!--<div id="light" class="white_content">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d55252.7572822845!2d31.294877950000004!3d30.057010650000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2seg!4v1500370138501"
                         width="350" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
                     <a class="glyphicon glyphicon-remove" style="float:right" href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"></a></div>
 
-                <div id="fade" class="black_overlay"></div>
+                <div id="fade" class="black_overlay"></div>-->
                 <!--Map------------------------------------------------>
 
                 <div class="row"></div>

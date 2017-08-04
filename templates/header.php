@@ -73,11 +73,11 @@
 	<!--
 	    Start Preloader
 	    ==================================== -->
-	<div id="loading-mask">
-		<div class="loading-img">
-			<img alt="Arab Scout" src="<?=assets('img/loader 2.gif')?>"/>
-		</div>
-	</div>
+	<!--<div id="loading-mask">-->
+		<!--<div class="loading-img">-->
+<!--			<img alt="Arab Scout" src="<?=assets('img/loader 2.gif')?>"/>-->
+		<!--</div>
+	</div>-->
 	<!--
         End Preloader
         ==================================== -->
@@ -231,7 +231,7 @@
     							margin-right: auto; width:45%; " alt="ArabScout" data-pin-nopin="true">
 						</div>
 						<div class="modal-body">
-							<form action="<?=actionLink('login','auth.Login')?>" method="post">
+							<form action="<?=actionLink('login','Login')?>" method="post">
 								<?=Framework\Request::CSRF()?>
 								<div class="form-group">
 									<label for="pwd">E-mail:</label>

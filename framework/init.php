@@ -23,8 +23,12 @@ foreach (glob(dirname(__FILE__)."/models/*/*.php") as $filename)
 
 include 'addons/init.php';
 include('framework/controller/BaseController.php');
+include('framework/controller/AccessRight.php');
+include('framework/controller/GroupCategory.php');
+include('framework/controller/Login.php');
+include('framework/controller/UserGroup.php');
+include('framework/controller/UserGroupRel.php');
+include('framework/controller/Users.php');
 
-$APP_Controllers=[
-        'auth.AccessRight','auth.GroupCategory','auth.Login','auth.UserGroup','auth.UserGroupRel','auth.Users'
-    ];
-?>
+
+ ?>

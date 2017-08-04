@@ -68,13 +68,13 @@
 		<!-- Jappear js -->
 		<script src="<?=assets('js/jquery.appear.js')?>"></script>
 		<!-- Pie Chart -->
-		<script src="<?=assets('js/easyPieChart.js')?>"></script>
+		<!--<script src="<?=assets('js/easyPieChart.js')?>"></script>-->
 		<!-- jQuery Easing -->
-		<script src="<?=assets('js/jquery.easing-1.3.pack.js')?>"></script>
+		<!--<script src="<?=assets('js/jquery.easing-1.3.pack.js')?>"></script>-->
 		<!-- tweetie.min -->
-		<script src="<?=assets('js/tweetie.min.js')?>"></script>
+		<!--<script src="<?=assets('js/tweetie.min.js')?>"></script>-->
 		<!-- Google Map API -->
-		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+		<!--<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>-->
 		<!-- Highlight menu item -->
 		<script src="<?=assets('js/jquery.nav.js')?>"></script>
 		<!-- Sticky Nav -->
@@ -86,7 +86,7 @@
 		<!-- For video responsive -->
 		<script src="<?=assets('js/jquery.fitvids.js')?>"></script>
 		<!-- Grid js -->
-		<script src="<?=assets('js/grid.js')?>"></script>
+		<!--<script src="<?=assets('js/grid.js')?>"></script>-->
 		<!-- Custom js -->
 		<script src="<?=assets('js/custom.js')?>"></script>
 		<!-- Ajax Form-->
@@ -107,7 +107,11 @@ $(function(){
 			error:function(res){
 				alert(res.responseText);
 			}
-	})
+	});
+	$("#btnLogin").click(function(event){
+		event.preventDefault();
+ 		$("#myModal").modal();
+	});
 })
 </script>
     </body>

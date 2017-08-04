@@ -78,54 +78,7 @@
                     </a>
                   </li>
                   <!-- end message -->
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="<?=assets('dist/img/user3-128x128.jpg')?>" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        AdminLTE Design Team
-                        <small><i class="fa fa-clock-o"></i> 2 hours</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="<?=assets('dist/img/user4-128x128.jpg')?>" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        Developers
-                        <small><i class="fa fa-clock-o"></i> Today</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="<?=assets('dist/img/user3-128x128.jpg')?>" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        Sales Department
-                        <small><i class="fa fa-clock-o"></i> Yesterday</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="<?=assets('dist/img/user4-128x128.jpg')?>" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        Reviewers
-                        <small><i class="fa fa-clock-o"></i> 2 days</small>
-                      </h4>
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
+                  
                 </ul>
               </li>
               <li class="footer"><a href="#">See All Messages</a></li>
@@ -147,28 +100,7 @@
                       <i class="fa fa-users text-aqua"></i> 5 new members joined today
                     </a>
                   </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
-                      page and may cause design problems
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-users text-red"></i> 5 new members joined
-                    </a>
-                  </li>
-
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-user text-red"></i> You changed your username
-                    </a>
-                  </li>
+                 
                 </ul>
               </li>
               <li class="footer"><a href="#">View all</a></li>
@@ -200,50 +132,7 @@
                     </a>
                   </li>
                   <!-- end task item -->
-                  <li><!-- Task item -->
-                    <a href="#">
-                      <h3>
-                        Create a nice theme
-                        <small class="pull-right">40%</small>
-                      </h3>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar"
-                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">40% Complete</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <!-- end task item -->
-                  <li><!-- Task item -->
-                    <a href="#">
-                      <h3>
-                        Some task I need to do
-                        <small class="pull-right">60%</small>
-                      </h3>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar"
-                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">60% Complete</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <!-- end task item -->
-                  <li><!-- Task item -->
-                    <a href="#">
-                      <h3>
-                        Make beautiful transitions
-                        <small class="pull-right">80%</small>
-                      </h3>
-                      <div class="progress xs">
-                        <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar"
-                             aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                          <span class="sr-only">80% Complete</span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
+                   
                   <!-- end task item -->
                 </ul>
               </li>
@@ -255,14 +144,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?=assets('dist/img/user2-160x160.jpg')?>" class="user-image" alt="User Image">
+              <img src="<?=$context->user->accid->PersonalImage->thumb?>" class="user-image" alt="User Image">
               <span class="hidden-xs"><?=USER_NAME?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<?=assets('dist/img/user2-160x160.jpg')?>" class="img-circle" alt="User Image">
-
+                <img src="<?=$context->user->accid->PersonalImage->thumb?>" class="img-circle" alt="User Image">
                 <p>
                   <?=USER_NAME?> - Web Developer
                   <small>Member since Nov. 2012</small>
@@ -289,7 +177,7 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<?=actionLink('logout','Login')?>" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -305,7 +193,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?=assets('dist/img/user2-160x160.jpg')?>" class="img-circle" alt="User Image">
+          <img src="<?=$context->user->accid->PersonalImage->thumb?>" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?=USER_NAME?></p>
@@ -326,29 +214,32 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
+     
+        
         <li class="treeview">
-          <a href="<?=actionLink("","Dashboard")?>">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+			<a href="#">
+				<i class="fa fa-files-o"></i>
+				<span>Profile</span>
+				 <span class="pull-right-container">
+                  <i class="fa fa-angle-right pull-right"></i>
+                </span>
+			</a>
+			<ul class="treeview-menu">
+			<li><a class="menu-item"  href="<?=actionLink("all","Profile")?>"><i class="fa fa-circle-o"></i> Profiles</a></li>
+			<li><a class="menu-item"  href="<?=actionLink("all","Comp")?>"><i class="fa fa-circle-o"></i> Camps</a></li>
+			<li><a class="menu-item"  href="<?=actionLink("all","CompUserLog")?>"><i class="fa fa-circle-o"></i> Comps Log</a></li>
+			<li><a class="menu-item"  href="<?=actionLink("all","ExperienceUserLog")?>"><i class="fa fa-circle-o"></i> Experience Log</a></li>
+			<li><a class="menu-item"  href="<?=actionLink("all","HobbyUserLog")?>"><i class="fa fa-circle-o"></i> Hobbies Log</a></li>
+			<li><a class="menu-item"  href="<?=actionLink("all","StudyUserLog")?>"><i class="fa fa-circle-o"></i> Studies Log</a></li>
+		    </ul>
+	    </li>
 
-          </a>
 
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>Layout Options</span>
-            <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-            <li><a href="layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-            <li><a href="layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-            <li><a href="layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
-          </ul>
-        </li>
-        <li>
+
+
+      <li><a class="menu-item" href="<?=actionLink("","TeamsReg")?>"><i class="fa fa-link"></i> <span>Forms</span></a></li>
+      <li><a class="menu-item" href="<?=actionLink("","ApprovalRequests")?>"><i class="fa fa-link"></i> <span>Approvels</span></a></li>
+         <li>
           <a href="widgets.html">
             <i class="fa fa-th"></i> <span>Widgets</span>
             <span class="pull-right-container">
@@ -508,3 +399,14 @@
         <li class="active"><?=METHOD?></li>
       </ol>
     </section>
+    
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="box box-primary">
+        <div class="box-body no-padding">
+
+            <div id="pageContent">
+
+    

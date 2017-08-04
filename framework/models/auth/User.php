@@ -14,7 +14,7 @@ class User extends BLL{
 	            'compute'=>'',
 	            'type'=>'Many2one',
 	            'serialize'=>true,
-	            'relation'=>['class'=>"App\Models\Profile\Profile",'classid'=>'id','controller'=>'Profile']],
+	            'relation'=>['class'=>"App\Models\Profile\Profile",'classid'=>'Profile_ID','controller'=>'Profile']],
 	     'groups'=>['name'=>'Groups',
 	            'default'=>'2',
 	            'compute'=>'',

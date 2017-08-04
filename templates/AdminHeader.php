@@ -129,7 +129,7 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="hold-transition skin-green sidebar-mini" onLoad="Ajxify()">
+<body class="hold-transition skin-green sidebar-mini"  >
   <!-- ./wrapper -->
   <!-- REQUIRED JS SCRIPTS -->
   <!-- jQuery 3 -->
@@ -241,12 +241,12 @@ desired effect
           <!-- Menu Toggle Button -->
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
           <!-- The user image in the navbar-->
-          <img src="http://i0.kym-cdn.com/entries/icons/original/000/003/193/teddy-bear-poker-face.jpg" class="user-image" alt="User Image">
+          <img src="<?=$context->user->accid->PersonalImage->thumb?>" class="user-image" alt="User Image">
           <!-- hidden-xs hides the username on small devices so only the image appears. -->
           <span class="hidden-xs"><?=USER_NAME?></span> </a>
           <ul class="dropdown-menu">
             <!-- The user image in the menu -->
-            <li class="user-header"> <img src="http://i0.kym-cdn.com/entries/icons/original/000/003/193/teddy-bear-poker-face.jpg" class="img-circle" alt="User Image">
+            <li class="user-header"> <img src="<?=$context->user->accid->PersonalImage->thumb?>" class="img-circle" alt="User Image">
               <p> <?=USER_NAME?> - Web Developer <small>Member since Nov. 2012</small> </p>
             </li>
             <!-- Menu Body -->
@@ -261,7 +261,7 @@ desired effect
             <!-- Menu Footer-->
             <li class="user-footer">
               <div class="pull-left"> <a href="#" class="btn btn-default btn-flat">Profile</a> </div>
-              <div class="pull-right"> <a href="#" class="btn btn-default btn-flat">Sign out</a> </div>
+              <div class="pull-right"> <a href="<?=actionLink('logout','Login')?>" class="btn btn-default btn-flat">Sign out</a> </div>
             </li>
           </ul>
         </li>
@@ -276,30 +276,57 @@ desired effect
 
   <!-- sidebar: style can be found in sidebar.less -->
   <section class="sidebar">
-
-    <!-- Sidebar user panel (optional) -->
-    <div class="user-panel">
-      <div class="pull-left image"> <img src="http://i0.kym-cdn.com/entries/icons/original/000/003/193/teddy-bear-poker-face.jpg" class="img-circle" alt="User Image"> </div>
-      <div class="pull-left info">
-        <p><?=USER_NAME?></p>
-        <!-- Status -->
-        <a href="#"><i class="fa fa-circle text-success"></i> Online</a> </div>
-        <br><br>
-    </div>
-    <!-- search form (Optional) -->
-    <form action="#" method="get" class="sidebar-form">
-      <div class="input-group">
-        <input type="text" name="q" class="form-control" placeholder="Search...">
-        <span class="input-group-btn">
-        <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i> </button>
-        </span> </div>
-    </form>
-    <!-- /.search form -->
-    <!--#222D32-->
-    <ul class="treeview-menu">
-    </ul>
-    <!-- Sidebar Menu -->
+      <!-- Sidebar user panel -->
+      <div class="user-panel">
+        <div class="pull-left image">
+        
+          <img src="<?=$context->user->accid->PersonalImage->thumb?>" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p><?=USER_ACCID_FIRST_NAME?></p>
+          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+      </div>
+      <!-- search form -->
+      <form action="#" method="get" class="sidebar-form">
+        <div class="input-group">
+          <input type="text" name="q" class="form-control" placeholder="Search...">
+          <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </span>
+        </div>
+      </form>
     <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">MAIN NAVIGATION</li>
+        <li class="treeview">
+          <a href="<?=actionLink("","Dashboard")?>">
+            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+
+          </a>
+
+        </li>
+        <li class="treeview">
+			<a href="#">
+				<i class="fa fa-files-o"></i>
+				<span>Profile</span>
+				<span class="pull-right-container">
+					<span class="label label-primary pull-right">4</span>
+				</span>
+			</a>
+			<ul class="treeview-menu">
+			<li><a class="menu-item"  href="<?=actionLink("all","Profile")?>"><i class="fa fa-circle-o"></i> Profiles</a></li>
+			<li><a class="menu-item"  href="<?=actionLink("all","Comp")?>"><i class="fa fa-circle-o"></i> Camps</a></li>
+			<li><a class="menu-item"  href="<?=actionLink("all","CompUserLog")?>"><i class="fa fa-circle-o"></i> Comps Log</a></li>
+			<li><a class="menu-item"  href="<?=actionLink("all","ExperienceUserLog")?>"><i class="fa fa-circle-o"></i> Experience Log</a></li>
+			<li><a class="menu-item"  href="<?=actionLink("all","HobbyUserLog")?>"><i class="fa fa-circle-o"></i> Hobbies Log</a></li>
+			<li><a class="menu-item"  href="<?=actionLink("all","StudyUserLog")?>"><i class="fa fa-circle-o"></i> Studies Log</a></li>
+		    </ul>
+	    </li>
+
+
+
+
       <li><a class="menu-item" href="<?=actionLink("","TeamsReg")?>"><i class="fa fa-link"></i> <span>Forms</span></a></li>
       <li><a class="menu-item" href="<?=actionLink("","ApprovalRequests")?>"><i class="fa fa-link"></i> <span>Approvels</span></a></li>
     </ul>
