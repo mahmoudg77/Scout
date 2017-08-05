@@ -1,3 +1,4 @@
+
 <?if(!$request->isAjax())include(PATH.'templates/AdminHeader.php');?>
 
     <!-- Main content -->
