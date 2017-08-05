@@ -27,16 +27,18 @@ class Images extends BLL{
 
 	function __set($key,$value){
         parent::__set($key,$value);
-		if($key!="model_name") return;
+
+				if($key!="model_name") return;
 
         if($this->model_name=="") return;
 
         $c=new $this->model_name;
-		$this->fields['model_id']=['name'=>'Releted Record',
-			'type'=>'Many2one','visible'=>true,
-			'serialize'=>true,
-			'relation'=>['class'=>$this->model_name,'classid'=>$c->getPKname(),'controller'=>'Comp']];
-	}
+
+				$this->fields['model_id']=['name'=>'Releted Record',
+							'type'=>'Many2one','visible'=>true,
+							'serialize'=>true,
+							'relation'=>['class'=>$this->model_name,'classid'=>$c->getPKname(),'controller'=>'Comp']];
+		}
 
     function upload(){
         $model_name=str_replace("App\Models\\","",$this->model_name);

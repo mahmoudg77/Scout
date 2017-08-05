@@ -1,5 +1,5 @@
 <?php
-function time_elapsed_string($ptime,$incTime=true)
+function time_string($ptime,$incTime=true)
 {
 global $LANG,$cLang;
 //if(!validateDate($ptime))$ptime=strtotime($ptime);
@@ -76,25 +76,25 @@ function get_keywords($str,$count=5){
 global $LANG,$cLang;
 $str=strip_tags($str);
 $ignore_keywords_en=array('to','from','of','all','but','no','yes','do'.'are','is','can','not');
-$ignore_keywords_ar=array('ãä',
-				'Ýí'
-				,'Úáì'
-				,'Çáì'
-				,'áßä'
-				,'áÇ'
-				,'áã'
-				,'áä'
-				,'íßæä'
-				,'Úä'
-				,'íÓÊØíÚ'
-				,'ãäÐ'
-				,'Ãä'
-				,'åÐÇ'
-				,'Åáì'
-				,'ÍÊì'
-				,'Ãí',
-				'æ',
-				'ÇáÐí',
+$ignore_keywords_ar=array('ï¿½ï¿½',
+				'ï¿½ï¿½'
+				,'ï¿½ï¿½ï¿½'
+				,'ï¿½ï¿½ï¿½'
+				,'ï¿½ï¿½ï¿½'
+				,'ï¿½ï¿½'
+				,'ï¿½ï¿½'
+				,'ï¿½ï¿½'
+				,'ï¿½ï¿½ï¿½ï¿½'
+				,'ï¿½ï¿½'
+				,'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'
+				,'ï¿½ï¿½ï¿½'
+				,'ï¿½ï¿½'
+				,'ï¿½ï¿½ï¿½'
+				,'ï¿½ï¿½ï¿½'
+				,'ï¿½ï¿½ï¿½'
+				,'ï¿½ï¿½',
+				'ï¿½',
+				'ï¿½ï¿½ï¿½ï¿½',
 				);
 
 $str=str_replace($ignore_keywords_ar,"",$str);
@@ -451,7 +451,7 @@ function view($view,$arr=[]){
                     return true;
 
         },ARRAY_FILTER_USE_KEY);
-         
+
         return array_values($new_array);;
 
     }

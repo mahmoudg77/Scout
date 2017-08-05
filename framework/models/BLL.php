@@ -761,9 +761,9 @@ var $mode="view";
                 break;
             default:
                 if($this->fields[$field]['type']=='Many2one'){
-
+                    //print_r( $this->fields[$field]);
                 ?>
-                        <a target="_blank" href="/<?=LANG?>/<?=$this->fields[$field]['relation']['controller']?>/item/<?=$this->$field->id?>" <?foreach($attrs as $key=>$attr){?><?=' '.$key.'="'.$attr.'" '?><?}?>><?=$this->$field->name?></a>
+                        <a target="_blank" class="open-modal" href="/<?=LANG?>/<?=$this->fields[$field]['relation']['controller']?>/item/<?=$this->$field->id?>" <?foreach($attrs as $key=>$attr){?><?=' '.$key.'="'.$attr.'" '?><?}?>><?=$this->$field->name?></a>
                 <?
                 }elseif($this->fields[$field]['type']=='One2many'){
                      if(array_key_exists('class',$attrs)){$attrs['class'].=' btn-link ';}else{$attrs['class'].=' btn-link ';}
@@ -876,15 +876,15 @@ trait ApprovelModel {
 
         
      function approve() {
-         $this->approved_by=intval(USER_ID);
+         $this->approval_by=intval(USER_ID);
 			 $this->approval_request=1;
-			 $this->approved_at=Date("Y-m-d H:i:s");
+			 $this->approval_at=Date("Y-m-d H:i:s");
 			 return $this->update();
     }
 	function reject() {
-		$this->approved_by=intval(USER_ID);
+		$this->approval_by=intval(USER_ID);
 		$this->approval_request=0;
-		$this->approved_at=Date("Y-m-d H:i:s");
+		$this->approval_at=Date("Y-m-d H:i:s");
 		return $this->update();
     }
     function insert() {
