@@ -41,6 +41,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	var counter =13;
 	
 	var counterFee=120;
+	function checkDate(value){
+		var x=new Date();
+		var date1 = new Date(value);
+        var date2 = new Date(String((x.getMonth()+1)+"/"+x.getDate()+"/"+x.getFullYear()));
+        var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24))/365;alert(diffDays);
+		if(document.getElementById("category").value==1 && diffDays>7 ){
+			
+		}
+		else if(document.getElementById("category").value==2 && diffDays>11 ){
+			
+		}
+		else if(document.getElementById("category").value==3 && diffDays>14 ){
+			
+		}
+		else if(document.getElementById("category").value==4 && diffDays>17 ){
+			
+		}
+		else if(document.getElementById("category").value==5 && diffDays<=17 ){
+			
+		}
+		
+	}
 	function asd(){
 		if(counter<=24){
 			document.getElementById('table').innerHTML+=

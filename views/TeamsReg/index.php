@@ -133,7 +133,7 @@
                                     <th scope="row">1</th>
 								<td><input type="text" class="form-control tdinput" id="r1td1" name="name[]"    required>
 								</td>
-								<td><input type="text" class="form-control tdinput" id="r1td2" name="Birthdate[]"  required>
+								<td><input type="date" class="form-control tdinput" id="r1td2" name="Birthdate[]"  required>
 								</td>
 								<td><input type="number" class="form-control tdinput" id="r1td3" name="NationalID[]"  required>
 								</td>
@@ -148,7 +148,7 @@
                                     <th scope="row">2</th>
 								<td><input type="text" class="form-control tdinput" id="r2td1" name="name[]"  required>
 								</td>
-								<td><input type="text" class="form-control tdinput" id="r2td2" name="Birthdate[]"  required>
+								<td><input type="date" class="form-control tdinput" id="r2td2" name="Birthdate[]"  required>
 								</td>
 								<td><input type="number" class="form-control tdinput" id="r2td3" name="NationalID[]"  required>
 								</td>
@@ -163,7 +163,7 @@
                                     <th scope="row">3</th>
 								<td><input type="text" class="form-control tdinput" id="r3td1" name="name[]"  required>
 								</td>
-								<td><input type="text" class="form-control tdinput" id="r3td2" name="Birthdate[]"  required>
+								<td><input type="date" class="form-control tdinput" id="r3td2" name="Birthdate[]"  required>
 								</td>
 								<td><input type="number" class="form-control tdinput" id="r3td3" name="NationalID[]"  required>
 								</td>
@@ -178,7 +178,7 @@
                                     <th scope="row">4</th>
 								<td><input type="text" class="form-control tdinput" id="r4td1" name="name[]"  required>
 								</td>
-								<td><input type="text" class="form-control tdinput" id="r4td2" name="Birthdate[]"  required>
+								<td><input type="date" class="form-control tdinput" id="r4td2" name="Birthdate[]"  required>
 								</td>
 								<td><input type="number" class="form-control tdinput" id="r4td3" name="NationalID[]"  required>
 								</td>
@@ -193,7 +193,7 @@
                                     <th scope="row">5</th>
 								<td><input type="text" class="form-control tdinput" id="r5td1" name="name[]"  required>
 								</td>
-								<td><input type="text" class="form-control tdinput" id="r5td2" name="Birthdate[]"  required>
+								<td><input type="date" class="form-control tdinput" id="r5td2" name="Birthdate[]"  required>
 								</td>
 								<td><input type="number" class="form-control tdinput" id="r5td3" name="NationalID[]"  required>
 								</td>
@@ -208,7 +208,7 @@
                                     <th scope="row">6</th>
 								<td><input type="text" class="form-control tdinput" id="r6td1" name="name[]"  required>
 								</td>
-								<td><input type="text" class="form-control tdinput" id="r6td2" name="Birthdate[]"  required>
+								<td><input type="date" class="form-control tdinput" id="r6td2" name="Birthdate[]"  required>
 								</td>
 								<td><input type="number" class="form-control tdinput" id="r6td3" name="NationalID[]"  required>
 								</td>
@@ -223,7 +223,7 @@
                                     <th scope="row">7</th>
 								<td><input type="text" class="form-control tdinput" id="r7td1" name="name[]"  required>
 								</td>
-								<td><input type="text" class="form-control tdinput" id="r7td2" name="Birthdate[]"  required>
+								<td><input type="date" class="form-control tdinput" id="r7td2" name="Birthdate[]"  required>
 								</td>
 								<td><input type="number" class="form-control tdinput" id="r7td3" name="NationalID[]"  required>
 								</td>
@@ -238,7 +238,7 @@
                                     <th scope="row">8</th>
 								<td><input type="text" class="form-control tdinput" id="r8td1" name="name[]"  required>
 								</td>
-								<td><input type="text" class="form-control tdinput" id="r8td2" name="Birthdate[]"  required>
+								<td><input type="date" class="form-control tdinput" id="r8td2" name="Birthdate[]"  required>
 								</td>
 								<td><input type="number" class="form-control tdinput" id="r8td3" name="NationalID[]"  required>
 								</td>
@@ -253,7 +253,7 @@
                                     <th scope="row">9</th>
 								<td><input type="text" class="form-control tdinput" id="r9td1" name="name[]"  required>
 								</td>
-								<td><input type="text" class="form-control tdinput" id="r9td2" name="Birthdate[]"  required>
+								<td><input type="date" class="form-control tdinput" id="r9td2" name="Birthdate[]"  required>
 								</td>
 								<td><input type="number" class="form-control tdinput" id="r9td3" name="NationalID[]"  required>
 								</td>
@@ -268,7 +268,7 @@
                                     <th scope="row">10</th>
 								<td><input type="text" class="form-control tdinput" id="r10td1" name="name[]"  required>
 								</td>
-								<td><input type="text" class="form-control tdinput" id="r10td2" name="Birthdate[]"  required>
+								<td><input type="date" class="form-control tdinput" id="r10td2" name="Birthdate[]"  required>
 								</td>
 								<td><input type="number" class="form-control tdinput" id="r10td3" name="NationalID[]"  required>
 								</td>
@@ -283,7 +283,7 @@
                                     <th scope="row">11</th>
 								<td><input type="text" class="form-control tdinput" id="r11td1" name="name[]"  required>
 								</td>
-								<td><input type="text" class="form-control tdinput" id="r11td2" name="Birthdate[]"  required>
+								<td><input type="date" class="form-control tdinput" id="r11td2" name="Birthdate[]"  required>
 								</td>
 								<td><input type="number" class="form-control tdinput" id="r11td3" name="NationalID[]"  required>
 								</td>
@@ -295,10 +295,10 @@
 								</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">12</th>
+                                <th scope="row">12</th>
 								<td><input type="text" class="form-control tdinput" id="r12td1" name="name[]"  required>
 								</td>
-								<td><input type="text" class="form-control tdinput" id="r12td2" name="Birthdate[]"  required>
+								<td><input type="date" class="form-control tdinput" id="r12td2" name="Birthdate[]" onChange="checkDate(this.value)" required>
 								</td>
 								<td><input type="number" class="form-control tdinput" id="r12td3" name="NationalID[]"  required>
 								</td>
