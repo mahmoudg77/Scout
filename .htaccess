@@ -28,16 +28,16 @@ RewriteRule ^(en|ar)/(templates|icons|assets|uploads)/(.*)$ $2/$3?lang=$1 [L,QSA
 
 #RewriteRule ^views/(.*)$ views/$1 [L,QSA,NC]
 
-RewriteRule ^(en|ar)/api/(index.php)$  index.php?lang=$1&controller=home&method=index&id=0&api
-RewriteRule ^(en|ar)/api/(index.php)$  index.php?lang=$1&controller=home&method=index&id=0&api
+RewriteRule ^(en|ar)/api/(index.php)$  index.php?lang=$1&controller=home&method=index&id=0&api  [L,QSA]
+RewriteRule ^(en|ar)/api/(index.php)$  index.php?lang=$1&controller=home&method=index&id=0&api  [L,QSA]
 RewriteRule ^(en|ar)/api/(.*)/(.*)/(.*)$  index.php?lang=$1&controller=$2&method=$3&id=$4&api [L,QSA]
-RewriteRule ^(en|ar)/api/(.*)/(.*)$ index.php?lang=$1&controller=$2&method=$3&api
-RewriteRule ^(en|ar)/api/(.*)$  index.php?lang=$1&controller=$2&method=index&api
+RewriteRule ^(en|ar)/api/(.*)/(.*)$ index.php?lang=$1&controller=$2&method=$3&api  [L,QSA]
+RewriteRule ^(en|ar)/api/(.*)$  index.php?lang=$1&controller=$2&method=index&api  [L,QSA]
 
-RewriteRule ^(en|ar)/(index.php)$  index.php?lang=$1&controller=home&method=index&id=0
+RewriteRule ^(en|ar)/(index.php)$  index.php?lang=$1&controller=home&method=index&id=0  [L,QSA]
 RewriteRule ^(en|ar)/(.*)/(.*)/(.*)$  index.php?lang=$1&controller=$2&method=$3&id=$4 [L,QSA]
-RewriteRule ^(en|ar)/(.*)/(.*)$ index.php?lang=$1&controller=$2&method=$3
-RewriteRule ^(en|ar)/(.*)$  index.php?lang=$1&controller=$2&method=index
+RewriteRule ^(en|ar)/(.*)/(.*)$ index.php?lang=$1&controller=$2&method=$3  [L,QSA]
+RewriteRule ^(en|ar)/(.*)$  index.php?lang=$1&controller=$2&method=index  [L,QSA]
 
 
 # populate ?lang query parameter

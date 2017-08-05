@@ -2,37 +2,55 @@
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title><??></title>
+  <title>Arabscout|  <?=str_replace("App\Controllers\\","",CONTROLLER_PATH)?></title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="<?=assets('bower_components/bootstrap/dist/css/bootstrap.min.css')?>">
+  <link rel="stylesheet" href="<?=assets('css/bootstrap.min.css')?>">
   <link rel="stylesheet" href="<?=assets('css/jquery.dataTables.min.css')?>">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?=assets('css/font-awesome.min.css')?>">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="<?=assets('bower_components/Ionicons/css/ionicons.min.css')?>">
-  <!-- fullCalendar -->
-  <link rel="stylesheet" href="<?=assets('bower_components/fullcalendar/dist/fullcalendar.min.css')?>">
-  <link rel="stylesheet" href="<?=assets('bower_components/fullcalendar/dist/fullcalendar.print.min.css')?>" media="print">
+  <link rel="stylesheet" href="<?=assets('css/skin/ionicons.min.css')?>">
   <!-- Theme style -->
-  <link rel="stylesheet" href="<?=assets('dist/css/AdminLTE.min.css')?>">
+  <link rel="stylesheet" href="<?=assets('css/skin/AdminLTE.min.css')?>">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<?=assets('dist/css/skins/_all-skins.min.css')?>">
   <link rel="stylesheet" href="<?=assets('css/iziToast.min.css')?>">
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js')?>"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js')?>"></script>
-  <![endif]-->
-
-  <!-- Google Font -->
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="<?=assets('css/TeamsReg.css')?>">
+  <style>
+  #part1 {
+  	border: 1px solid #d9d9d9;
+  	border-radius: 10px;
+  	background: #e6e6e6;
+  	padding: 5px 0;
+  	width: 45%;
+  	float: left;
+  	margin: 0 18px;
+  	padding-bottom: 30px
+  }
+  #part2 {
+  	border: 1px solid #d9d9d9;
+  	border-radius: 10px;
+  	background: #e6e6e6;
+  	padding: 5px 0;
+  	width: 45%;
+  	float: left;
+  }
+  .tdinput {
+  	width: 80%;
+  }
+  #approveFom {
+  	background: #f2f2f2;
+  	border: 1px solid #e6e6e6;
+  	width: 45%;
+  	padding: 15px 12px;
+  	border-radius: 20px;
+  	text-align: center;
+  }
+  </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -217,172 +235,86 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-
-
         <li class="treeview">
-			<a href="#">
-				<i class="fa fa-files-o"></i>
-				<span>Profile</span>
-				 <span class="pull-right-container">
-                  <i class="fa fa-angle-right pull-right"></i>
-                </span>
-			</a>
-			<ul class="treeview-menu">
-			<li><a class="menu-item"  href="<?=actionLink("all","Profile")?>"><i class="fa fa-circle-o"></i> Profiles</a></li>
-			<li><a class="menu-item"  href="<?=actionLink("all","Comp")?>"><i class="fa fa-circle-o"></i> Camps</a></li>
-			<li><a class="menu-item"  href="<?=actionLink("all","CompUserLog")?>"><i class="fa fa-circle-o"></i> Comps Log</a></li>
-			<li><a class="menu-item"  href="<?=actionLink("all","ExperienceUserLog")?>"><i class="fa fa-circle-o"></i> Experience Log</a></li>
-			<li><a class="menu-item"  href="<?=actionLink("all","HobbyUserLog")?>"><i class="fa fa-circle-o"></i> Hobbies Log</a></li>
-			<li><a class="menu-item"  href="<?=actionLink("all","StudyUserLog")?>"><i class="fa fa-circle-o"></i> Studies Log</a></li>
+  			<a href="#">
+  				<i class="fa fa-files-o"></i>
+  				<span>Profile</span>
+  				 <span class="pull-right-container">
+                    <i class="fa fa-angle-right pull-right"></i>
+                  </span>
+  			</a>
+			   <ul class="treeview-menu">
+      			<li><a class="menu-item"  href="<?=actionLink("all","Profile")?>"><i class="fa fa-circle-o"></i> Profiles</a></li>
+      			<li><a class="menu-item"  href="<?=actionLink("all","Comp")?>"><i class="fa fa-circle-o"></i> Camps</a></li>
+      			<li><a class="menu-item"  href="<?=actionLink("all","CompUserLog")?>"><i class="fa fa-circle-o"></i> Comps Log</a></li>
+      			<li><a class="menu-item"  href="<?=actionLink("all","ExperienceUserLog")?>"><i class="fa fa-circle-o"></i> Experience Log</a></li>
+      			<li><a class="menu-item"  href="<?=actionLink("all","HobbyUserLog")?>"><i class="fa fa-circle-o"></i> Hobbies Log</a></li>
+      			<li><a class="menu-item"  href="<?=actionLink("all","StudyUserLog")?>"><i class="fa fa-circle-o"></i> Studies Log</a></li>
 		    </ul>
 	    </li>
 
-
-
-
-      <li><a class="menu-item" href="<?=actionLink("","TeamsReg")?>"><i class="fa fa-link"></i> <span>Forms</span></a></li>
-      <li><a class="menu-item" href="<?=actionLink("","ApprovalRequests")?>"><i class="fa fa-link"></i> <span>Approvels</span></a></li>
-         <li>
-          <a href="widgets.html">
-            <i class="fa fa-th"></i> <span>Widgets</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-green">new</small>
-            </span>
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-pie-chart"></i>
-            <span>Charts</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-            <li><a href="charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
-            <li><a href="charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
-            <li><a href="charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-laptop"></i>
-            <span>UI Elements</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="UI/general.html"><i class="fa fa-circle-o"></i> General</a></li>
-            <li><a href="UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
-            <li><a href="UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
-            <li><a href="UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
-            <li><a href="UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
-            <li><a href="UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-edit"></i> <span>Forms</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
-            <li><a href="forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
-            <li><a href="forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-table"></i> <span>Tables</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
-            <li><a href="tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
-          </ul>
-        </li>
-        <li class="active">
-          <a href="calendar.html">
-            <i class="fa fa-calendar"></i> <span>Calendar</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-red">3</small>
-              <small class="label pull-right bg-blue">17</small>
-            </span>
-          </a>
-        </li>
-        <li>
-          <a href="mailbox/mailbox.html">
-            <i class="fa fa-envelope"></i> <span>Mailbox</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-yellow">12</small>
-              <small class="label pull-right bg-green">16</small>
-              <small class="label pull-right bg-red">5</small>
-            </span>
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-folder"></i> <span>Examples</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="examples/invoice.html"><i class="fa fa-circle-o"></i> Invoice</a></li>
-            <li><a href="examples/profile.html"><i class="fa fa-circle-o"></i> Profile</a></li>
-            <li><a href="examples/login.html"><i class="fa fa-circle-o"></i> Login</a></li>
-            <li><a href="examples/register.html"><i class="fa fa-circle-o"></i> Register</a></li>
-            <li><a href="examples/lockscreen.html"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
-            <li><a href="examples/404.html"><i class="fa fa-circle-o"></i> 404 Error</a></li>
-            <li><a href="examples/500.html"><i class="fa fa-circle-o"></i> 500 Error</a></li>
-            <li><a href="examples/blank.html"><i class="fa fa-circle-o"></i> Blank Page</a></li>
-            <li><a href="examples/pace.html"><i class="fa fa-circle-o"></i> Pace Page</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-share"></i> <span>Multilevel</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-            <li class="treeview">
-              <a href="#"><i class="fa fa-circle-o"></i> Level One
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
+      <li class="treeview">
+      <a href="#">
+        <i class="fa fa-files-o"></i>
+        <span>Register</span>
+         <span class="pull-right-container">
+                  <i class="fa fa-angle-right pull-right"></i>
                 </span>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
-                <li class="treeview">
-                  <a href="#"><i class="fa fa-circle-o"></i> Level Two
-                    <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                  </a>
-                  <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-          </ul>
-        </li>
-        <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+      </a>
+       <ul class="treeview-menu">
+         <li><a class="menu-item" href="<?=actionLink("","TeamsReg")?>"><i class="fa fa-circle-o"></i> Forms</a></li>
+         <li><a class="menu-item" href="<?=actionLink("all","Waitinglist")?>"><i class="fa fa-circle-o"></i> Approvels</a></li>
+      </ul>
+    </li>
+
+    <li class="treeview">
+    <a href="#">
+      <i class="fa fa-files-o"></i>
+      <span>Administrator</span>
+       <span class="pull-right-container">
+                <i class="fa fa-angle-right pull-right"></i>
+              </span>
+    </a>
+     <ul class="treeview-menu">
+       <li><a class="menu-item" href="<?=actionLink("all","Register")?>"><i class="fa fa-circle-o"></i> Register Years</a></li>
+       <li><a class="menu-item" href="<?=actionLink("all","Teams")?>"><i class="fa fa-circle-o"></i> Organization Tree</a></li>
+       <li><a class="menu-item" href="<?=actionLink("all","RegisteryUser")?>"><i class="fa fa-circle-o"></i> Register User</a></li>
+    </ul>
+  </li>
+  <li class="treeview">
+    <a href="#">
+      <i class="fa fa-files-o"></i>
+      <span>Setting</span>
+       <span class="pull-right-container">
+                <i class="fa fa-angle-right pull-right"></i>
+              </span>
+    </a>
+     <ul class="treeview-menu">
+       <li><a class="menu-item" href="<?=actionLink("all","ContactType")?>"><i class="fa fa-circle-o"></i> Contact Types</a></li>
+       <li><a class="menu-item" href="<?=actionLink("all","Experiences")?>"><i class="fa fa-circle-o"></i> Experiences</a></li>
+       <li><a class="menu-item" href="<?=actionLink("all","Hobbies")?>"><i class="fa fa-circle-o"></i> Hobbies</a></li>
+       <li><a class="menu-item" href="<?=actionLink("all","Position")?>"><i class="fa fa-circle-o"></i> Positions</a></li>
+       <li><a class="menu-item" href="<?=actionLink("all","Studies")?>"><i class="fa fa-circle-o"></i> Studies</a></li>
+    </ul>
+  </li>
+  <li class="treeview">
+    <a href="#">
+      <i class="fa fa-files-o"></i>
+      <span>Media</span>
+       <span class="pull-right-container">
+                <i class="fa fa-angle-right pull-right"></i>
+              </span>
+    </a>
+     <ul class="treeview-menu">
+       <li><a class="menu-item" href="<?=actionLink("all","Images")?>"><i class="fa fa-circle-o"></i> Images</a></li>
+    </ul>
+  </li>
+
+        <!-- <li><a href=""><i class="fa fa-book"></i> <span>Documentation</span></a></li>
         <li class="header">LABELS</li>
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
+        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Register Form</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li> -->
       </ul>
     </section>
     <!-- /.sidebar -->

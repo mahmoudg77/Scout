@@ -1,12 +1,15 @@
 <?
 namespace App\Controllers;
+use App;
+use Framework\Addons\Validator as Validator;
+
 
 class TeamsReg extends BaseController
 {
     protected  $model="App\Models\Lookup\TeamsReg";
     protected $authRequired=false;
 
-        function postAdd($request)
+  function postAdd($request)
 	{
       $teams=new App\Models\Admin\Teams;
       $validate=new Validator();//for valid only
@@ -28,9 +31,9 @@ class TeamsReg extends BaseController
 			}
 
 		}
-		
+
 		//$con=new App\Models\Admin\Teams;
-   
+
 /*    $found=  $con->where('National_Number','=',$request->post['nationalId'])->supperUser()->get();
 
      if(count($found)>0){
@@ -47,10 +50,10 @@ class TeamsReg extends BaseController
 		$TeamId->parentId=$request->post['branch'];
 		$TeamId->created_by=7;
 		$TeamId->created_at="2017-08-15 00:00:00";
-		
+
 		$profile=new App\Models\Profile\Profile;
 		$LeaderId=$profile->where('National_Number','=',$request->post['leaderNId'])->supperUser()->get();
-		
+
 		$Teams=new App\Models\Lookup\TeamsReg;
 		$Teams->TeamId=$TeamId->id;
 		$Teams->LeaderId=$LeaderId;
@@ -103,7 +106,7 @@ class TeamsReg extends BaseController
             	echo $Teams->error;
         	}
       }
-		
+
 			$Teams->created_by=7;
 			$Teams->created_at="2017-08-15 00:00:00";
 			$Teams->approval_by=7;
@@ -111,9 +114,41 @@ class TeamsReg extends BaseController
 			$Teams->approval_request=0;//not approved
 			$Teams->supperUser()->insert();
 
-      
-		
+
+
 	}
+
+
+  function getChilds($request){
+
+    try{
+      $validate=new Validator();//for valid only
+      $validate->validate($request->get,['parentid'=>'Required|Integer']);
+
+
+            $obj =new App\Models\Admin\Teams;
+            $obj=  App\Models\Admin\Teams::find(intval($request->get['parentid']));
+
+            foreach ($obj->childs as $item) {
+              $response.="<option value='".$item->id."'>" .$item->name."</option>";
+            }
+
+
+            echo $response;
+       }
+      catch(\Exception $ex)
+      {
+        if($request->isAjax())
+        {
+          return json_error($ex->getMessage());
+        }
+        else
+        {
+           echo $ex->getMessage();
+        }
+
+      }
+  }
 }
 
 ?>

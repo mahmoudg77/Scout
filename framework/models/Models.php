@@ -1,11 +1,16 @@
 <?php
 namespace Framework;
-class Models
+class Models extends BLL
 {
 	//var $list=[];
 	var $fields=[
 	        'name'=>[
 	                'name'=>'Name',
+	                'type'=>'nvarchar',
+	                'size'=>255,
+	            ],
+					'id'=>[
+	                'name'=>'id',
 	                'type'=>'nvarchar',
 	                'size'=>255,
 	            ],
@@ -20,6 +25,7 @@ class Models
 				if(strpos($class,'App\\',0)!==false){
 				    $obj= new Models;
 				    $obj->name=$class;
+						$obj->id=$class;
 				    $list[]=$obj;
 				}
 			}
@@ -27,12 +33,17 @@ class Models
 
 		return $list;
 	}
-
-	function Many2one($class,$foraginkey='',$classid=''){
+function get(){
+	 $arr=$this->all();
+	 $arr=array_filtercolumn($arr,$this->where_arr);
+		return $arr;
+}
+function Many2one($class,$foraginkey='',$classid='',$where = NULL){
 	    $obj=new Models;
-	    $obj->name=$this->$foraginkey;
-		return $obj;
-	}
+			$this->where_arr[]=$where;
+			$obj=$this->supperUser()->get();
+		return $obj[0];
+}
 
 
 }

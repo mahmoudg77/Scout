@@ -1,5 +1,8 @@
 <?
 namespace App\Controllers;
+use App;
+use Framework\Addons\Validator as Validator;
+
 
 class Waitinglist extends BaseController
 {
@@ -22,22 +25,64 @@ class Waitinglist extends BaseController
 
     function postApprove($request){
         try {
-          $obj=new $request->post['model'];
-          $obj->approve();
-        } catch (Exception $e) {
-          echo $e->getMessage();
+          $validate=new  Validator();
+          $validate->validate($request->post,['id'=>'Required|Integer']);
+
+          //$req=new App\Models\Notify\Waitinglist;
+          $req=App\Models\Notify\Waitinglist::find($request->post['id']);
+
+           $approve_model= $req->model_id;
+
+          if($approve_model->approve()){
+
+            $req->is_done=1;
+            $req->update();
+
+            if($request->isAjax()) return json_success("Approved success");
+
+            $data=new App\Models\Notify\Waitinglist;
+            return $this->view('all',['data'=>$data->get()]);
+          }else{
+            throw new \Exception($req->error . " " .$approve_model->error );
+          }
+
+
+        } catch (\Exception $e) {
+            if($request->isAjax()) return json_error($e->getMessage());
+            throw $e;
         }
 
 
     }
     function postReject($request){
       try {
-        $obj=new $request->post['model'];
-        $obj->reject();
-      } catch (Exception $e) {
-        echo $e->getMessage();
-      }
+        $validate=new Framework\Addons\Validator();
+        $validate->validate($request->post,['id'=>'Required|Integer']);
 
+        $req=new App\Models\Notify\Waitinglist;
+        $req=$req->find($request->post['id']);
+        $approve_model=new $req->model_name;
+        $approve_model=$req->model_id;
+
+        if($approve_model->reject()){
+
+          $req->is_done=1;
+          $req->update();
+
+          if($request->isAjax()) return json_success("Rejected success");
+
+          $data=new App\Models\Notify\Waitinglist;
+          return $this->view('all',['data'=>$data->get()]);
+        }else{
+          throw new \Exception($req->error . " " .$approve_model->error );
+
+        }
+
+
+      } catch (\Exception $e) {
+          if($request->isAjax()) return json_error($e->getMessage());
+          throw $e;
+      }
 
     }
 

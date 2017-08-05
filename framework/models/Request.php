@@ -10,6 +10,7 @@ class Request
     var $server;
 
     function __construct(){
+      global $_GET,$_POST,$_FILES,$_SERVER;
          $this->get=$_GET;
          $this->post=$_POST;
          $this->files=$_FILES;
