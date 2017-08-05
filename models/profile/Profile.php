@@ -33,7 +33,7 @@ class Profile extends BLL{
                     'type'=>'One2many',
                     'relation'=>['class'=>'App\Models\Media\Images','classid'=>'model_id','where'=>['model_name','App\Models\Profile\Profile'],'controller'=>'Images'],
                 ],
-           
+
              ];
 
 			function name()
@@ -41,15 +41,28 @@ class Profile extends BLL{
 		 		return $this->First_Name." ".$this->Second_Name." ".$this->Third_Name;
 		 	}
 
-             function PersonalImage(){
-                $p=array_filtercolumn($this->Images,[["tag","Personal"]]);
-                 return $p[0];
-             }
-            function CoverImage(){
-                $p=array_filtercolumn($this->Images,[["tag","Cover"]]);
-                
-                 return $p[0];
-             }
+			function PersonalImage(){
+			   $p=array_filtercolumn($this->Images,[["tag","Personal"]]);
+			   return $p[0];
+			}
+			function CoverImage(){
+			    $p=array_filtercolumn($this->Images,[["tag","Cover"]]);
+			    return $p[0];
+			 }
+
+			//  function approve(){
+			// 	 $this->approved_by=USER_ID;
+			// 	 $this->approval_request=1;
+			// 	 $this->approved_at=Date("Y-m-d H:i:s");
+			// 	 return $this->update();
+			 //
+			//  }
+			//  function reject(){
+			// 	 $this->approved_by=USER_ID;
+			// 	 $this->approval_request=0;
+			// 	 $this->approved_at=Date("Y-m-d H:i:s");
+			// 	 return $this->update();
+			//  }
 
 }
 ?>

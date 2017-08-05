@@ -12,7 +12,17 @@ class Waitinglist extends BLL{
 	var $col_pk="id";
 
 	var $fields=[
-	    ];
+        'userId'=>[
+            'name'=>'Requested By',
+            'type'=>'Many2one',
+            'serialize'=>true,
+            'relation'=>['class'=>'App\Models\Profile\Profile','classid'=>'Profile_ID','controller'=>'Profile']],
+        'model_name'=>[
+            'name'=>'Model Name',
+            'type'=>'Many2one',
+            'serialize'=>true,
+            'relation'=>['class'=>'Framework\Models','classid'=>'name','controller'=>'Models']]
+ 	    ];
 
 	function __set($key,$value){
         parent::__set($key,$value);
@@ -24,8 +34,10 @@ class Waitinglist extends BLL{
     		$this->fields['model_id']=['name'=>'Releted Record',
     			'type'=>'Many2one','visible'=>true,
     			'serialize'=>true,
-    			'relation'=>['class'=>$this->model_name,'classid'=>$c->getPKname(),'controller'=>'Comp']];
+    			'relation'=>['class'=>$value,'classid'=>$c->getPKname(),'controller'=>'Comp']];
     	}
+
+
 
 
 

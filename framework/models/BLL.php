@@ -728,7 +728,7 @@ var $mode="view";
                             break;
 
                     }
-				
+
                 }else{
                     if($this->fields[$field]['size']>=500 || in_array($this->fields[$field]['type'],['text','longtext'])){
                      ?>
@@ -842,17 +842,19 @@ trait NotifyModel {
 
 
 trait ApprovelModel {
-    public function approve() {
-        $TYPE=get_called_class();
-
-        echo $TYPE . ' Was Approved!';
+     function approve() {
+			 $this->approved_by=USER_ID;
+			 $this->approval_request=1;
+			 $this->approved_at=Date("Y-m-d H:i:s");
+			 return $this->update();
     }
-		public function reject() {
-				$TYPE=get_called_class();
-
-				echo $TYPE . ' Was Rejected!';
+		 function reject() {
+			 $this->approved_by=USER_ID;
+			 $this->approval_request=0;
+			 $this->approved_at=Date("Y-m-d H:i:s");
+			 return $this->update();
 		}
 }
 
- 
+
 ?>

@@ -20,7 +20,10 @@ class Dashboard extends BaseController
 
         return $this->view();
     }
-    
+
+    function getUser($request){
+        print_r($request);
+    }
 
 }
 ?>
