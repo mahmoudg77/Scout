@@ -96,6 +96,7 @@
                                    });
                                     
                                     btn.click();
+                                    $("#formModel").modal("close");
                                   }else{
                                     iziToast.show({
                                        title: 'Error',

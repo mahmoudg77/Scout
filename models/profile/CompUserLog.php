@@ -11,7 +11,7 @@ class CompUserLog extends BLL{
     use \Framework\ApprovelModel;
 
 	var $fields=[
-        'campId'=>['name'=>'Group',
+        'campId'=>['name'=>'Camp',
             'type'=>'Many2one',
             'serialize'=>true,
             'relation'=>['class'=>"App\Models\Profile\Comp",'classid'=>'id','controller'=>'Comp']],
