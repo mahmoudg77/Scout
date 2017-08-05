@@ -151,7 +151,7 @@ var $mode="view";
 	    $this->data[$name] = $value;
 	}
 
-	function insert($souperuser=''){
+	function insert(){
 
 		global $context;
 		// Get class name
@@ -672,11 +672,13 @@ var $mode="view";
                 $widget='text';
             }
         }
+        
 		//echo $this->fields[$field]['type'];
         // include_once('Request.php');
         switch($mode){
             case "edit":
             case "add":
+               
                 if(array_key_exists('class',$attrs)){$attrs['class'].=' form-control';}else{$attrs['class'].=' form-control ';}
                 if(in_array($this->fields[$field]['type'],["Many2many" ,"One2many"])){
                      ?>
@@ -688,9 +690,14 @@ var $mode="view";
                          </table>
                      <?
                 }elseif($this->fields[$field]['type']=="Many2one" ){
+                    
                     switch($widget){
                         default:
-                        case 'combo':?>
+
+                        case 'combo':
+                            
+                            ?>
+
                             <select  name="<?=$field?>" <?foreach($attrs as $key=>$attr){?><?=' '.$key.'="'.$attr.'" '?><?}?>     <?if($this->fields[$field]['required']){?> required <?}?>>
 															<option value="0">Select One..</option>
                                 <?$class=$this->fields[$field]['relation']['class'];
@@ -699,12 +706,15 @@ var $mode="view";
                                     if($this->fields[$field]['relation']['where']){
                                         $class->where($this->fields[$field]['relation']['where']);
                                     }
+                                   
                                 foreach($class->supperUser()->get() as $itm){?>
                                     <option value="<?=$itm->$classid?>" <?if($itm->$classid==$this->data[$field]){?>selected<?}?>><?=$itm->name?></option>
                                 <?}?>
                             </select>
 
-                            <?break;
+                            <?
+                         
+                            break;
 
                     }
                  }elseif(in_array($this->fields[$field]['type'],["Boolean","tinyint"])){
@@ -753,7 +763,7 @@ var $mode="view";
                 if($this->fields[$field]['type']=='Many2one'){
 
                 ?>
-                        <a target="_blank" href="/<?=LANG?>/<?=$this->fields[$field]['relation']['controller']?>/item/<?=$this->data[$field]?>" <?foreach($attrs as $key=>$attr){?><?=' '.$key.'="'.$attr.'" '?><?}?>><?=$this->$field->name?></a>
+                        <a target="_blank" href="/<?=LANG?>/<?=$this->fields[$field]['relation']['controller']?>/item/<?=$this->$field->id?>" <?foreach($attrs as $key=>$attr){?><?=' '.$key.'="'.$attr.'" '?><?}?>><?=$this->$field->name?></a>
                 <?
                 }elseif($this->fields[$field]['type']=='One2many'){
                      if(array_key_exists('class',$attrs)){$attrs['class'].=' btn-link ';}else{$attrs['class'].=' btn-link ';}
@@ -842,18 +852,55 @@ trait NotifyModel {
 
 
 trait ApprovelModel {
+   
+    function __construct(){
+        $this->fields['approval_request']=['name'=>'approval_request',
+                                       'type'=>'int',
+                                       'serialize'=>true,
+                                       'visible'=>false,
+                                       ];
+        $this->fields['approval_at']=['name'=>'approval_at',
+                                       'type'=>'datetime',
+                                       'serialize'=>true,
+                                       'visible'=>false,
+                                       ];
+        $this->fields['approval_by']=['name'=>'approval_by',
+                                       'type'=>'int',
+                                       'serialize'=>true,
+                                       'visible'=>false,
+                                       ];
+        parent::__construct();
+    }
+   
+  
+
+        
      function approve() {
-			 $this->approved_by=USER_ID;
+         $this->approved_by=intval(USER_ID);
 			 $this->approval_request=1;
 			 $this->approved_at=Date("Y-m-d H:i:s");
 			 return $this->update();
     }
-		 function reject() {
-			 $this->approved_by=USER_ID;
-			 $this->approval_request=0;
-			 $this->approved_at=Date("Y-m-d H:i:s");
-			 return $this->update();
-		}
+	function reject() {
+		$this->approved_by=intval(USER_ID);
+		$this->approval_request=0;
+		$this->approved_at=Date("Y-m-d H:i:s");
+		return $this->update();
+    }
+    function insert() {
+        parent::insert();
+        $approve_request=new \App\Models\Notify\Waitinglist;
+        $approve_request->userId=intval(USER_ID);
+        $approve_request->model_name=$this->model;
+        $approve_request->model_id=$this->id;
+        $approve_request->is_done=-1;
+
+        if(!$approve_request->insert()){
+            $this->error=$approve_request->error;
+            return false;
+        }
+        return true;
+    }
 }
 
 

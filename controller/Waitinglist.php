@@ -56,7 +56,7 @@ class Waitinglist extends BaseController
     }
     function postReject($request){
       try {
-        $validate=new Framework\Addons\Validator();
+        $validate=new Validator();
         $validate->validate($request->post,['id'=>'Required|Integer']);
 
         $req=new App\Models\Notify\Waitinglist;
@@ -66,7 +66,7 @@ class Waitinglist extends BaseController
 
         if($approve_model->reject()){
 
-          $req->is_done=1;
+          $req->is_done=0;
           $req->update();
 
           if($request->isAjax()) return json_success("Rejected success");

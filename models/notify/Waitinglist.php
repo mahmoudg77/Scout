@@ -21,8 +21,13 @@ class Waitinglist extends BLL{
             'name'=>'Model Name',
             'type'=>'Many2one',
             'serialize'=>true,
-            'relation'=>['class'=>'Framework\Models','classid'=>'name','controller'=>'Models']]
+            'relation'=>['class'=>'Framework\Models','classid'=>'id','controller'=>'Models']]
  	    ];
+
+    function name(){
+        return $this->userId->name . "(" .$this->model_name .")";
+    }
+
 
 	function __set($key,$value){
         parent::__set($key,$value);

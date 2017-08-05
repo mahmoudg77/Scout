@@ -25,7 +25,6 @@
                         </th><?}
       }?>
                         <th>Edit</th>
-                        <th>View</th>
                         <th>Delete</th>
                     </tr></thead><?
 foreach($data as $key=>$row){
@@ -46,13 +45,9 @@ foreach($data as $key=>$row){
                               <input type="hidden" name="id" value="<?=$row->id?>" />
                               <input type="submit" class="btn btn-danger" value="Rejected" />
                           </form>
-                            <a class="btn btn-primary" href="<?=actionLink('item','',['id'=>$row->{$row->col_pk}])?>">view</a>
-
+                            <a class="btn btn-primary open-modal" href="<?=actionLink('item','',['id'=>$row->{$row->col_pk}])?>">view</a>
                         </td>
-                        <td>
-                            <a class="btn btn-default" href="<?=actionLink('edit','',['id'=>$row->{$row->col_pk}])?>">Edit</a>
-
-                        </td>
+                       
                         <td>
 
 

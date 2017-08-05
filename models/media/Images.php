@@ -11,9 +11,11 @@ class Images extends BLL{
     var $img;
 
 	var $fields=[
-		
-	    ];
 
+	    ];
+    function name(){
+        return $this->file_name;
+    }
     function __construct($obj,$tag,$img){
          parent::__construct();
          $this->data['model_id']=$obj->id;
@@ -41,9 +43,9 @@ class Images extends BLL{
         $model_name=str_replace("\\","/",$model_name);
 
         $arr=upload_image($this->img,"uploads/{$model_name}/{$this->data['model_id']}/{$this->tag}");
-       
+
         if(array_key_exists($arr,'error')) throw new \Exciption( $arr['error']);
-        
+
         $this->file_name=$arr['filename'];
 
         if(!$this->supperUser()->insert()) throw new \Exciption( $arr['error']);

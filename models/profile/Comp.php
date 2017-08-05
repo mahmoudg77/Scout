@@ -7,6 +7,9 @@ use Framework\BLL;
 class Comp extends BLL{
 	var $tablename="comp";
 	var $col_pk="id";
+    use \Framework\NotifyModel;
+    use \Framework\ApprovelModel;
+
 
 	var $fields=[
 			'Profiles'=>['name'=>'Profiles',

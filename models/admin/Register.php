@@ -11,5 +11,9 @@ class Register extends BLL{
 	var $fields=[
 
   	    ];
+
+    function name(){
+        return $this->regYear;
+    }
 }
 ?>

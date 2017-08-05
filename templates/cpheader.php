@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="<?=assets('css/jquery.dataTables.min.css')?>">
 
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?=assets('css/font-awesome.min.css')?>">
+<link rel="stylesheet" href="<?=assets('css/skin/font-awesome.min.css')?>">
   <!-- Ionicons -->
   <link rel="stylesheet" href="<?=assets('css/skin/ionicons.min.css')?>">
   <!-- Theme style -->

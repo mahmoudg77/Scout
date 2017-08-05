@@ -32,8 +32,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-----------------------------registration form style and javascript-------------------------->
 <link href="https://fonts.googleapis.com/css?family=Metal Mania" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="register.component.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-        crossorigin="anonymous">
+
 <script type="text/javascript" src="<?=assets('js/registrationformAdmin.js')?>"></script>
 <!-----------------------------team registration form style and javascript---------------------------------------->
 
