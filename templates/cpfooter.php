@@ -37,7 +37,7 @@
 	 <div class="pull-right hidden-xs">
 		 <b>Version</b> 2.4.0
 	 </div>
-	 <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io/">Almsaeed Studio</a>.</strong> All rights
+	 <strong>Copyright &copy; 2014-2016 <a href="#" id="btn-testajax">Almsaeed Studio</a>.</strong> All rights
 	 reserved.
  </footer>
 
@@ -166,9 +166,25 @@ $("body").on("click",".open-modal",function(e){
                                     });
                                 }
                             });
-        });
-});
+    });
 
+    
+});
+        $("#btn-testajax").click(function () {
+
+            alert("test");
+            $.ajax({
+                type: "get",
+                url: "/en/Dashboard/getUser?userid=7",
+                data: "",
+                success: function (d) {
+                    alert(d);
+                },
+                error: function (d) {
+                    alert(d.responseText);
+                }
+            });
+        });
 });
 </script>
 </body>

@@ -32,41 +32,17 @@
 						<input id="teamName" type="text" class="form-control" name="teamName" placeholder="Team name">
 						<span class="input-group-addon">
 							<select name="category" id="category">
-<<<<<<< HEAD
+ 
                 <option value="1">براعم</option>
                 <option value="2">أشبال</option>
                 <option value="3">كشافة</option>
                 <option value="4">كشاف متقدم</option>
                 <option value="5">جوالة</option>
-=======
-
->>>>>>> 2c5115ac04584bde654a89f69425fc7e97324162
-
-							</select>
+ 							</select>
 						</span>
 
-<<<<<<< HEAD
-          </div>
-=======
-
-
-
-
-
-
-
-
-								<option value="1">براعم</option>
-								<option value="2">أشبال</option>
-								<option value="3">كشافة</option>
-								<option value="4">كشاف متقدم</option>
-								<option value="5">جوالة</option>
-							</select>
-						</span>
-
-
-                            </div>
->>>>>>> 2c5115ac04584bde654a89f69425fc7e97324162
+           </div>
+ 
 					<div class="input-group col-xs-6 ">
 						<span class="input-group-addon"><i aria-hidden="true">Country</i></span>
 						<select id="country"  type="text" class="form-control teams-tree" name="country" data-childs="#organization">
@@ -87,9 +63,11 @@
                     var select=$(this);
       							$.ajax({
       							type: "get",
-      							url: "<?=actionLink("getChilds","TeamsReg")?>/"+select.val(),
+      							url: "<?=actionLink("getChilds","TeamsReg")?>",
+      							data: "parentid=" + select.val(),
       							success: function(data){
-      								$(select.data("childs")).html(data);
+      							    $(select.data("childs")).html(data);
+      							    $(select.data("childs")).change();
       							}
       							});
       						});

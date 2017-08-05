@@ -123,13 +123,13 @@ class TeamsReg extends BaseController
 
     try{
       $validate=new Validator();//for valid only
-             $validate->validate($request->get,['id'=>'Required|Integer']);
+      $validate->validate($request->get,['parentid'=>'Required|Integer']);
 
 
             $obj =new App\Models\Admin\Teams;
-            $obj=  $obj->where(['parentId',intval($request->get['id'])])->supperUser()->get();
+            $obj=  App\Models\Admin\Teams::find(intval($request->get['parentid']));
 
-            foreach ($obj as $item) {
+            foreach ($obj->childs as $item) {
               $response.="<option value='".$item->id."'>" .$item->name."</option>";
             }
 
