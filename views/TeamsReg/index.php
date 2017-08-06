@@ -46,7 +46,7 @@
 							<?
                             $country= new App\Models\Lookup\Teams;
                             foreach($country->supperUser()->get() as $item){
-<<<<<<< HEAD
+ 
                                	if($item->parentId==0){
                               ?>
                                 	<option value="<?=$item->id?>"><?=$item->name?></option>

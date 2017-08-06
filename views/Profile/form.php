@@ -87,7 +87,7 @@
         </div>
         <div class="input-group  col-xs-12 col-md-6">
             <span class="input-group-addon">Cover Img</span>
-            <input id="proimage" type="file" name="coverImg"  />
+            <input id="coverImg" type="file" name="coverImg"  />
         </div>
     </div>
     <div class="form-group">
