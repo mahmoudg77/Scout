@@ -876,21 +876,26 @@ trait ApprovelModel {
 
         
      function approve() {
-         $this->approval_by=intval(USER_ID);
+         global $context;
+         $this->approval_by=intval($context->user->id);
 			 $this->approval_request=1;
 			 $this->approval_at=Date("Y-m-d H:i:s");
 			 return $this->update();
     }
 	function reject() {
-		$this->approval_by=intval(USER_ID);
+        global $context;
+		$this->approval_by=intval($context->user->id);
 		$this->approval_request=0;
 		$this->approval_at=Date("Y-m-d H:i:s");
 		return $this->update();
     }
     function insert() {
-        parent::insert();
+        global $context;
+       if(!parent::insert()){
+           return false;
+       }
         $approve_request=new \App\Models\Notify\Waitinglist;
-        $approve_request->userId=intval(USER_ID);
+        $approve_request->userId=intval($context->user->id);
         $approve_request->model_name=$this->model;
         $approve_request->model_id=$this->id;
         $approve_request->is_done=-1;

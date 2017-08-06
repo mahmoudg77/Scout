@@ -7,7 +7,7 @@ use Framework\Addons\Validator as Validator;
 class TeamsReg extends BaseController
 {
     protected  $model="App\Models\Lookup\TeamsReg";
-    protected $authRequired=false;
+    protected $authRequired=true;
 
   function postAdd($request)
 	{
@@ -46,8 +46,8 @@ class TeamsReg extends BaseController
 		// will creat team id only in parent and child
 		$TeamId=new App\Models\Lookup\Teams;
 		$TeamId->name=$request->post['teamName'];
-		$TeamId->serial="ddddd";
 		$TeamId->parentId=$request->post['branch'];
+        $TeamId->serial="ddddd";
 		$TeamId->created_by=7;
 		$TeamId->created_at="2017-08-15 00:00:00";
 
@@ -151,7 +151,7 @@ class TeamsReg extends BaseController
   }
 
   function getDataFromDb($request){
-
+      if(!$request->isAjax()) return redirectTo("");
    try{
          $validate=new Validator();//for valid only
          $validate->validate($request->get,['NationalID'=>'Required|Integer']);
@@ -161,9 +161,12 @@ class TeamsReg extends BaseController
 
 
            //$Profile= App\Models\Profile\Profile::find(1);/*after 3 hour i know that find take only id of col-pk in model*/
-           if(count($Profile)>0 && $request->isAjax())
+           if(count($Profile)>0)
            {
              return json_success("Account already exists !",$Profile[0]) ;
+           }else{
+               return json_success("This is new account") ;
+
            }
       }
      catch(\Exception $ex)

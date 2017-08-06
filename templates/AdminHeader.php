@@ -71,16 +71,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		if(counter<=24){
 			document.getElementById('table').innerHTML+=
 			`<tr>
-			  <th scope="row" id='`+counter+`'>`+counter+`</th>
-        <td><input type="number" class="form-control tdinput" id="r`+counter+`td3"  name="NationalID[]"></td>
-			  <td> <td><input type="text" class="form-control tdinput" id="r`+counter+`td1"  name="name[]"></td>
-			  <td><input type="Date" class="form-control tdinput" id="r`+counter+`td2"  name="Birthdate[]" onBlur="checkDate(this.value,this.id)"></td>
-
-				<div class="input-group">
-					<span class="input-group-addon "><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i><i class="fa fa-square-o fa-lg" aria-hidden="true"></i></span>
-					<button type="button" class="btn btn-success " disabled>Get IN</button>
-				</div></td>
-			</tr>`
+                <th scope="row">`+counter+`</th>
+                <td><input type="number" class="form-control tdinput" name="NationalID[]"  required></td>
+			    <td class="name">
+			    </td>
+			    <td class="birthdate">
+			    </td>
+		    <td>
+			    <div class="input-group">
+				    <span class="input-group-addon "><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i><i class="fa fa-square-o fa-lg" aria-hidden="true"></i></span>
+				    <button type="button" class="btn btn-success btn-getin">Get IN</button>
+			    </div>
+		    </td>
+         </tr>`
 		counter++;
 
 		document.getElementById('Money').innerHTML=((counter-1)*10);
