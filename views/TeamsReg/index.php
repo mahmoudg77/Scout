@@ -1,4 +1,4 @@
-<?if(!$request->isAjax())include(PATH.'templates/cpheader.php');?>
+<?if(!$request->isAjax())include(PATH.'templates/AdminHeader.php');?>
 
     <!-- Main content -->
     <section class="container-fluid" name="sec1">
@@ -46,11 +46,12 @@
 							<?
                             $country= new App\Models\Lookup\Teams;
                             foreach($country->supperUser()->get() as $item){
-                                if($item->parentId==0){
-                            ?>
-                          	<option value="<?=$item->id?>"><?=$item->name?></option>
-                        <?
-                                }
+<<<<<<< HEAD
+                               	if($item->parentId==0){
+                              ?>
+                                	<option value="<?=$item->id?>"><?=$item->name?></option>
+                              <?
+								}
                             }?>
 						</select>
 			<script>
