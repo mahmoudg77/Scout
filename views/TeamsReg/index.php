@@ -47,8 +47,7 @@
 							<option value="" selected>أختر البلد</option>
 							<?
                             $country= new App\Models\Lookup\Teams;
-                            foreach($country->supperUser()->get() as $item){
-
+                            foreach($country->where('parentId',0)->supperUser()->get() as $item){
                                	if($item->parentId==0){
                               ?>
                                 	<option value="<?=$item->id?>"><?=$item->name?></option>
