@@ -7,8 +7,10 @@ use Framework\BLL;
 class RegisteryUserLog extends BLL{
 	var $tablename="registeryuser";
 	var $col_pk="id";
+    use \Framework\NotifyModel;
+    use \Framework\ApprovelModel;
 
-	var $fields=[
+    var $fields=[
 		'regId'=>['name'=>'Register',
 				'type'=>'Many2one',
 				'serialize'=>true,
@@ -20,6 +22,12 @@ class RegisteryUserLog extends BLL{
 				'serialize'=>true,
 				'relation'=>['class'=>"App\Models\Profile\Profile",'classid'=>'Profile_ID','controller'=>'Profile']],
 		];
+
+    function name(){
+        return $this->userId->name."(". $this->regId->name.")";
+    }
+
+
 // 		$reguser=new App\Models\Admin\RegisteryUserLog;
 //
 // 		$reguser->regId=1;

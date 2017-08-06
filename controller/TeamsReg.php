@@ -149,6 +149,36 @@ class TeamsReg extends BaseController
 
       }
   }
+
+  function getDataFromDb($request){
+
+   try{
+         $validate=new Validator();//for valid only
+         $validate->validate($request->get,['NationalID'=>'Required|Integer']);
+           $Profile =new App\Models\Profile\Profile;
+           //$found=$request->get['NationalID'];
+          $Profile=$Profile->where('National_Number',$request->get['NationalID'])->supperUser()->get();
+
+
+           //$Profile= App\Models\Profile\Profile::find(1);/*after 3 hour i know that find take only id of col-pk in model*/
+           if(count($Profile)>0 && $request->isAjax())
+           {
+             return json_success("Account already exists !",$Profile[0]) ;
+           }
+      }
+     catch(\Exception $ex)
+     {
+       if($request->isAjax())
+       {
+         return json_error($ex->getMessage());
+       }
+      //  else
+      //  {
+      //     echo $ex->getMessage();
+      //  }
+
+     }
+ }
 }
 
 ?>

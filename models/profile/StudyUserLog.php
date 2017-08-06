@@ -8,6 +8,9 @@ class StudyUserLog extends BLL{
 	var $tablename="studiesusers";
 	var $col_pk="id";
 
+    use \Framework\NotifyModel;
+    use \Framework\ApprovelModel;
+
 	var $fields=[
         'studyId'=>['name'=>'Study',
             'type'=>'Many2one',
@@ -18,5 +21,10 @@ class StudyUserLog extends BLL{
             'serialize'=>true,
             'relation'=>['class'=>"App\Models\Profile\Profile",'classid'=>'Profile_ID','controller'=>'Profile']],
   	    ];
+
+    function name(){
+        return $this->userId->name . "(" .$this->studyId->name .")";
+    }
+
 }
 ?>

@@ -37,52 +37,55 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script type="text/javascript" src="<?=assets('js/registrationformAdmin.js')?>"></script>
 <!-----------------------------team registration form style and javascript---------------------------------------->
 
-<script type="text/javascript">
+<script>
 	var counter =13;
-	
 	var counterFee=120;
-	function checkDate(value){
-		var x=new Date();
+	function checkDate(value,name){
 		var date1 = new Date(value);
         var date2 = new Date(String((x.getMonth()+1)+"/"+x.getDate()+"/"+x.getFullYear()));
         var timeDiff = Math.abs(date2.getTime() - date1.getTime());
-        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24))/365;alert(diffDays);
+        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24))/365;
 		if(document.getElementById("category").value==1 && diffDays>7 ){
-			
+			alert("هذا الشخص لم يعد فى مرحلة البراعم ");
+			document.getElementById(name).value="yyyy-mm-dd";
 		}
-		else if(document.getElementById("category").value==2 && diffDays>11 ){
-			
+		else if(document.getElementById("category").value==2 && (diffDays<7 || diffDays>11) ){
+			alert("هذا الشخص لم يعد/ يصل فى مرحلة الأشبال ");
+			document.getElementById(name).value="yyyy-mm-dd";
 		}
-		else if(document.getElementById("category").value==3 && diffDays>14 ){
-			
+		else if(document.getElementById("category").value==3 &&  (diffDays<11 || diffDays>14) ){
+			alert("هذا الشخص لم يعد/ يصل فى مرحلة الكشافة ");
+			document.getElementById(name).value="yyyy-mm-dd";
 		}
-		else if(document.getElementById("category").value==4 && diffDays>17 ){
-			
+		else if(document.getElementById("category").value==4 &&  (diffDays<14 || diffDays>17) ){
+			alert("هذا الشخص لم يعد/ يصل فى مرحلة الكشاف المتقدم ");
+			document.getElementById(name).value="yyyy-mm-dd";
 		}
-		else if(document.getElementById("category").value==5 && diffDays<=17 ){
-			
+		else if(document.getElementById("category").value==5 && diffDays<17 ){
+			alert("هذا الشخص لم يصل فى مرحلة الجوالة ");
+			document.getElementById(name).value="yyyy-mm-dd";
 		}
-		
+
 	}
 	function asd(){
 		if(counter<=24){
 			document.getElementById('table').innerHTML+=
 			`<tr>
 			  <th scope="row" id='`+counter+`'>`+counter+`</th>
-			  <td><input type="text" class="form-control tdinput" id="r`+counter+`td1"  name="r1td1"></td>
-			  <td><input type="text" class="form-control tdinput" id="r`+counter+`td2"  name="r1td2"></td>
-			  <td><input type="number" class="form-control tdinput" id="r`+counter+`td3"  name="r1td3"></td>
-			  <td>
+        <td><input type="number" class="form-control tdinput" id="r`+counter+`td3"  name="NationalID[]"></td>
+			  <td> <td><input type="text" class="form-control tdinput" id="r`+counter+`td1"  name="name[]"></td>
+			  <td><input type="Date" class="form-control tdinput" id="r`+counter+`td2"  name="Birthdate[]" onBlur="checkDate(this.value,this.id)"></td>
+
 				<div class="input-group">
 					<span class="input-group-addon "><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i><i class="fa fa-square-o fa-lg" aria-hidden="true"></i></span>
 					<button type="button" class="btn btn-success " disabled>Get IN</button>
 				</div></td>
 			</tr>`
 		counter++;
-			
+
 		document.getElementById('Money').innerHTML=((counter-1)*10);
 		}else{
-			alert("FUCK OFF");
+			alert("هذا هو اقصى عدد مسموح للفريق");
 		}
 	}
 	var elementToD;
@@ -90,7 +93,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		if(counter>13){
 			document.getElementById("table").deleteRow(counter-2);
 			--counter;
-			document.getElementById('Money').innerHTML=((counter-1)*10);	
+			document.getElementById('Money').innerHTML=((counter-1)*10);
 		}
 
 	  }
@@ -104,7 +107,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		xmlhttp.open('GET','starter.php',true);
 		xmlhttp.send();
 	}
-	
+
 
 </script>
 <style>
@@ -309,7 +312,7 @@ desired effect
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-        
+
           <img src="<?=$context->user->accid->PersonalImage->thumb?>" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">

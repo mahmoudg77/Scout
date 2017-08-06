@@ -94,8 +94,9 @@
                                        color: 'green', // blue, red, green, yellow
                                        position: 'topCenter',
                                    });
+                                    
+                                    btn.click();
                                     $("#formModel").modal("close");
-
                                   }else{
                                     iziToast.show({
                                        title: 'Error',
@@ -142,7 +143,7 @@ $("body").on("click",".open-modal",function(e){
                                          color: 'green', // blue, red, green, yellow
                                          position: 'topCenter',
                                      });
-                                      $("#formModel").modal("close");
+                                      $("#formModel").modal("toggel");
 
                                     }else{
                                       iziToast.show({

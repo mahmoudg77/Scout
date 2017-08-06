@@ -18,5 +18,9 @@ class HobbyUserLog extends BLL{
             'serialize'=>true,
             'relation'=>['class'=>"App\Models\Profile\Profile",'classid'=>'Profile_ID','controller'=>'Profile']],
   	    ];
+
+    function name(){
+        return $this->userId->name . "(" .$this->hobbiesId->name .")";
+    }
 }
 ?>

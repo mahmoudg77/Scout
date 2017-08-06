@@ -11,9 +11,11 @@ class Images extends BLL{
     var $img;
 
 	var $fields=[
-		
-	    ];
 
+	    ];
+    function name(){
+        return $this->file_name;
+    }
     function __construct($obj,$tag,$img){
          parent::__construct();
          $this->data['model_id']=$obj->id;
@@ -25,25 +27,27 @@ class Images extends BLL{
 
 	function __set($key,$value){
         parent::__set($key,$value);
-		if($key!="model_name") return;
+
+				if($key!="model_name") return;
 
         if($this->model_name=="") return;
 
         $c=new $this->model_name;
-		$this->fields['model_id']=['name'=>'Releted Record',
-			'type'=>'Many2one','visible'=>true,
-			'serialize'=>true,
-			'relation'=>['class'=>$this->model_name,'classid'=>$c->getPKname(),'controller'=>'Comp']];
-	}
+
+				$this->fields['model_id']=['name'=>'Releted Record',
+							'type'=>'Many2one','visible'=>true,
+							'serialize'=>true,
+							'relation'=>['class'=>$this->model_name,'classid'=>$c->getPKname(),'controller'=>'Comp']];
+		}
 
     function upload(){
         $model_name=str_replace("App\Models\\","",$this->model_name);
         $model_name=str_replace("\\","/",$model_name);
 
         $arr=upload_image($this->img,"uploads/{$model_name}/{$this->data['model_id']}/{$this->tag}");
-       
+
         if(array_key_exists($arr,'error')) throw new \Exciption( $arr['error']);
-        
+
         $this->file_name=$arr['filename'];
 
         if(!$this->supperUser()->insert()) throw new \Exciption( $arr['error']);

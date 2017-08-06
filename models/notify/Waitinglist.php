@@ -17,12 +17,17 @@ class Waitinglist extends BLL{
             'type'=>'Many2one',
             'serialize'=>true,
             'relation'=>['class'=>'App\Models\Profile\Profile','classid'=>'Profile_ID','controller'=>'Profile']],
-        'model_name'=>[
-            'name'=>'Model Name',
-            'type'=>'Many2one',
-            'serialize'=>true,
-            'relation'=>['class'=>'Framework\Models','classid'=>'name','controller'=>'Models']]
+        //'model_name'=>[
+        //    'name'=>'Model Name',
+        //    'type'=>'Many2one',
+        //    'serialize'=>true,
+        //    'relation'=>['class'=>'Framework\Models','classid'=>'id','controller'=>'Models']]
  	    ];
+
+    function name(){
+        return $this->userId->name . "(" .$this->model_name .")";
+    }
+
 
 	function __set($key,$value){
         parent::__set($key,$value);
@@ -31,11 +36,14 @@ class Waitinglist extends BLL{
         if($this->model_name=="") return;
 
         $c=new $this->model_name;
-    		$this->fields['model_id']=['name'=>'Releted Record',
+        $arr=explode("\\",$this->model_name);
+        $controller=array_pop($arr);
+       // echo "Col_pk",$this->model_name,$c->getPKname();
+        $this->fields['model_id']=['name'=>'Releted Record',
     			'type'=>'Many2one','visible'=>true,
     			'serialize'=>true,
-    			'relation'=>['class'=>$value,'classid'=>$c->getPKname(),'controller'=>'Comp']];
-    	}
+    			'relation'=>['class'=>$value,'classid'=>$c->getPKname(),'controller'=>$controller]];
+    }
 
 
 

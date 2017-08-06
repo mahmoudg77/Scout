@@ -94,7 +94,7 @@ class BaseController{
                     if($request->isAjax()) return json_error($data->error);
                     throw new \Exception($data->error);
                 }
-                if($request->isAjax()) return json_success("Save Success !!");
+          if($request->isAjax()) return json_success("Save Success !!".$data->error,$data);
 
 
             redirectTo($context->controller_path."/all");

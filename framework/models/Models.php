@@ -22,10 +22,10 @@ class Models extends BLL
 
 		$list=[];
 			foreach(get_declared_classes() as $class){
-				if(strpos($class,'App\\',0)!==false){
+				if(strpos($class,'App\\Models\\',0)!==false){
 				    $obj= new Models;
 				    $obj->name=$class;
-						$obj->id=$class;
+					$obj->id=$class;
 				    $list[]=$obj;
 				}
 			}
@@ -34,9 +34,13 @@ class Models extends BLL
 		return $list;
 	}
 function get(){
-	 $arr=$this->all();
-	 $arr=array_filtercolumn($arr,$this->where_arr);
-		return $arr;
+    $arr=Models::all();
+
+    if($this->where_arr){
+        $arr=array_filtercolumn($arr,$this->where_arr);
+    }
+
+    return $arr;
 }
 function Many2one($class,$foraginkey='',$classid='',$where = NULL){
 	    $obj=new Models;
