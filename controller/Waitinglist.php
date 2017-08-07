@@ -20,9 +20,12 @@ class Waitinglist extends BaseController
     function index($request){
       $obj=new $this->model;
       $data=$obj->where('is_done','0')->get();
-      return $this->view(compact('data'));
+      return $this->view('all',compact('data'));
     }
 
+    function wait($request){
+        
+    }
     function postApprove($request){
         try {
           $validate=new  Validator();
@@ -40,8 +43,9 @@ class Waitinglist extends BaseController
 
             if($request->isAjax()) return json_success("Approved success");
 
-            $data=new App\Models\Notify\Waitinglist;
-            return $this->view('all',['data'=>$data->get()]);
+
+            //$data=new App\Models\Notify\Waitinglist;
+            return redirectTo("Waitinglist");
           }else{
             throw new \Exception($req->error . " " .$approve_model->error );
           }
@@ -51,7 +55,6 @@ class Waitinglist extends BaseController
             if($request->isAjax()) return json_error($e->getMessage());
             throw $e;
         }
-
 
     }
     function postReject($request){

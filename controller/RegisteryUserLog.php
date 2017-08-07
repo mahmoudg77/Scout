@@ -1,7 +1,7 @@
 <?
 namespace App\Controllers;
 
-class RegisteryUser extends BaseController
+class RegisteryUserLog extends BaseController
 {
     protected  $model="App\Models\Admin\RegisteryUserLog";
     protected $authRequired=true;

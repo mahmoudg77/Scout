@@ -67,14 +67,13 @@
 			document.getElementById('table').innerHTML+=
 			`<tr>
                 <th scope="row">`+counter+`</th>
-                <td><input type="number" class="form-control tdinput" name="NationalID[]"  required></td>
+                <td><input type="hidden" name="profileid[]" /> <input type="number" class ="form-control tdinput" name="NationalID[]"  required></td>
 			    <td class="name">
 			    </td>
 			    <td class="birthdate">
 			    </td>
 		    <td>
 			    <div class="input-group">
-				    <span class="input-group-addon "><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i><i class="fa fa-square-o fa-lg" aria-hidden="true"></i></span>
 				    <button type="button" class="btn btn-success btn-getin">Get IN</button>
 			    </div>
 		    </td>

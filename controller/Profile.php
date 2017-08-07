@@ -107,10 +107,12 @@ class Profile extends BaseController
                             }
                         }
                     }
+
                     if(isset($request->post['secondphone'])){
                         $contact->contactTypeId=3;
                         $contact->userId=$Profile->Profile_ID;
                         $contact->contactValue=$request->post['secondphone'];
+
                         if(!$contact->insert()) {
                             if($request->isAjax()){
                                 return json_error($contact->error);
@@ -121,14 +123,16 @@ class Profile extends BaseController
                         }
                     }
 
-                    if(isset($request->files['proImg'])){
+                    
+                     if(isset($request->files['proImg']['filename'])){
                         $image=new App\Models\Media\Images($Profile,"Personal",$request->files['proImg']);
                         $image->upload();
 
                     }
-                    if(isset($request->files['coverImg'])){
+                     if(isset($request->files['coverImg']['filename'])){
                         $image=new App\Models\Media\Images($Profile,"Cover",$request->files['coverImg']);
                         $image->upload();
+
                     }
 
                     if($request->isAjax()){
