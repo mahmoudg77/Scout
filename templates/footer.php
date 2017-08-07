@@ -56,6 +56,7 @@
 		<script src="<?=assets('js/bootstrap.min.js')?>"></script>
 		<!-- Slitslider -->
 		<script src="<?=assets('js/jquery.slitslider.js')?>"></script>
+		
 		<script src="<?=assets('js/jquery.ba-cond.min.js')?>"></script>
 		<!-- Parallax -->
 		<script src="<?=assets('js/jquery.parallax-1.1.3.js')?>"></script>
@@ -89,6 +90,7 @@
 		<!--<script src="<?=assets('js/grid.js')?>"></script>-->
 		<!-- Custom js -->
 		<script src="<?=assets('js/custom.js')?>"></script>
+		<script src="<?=assets('js/.js')?>"></script>
 		<!-- Ajax Form-->
 		<script src="http://malsup.github.com/jquery.form.js"></script>
 <script>
