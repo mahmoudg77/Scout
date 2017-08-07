@@ -46,11 +46,11 @@ class Images extends BLL{
 
         $arr=upload_image($this->img,"uploads/{$model_name}/{$this->data['model_id']}/{$this->tag}");
 
-        if(array_key_exists($arr,'error')) throw new \Exciption( $arr['error']);
+        if(array_key_exists($arr,'error')) throw new \Exception( $arr['error']);
 
         $this->file_name=$arr['filename'];
-
-        if(!$this->supperUser()->insert()) throw new \Exciption( $arr['error']);
+         
+        if(!$this->supperUser()->insert()) throw new \Exception( $this->error);
 
         return true;
     }

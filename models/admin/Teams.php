@@ -28,5 +28,21 @@ class Teams extends BLL{
 			}
 			return $fullName;
 		}
+
+		function getNewSerial($parentid){
+			$parent=\App\Models\Admin\Teams::find($parentid);
+      if($parent->id>0){
+          $last=$parent->where('parentId',$parentid)->withDeleted()->orderBy("serial","desc")->limit(1)->get();
+					if($parent->level_type<3)
+							$length=2;
+					else
+							$length=2;
+
+					return $parent->serial.str_pad(intval($last->serial)+1, $length, "0", STR_PAD_LEFT);
+      }
+
+		}
+
+
 }
 ?>

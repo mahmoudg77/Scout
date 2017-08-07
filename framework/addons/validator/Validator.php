@@ -49,6 +49,7 @@ class Validator {
 
     function CheckStrings($value, $key)
     {
+        if(empty($value)) return true;
         //$pattern="/^[a-zA-Z\p{Cyrillic}0-9\s\-\.]+$/u";
         $validate = $this->is_clean($value);//preg_match($pattern, $value);
         if ($validate)
@@ -62,6 +63,7 @@ class Validator {
 
     function CheckGuid($value, $key)
     {
+        if(empty($value)) return true;
         $pattern="/^([0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12})$/";
         $validate = preg_match($pattern, $value);
         if ($validate)
@@ -75,6 +77,7 @@ class Validator {
 
     function CheckEmail($value, $key)
     {
+        if(empty($value)) return true;
         $validate = filter_var($value, FILTER_VALIDATE_EMAIL);
         if ($validate)
         {
@@ -87,6 +90,7 @@ class Validator {
 
     function CheckURL($value, $key)
     {
+        if(empty($value)) return true;
         $validate = filter_var($value, FILTER_VALIDATE_URL);
         if ($validate == FALSE)
             throw new Exception("!Error: the $key must be a valid URL");
@@ -96,6 +100,7 @@ class Validator {
 
     function CheckIP($value, $key)
     {
+        if(empty($value)) return true;
         $validate = filter_var($value, FILTER_VALIDATE_IP);
         if ($validate == FALSE)
             throw new Exception("!Error: the $key must be a valid IP");
@@ -105,9 +110,10 @@ class Validator {
 
     function CheckInteger($value, $key)
     {
+        if(empty($value)) return true;
         $validate = filter_var($value, FILTER_VALIDATE_INT);
         if ($validate == FALSE)
-            throw new Exception("!Error: the $key must be a valid INT : $value");
+            throw new Exception("!Error: the $key must be a valid INT");
 
         return $validate;
     }
@@ -116,7 +122,7 @@ class Validator {
     {
         $validate = ! empty($value);
         if ($validate == FALSE)
-            throw new Exception("!Error: the $key is required:".$value);
+            throw new Exception("!Error: the $key is required:");
 
         return $validate;
     }
@@ -124,18 +130,38 @@ class Validator {
     {
         $validate = ! empty($value);
         if ($validate == FALSE)
-            throw new Exception("!Error: the $key is required:".$value);
+            throw new Exception("!Error: the $key is required:");
 
         return $validate;
     }
-    //  function CheckRequired($value, $key)
-    // {
-    //     $validate = ! empty($value);
-    //     if ($validate == FALSE)
-    //         throw new Exception("!Error: the $key is required:".$value);
-    //
-    //     return $validate;
-    // }
+
+    function CheckDate($value, $key)
+    {
+
+        //if(empty($value)) return true;
+        try
+        {
+        	 $t = strtotime($value);
+        }
+        catch (Exception $exception)
+        {
+            throw new Exception("!Error: the $key must be Date");
+        }
+
+        if(empty($t))
+            throw new Exception("!Error: the $key must be Date");
+        
+        $m = date('m',$t);
+        $d = date('d',$t);
+        $y = date('Y',$t);
+
+        $validate=checkdate ($m, $d, $y);
+
+        if ($validate == FALSE)
+            throw new Exception("!Error: the $key must be Date");
+
+        return $validate;
+     }
 
     function SanitizeItem($value, $key)
     {

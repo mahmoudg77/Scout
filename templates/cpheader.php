@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html>
+<head>
 <meta charset="utf-8">
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 
@@ -20,39 +23,93 @@
   <link rel="stylesheet" href="<?=assets('dist/css/skins/_all-skins.min.css')?>">
   <link rel="stylesheet" href="<?=assets('css/iziToast.min.css')?>">
   <link rel="stylesheet" href="<?=assets('css/TeamsReg.css')?>">
-  <style>
-  #part1 {
-  	border: 1px solid #d9d9d9;
-  	border-radius: 10px;
-  	background: #e6e6e6;
-  	padding: 5px 0;
-  	width: 45%;
-  	float: left;
-  	margin: 0 18px;
-  	padding-bottom: 30px
-  }
-  #part2 {
-  	border: 1px solid #d9d9d9;
-  	border-radius: 10px;
-  	background: #e6e6e6;
-  	padding: 5px 0;
-  	width: 45%;
-  	float: left;
-  }
-  .tdinput {
-  	width: 80%;
-  }
-  #approveFom {
-  	background: #f2f2f2;
-  	border: 1px solid #e6e6e6;
-  	width: 45%;
-  	padding: 15px 12px;
-  	border-radius: 20px;
-  	text-align: center;
-  }
-  </style>
+
+   
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
+<!-- jQuery 3 -->
+<script src="<?=assets('bower_components/jquery/dist/jquery.min.js')?>"></script>
+<script src="<?=assets('js/jquery-1.12.4.js')?>"></script>
+
+    <script>
+	var counter =13;
+	var counterFee=120;
+	function checkDate(value,name){
+		var date1 = new Date(value);
+        var date2 = new Date(String((x.getMonth()+1)+"/"+x.getDate()+"/"+x.getFullYear()));
+        var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24))/365;
+		if(document.getElementById("category").value==1 && diffDays>7 ){
+			alert("هذا الشخص لم يعد فى مرحلة البراعم ");
+			document.getElementById(name).value="yyyy-mm-dd";
+		}
+		else if(document.getElementById("category").value==2 && (diffDays<7 || diffDays>11) ){
+			alert("هذا الشخص لم يعد/ يصل فى مرحلة الأشبال ");
+			document.getElementById(name).value="yyyy-mm-dd";
+		}
+		else if(document.getElementById("category").value==3 &&  (diffDays<11 || diffDays>14) ){
+			alert("هذا الشخص لم يعد/ يصل فى مرحلة الكشافة ");
+			document.getElementById(name).value="yyyy-mm-dd";
+		}
+		else if(document.getElementById("category").value==4 &&  (diffDays<14 || diffDays>17) ){
+			alert("هذا الشخص لم يعد/ يصل فى مرحلة الكشاف المتقدم ");
+			document.getElementById(name).value="yyyy-mm-dd";
+		}
+		else if(document.getElementById("category").value==5 && diffDays<17 ){
+			alert("هذا الشخص لم يصل فى مرحلة الجوالة ");
+			document.getElementById(name).value="yyyy-mm-dd";
+		}
+
+	}
+	function asd(){
+		if(counter<=24){
+			document.getElementById('table').innerHTML+=
+			`<tr>
+                <th scope="row">`+counter+`</th>
+                <td><input type="number" class="form-control tdinput" name="NationalID[]"  required></td>
+			    <td class="name">
+			    </td>
+			    <td class="birthdate">
+			    </td>
+		    <td>
+			    <div class="input-group">
+				    <span class="input-group-addon "><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i><i class="fa fa-square-o fa-lg" aria-hidden="true"></i></span>
+				    <button type="button" class="btn btn-success btn-getin">Get IN</button>
+			    </div>
+		    </td>
+         </tr>`
+		counter++;
+
+		document.getElementById('Money').innerHTML=((counter-1)*10);
+		}else{
+			alert("هذا هو اقصى عدد مسموح للفريق");
+		}
+	}
+	var elementToD;
+	function Removemember(){
+		if(counter>13){
+			document.getElementById("table").deleteRow(counter-2);
+			--counter;
+			document.getElementById('Money').innerHTML=((counter-1)*10);
+		}
+
+	  }
+	function Ajxify(){
+		xmlhttp= new XMLHttpRequest();
+		xmlhttp.onreadystatechange= function(){
+			if(xmlhttp.readyState == 4 &&xmlhttp.status == 200){
+				document.getElementById('RUsers').innerHTML=xmlhttp.responseText;
+			}
+		}
+		xmlhttp.open('GET','starter.php',true);
+		xmlhttp.send();
+	}
+
+
+    </script>
+
+
 <div class="wrapper">
 
   <header class="main-header">

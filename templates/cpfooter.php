@@ -45,9 +45,6 @@
 </div>
 <!-- ./wrapper -->
 
-<!-- jQuery 3 -->
-<script src="<?=assets('bower_components/jquery/dist/jquery.min.js')?>"></script>
-<script src="<?=assets('js/jquery-1.12.4.js')?>"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<?=assets('bower_components/bootstrap/dist/js/bootstrap.min.js')?>"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -66,7 +63,7 @@
 <script src="<?=assets('js/jquery.dataTables.min.js')?>"></script>
 <script src="<?=assets('js/iziToast.min.js')?>"></script>
 
-  <script src="http://malsup.github.com/jquery.form.js"></script>
+  <script src="<?=assets('js/jquery.form.js')?>"></script>
 <!-- Page specific script -->
 
 <script>
@@ -143,7 +140,7 @@ $("body").on("click",".open-modal",function(e){
                                          color: 'green', // blue, red, green, yellow
                                          position: 'topCenter',
                                      });
-                                      $("#formModel").modal("toggel");
+                                      $("#formModel").modal("toggle");
 
                                     }else{
                                       iziToast.show({
