@@ -1,6 +1,7 @@
 <?include(PATH.'templates/navHeader.php');?>
 <div class=" text-center">
-	<h1 class="Ename">Event Name</h1>
+	<h1 class="Ename" >Event Name</h1>
+	<a href="#" title="Attend"><i class="fa fa-star-o fa-4x" aria-hidden="true"></i></a>
 </div>
 <div class="container">
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -115,10 +116,11 @@
 	</div>
 </div>
 <div id="right-sidebar" class="col-md-4 col-sm-4">
+	<h2>FeedBack</h2>
 	<!-- Single Widget -->
 	<aside class="widget wow fadeInDown">
 		<div class="widget-title">
-			<h3>Text FeedBack</h3>
+			<h5>User K</h5>
 		</div>
 		<div class="widget-content">
 			<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus ducimus in dolorum accusantium voluptate nostrum, excepturi dolores voluptatem vel rerum at, recusandae inventore nobis ex eveniet sunt eligendi, qui provident.</span>
