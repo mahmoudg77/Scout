@@ -2,6 +2,7 @@
 
       <form action="<?=actionLink('edit')?>" method="post" class="ajax-form">
        <?=Framework\Request::CSRF()?>
+       	<input type="hidden" value="<?=$data->id?>" name="<?=$data->col_pk?>"/>
         <table class="table" >
             <?foreach($data->fields as $key=>$field){
                 if($field['visible']){?>

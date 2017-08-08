@@ -24,7 +24,7 @@
 
 <?foreach($data as $key=>$row){
     ?><tr>
-        <td><img style="width:100px;" src="<?=$row->CoverImage->thumb?>"/></td>
+        <td><img style="width:100px;" src="<?=$row->PersonalImage->thumb?>"/></td>
          <td><?=$row->name?></td>
         <td><?=$row->DrawField('Hobbies')?></td>
         <td><?=$row->Birth_Date?></td>

@@ -1,4 +1,4 @@
-<?if(!$request->isAjax())include(PATH.'templates/AdminHeader.php');?>
+<?if(!$request->isAjax())include(PATH.'templates/cpheader.php');?>
 
     <!-- Main content -->
     <section class="container-fluid" name="sec1">

@@ -139,7 +139,7 @@
                         <div class="col-sm-5">
 
                         <div class="input-group">
-  							<select class="form-control" id="hobbies" name="hobbiesList" required>
+  							<select class="form-control" id="hobbies" name="hobbiesList">
                             <?
                             $hobbs= new App\Models\Lookup\Hobbies;
                             foreach($hobbs->supperUser()->get() as $item){
@@ -215,7 +215,7 @@
                         <div class="col-sm-5">
 
                             <div class="input-group">
-  								<select class="form-control" id="campaines" name="campainList" required>
+  								<select class="form-control" id="campaines" name="campainList">
  							<?
                             	$Comp= new App\Models\Profile\Comp;
                             	foreach($Comp->supperUser()->get() as $item){
@@ -251,7 +251,7 @@
                         <div class="col-sm-5">
 
                             <div class="input-group">
-  								 <select class="form-control" id="trains" name="trainList" required>
+  								 <select class="form-control" id="trains" name="trainList">
 							<?
                             	$Studies= new App\Models\Lookup\Studies;
                             	foreach($Studies->supperUser()->get() as $item){
@@ -286,7 +286,7 @@
                         <div class="col-sm-5">
 
                              <div class="input-group">
-  								<select class="form-control" id="experiences" name="experienceList" required>
+  			  <select class="form-control" id="experiences" name="experienceList">
               				<?
                             	$Experiences= new App\Models\Lookup\Experiences;
                             	foreach($Experiences->supperUser()->get() as $item){

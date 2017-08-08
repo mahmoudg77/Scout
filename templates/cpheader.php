@@ -47,23 +47,27 @@
         
 		if(document.getElementById("category").value==1 && diffDays>7 ){
 			alert("هذا الشخص لم يعد فى مرحلة البراعم ");
+			document.getElementById(name).value="";
 			return false;
 		}
 		else if(document.getElementById("category").value==2 && (diffDays<7 || diffDays>11) ){
 			alert("هذا الشخص لم يعد/ يصل فى مرحلة الأشبال ");
+			document.getElementById(name).value="";
 			return false;
 		}
 		else if(document.getElementById("category").value==3 &&  (diffDays<11 || diffDays>14) ){
 			alert("هذا الشخص لم يعد/ يصل فى مرحلة الكشافة ");
+			document.getElementById(name).value="";
 			return false;
 		}
 		else if(document.getElementById("category").value==4 &&  (diffDays<14 || diffDays>17) ){
 			alert("هذا الشخص لم يعد/ يصل فى مرحلة الكشاف المتقدم ");
+			document.getElementById(name).value="";
 			return false;
 		}
 		else if(document.getElementById("category").value==5 && diffDays<17 ){
 			alert("هذا الشخص لم يصل فى مرحلة الجوالة ");
-		    //document.getElementById(name).value="yyyy-mm-dd";
+		    document.getElementById(name).value="";
 			return false;
 		}
 		return true;

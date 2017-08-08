@@ -107,6 +107,7 @@ class BaseController{
             if($field['type']!='One2many' && $field['type']!='Many2many')
                 $data->data[$key]=$request->post[$key];
           }
+          //print_r($data);
           if(!$data->update()){
                     if($request->isAjax()) return json_error($data->error);
                     throw new \Exception($data->error);

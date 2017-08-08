@@ -15,20 +15,20 @@ class Profile extends BaseController
         $NathionalID=$request->get['NationalID'];
 
         //print_r($request);
-        //echo($NathionalID);
+      
         if(isset($id) && intval($id)>0){
             $Profile=App\Models\Profile\Profile::find($id);
         }
         elseif(isset($NathionalID)  && intval($NathionalID)>0){
             $Profile=new App\Models\Profile\Profile;
-            $Profile= $Profile->where('National_Number',$NathionalID)->get();
+            $Profile= $Profile->where('National_Number',$NathionalID)->supperUser()->get();
             $Profile=$Profile[0];
         }
         if(intval($Profile->Profile_ID)==0){
             $Profile=new App\Models\Profile\Profile;
             $Profile->National_Number=$NathionalID;
         }
-        //print_r($Profile);
+      //print_r($Profile);
         return $this->view(compact('Profile'));
     }
 

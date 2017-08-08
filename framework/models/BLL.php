@@ -911,7 +911,7 @@ trait ApprovelModel {
         $approve_request->model_id=$this->id;
         $approve_request->is_done=-1;
 
-        if(!$approve_request->insert()){
+        if(!$approve_request->supperUser()->insert()){
             $this->error=$approve_request->error;
             return false;
         }
