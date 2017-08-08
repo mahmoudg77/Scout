@@ -1,30 +1,28 @@
 <?if(!$request->isAjax())include(PATH.'templates/cpheader.php');?>
 
- <?if(!is_array($data)){$data=[$data];}?>
- <?foreach($data as $group){?>
      <form action="<?=actionLink('edit')?>" method="post" class="ajax-form">
-         <?=App\Request::CSRF()?>
+         <?=Framework\Request::CSRF()?>
         <table class="table" > 
-        	 <tr><td>Group :</td><td><?$group->DrawField("groupid")?></td></tr>
+        	 <tr><td>Group :</td><td><?$data->DrawField("groupid")?></td></tr>
          <tr><td>Model :</td><td>
-             <select name="model" class="form-control">
-                 <?foreach(App\Models::all() as $model){?>
-                    <option value="<?=$model->name?>" <?if($model->name==$group->model){?>selected<?}?>><?=$model->name?></option>
+            <select name="model" class="form-control">
+                 
+                 <?foreach(Framework\Models::all() as $model){?>
+                    <option value="<?=$model->id?>" <?if($model->id==$data->model_name){?>selected<?}?>><?=$model->name?></option>
                  <?}?>
              </select>
             
              </td></tr>
-        	 <tr><td>Type :</td><td><?$group->DrawField("accesstype")?></td></tr>
+        	 <tr><td>Type :</td><td><?$data->DrawField("accesstype")?></td></tr>
          <tr><td>Filter :</td><td> 
-        	<?=$group->DrawField("filter")?>
+        	<?=$data->DrawField("filter")?>
 	 </td></tr>
             
             <tr><td></td><td>
-                <input type="hidden" name="id" value="<?=$group->id?>"/>
+                <input type="hidden" name="id" value="<?=$data->id?>"/>
                 
             <input class="btn btn-success" type="submit" value="Save"/></td></tr>
         </table>
      </form>
- <?}?>
 
 <?if(!$request->isAjax())include(PATH.'templates/cpfooter.php');?>

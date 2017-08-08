@@ -11,13 +11,13 @@
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-address-card" aria-hidden="true"></i></span>
                         <input type="hidden" id="leader_profileid" name="leader_profileid"/>
-						<input id="leaderNId" type="text" class="form-control" name="leaderNId" placeholder="Leader NationalID" >
+						<input id="leaderNId" type="text" class="form-control" name="leaderNId" placeholder="Leader NationalID" required>
                         <span class="input-group-addon btn-getin"><a href=""><i class="fa fa-address-card " aria-hidden="true"></i></a></span>
                     </div>
 					<div class="input-group ">
 						<span class="input-group-addon"><i class="fa fa-address-card-o" aria-hidden="true"></i></span>
                         <input type="hidden" id="assist_profileid" name="assist_profileid" />
-						<input id="leaderAssistNId" type="text" class="form-control" name="leaderAssistNId" placeholder="Leader Assist National ID">
+						<input id="leaderAssistNId" type="text" class="form-control" name="leaderAssistNId" placeholder="Leader Assist National ID" required>
                         <span class="input-group-addon btn-getin"><a href=""><i class="fa fa-address-card" aria-hidden="true"></i></a></span>
                     </div>
                 </div>
@@ -37,8 +37,8 @@
 					<div class="input-group  ">
 						<span class="input-group-addon"><i class="fa fa-id-card" aria-hidden="true"></i></span>
 						<input id="teamName" type="text" class="form-control" name="teamName" placeholder="Team name">
-						<span class="input-group-addon">
-							<select name="category" id="category">
+						<span class="input-group-addon" >
+							<select name="category" id="category" required>
                                 <?$levels=new App\Models\Lookup\Levels;
                                   foreach($levels->supperUser()->get() as $item){?>
                                 <option value="<?=$item->id?>"><?=$item->name?></option>
@@ -48,7 +48,7 @@
            </div>
 					<div class="input-group ">
 						<span class="input-group-addon"><i aria-hidden="true">Country</i></span>
-						<select id="country"  type="text" class="form-control teams-tree" name="country" data-childs="#organization">
+						<select id="country"  type="text" class="form-control teams-tree" name="country" data-childs="#organization" required>
 							<option value="" selected>أختر البلد</option>
 							<?
                             $country= new App\Models\Admin\Teams;
@@ -64,19 +64,19 @@
 
 					<div class="input-group">
 						<span class="input-group-addon"><i aria-hidden="true">Organization</i></span>
-						<select id="organization" type="text" class="form-control teams-tree" name="organization"  data-childs="#branch">
+						<select id="organization" type="text" class="form-control teams-tree" name="organization"  data-childs="#branch" required>
 							<option value="">يجب اختيار البلد اولا</option>
 						</select>
     </div>
 					<div class="input-group">
 						<span class="input-group-addon"><i aria-hidden="true">Branch</i></span>
-						<select id="branch" type="text" class="form-control teams-tree" name="branch"   data-childs="#office">
+						<select id="branch" type="text" class="form-control teams-tree" name="branch"   data-childs="#office" required>
 							<option value="">يجب اختيار الجمعية اولا</option>
 						</select>
                         </div>
 					<div class="input-group">
 						<span class="input-group-addon"><i aria-hidden="true">Office</i></span>
-						<select id="office" type="text" class="form-control" name="office"  >
+						<select id="office" type="text" class="form-control" name="office"  required >
 							<option value="">يجب اختيار الفرع اولا</option>
 						</select>
                     </div>
@@ -103,7 +103,7 @@
                                 </tr>
                             </thead>
                             <tbody id="table">
-                                <?for($i=1;$i<=2;$i++){?>
+                                <?for($i=1;$i<=12;$i++){?>
                                 <tr>
                                     <th scope="row"><?=$i?></th>
                                     <td><input type="hidden" name="profileid[]" />
@@ -208,7 +208,7 @@
 
           $("body").on("change", '#leaderNId', function () {
               var select = $(this);
-             
+
               if (select.val() == "") {
                       $('#leader').val("");
                       $('#leader_profileid').val(0);
@@ -216,9 +216,9 @@
                        select.closest(".input-group").find('.btn-getin').removeClass('btn-viewin');
                       return false;
                }
-             
+
               if (!isExistsNID(select)) return false;
-              
+
               getProfile({
                   element: select,
                   success: function (data) {
@@ -229,9 +229,23 @@
                               select.closest(".input-group").find('.btn-getin').data("id", data.result.Profile_ID);
                               select.closest(".input-group").find('.btn-getin').addClass("btn-viewin").removeClass('btn-getin');
                           } else {
-                              $("#BoyScout .modal-body").html("<center><h2>L o a d i n g . . .</h2><img style='width:200px' src='<?=assets("img/loader 2.gif")?>' /></center>");
-                              $("#BoyScout .modal-body").load("<?=actionLink("form","Profile")?>?NationalID=" + select.val(), function () {
-                                  $("#BoyScout").modal();
+                              ////$("#BoyScout .modal-body").html("<center><h2>L o a d i n g . . .</h2><img style='width:200px' src='<?=assets("img/loader 2.gif")?>' /></center>");
+                              ////$("#BoyScout .modal-body").load("<?=actionLink("form","Profile")?>?NationalID=" + select.val(), function () {
+                              //    $("#BoyScout").modal();
+
+                              //});
+                              addNewProfile({
+                                  nid: select.val(),
+                                  success: function (data) {
+                                      if (data.type == "success") {
+                                          select.val(data.result.National_Number);
+                                          select.change();
+                                      }
+                                  },
+                                  error: function (data) {
+                                      select.val("");
+                                      select.change();
+                                  }
                               });
                           }
                     }
@@ -259,16 +273,27 @@
                   success: function (data) {
                       if (data.type == "success") {
                           if (data.result) {
+                              
                               $('#assist_profileid').val(data.result.Profile_ID);
                               $('#leaderAssist').val(data.result.First_Name + " " + data.result.Second_Name + " " + data.result.Third_Name + " " + data.result.Forth_Name);
                               select.closest(".input-group").find('.btn-getin').data("id", data.result.Profile_ID);
                               select.closest(".input-group").find('.btn-getin').addClass("btn-viewin");
                               select.closest(".input-group").find('.btn-getin').removeClass('btn-getin');
                           } else {
-                              $("#BoyScout .modal-body").html("<center><h2>L o a d i n g . . .</h2><img style='width:200px' src='<?=assets("img/loader 2.gif")?>' /></center>");
-                              $("#BoyScout .modal-body").load("<?=actionLink("form","Profile")?>?NationalID=" + select.val(), function () {
-                                  $("#BoyScout").modal();
+
+                              addNewProfile({
+                                  nid: select.val(),
+                                  success: function (data) {
+                                      if(data.type=="success"){
+                                          select.val(data.result.National_Number);
+                                          select.change();
+                                        }
+                                  }
                               });
+                              ////$("#BoyScout .modal-body").html("<center><h2>L o a d i n g . . .</h2><img style='width:200px' src='<?=assets("img/loader 2.gif")?>' /></center>");
+                              ////$("#BoyScout .modal-body").load("<?=actionLink("form","Profile")?>?NationalID=" + select.val(), function () {
+                              //    $("#BoyScout").modal();
+                              //});
                           }
                     }
                   },
@@ -279,9 +304,9 @@
           });
 
           function isExistsNID(element) {
-              
+
                   //console.log(select.val());
-                 
+
 
                   var found = 0;
                   //$.each([ 52, 97 ], function( index, value ) {
@@ -303,7 +328,7 @@
                       return false;
                   }
                   return true;
-              
+
           }
           $("body").on("change", 'input[name^="NationalID"]', function () {
               var select = $(this);
@@ -323,11 +348,12 @@
                       }
 
                       return isExistsNID(select);
-                      
+
                   },
                   success: function (data) {
                       if (data.type == "success") {
                           if (data.result) {
+                              if (!checkDate(data.result.Birth_Date)) return false;
                               select.closest("tr").find('input[name^="profileid"]').val(data.result.Profile_ID);
                               select.closest("tr").find('.birthdate').html(data.result.Birth_Date);
                               select.closest("tr").find('.name').html(data.result.First_Name + " " + data.result.Second_Name + " " + data.result.Third_Name + " " + data.result.Forth_Name);
@@ -335,11 +361,23 @@
                               select.closest("tr").find('.btn-getin').addClass("btn-viewin");
                               select.closest("tr").find('.btn-getin').removeClass('btn-getin');
                           } else {
-                              $("#BoyScout .modal-body").html("<center><h2>L o a d i n g . . .</h2><img style='width:200px' src='<?=assets("img/loader 2.gif")?>' /></center>");
-                              $("#BoyScout .modal-body").load("<?=actionLink("form","Profile")?>?NationalID=" + select.val(), function () {
-                                  $("#BoyScout").modal();
+                              ////$("#BoyScout .modal-body").html("<center><h2>L o a d i n g . . .</h2><img style='width:200px' src='<?=assets("img/loader 2.gif")?>' /></center>");
+                              ////$("#BoyScout .modal-body").load("<?=actionLink("form","Profile")?>?NationalID=" + select.val(), function () {
+                              //    $("#BoyScout").modal();
+                              //});
+                              addNewProfile({
+                                  nid: select.val(),
+                                  success: function (data) {
+                                      if (data.type == "success") {
+                                          select.val(data.result.National_Number);
+                                          select.change();
+                                      }
+                                  },
+                                  error: function (data) {
+                                      select.val("");
+                                      select.change();
+                                  }
                               });
-
                           }
                     }
                   },
@@ -348,7 +386,7 @@
                     }
               });
           });
-           
+
           $(".tdinput").keypress(function (e) {
               if (e.which == 13) {
                   return false;
@@ -357,9 +395,13 @@
 
           function addNewProfile(obj) {
                 $("#BoyScout .modal-body").html("<center><h2>L o a d i n g . . .</h2><img style='width:200px' src='<?=assets("img/loader 2.gif")?>' /></center>");
-                $("#BoyScout .modal-body").load("<?=actionLink("form","Profile")?>/" + obj.id, function () {
+              $("#BoyScout .modal-body").load("<?=actionLink("form","Profile")?>?NationalID=" + obj.nid, function () {
                 $("#BoyScout").modal();
-                
+
+                $('#BoyScout input[type="date"]').datepicker({
+                    format: "yyyy-mm-dd",
+                    language: "ar"
+                });
                 console.log($("#BoyScout .modal-body .ajax-form"));
                 $("#BoyScout .modal-body .ajax-form").ajaxForm({
                     dataType: 'json',
@@ -372,6 +414,7 @@
                                 color: 'green', // blue, red, green, yellow
                                 position: 'topCenter',
                             });
+                            $("#BoyScout").modal("toggle");
                         } else {
                             iziToast.show({
                                 title: 'Error',
@@ -383,17 +426,17 @@
                         }
                     },
                     error: function (data, status, xhr) {
-                        if ('error' in obj)  
+                        if ('error' in obj)
                             obj.error(data, status, xhr);
-                         
+
                             iziToast.show({
                                 title: 'Error',
                                 message: data.status + " " + xhr,
                                 color: 'red', // blue, red, green, yellow
                                 position: 'topCenter',
                             });
-                        
-                         
+
+
                     }
                 });
 
@@ -404,6 +447,7 @@
               $("#BoyScout .modal-body").html("<center><h2>L o a d i n g . . .</h2><img style='width:200px' src='<?=assets("img/loader 2.gif")?>' /></center>");
               $("#BoyScout .modal-body").load("<?=actionLink("form","Profile")?>/" + id, function () {
                   $("#BoyScout").modal();
+                 
               });
           }
           $("body").on("click", ".btn-viewin", function (e) {
@@ -415,9 +459,9 @@
           $("body").on("click", ".btn-getin", function (e) {
               e.preventDefault();
               var btn = $(this);
-             
+
               addNewProfile({
-                  id: btn.data("id"),
+                  nid: btn.data("id"),
                   success: function(data) {
                       if (data.type == "success") {
                           $("#BoyScout").modal("toggle");
@@ -429,7 +473,7 @@
                   }
               });
         });
-        
+
       });
 </script>
 

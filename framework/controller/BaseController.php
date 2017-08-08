@@ -332,7 +332,7 @@ class BaseController{
           $view="BaseController/$method";
         }
 
-        return view($view,$arr);
+         echo view($view,$arr);
 
 
 

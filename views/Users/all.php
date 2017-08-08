@@ -8,34 +8,40 @@
 </div>
 
 
-<table class="table data-table"><thead><tr>
-   <th>Personal Photo</th>
-
-   <th>Name</th>
-    <th>Hobbies</th>
-   <th>Date Of Birth</th>
-
-   <th>View</th>
-   <th>Edit</th>
-   <th>Delete</th>
-   </tr></thead>
-
+<table class="table data-table">
+<thead>
+    <tr>
+        <th>Profile</th>
+        <th>Groups</th>
+        <th>Name</th>
+        <th>Email/Username</th>
+        <th>View</th>
+        <th>Edit</th>
+       
+        <th>Delete</th>
+    </tr>
+</thead>
 
 
 <?foreach($data as $key=>$row){
     ?><tr>
-        <td><img style="width:100px;" src="<?=$row->CoverImage->thumb?>"/></td>
-         <td><?=$row->name?></td>
-        <td><?=$row->DrawField('Hobbies')?></td>
-        <td><?=$row->Birth_Date?></td>
+        <td><?$row->DrawField('accid')?></td>
+          <td>
+              <?$row->DrawField('groups')?>
+          </td>
+          <td>
+              <?$row->DrawField('name')?>
+          </td>
+          <td>
+              <?$row->DrawField('email')?>
+          </td>
           <td>
               <a class="btn btn-primary open-modal" href="<?=actionLink('item','',['id'=>$row->{$row->col_pk}])?>">View</a>
-
           </td>
         <td>
             <a class="btn btn-default open-modal"  href="<?=actionLink('edit','',['id'=>$row->{$row->col_pk}])?>">Edit</a>
-
         </td>
+        
          <td>
         <?if(!$row->is_deleted){?>
            <form action="<?=actionLink('delete')?>" method="post" class="ajax-form">
@@ -68,4 +74,5 @@
 
 ?>
 </table>
+
 <?if(!$request->isAjax())include(PATH.'templates/cpfooter.php');?>

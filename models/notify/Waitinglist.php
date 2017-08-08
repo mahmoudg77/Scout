@@ -16,7 +16,7 @@ class Waitinglist extends BLL{
             'name'=>'Requested By',
             'type'=>'Many2one',
             'serialize'=>true,
-            'relation'=>['class'=>'App\Models\Profile\Profile','classid'=>'Profile_ID','controller'=>'Profile']],
+            'relation'=>['class'=>'App\Models\Auth\User','classid'=>'id','controller'=>'Users']],
         //'model_name'=>[
         //    'name'=>'Model Name',
         //    'type'=>'Many2one',
@@ -31,7 +31,7 @@ class Waitinglist extends BLL{
 
 	function __set($key,$value){
         parent::__set($key,$value);
-      if($key!="model_name") return;
+        if($key!="model_name") return;
 
         if($this->model_name=="") return;
 

@@ -13,12 +13,12 @@ class UserGroupRel extends BLL{
 	            'default'=>'2',
 	            'type'=>'Many2one',
 	            'serialize'=>true,
-	            'relation'=>['class'=>"App\Models\Auth\UserGroup",'classid'=>'id','controller'=>'auth.UserGroup']],
+	            'relation'=>['class'=>"App\Models\Auth\UserGroup",'classid'=>'id','controller'=>'UserGroup']],
 	   'userid'=>['name'=>'User',
 	            'default'=>'2',
 	            'type'=>'Many2one',
 	            'serialize'=>true,
-	            'relation'=>['class'=>"App\Models\Auth\User",'classid'=>'id','controller'=>'auth.Users']],
+	            'relation'=>['class'=>"App\Models\Auth\User",'classid'=>'id','controller'=>'Users']],
 
 	    ];
 

@@ -13,7 +13,7 @@ class GroupCategory extends BLL{
 	            'default'=>'2',
 	            'type'=>'One2many',
 	            'serialize'=>true,
-	            'relation'=>['class'=>"App\Models\Auth\UserGroup",'classid'=>'categoryid','controller'=>'auth.UserGroup']],
+	            'relation'=>['class'=>"App\Models\Auth\UserGroup",'classid'=>'categoryid','controller'=>'UserGroup']],
 
 	    ];
 

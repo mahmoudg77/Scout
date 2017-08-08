@@ -878,16 +878,27 @@ trait ApprovelModel {
      function approve() {
          global $context;
          $this->approval_by=intval($context->user->id);
-			 $this->approval_request=1;
-			 $this->approval_at=Date("Y-m-d H:i:s");
-			 return $this->update();
+		 $this->approval_request=1;
+		 $this->approval_at=Date("Y-m-d H:i:s");
+
+		 if($this->update()){
+            return  $this->onApproved();
+         }else{
+             return false;
+         }
+         return true;
     }
 	function reject() {
         global $context;
 		$this->approval_by=intval($context->user->id);
 		$this->approval_request=0;
 		$this->approval_at=Date("Y-m-d H:i:s");
-		return $this->update();
+        if($this->update()){
+            return $this->onRejected();
+        }else{
+            return false;
+        }
+        return true;
     }
     function insert() {
         global $context;
@@ -906,6 +917,9 @@ trait ApprovelModel {
         }
         return true;
     }
+
+    function onApproved(){return true;}
+    function onRejected(){return true;}
 }
 
 

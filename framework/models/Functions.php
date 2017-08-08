@@ -349,7 +349,7 @@ function view($view,$arr=[]){
         $content = ob_get_contents();
         ob_end_clean();
 
-        echo $content;
+        return $content;
 
     }
 
