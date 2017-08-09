@@ -13,11 +13,11 @@ class AccessRight extends BLL{
 	            'compute'=>'',
 	            'type'=>'Many2one',
 	            'serialize'=>true,
-	            'relation'=>['class'=>"App\Models\Auth\UserGroup",'classid'=>'id','controller'=>'auth.UserGroup']],
+	            'relation'=>['class'=>"App\Models\Auth\UserGroup",'classid'=>'id','controller'=>'UserGroup']],
 	    ];
 
 	 function name(){
-	     return $this->model." ( ".$this->accesstype." )";
+	     return $this->model_name." ( ".$this->accesstype." )";
 	 }
 
 

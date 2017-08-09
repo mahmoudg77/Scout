@@ -35,7 +35,7 @@
             <span class="input-group-addon">
                 <i aria-hidden="true">BirthDate</i>
             </span>
-            <input id="birthdate" type="date" class="form-control" onblur="checkDate(this.value,this.id)" name="birthdate" value="<?=$Profile->Birth_Date?>" required />
+            <input id="birthdate" type="date" class="form-control date" onblur="checkDate(this.value,this.id)" name="birthdate" value="<?=$Profile->Birth_Date?>" required />
         </div>
     </div>
     <div class="col-xs-12">

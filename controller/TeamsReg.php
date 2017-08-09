@@ -1,5 +1,6 @@
 <?
 namespace App\Controllers;
+
 use App;
 use Framework\Addons\Validator as Validator;
 
@@ -13,13 +14,19 @@ class TeamsReg extends BaseController
 	{
       $teams=new App\Models\Admin\Teams;
       $validate=new Validator();//for valid only
+
+
       try{
-              $validate->validate($request->post,['name[]'=>'Requierd|Strings',
-                                                  'Birthdate[]'=>'Requierd|Time',
-                                                  'NationalID[]'=>'Requierd|Integer',
-                                             ]);
+              $validate->validate($request->post,['teamName'=>'Requierd|Strings',
+                                                  'branch'=>'Requierd|Integer',
+                                                  'leader_profileid'=>'Requierd|Integer',
+                                                  'assist_profileid'=>'Integer',
+                                                  'category'=>'Requierd|Integer',
+                                                  'profileid'=>'Requierd|Integer',
+                                                  'office'=>'Requierd|Integer',
+                                                    ]);
          }
-		catch(Exception $ex)
+		catch(\Exception $ex)
 		{
 			if($request->isAjax())
 			{
@@ -32,26 +39,27 @@ class TeamsReg extends BaseController
 
 		}
 
-		//$con=new App\Models\Admin\Teams;
 
-/*    $found=  $con->where('National_Number','=',$request->post['nationalId'])->supperUser()->get();
+    // will creat team id only in parent and child
+    $TeamId=new App\Models\Admin\Teams;
+    if(count($TeamId->where('name',$TeamId->name=$request->post['teamName'])->get())>0){
+         if($request->isAjax()){
+            return json_error("This team is alrady exists !!");
+        }else{
+            echo "This team is alrady exists !!";
+            exit();
+        }
+    }
 
-     if(count($found)>0){
-      if($request->isAjax()){
-        return json_error("This National ID exists !!");
-      }else{
-         echo $profile->error;
-      }
-    }*/
-		// will creat team id only in parent and child
-		$TeamId=new App\Models\Lookup\Teams;
-		$TeamId->name=$request->post['teamName'];
-		$TeamId->parentId=$request->post['branch'];
-    $TeamId->serial=$TeamId->getNewSerial($TeamId->parentId);
+
+    $TeamId->name=$request->post['teamName'];
+    $TeamId->parentId=$request->post['office'];
+    $TeamId->level_type=$TeamId->parentId->level_type+1;
+    $TeamId->serial="(New)";
 
 
     if(!$TeamId->insert()) {
-        if($TeamId->isAjax()){
+        if($request->isAjax()){
             return json_error($TeamId->error);
         }else{
             echo $TeamId->error;
@@ -59,50 +67,78 @@ class TeamsReg extends BaseController
         }
     }
 
-		$profile=new App\Models\Profile\Profile;
-		$LeaderId=$profile->where('National_Number','=',$request->post['leaderNId'])->supperUser()->get();
+	$profile=new App\Models\Profile\Profile;
+	$LeaderId=$profile->where('Profile_ID',$request->post['leader_profileid'])->supperUser()->get();
 
-		$Teams=new App\Models\Lookup\TeamsReg;
-		$Teams->TeamId=$TeamId->id;
-		$Teams->LeaderId=$LeaderId[0]->id;
+    $Teams=new App\Models\Lookup\TeamsReg;
+	$Teams->TeamId=$TeamId->id;
+	$Teams->LeaderId=$LeaderId[0]->id;
+	$Teams->TeamCatId=$request->post['category'];
 
-    $Teams->insert();
 
-		if($request->post['AFLeaderId']){
-      $leaderAssist=$profile->where('National_Number','=',$request->post['leaderAssistNId'])->supperUser()->get();
+
+
+	if($request->post['assist_profileid']){
+        $leaderAssist=$profile->where('Profile_ID',$request->post['assist_profileid'])->supperUser()->get();
 			$Teams->AFLeaderId=$leaderAssist[0]->id;
-		}/*
-		if($request->post['ASLeaderId']){
-			$Teams->ASLeaderId=post['AFLeaderId'];
-		}*/
-		$Teams->TeamCatId=post['category'];
-		foreach($request->post['profileid'] as $NatIDReq){
-			//$FoundTeamMem=new;
-			$found= App\Models\Profile\Profile::find(intval($request->post['profileid']));
-			 if(!$found->id>0){
-         $Register= new App\Models\Admin\RegisteryUserLog;
-         $Register->userId= $found->id;
-         $Reg_rec=new App\Models\Admin\Register;
-         $Reg_rec=$Reg_rec->where('regFrom','<=',Date("Y-m-d"))->where('regTo','>=',Date("Y-m-d"))->limit(1)->get();
-         $Register->regId=$Reg_rec[0]->id;
-         $Register->teamId=$Reg_rec[0]->id;
-       }
-			}
-			if($Teams->error!=''){
-            	echo $Teams->error;
-        	}
-      }
+	}else{
+        $Teams->AFLeaderId=0;
+    }
+
+    if($request->post['assist_profileid1']){
+        $leaderAssist=$profile->where('Profile_ID',$request->post['assist_profileid1'])->supperUser()->get();
+			$Teams->ASLeaderId=$leaderAssist[0]->id;
+	}else{
+        $Teams->ASLeaderId=0;
+    }
 
 
+    $Teams->NoOfTeam=count($request->post['profileid']);
 
+    if(!$Teams->insert()) {
+        if($request->isAjax()){
+            return json_error($Teams->error);
+        }else{
+            echo $Teams->error;
+            exit();
+        }
+    }
+	foreach($request->post['profileid'] as $profileid){
+		//$FoundTeamMem=new;
+		$user= App\Models\Profile\Profile::find(intval($profileid));
 
+        $Register= new App\Models\Admin\RegisteryUserLog;
+        $Register->userId= $user->id;
 
+        $Reg_rec=new App\Models\Admin\Register;
+        $Reg_rec=$Reg_rec->where('regFrom','<=',Date("Y-m-d"))->where('regTo','>=',Date("Y-m-d"))->limit(1)->get();
+
+        $Register->regId=$Reg_rec[0]->id;
+        $Register->teamId=$TeamId->id;
+
+        if(!$Register->insert()) {
+            if($request->isAjax()){
+                return json_error($Register->error);
+            }else{
+                echo $Register->error;
+                exit();
+            }
+        }
 
 	}
 
 
-  function getChilds($request){
+        if($request->isAjax()){
+            return json_success("Save team success !!");
+        }else{
+            echo "Save team success !!";
 
+        }
+
+
+}
+
+  function getChilds($request){
     try{
       $validate=new Validator();//for valid only
       $validate->validate($request->get,['parentid'=>'Required|Integer']);
@@ -157,11 +193,6 @@ class TeamsReg extends BaseController
        {
          return json_error($ex->getMessage());
        }
-      //  else
-      //  {
-      //     echo $ex->getMessage();
-      //  }
-
      }
  }
 }

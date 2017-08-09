@@ -28,15 +28,15 @@ class Validator {
                 {
                     foreach ($value as $val) {
                     	try{
-                        if ($this->$callback($val,$key)== FALSE)
-                            $valed = FALSE;
-	                }catch(Exception $ex){
-	                	 throw $ex;
-	                }
+                            if ($this->$callback($val,$key)== FALSE)
+                                $valed = FALSE;
+	                    }catch(Exception $ex){
+	                	     throw $ex;
+	                    }
                     }
                 } else {
                    	try{
-                        if ($this-> $callback($value,$key)== FALSE)
+                        if ($this->$callback($value,$key)== FALSE)
                             $valed = FALSE;
 	                }catch(Exception $ex){
 	                	 throw $ex;
@@ -60,6 +60,7 @@ class Validator {
             throw new Exception("!Error: the $key must be a valid string");
         }
     }
+    
 
     function CheckGuid($value, $key)
     {
@@ -150,7 +151,7 @@ class Validator {
 
         if(empty($t))
             throw new Exception("!Error: the $key must be Date");
-        
+
         $m = date('m',$t);
         $d = date('d',$t);
         $y = date('Y',$t);

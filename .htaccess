@@ -1,6 +1,8 @@
 DirectoryIndex index.php
 
 ErrorDocument 404 /index.php?lang=en&controller=Error&method=index&number=404
+ErrorDocument 500 /index.php?lang=en&controller=Error&method=index&number=500
+
 
 RewriteEngine on
 RewriteBase /

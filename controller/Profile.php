@@ -15,20 +15,20 @@ class Profile extends BaseController
         $NathionalID=$request->get['NationalID'];
 
         //print_r($request);
-        //echo($NathionalID);
+      
         if(isset($id) && intval($id)>0){
             $Profile=App\Models\Profile\Profile::find($id);
         }
         elseif(isset($NathionalID)  && intval($NathionalID)>0){
             $Profile=new App\Models\Profile\Profile;
-            $Profile= $Profile->where('National_Number',$NathionalID)->get();
+            $Profile= $Profile->where('National_Number',$NathionalID)->supperUser()->get();
             $Profile=$Profile[0];
         }
         if(intval($Profile->Profile_ID)==0){
             $Profile=new App\Models\Profile\Profile;
             $Profile->National_Number=$NathionalID;
         }
-        //print_r($Profile);
+      //print_r($Profile);
         return $this->view(compact('Profile'));
     }
 
@@ -107,10 +107,12 @@ class Profile extends BaseController
                             }
                         }
                     }
+
                     if(isset($request->post['secondphone'])){
                         $contact->contactTypeId=3;
                         $contact->userId=$Profile->Profile_ID;
                         $contact->contactValue=$request->post['secondphone'];
+
                         if(!$contact->insert()) {
                             if($request->isAjax()){
                                 return json_error($contact->error);
@@ -121,14 +123,16 @@ class Profile extends BaseController
                         }
                     }
 
-                    if(isset($request->files['proImg'])){
+                    
+                     if(isset($request->files['proImg']['filename'])){
                         $image=new App\Models\Media\Images($Profile,"Personal",$request->files['proImg']);
                         $image->upload();
 
                     }
-                    if(isset($request->files['coverImg'])){
+                     if(isset($request->files['coverImg']['filename'])){
                         $image=new App\Models\Media\Images($Profile,"Cover",$request->files['coverImg']);
                         $image->upload();
+
                     }
 
                     if($request->isAjax()){

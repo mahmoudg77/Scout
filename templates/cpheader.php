@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="<?=assets('dist/css/skins/_all-skins.min.css')?>">
   <link rel="stylesheet" href="<?=assets('css/iziToast.min.css')?>">
   <link rel="stylesheet" href="<?=assets('css/TeamsReg.css')?>">
-
+    <link href="<?=assets('css/bootstrap-datepicker.min.css')?>" rel="stylesheet" />
    
 
 </head>
@@ -35,46 +35,55 @@
     <script>
 	var counter =13;
 	var counterFee=120;
-	function checkDate(value,name){
-		var date1 = new Date(value);
-        var date2 = new Date(String((x.getMonth()+1)+"/"+x.getDate()+"/"+x.getFullYear()));
-        var timeDiff = Math.abs(date2.getTime() - date1.getTime());
-        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24))/365;
+	function checkDate(value, name) {
+	    var date2 = new Date(); //today
+
+	    var date1 = new Date(value); //selected date
+	   
+        //var date2 = new Date(String((date1.getMonth()+1)+"/"+x.getDate()+"/"+x.getFullYear()));
+	    var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)) / 365;
+        //console.log(timeDiff);
+        
 		if(document.getElementById("category").value==1 && diffDays>7 ){
 			alert("هذا الشخص لم يعد فى مرحلة البراعم ");
-			document.getElementById(name).value="yyyy-mm-dd";
+			document.getElementById(name).value="";
+			return false;
 		}
 		else if(document.getElementById("category").value==2 && (diffDays<7 || diffDays>11) ){
 			alert("هذا الشخص لم يعد/ يصل فى مرحلة الأشبال ");
-			document.getElementById(name).value="yyyy-mm-dd";
+			document.getElementById(name).value="";
+			return false;
 		}
 		else if(document.getElementById("category").value==3 &&  (diffDays<11 || diffDays>14) ){
 			alert("هذا الشخص لم يعد/ يصل فى مرحلة الكشافة ");
-			document.getElementById(name).value="yyyy-mm-dd";
+			document.getElementById(name).value="";
+			return false;
 		}
 		else if(document.getElementById("category").value==4 &&  (diffDays<14 || diffDays>17) ){
 			alert("هذا الشخص لم يعد/ يصل فى مرحلة الكشاف المتقدم ");
-			document.getElementById(name).value="yyyy-mm-dd";
+			document.getElementById(name).value="";
+			return false;
 		}
 		else if(document.getElementById("category").value==5 && diffDays<17 ){
 			alert("هذا الشخص لم يصل فى مرحلة الجوالة ");
-			document.getElementById(name).value="yyyy-mm-dd";
+		    document.getElementById(name).value="";
+			return false;
 		}
-
+		return true;
 	}
 	function asd(){
 		if(counter<=24){
 			document.getElementById('table').innerHTML+=
 			`<tr>
                 <th scope="row">`+counter+`</th>
-                <td><input type="number" class="form-control tdinput" name="NationalID[]"  required></td>
+                <td><input type="hidden" name="profileid[]" /> <input type="number" class ="form-control tdinput" name="NationalID[]"  required></td>
 			    <td class="name">
 			    </td>
 			    <td class="birthdate">
 			    </td>
 		    <td>
 			    <div class="input-group">
-				    <span class="input-group-addon "><i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i><i class="fa fa-square-o fa-lg" aria-hidden="true"></i></span>
 				    <button type="button" class="btn btn-success btn-getin">Get IN</button>
 			    </div>
 		    </td>
@@ -335,7 +344,7 @@
      <ul class="treeview-menu">
        <li><a class="menu-item" href="<?=actionLink("all","Register")?>"><i class="fa fa-circle-o"></i> Register Years</a></li>
        <li><a class="menu-item" href="<?=actionLink("all","Teams")?>"><i class="fa fa-circle-o"></i> Organization Tree</a></li>
-       <li><a class="menu-item" href="<?=actionLink("all","RegisteryUser")?>"><i class="fa fa-circle-o"></i> Register User</a></li>
+       <li><a class="menu-item" href="<?=actionLink("all","RegisteryUserLog")?>"><i class="fa fa-circle-o"></i> Register User</a></li>
     </ul>
   </li>
   <li class="treeview">
@@ -366,6 +375,22 @@
        <li><a class="menu-item" href="<?=actionLink("all","Images")?>"><i class="fa fa-circle-o"></i> Images</a></li>
     </ul>
   </li>
+<li class="treeview">
+    <a href="#">
+        <i class="fa fa-files-o"></i>
+        <span>Security</span>
+        <span class="pull-right-container">
+            <i class="fa fa-angle-right pull-right"></i>
+        </span>
+    </a>
+    <ul class="treeview-menu">
+        <li><a class="menu-item" href="<?=actionLink("all","GroupCategory")?>"><i class="fa fa-circle-o"></i> Category</a></li>
+        <li><a class="menu-item" href="<?=actionLink("all","UserGroup")?>"><i class="fa fa-circle-o"></i> Groups</a></li>
+        <li><a class="menu-item" href="<?=actionLink("all","Users")?>"><i class="fa fa-circle-o"></i> Users</a></li>
+        <li><a class="menu-item" href="<?=actionLink("all","AccessRight")?>"><i class="fa fa-circle-o"></i> Access Rights</a></li>
+        <li><a class="menu-item" href="<?=actionLink("all","UserGroupRel")?>"><i class="fa fa-circle-o"></i> Users in Groups</a></li>
+    </ul>
+</li>
 
         <!-- <li><a href=""><i class="fa fa-book"></i> <span>Documentation</span></a></li>
         <li class="header">LABELS</li>

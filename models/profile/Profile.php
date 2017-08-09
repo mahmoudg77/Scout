@@ -48,9 +48,40 @@ class Profile extends BLL{
 			function CoverImage(){
 			    $p=array_filtercolumn($this->Images,[["tag","Cover"]]);
 			    return $p[0];
-			 }
+			}
 
-			//  function approve(){
+            function emails(){
+			    $p=array_filtercolumn($this->Contacts,[["contactTypeId",2]]);
+			    return $p[0];
+            }
+            function phones(){
+			    $p=array_filtercolumn($this->Contacts,[["contactTypeId",3]]);
+			    return $p[0];
+            }
+            function addresss(){
+			    $p=array_filtercolumn($this->Contacts,[["contactTypeId",1]]);
+			    return $p[0];
+            }
+
+
+            function onApproved(){
+                global $context;
+                $obj =new \App\Models\Auth\User;
+                $user=$obj->where('accid',$this->id)->limit(1)->get();
+                if(count($user)>0){
+                     $user=$user[0];
+                }else{
+                     $user=new \App\Models\Auth\User;
+                     $user->name=$this->name;
+                     $user->email=$this->emails[0]->contactValue;
+                     $user->accid=$this->id;
+                }
+                   $user->mode="edit";
+
+                return ['DoActionRequired'=>true,'form'=>view("Users/userinfo",['data'=>$user])];
+            }
+
+            //  function approve(){
 			// 	 $this->approved_by=USER_ID;
 			// 	 $this->approval_request=1;
 			// 	 $this->approved_at=Date("Y-m-d H:i:s");

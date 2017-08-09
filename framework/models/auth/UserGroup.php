@@ -15,19 +15,19 @@ class UserGroup extends BLL{
 	            'compute'=>'',
 	            'type'=>'One2many',
 	            'serialize'=>true,
-	            'relation'=>['class'=>"App\Models\Auth\AccessRight",'classid'=>'groupid','controller'=>'auth.AccessRight']],
+	            'relation'=>['class'=>"App\Models\Auth\AccessRight",'classid'=>'groupid','controller'=>'AccessRight']],
 	     'members'=>['name'=>'Members',
 	            'default'=>'2',
 	            'compute'=>'',
 	            'type'=>'Many2many',
 	            'serialize'=>true,
-	            'relation'=>['class'=>"App\Models\Auth\User",'classid'=>'userid','thisid'=>'groupid','table'=>"App\Models\Auth\UserGroupRel",'controller'=>'auth.Users']],
+	            'relation'=>['class'=>"App\Models\Auth\User",'classid'=>'userid','thisid'=>'groupid','table'=>"App\Models\Auth\UserGroupRel",'controller'=>'Users']],
 	    'categoryid'=>['name'=>'Category',
 	            'default'=>'2',
 	            'compute'=>'',
 	            'type'=>'Many2one',
 	            'serialize'=>true,
-	            'relation'=>['class'=>"App\Models\Auth\GroupCategory",'classid'=>'id','controller'=>'auth.GroupCategory']],
+	            'relation'=>['class'=>"App\Models\Auth\GroupCategory",'classid'=>'id','controller'=>'GroupCategory']],
 	    ];
 
 }

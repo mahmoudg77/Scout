@@ -2,7 +2,7 @@
 namespace App\Controllers;
 use App;
 use Framework\Addons\Validator as Validator;
-
+use \Exception  as Exception ;
 
 class ProfileReg extends BaseController
 {
@@ -17,34 +17,36 @@ class ProfileReg extends BaseController
       return $this->view();
     }
     function postIndex($request){
+   
       $profile=new App\Models\Profile\Profile;
       $validate=new Validator();//for valid only
+
       try{
-              $validate->validate($request->post,['leader'=>'Requierd|Strings',
-                                          	      'leaderNId'=>'Requierd|Integer',
-                                                  'teamName'=>'Requierd|Strings',
+              $validate->validate($request->post,['firstname'=>'Requierd|Strings',
+                                          	  'secondname'=>'Requierd|strings',
+                                                  'thirdname'=>'Requierd|Strings',
                                                   'fourthname'=>'Requierd|Strings',
                                                   'birthdate'=>'Requierd',
                                                   'nationalId'=>'Requierd|Integer',
                                         		 ]);
-         }
-		catch(Exception $ex){
-      if($request->isAjax()){
-        return json_error($ex->getMessage());
-      }else{
-         echo $ex->getMessage();
-      }
+         }catch(Exception $ex){
+		      if($request->isAjax()){
+		        return json_error($ex->getMessage());
+		      }else{
+		         echo $ex->getMessage();
+		      }
 
-		}
+	}
+	
     $con=new App\Models\Profile\Profile;
-   
+    
     $found=  $con->where('National_Number','=',$request->post['nationalId'])->supperUser()->get();
 
      if(count($found)>0){
       if($request->isAjax()){
         return json_error("This National ID exists !!");
       }else{
-         echo $profile->error;
+         echo "This National ID exists !!";
       }
     }
 
@@ -70,9 +72,9 @@ class ProfileReg extends BaseController
       catch(Exception $ex){
 
         if($request->isAjax()){
-          return json_error($ex->getMessage());
+          return json_error("profile:".$ex->getMessage());
         }else{
-           echo $profile->error;
+           echo $ex->getMessage();
         }
 
       }
@@ -188,10 +190,10 @@ class ProfileReg extends BaseController
             try
             {
             	$image=new App\Models\Media\Images($profile,"Personal",$request->files['proImg']);
-                $image->upload();
+                $image->supperUser()->upload();
             
                 $image=new App\Models\Media\Images($profile,"Cover",$request->files['cvrImg']);
-                $image->upload();
+                $image->supperUser()->upload();
             }
             catch (\Exception $ex)
             {

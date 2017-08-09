@@ -57,17 +57,23 @@
 <script src="<?=assets('dist/js/adminlte.min.js')?>"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?=assets('dist/js/demo.js')?>"></script>
-<!-- fullCalendar -->
-<script src="<?=assets('bower_components/moment/moment.js')?>"></script>
-<script src="<?=assets('bower_components/fullcalendar/dist/fullcalendar.min.js')?>"></script>
+
+<script src="<?=assets('js/bootstrap-datepicker.min.js')?>"></script>
+
 <script src="<?=assets('js/jquery.dataTables.min.js')?>"></script>
 <script src="<?=assets('js/iziToast.min.js')?>"></script>
-
   <script src="<?=assets('js/jquery.form.js')?>"></script>
 <!-- Page specific script -->
 
 <script>
     $(function () {
+
+        $('input[type="date"]').datepicker({
+            format: "yyyy-mm-dd",
+            language: "ar"
+        });
+
+
         $(".menu-item").click(function (event) {
             event.preventDefault();
             $("#pageContent").html("<center><h2>L o a d i n g . . .</h2><img style='width:200px' src='<?=assets("img/loader 2.gif")?>' /></center>");
@@ -78,7 +84,10 @@
                         return;
                     }
 
-
+                $('#pageContent input[type="date"]').datepicker({
+                    format: "yyyy-mm-dd",
+                    language: "ar"
+                });
                 $('#pageContent .data-table').DataTable();
                             $("#pageContent .ajax-form").ajaxForm({
                                 dataType: 'json',
@@ -129,8 +138,12 @@ $("body").on("click",".open-modal",function(e){
             if (status == "error") {
                         $("#myModal .modal-body").html("<div class='alert alert-danger'><strong>Sorry; </strong>" + xhr.status + " " + xhr.statusText + "</div>");
                     return;
-                }
-            $(".ajax-form").ajaxForm({
+            }
+            $('#formModel input[type="date"]').datepicker({
+                format: "yyyy-mm-dd",
+                language: "ar"
+            });
+            $("#formModel .ajax-form").ajaxForm({
                                 dataType: 'json',
                                 success: function (data) {
                                     if(data.type=="success"){

@@ -1,96 +1,5 @@
-<<<<<<< HEAD
-<?if(!$request->isAjax())include(PATH.'templates/AdminHeader.php');?>
 
-<!-- Main content -->
-
-
-
-    <div class="col-ld-6 pull-left">
-        <h2></h2>
-    </div>
-    <div class="col-ld-6 pull-right"  style="padding: 10 0px;">
-        <a class="btn btn-primary btn-md open-modal" href="<?=actionLink('add')?>">Create New</a>
-    </div>
-
-
-
-
-
-
-
-                <table class="table data-table"><thead>
-                    <tr><?foreach($data[0]->fields as $key=>$value){
-		if($value['visible']){
-                          ?>
-                        <th><?=ucwords(str_replace("_"," ",$key))?>
-                        </th><?}
-      }?>
-                        <th>Edit</th>
-                        <th>View</th>
-                        <th>Delete</th>
-                    </tr></thead><?
-foreach($data as $key=>$row){
-                      ?>
-                    <tr><?foreach($row->fields as $key=>$field){
-                			if($field['visible']){
-                          ?>
-
-                        <td><?$row->DrawField($key)?>
-                        </td><?}
-          }?>
-                        <td>
-                          <form action="<?=actionLink('approve')?>" method="post" class="ajax-form"><?=Framework\Request::CSRF()?>
-                              <input type="hidden" name="id" value="<?=$row->id?>" />
-                              <input type="submit" class="btn btn-worning" value="Approved" />
-                          </form>
-                          <form action="<?=actionLink('reject')?>" method="post" class="ajax-form"><?=Framework\Request::CSRF()?>
-                              <input type="hidden" name="id" value="<?=$row->id?>" />
-                              <input type="submit" class="btn btn-danger" value="Rejected" />
-                          </form>
-                            <a class="btn btn-primary" href="<?=actionLink('item','',['id'=>$row->{$row->col_pk}])?>">view</a>
-
-                        </td>
-                        <td>
-                            <a class="btn btn-default" href="<?=actionLink('edit','',['id'=>$row->{$row->col_pk}])?>">Edit</a>
-
-                        </td>
-                        <td>
-
-
-                          <?if(!$row->is_deleted){?>
-                            <form action="<?=actionLink('delete')?>" method="post" class="ajax-form"><?=Framework\Request::CSRF()?>
-                                <input type="hidden" name="<?=$row->col_pk?>" value="<?=$row->{$row->col_pk}?>" />
-                                <input type="submit" class="btn btn-danger" value="Delete" />
-                            </form><?}?><?if($row->is_deleted){?>
-                            <form action="<?=actionLink('restore')?>" method="post" class="ajax-form"><?=Framework\Request::CSRF()?>
-                                <input type="hidden" name="<?=$row->col_pk?>" value="<?=$row->{$row->col_pk}?>" />
-                                <input type="submit" class="btn btn-info" value="Restore" />
-                            </form>
-                            <form action="<?=actionLink('destroy')?>" method="post" class="ajax-form"><?=Framework\Request::CSRF()?>
-                                <input type="hidden" name="<?=$row->col_pk?>" value="<?=$row->{$row->col_pk}?>" />
-                                <input type="submit" class="btn btn-danger" value="Delete forever" />
-                            </form>
-
-                            <?}?>
-                        </td>
-                    </tr><?
-}
-                      ?>
-                </table>
-
-
- 			 <!-- /.col -->
-
- 		 <!-- /.row -->
-
-
-
-<?if(!$request->isAjax())include(PATH.'templates/AdminFooter.php');?>
-=======
-<?if(!$request->isAjax())include(PATH.'templates/AdminHeader.php');?>
-
-<!-- Main content -->
-
+<?if(!$request->isAjax())include(PATH.'templates/cpheader.php');?>
 
 
     <div class="col-ld-6 pull-left">
@@ -98,7 +7,8 @@ foreach($data as $key=>$row){
     </div>
 
 
-                <table class="table data-table"><thead>
+                <table class="table data-table">
+                    <thead>
                     <tr>
                       <th>User</th>
                       <th>Approval Type</th>
@@ -107,36 +17,43 @@ foreach($data as $key=>$row){
 
                         <th></th>
                         <th></th>
-                        <th></th>
+                       
                     </tr></thead>
                     <?foreach($data as $key=>$row){
                       ?>
                     <tr>
                         <td><?$row->DrawField('userId')?></td>
-                        <?$d=explode("\\",$row->model_name);?>
-                        <td><?=array_pop($d)?></td>
+                        <?
+                          $d=explode("\\",$row->model_name);
+                          
+                        ?>
+                        <td><?=implode(" ",preg_split('/(?=[A-Z])/',array_pop($d)))?></td>
                         <td><?$row->DrawField('model_id')?></td>
-                        <td><?=time_string(strtotime($row->created_at))?></td>
+                        <td><?=date("Y-M-d H:i:s",strtotime($row->created_at))?></td>
 
                         <td>
-                          <form action="<?=actionLink('approve')?>" method="post" class="ajax-form"><?=Framework\Request::CSRF()?>
-                              <input type="hidden" name="id" value="<?=$row->id?>" />
-                              <input type="submit" class="btn btn-worning" value="Approved" />
-                          </form>
-                          <form action="<?=actionLink('reject')?>" method="post" class="ajax-form"><?=Framework\Request::CSRF()?>
-                              <input type="hidden" name="id" value="<?=$row->id?>" />
-                              <input type="submit" class="btn btn-danger" value="Rejected" />
-                          </form>
-                            <a class="btn btn-primary open-modal" href="<?=actionLink('item','',['id'=>$row->{$row->col_pk}])?>">view</a>
+                            
+                                <form action="<?=actionLink('approve')?>" method="post" class="ajax-form-approve pull-left">
+                                    <?=Framework\Request::CSRF()?>
+                                    <input type="hidden" name="id" value="<?=$row->id?>" />
+                                    <button type="submit" class="btn text-success fa fa-lg fa-thumbs<?=($row->model_id->approval_request==1?"":"-o")?>-up"></button>
+                                </form>
+                            <form action="<?=actionLink('reject')?>" method="post" class="ajax-form pull-left">
+                                <?=Framework\Request::CSRF()?>
+                                <input type="hidden" name="id" value="<?=$row->id?>" />
+                                <button type="submit" class="btn text-danger fa fa-lg  fa-thumbs<?=($row->model_id->approval_request==0?"":"-o")?>-down"></button>
+                            </form>
+                            
+                             
                         </td>
 
                         <td>
 
-
+                            <a class="btn fa fa-eye  fa-lg open-modal pull-left btn-default" href="<?=actionLink('item','',['id'=>$row->{$row->col_pk}])?>"></a>
                           <?if(!$row->is_deleted){?>
                             <form action="<?=actionLink('delete')?>" method="post" class="ajax-form"><?=Framework\Request::CSRF()?>
                                 <input type="hidden" name="<?=$row->col_pk?>" value="<?=$row->{$row->col_pk}?>" />
-                                <input type="submit" class="btn btn-danger" value="Delete" />
+                                <button type="submit" class="btn text-danger fa fa-trash fa-lg"></button>
                             </form><?}?><?if($row->is_deleted){?>
                             <form action="<?=actionLink('restore')?>" method="post" class="ajax-form"><?=Framework\Request::CSRF()?>
                                 <input type="hidden" name="<?=$row->col_pk?>" value="<?=$row->{$row->col_pk}?>" />
@@ -154,12 +71,91 @@ foreach($data as $key=>$row){
                       ?>
                 </table>
 
+<?if(!$request->isAjax())include(PATH.'templates/cpfooter.php');?>
+<script>
+    $(function () {
+        $(".ajax-form-approve").ajaxForm({
+            dataType: 'json',
+            success: function (data) {
 
- 			 <!-- /.col -->
+                if (data.type == "success") {
+                    if (data.result==true) {
+                        iziToast.show({
+                            title: 'Success',
+                            message: data.message,
+                            color: 'green', // blue, red, green, yellow
+                            position: 'topCenter',
+                        });
+                        //$("#formModel").modal("toggle");
+                        $(".menu-item.active").click();
+                        return;
+                    }
+                    if ('DoActionRequired' in data.result && data.result.DoActionRequired == true && 'form' in data.result) {
+                        $("#formModel .modal-body").html(data.result.form)
+                        $("#formModel").modal();
+                        $("#formModel .modal-body .ajax-form").ajaxForm({
+                            dataType: "json",
+                            success: function (data) {
+                                if (data.type == "success") {
+                                    iziToast.show({
+                                        title: 'Success',
+                                        message: data.message,
+                                        color: 'green', // blue, red, green, yellow
+                                        position: 'topCenter',
+                                    });
+                                    $("#formModel").modal("toggle");
+                                    $(".menu-item.active").click();
+                                } else {
+                                    iziToast.show({
+                                        title: 'Error',
+                                        message: data.message,
+                                        color: 'red', // blue, red, green, yellow
+                                        position: 'topCenter',
+                                    });
+                                }
+                            },
+                            error: function (data, status, xhr) {
+                                iziToast.show({
+                                    title: 'Error',
+                                    message: data.status + " " + xhr,
+                                    color: 'red', // blue, red, green, yellow
+                                    position: 'topCenter',
+                                });
+                            }
+                        });
+                        return;
+                    }
+                    iziToast.show({
+                        title: 'Success',
+                        message: data.message,
+                        color: 'green', // blue, red, green, yellow
+                        position: 'topCenter',
+                    });
 
- 		 <!-- /.row -->
+                    $("#formModel").modal("close");
+                } else {
+                    iziToast.show({
+                        title: 'Error',
+                        message: data.message,
+                        color: 'red', // blue, red, green, yellow
+                        position: 'topCenter',
+                    });
+
+                }
+
+            },
+            error: function (data, status, xhr) {
+                // var obj = JSON.parse(data.responseText);
+
+                iziToast.show({
+                    title: 'Error',
+                    message: data.status + " " + xhr,
+                    color: 'red', // blue, red, green, yellow
+                    position: 'topCenter',
+                });
+            }
+        });
 
 
-
-<?if(!$request->isAjax())include(PATH.'templates/AdminFooter.php');?>
->>>>>>> refs/remotes/origin/master
+    })
+</script>

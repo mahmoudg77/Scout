@@ -4,6 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);//
 
+
 define('SCRIPT_DIR',"");
 define('PATH',$_SERVER["DOCUMENT_ROOT"].SCRIPT_DIR."/");
 
@@ -46,6 +47,7 @@ try{
     }
 
 
+
      $class=explode(".",$controller__path);
      //echo $class[count($class)-1];
      $context->controller_name="App\\Controllers\\".$class[count($class)-1];
@@ -62,6 +64,7 @@ try{
                exit();
           }
     }
+     
      if(isset($_SESSION['USER_TOKEN'])){
          $user=new User();
          $user=$user->where('token',$_SESSION['USER_TOKEN'])->limit(1)->supperUser()->get();
@@ -70,19 +73,22 @@ try{
          $context->userid=$user->data[$user->col_pk];
          // $context->accountid=$user->accid->id;
      }
-
-     if(file_exists(PATH.'Controller/'.str_replace(".","/",$context->controller_path).'.php') || file_exists(PATH.'framework/Controller/'.str_replace(".","/",$context->controller_path).'.php')){
+	
+     if(file_exists(PATH.'controller/'.str_replace(".","/",$context->controller_path).'.php') || file_exists(PATH.'framework/controller/'.str_replace(".","/",$context->controller_path).'.php')){
+          
          $context->controller=new $context->controller_name;
-
+	
      }else{
+
          header("HTTP/1.0 404 Not Found");
          $Error=new App\Controllers\BaseController();
          return $Error->view("Error/index",['ErrorNumber'=>404]);
 	}
+	
    $context->request= $request;
 
 
- 
+
 
      GV();
 

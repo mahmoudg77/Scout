@@ -19,10 +19,30 @@ class Waitinglist extends BaseController
 
     function index($request){
       $obj=new $this->model;
-      $data=$obj->where('is_done','0')->get();
-      return $this->view(compact('data'));
+      $data=$obj->where('is_done','-1')->get();
+      return $this->view('all',compact('data'));
     }
 
+    function wait($request){
+        $obj=new $this->model;
+        $data=$obj->where('is_done','-1')->get();
+        return $this->view('all',compact('data'));
+    }
+    function approved($request){
+        $obj=new $this->model;
+        $data=$obj->where('is_done','1')->get();
+        return $this->view('all',compact('data'));
+    }
+    function rejected($request){
+        $obj=new $this->model;
+        $data=$obj->where('is_done','0')->get();
+        return $this->view('all',compact('data'));
+    }
+    function all($request){
+        $obj=new $this->model;
+        $data=$obj->where('is_done','-1')->get();
+        return $this->view('all',compact('data'));
+    }
     function postApprove($request){
         try {
           $validate=new  Validator();
@@ -33,15 +53,15 @@ class Waitinglist extends BaseController
 
            $approve_model= $req->model_id;
 
-          if($approve_model->approve()){
+           $result=$approve_model->approve();
+          if($result){
 
             $req->is_done=1;
             $req->update();
 
-            if($request->isAjax()) return json_success("Approved success");
-
-            $data=new App\Models\Notify\Waitinglist;
-            return $this->view('all',['data'=>$data->get()]);
+            if($request->isAjax()) return json_success("Approved success",$result);
+            //$data=new App\Models\Notify\Waitinglist;
+            return redirectTo("Waitinglist");
           }else{
             throw new \Exception($req->error . " " .$approve_model->error );
           }
@@ -51,7 +71,6 @@ class Waitinglist extends BaseController
             if($request->isAjax()) return json_error($e->getMessage());
             throw $e;
         }
-
 
     }
     function postReject($request){

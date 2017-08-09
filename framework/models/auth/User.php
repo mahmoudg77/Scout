@@ -20,7 +20,7 @@ class User extends BLL{
 	            'compute'=>'',
 	            'type'=>'Many2many',
 	            'serialize'=>true,
-	            'relation'=>['class'=>"App\Models\Auth\UserGroup",'table'=>"App\Models\Auth\UserGroupRel",'classid'=>'groupid','thisid'=>'userid','controller'=>'auth.UserGroup']],
+	            'relation'=>['class'=>"App\Models\Auth\UserGroup",'table'=>"App\Models\Auth\UserGroupRel",'classid'=>'groupid','thisid'=>'userid','controller'=>'UserGroup']],
 	    ];
 
     function joined($g){

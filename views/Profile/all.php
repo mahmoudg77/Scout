@@ -16,6 +16,7 @@
    <th>Date Of Birth</th>
 
    <th>View</th>
+   <th>Edit</th>
    <th>Delete</th>
    </tr></thead>
 
@@ -23,12 +24,16 @@
 
 <?foreach($data as $key=>$row){
     ?><tr>
-        <td><img style="width:100px;" src="<?=$row->CoverImage->thumb?>"/></td>
+        <td><img style="width:100px;" src="<?=$row->PersonalImage->thumb?>"/></td>
          <td><?=$row->name?></td>
         <td><?=$row->DrawField('Hobbies')?></td>
         <td><?=$row->Birth_Date?></td>
+          <td>
+              <a class="btn btn-primary open-modal" href="<?=actionLink('item','',['id'=>$row->{$row->col_pk}])?>">View</a>
+
+          </td>
         <td>
-            <a class="btn btn-primary open-modal"  href="<?=actionLink('item','',['id'=>$row->{$row->col_pk}])?>">view</a>
+            <a class="btn btn-default open-modal"  href="<?=actionLink('edit','',['id'=>$row->{$row->col_pk}])?>">Edit</a>
 
         </td>
          <td>
@@ -63,5 +68,4 @@
 
 ?>
 </table>
-<a href="add" class="btn btn-primary open-model" >Add New</a>
 <?if(!$request->isAjax())include(PATH.'templates/cpfooter.php');?>
