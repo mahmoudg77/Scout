@@ -1,7 +1,5 @@
 <?include(PATH.'templates/navHeader.php');?>
 <div class=" text-center">
-
-
 </div>
 <div class="container">
 	<div class="item active">
@@ -15,19 +13,19 @@
 	</div>
 	<a href="#editForm" id="edit" data-toggle="modal"><i class="fa fa-cogs fa-lg" aria-hidden="true"></i></a>
 </div>
-<div class="body">
-	<div class="entry wow fadeInDown " data-wow-duration="1000ms" data-wow-delay="300ms">
+<div class="entry wow fadeInDown " data-wow-duration="1000ms" data-wow-delay="300ms">
 
-		<div class="post-excerpt">
-			<h2>Description</h2>
-			<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae modi quisquam laboriosam, expedita ea natus tempora unde sed sequi velit, quia veniam libero quos sunt praesentium nisi odit architecto fugiat? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae modi quisquam laboriosam, expedita ea natus tempora unde sed sequi velit, quia veniam libero quos sunt praesentium nisi odit architecto fugiat?</span>
-		</div>
+	<div class="post-excerpt">
+		<h2>Description</h2>
+		<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae modi quisquam laboriosam, expedita ea natus tempora unde sed sequi velit, quia veniam libero quos sunt praesentium nisi odit architecto fugiat? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae modi quisquam laboriosam, expedita ea natus tempora unde sed sequi velit, quia veniam libero quos sunt praesentium nisi odit architecto fugiat?</span>
 	</div>
-	<br><br>
-	<div id="blog-posts" class="col-md-8 col-sm-8">
-		<div class="post-item">
+</div>
+<br><br>
+<div id="blog-posts" class="col-md-8 col-sm-8">
+	<div class="post-item">
 
-			<article class="entry wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
+		<article class="entry wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
+
 
 				<div class="post-thumb">
 					<a href="single-post.html">
@@ -190,12 +188,46 @@
 					</div>
 					<!-- End Widget Section -->
 
-				</div>
-				<!-- End row -->
+			<div class="post-thumb">
+				<a href="single-post.html">
+			<img src="img/blog/3D-beach-art.jpg" alt="3D Beach Art | Meghna" class="img-responsive">
+		</a>
+			
+
+
 			</div>
-			<!-- End container -->
-		</section>
-		<!-- End Section -->
+			<div class="post-excerpt">
+				<h3><a href="#">Siple Post</a></h3>
+				<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae modi quisquam laboriosam, expedita ea natus tempora unde sed sequi velit, quia veniam libero quos sunt praesentium nisi odit architecto fugiat? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae modi quisquam laboriosam, expedita ea natus tempora unde sed sequi velit, quia veniam libero quos sunt praesentium nisi odit architecto fugiat?</span>
+			</div>
+			<div class="post-meta">
+				<span class="post-date">
+			<i class="fa fa-calendar"></i>30 jun 2014 <!--Variables-->
+		</span>
+			
+
+
+				<span class="comments">
+			<i class="fa fa-comments"></i>18 Comments
+		</span>
+			
+
+
+				<span class="post-view">
+			<i class="fa fa-eye"></i>265 Views
+		</span>
+			
+
+
+				<span class="author">
+			<i class="fa fa-user"></i><a href="#">Admin/User</a><!--If the admin who post this post-->
+		</span>
+			
+
+
+
+			</div>
+		</article>
 	</div>
 </div>
 <!-- Edit Modal -->
@@ -243,5 +275,19 @@
 		</div>
 
 	</div>
+
+<div id="right-sidebar" class="col-md-4 col-sm-4">
+	<!-- Single Widget -->
+	<aside class="widget wow fadeInDown">
+		<div class="widget-title">
+			<h3>Text FeedBack</h3>
+		</div>
+		<div class="widget-content">
+			<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus ducimus in dolorum accusantium voluptate nostrum, excepturi dolores voluptatem vel rerum at, recusandae inventore nobis ex eveniet sunt eligendi, qui provident.</span>
+		</div>
+	</aside>
+
+
+
 </div>
 <?include(PATH.'templates/footer.php');?>
