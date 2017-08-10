@@ -362,7 +362,7 @@ function view($view,$arr=[]){
 
        //foreach($result as $r)$r->fields=null;
 
-       echo json_encode(compact('type','message','result'));
+       echo json_encode(compact('type','message','result'),JSON_UNESCAPED_UNICODE);
     }
      function json_success($message,$result=null){
          json("success",$message,$result);

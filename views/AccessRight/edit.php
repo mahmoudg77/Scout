@@ -5,7 +5,7 @@
         <table class="table" > 
         	 <tr><td>Group :</td><td><?$data->DrawField("groupid")?></td></tr>
          <tr><td>Model :</td><td>
-            <select name="model" class="form-control">
+            <select name="model_name" class="form-control">
                  
                  <?foreach(Framework\Models::all() as $model){?>
                     <option value="<?=$model->id?>" <?if($model->id==$data->model_name){?>selected<?}?>><?=$model->name?></option>

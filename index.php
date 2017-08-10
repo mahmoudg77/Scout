@@ -64,7 +64,7 @@ try{
                exit();
           }
     }
-     
+
      if(isset($_SESSION['USER_TOKEN'])){
          $user=new User();
          $user=$user->where('token',$_SESSION['USER_TOKEN'])->limit(1)->supperUser()->get();
@@ -73,18 +73,18 @@ try{
          $context->userid=$user->data[$user->col_pk];
          // $context->accountid=$user->accid->id;
      }
-	
+
      if(file_exists(PATH.'controller/'.str_replace(".","/",$context->controller_path).'.php') || file_exists(PATH.'framework/controller/'.str_replace(".","/",$context->controller_path).'.php')){
-          
+
          $context->controller=new $context->controller_name;
-	
+
      }else{
 
          header("HTTP/1.0 404 Not Found");
          $Error=new App\Controllers\BaseController();
          return $Error->view("Error/index",['ErrorNumber'=>404]);
 	}
-	
+
    $context->request= $request;
 
 
@@ -92,7 +92,7 @@ try{
 
      GV();
 
-
+     $context->SERIALIZED_OBJECTS=[];
       if($request->isBody()){
           $method="body".ucwords($context->method);
       }elseif($request->isPost()){
@@ -107,6 +107,9 @@ try{
 		header("HTTP/1.0 404 Not Found");
 		return $context->controller->view("Error/index",['ErrorNumber'=>404]);
 	}
+  //print_r($context->SERIALIZED_OBJECTS);
+
+
   }catch(Exception $ex){
     $message=$ex->getMessage();
     $trace=$ex->getTrace();

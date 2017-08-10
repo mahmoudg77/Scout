@@ -71,6 +71,7 @@ class Request
 	    if(!empty($this->server['HTTP_X_REQUESTED_WITH']) && strtolower($this->server['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
 	        return true;
 	    }
+        if($this->UseApi()) return true;
 	    return false;
 	}
 }

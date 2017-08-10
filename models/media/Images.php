@@ -16,14 +16,59 @@ class Images extends BLL{
     function name(){
         return $this->file_name;
     }
-    function __construct($obj,$tag,$img){
+    function __construct(){
+
+         $args = func_get_args();
+         if(count($args)==0){
+             return ['type'=>'error','message'=>'Construct function arguemts count error.'];
+         }
+         if(count($args)==1 && !is_object($args[0])){
+             return ['type'=>'error','message'=>'Construct function arguemts 1 error.'];
+         }
+         if(count($args)==1){
+             $obj=$args[0];
+             $model=get_class($obj);
+             $id=$obj->id;
+             $tag="Default";
+
+         }
+         if(count($args)==1 && !is_object($args[0])){
+             return ['type'=>'error','message'=>'Construct function arguemts 1 error.'];
+         }
+         if(count($args)==2){
+             $obj=$args[0];
+             $model=get_class($obj);
+             $id=$obj->id;
+             $tag=$args[1];
+         }
+         if(count($args)==3 && !is_object($args[0])){
+             return ['type'=>'error','message'=>'Construct function arguemts 1 error.'];
+         }
+         if(count($args)==3){
+             $obj=$args[0];
+             $model=get_class($obj);
+             $id=$obj->id;
+             $tag=$args[1];
+             $img=$args[2];
+         }
+         if(count($args)==4 && is_object($args[0])){
+             echo 'Construct function arguemts 1 error.';
+             return ['type'=>'error','message'=>'Construct function arguemts 1 error.'];
+         }
+         if(count($args)==4){
+             $model=$args[0];
+             $id=$args[1];
+             $tag=$args[2];
+             $img=$args[3];
+         }
          parent::__construct();
-         $this->data['model_id']=$obj->id;
-         $this->data['model_name']=get_class($obj);
+
+         $this->data['model_id']=$id;
+         $this->data['model_name']=$model;
          $this->tag=$tag;
          $this->img=$img;
-
     }
+
 
 	function __set($key,$value){
         parent::__set($key,$value);
@@ -41,6 +86,7 @@ class Images extends BLL{
 		}
 
     function upload(){
+        //print_r( $this->model_name);
         $model_name=str_replace("App\Models\\","",$this->model_name);
         $model_name=str_replace("\\","/",$model_name);
 
@@ -49,7 +95,7 @@ class Images extends BLL{
         if(array_key_exists($arr,'error')) throw new \Exception( $arr['error']);
 
         $this->file_name=$arr['filename'];
-         
+
         if(!$this->supperUser()->insert()) throw new \Exception( $this->error);
 
         return true;
