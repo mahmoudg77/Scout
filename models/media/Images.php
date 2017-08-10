@@ -20,10 +20,15 @@ class Images extends BLL{
 
          $args = func_get_args();
          if(count($args)==0){
-             return ['type'=>'error','message'=>'Construct function arguemts count error.'];
+             $model='undifined';
+             $id='0';
+             $tag="Default";
          }
          if(count($args)==1 && !is_object($args[0])){
-             return ['type'=>'error','message'=>'Construct function arguemts 1 error.'];
+             $model='undifined';
+             $id='0';
+             $tag="Default";
+             //return ['type'=>'error','message'=>'Construct function arguemts 1 error.'];
          }
          if(count($args)==1){
              $obj=$args[0];

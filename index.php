@@ -65,6 +65,7 @@ try{
           }
     }
 
+
      if(isset($_SESSION['USER_TOKEN'])){
          $user=new User();
          $user=$user->where('token',$_SESSION['USER_TOKEN'])->limit(1)->supperUser()->get();

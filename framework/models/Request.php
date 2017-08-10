@@ -31,7 +31,7 @@ class Request
 	}
 
 	function Check_CSRF(){
-
+         if($this->UseApi || $this->isAjax()) return true;
 	     if((!array_key_exists('__FORM_TOKEN_KEY__',$this->post) || !isset($_SESSION[$this->post['__FORM_TOKEN_KEY__']]))  && count($this->post)>0 ) return false;
 	     if((!array_key_exists('__FORM_TOKEN__',$this->post) ||  $this->post['__FORM_TOKEN__']!=$_SESSION[$this->post['__FORM_TOKEN_KEY__']]) && count($this->post)>0 ) return false;
 
