@@ -1,3 +1,15 @@
+.container{
+	position: relative;
+}
+#edit{
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	margin: 0 30px 20px 0;
+	z-index: 2;
+}
+
+/*Create Event*/
 .Ename{
 	font-family:" Bernard MT Condensed";
 }
@@ -7,4 +19,58 @@
 #myCarousel{
 	width: 72%;
 	margin-left: 163px;
+}
+.body{
+	margin-left: 100px;
+	margin-right: 100px;
+}
+#eventForm{
+	width:auto;
+	margin: 0 200px;
+}
+#eventForm input{
+	border-radius: 10px;
+}
+.info{
+	position: relative;
+}
+.info a{
+	position: absolute;
+	right: 0;
+	top:0;
+	margin: 8px 10px;
+}
+textarea{
+	resize: none;
+	background: #2F383D;
+	color:white;
+	border: none;
+	border-radius: 10px;
+}
+#sub{
+	width: 1010px;
+}
+.popover-title {
+    color: black;
+    font-size: 15px;
+}
+.popover-content {
+    color: black;
+    font-size: 10px;
+}
+/*Edit Modal*/
+.modal-content{
+	background: #2B2C30;
+}
+.modal-content input{
+	border-radius: 10px;
+}
+.eventedit{
+	width:auto;
+}
+.modal-title{
+	font-family: Broadway;
+	font-size: 30px;
+	text-align: center;
+	color : #1FB919;
 }
