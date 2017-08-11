@@ -9,7 +9,7 @@ class Login extends BaseController
 
     function index($request){
          return $this->view();
-       
+
     }
      function all($request){
         return $this->view('home');
@@ -19,7 +19,7 @@ class Login extends BaseController
 
     }
     function postLogin($request){
-    
+
          try{
                 $validate=new Validator();
                 $validate->validate($request->post,['email'=>'Requierd|Strings','password'=>'Requierd|Strings']);
@@ -29,26 +29,30 @@ class Login extends BaseController
 
                 if(!$data){
                     $message= "Invalid login data !!";
+
+                    if($request->UseApi()) return json_error($message);
 					$email=$request->post['email'];
 					$password=$request->post['password'];
-					return $this->view("index",compact('message','email','password'));                     
+					return $this->view("index",compact('message','email','password'));
                 }
 
                 $user=$data[0];
-                //$user->account();
-                //$user->account->users;
-                $_SESSION['USER_TOKEN']=$user->token;
+                
+                $user->api_token=guid();
+                $user->supperUser()->update();
+                if(!$request->UseApi()){
+                   $_SESSION['USER_TOKEN']=$user->token;
+               }
 
-                //$group=App\Auth\UserGroup::find(1);
-                //$group->members;
-                if(isset($request->get['api'])){
-                      json_success("",$user);
+
+               if($request->isAjax()){
+                    return  json_success("Login Success",$user);
                 }else{
                     return redirectTo("Dashboard");
                 }
             }catch(\Exception $ex){
-                if(isset($request->get['api'])){
-                      json_success($ex);
+                if($request->isAjax()){
+                      return json_error($ex);
                 }else{
                     $message= $ex->getMessage();
 					$email=$request->post['email'];

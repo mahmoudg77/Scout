@@ -12,8 +12,14 @@ class BaseController{
 	global $context;
         $this->class= get_called_class();
 		if($this->authRequired && !$context->user){
-			return redirectTo('Login');
-		}
+
+            if($context->request->isAjax()){
+                //return json_error("Sorry, You must be logining to access this page !!");
+            }else{
+                return redirectTo('Login');
+            }
+
+ 		}
     }
     function getModel(){
         return $this->model;
