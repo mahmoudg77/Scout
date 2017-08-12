@@ -20,6 +20,7 @@ use App\Models\Auth\User as User;
 use Framework\Request as Request;
 use Framework\Context as Context;
 use \Exception as Exception;
+use Framework\Addons\Validator as Validator;
 
 function CustomException($number=0,$message){
     if($number==8) return;
@@ -54,6 +55,7 @@ try{
      $context->controller_path=$controller__path;
 
      $request=new Request();
+     $context->request= $request;
 
     if(!$request->Check_CSRF()){
          if($request->isAjax()){
@@ -64,35 +66,50 @@ try{
                exit();
           }
     }
-     
-     if(isset($_SESSION['USER_TOKEN'])){
+    if($request->UseApi()){
+
+  //if(!in_array('api_token',$request->get) && !in_array('email',$request->post) && !in_array('password',$request->post)){
+        //    return json_error("OAuth: Invalid token or must be login !!");
+        //}
+
+        if(array_key_exists('client_token',$request->get) ){
+             $v=new Validator;
+            $v->Validate($request->get,['client_token'=>'Required|Guid']);
+            $user=new User();
+            $user=$user->where('api_token',$request->get['client_token'])->limit(1)->supperUser()->get();
+            $user=$user[0];
+            $context->user=$user;
+            $context->userid=$user->data[$user->col_pk];
+        }
+    }elseif(isset($_SESSION['USER_TOKEN'])){
          $user=new User();
          $user=$user->where('token',$_SESSION['USER_TOKEN'])->limit(1)->supperUser()->get();
          $user=$user[0];
          $context->user=$user;
          $context->userid=$user->data[$user->col_pk];
          // $context->accountid=$user->accid->id;
-     }
-	
+
+    }
+
+
      if(file_exists(PATH.'controller/'.str_replace(".","/",$context->controller_path).'.php') || file_exists(PATH.'framework/controller/'.str_replace(".","/",$context->controller_path).'.php')){
-          
+
          $context->controller=new $context->controller_name;
-	
+
      }else{
 
          header("HTTP/1.0 404 Not Found");
          $Error=new App\Controllers\BaseController();
          return $Error->view("Error/index",['ErrorNumber'=>404]);
 	}
-	
-   $context->request= $request;
+
 
 
 
 
      GV();
 
-
+     $context->SERIALIZED_OBJECTS=[];
       if($request->isBody()){
           $method="body".ucwords($context->method);
       }elseif($request->isPost()){
@@ -107,9 +124,16 @@ try{
 		header("HTTP/1.0 404 Not Found");
 		return $context->controller->view("Error/index",['ErrorNumber'=>404]);
 	}
-  }catch(Exception $ex){
+  //print_r($context->SERIALIZED_OBJECTS);
+
+
+  }catch(\Exception $ex){
+
     $message=$ex->getMessage();
-    $trace=$ex->getTrace();
+    if($request->UseApi()){
+        return json_error($message);
+    }
+    //$trace=$ex->getTrace();
     //print_r($trace);
     return view('error',compact('message','trace'));
   }

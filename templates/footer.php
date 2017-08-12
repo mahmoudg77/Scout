@@ -21,17 +21,6 @@
 						</div>
 						<!--/. End Footer Social Links -->
 
-						<!-- copyright -->
-						<div class="copyright text-center">
-							<a href="index.html">
-								<img src="<?=assets('img/logo-meghna.png')?>" alt="Meghna" />
-							</a>
-							<br />
-
-							<p>Design And Developed by <a href="http://www.themefisher.com"> Themefisher Team</a>. Copyright &copy; 2015. All Rights Reserved.</p>
-						</div>
-						<!-- /copyright -->
-
 					</div> <!-- end col lg 12 -->
 				</div> <!-- end row -->
 			</div> <!-- end container -->
@@ -84,6 +73,8 @@
 		<script src="<?=assets('js/jquery.countTo.js')?>"></script>
 		<!-- wow.min Script -->
 		<script src="<?=assets('js/wow.min.js')?>"></script>
+		
+		<script src="<?=assets('js/Event.js')?>"></script>
 		<!-- For video responsive -->
 		<script src="<?=assets('js/jquery.fitvids.js')?>"></script>
 		<!-- Grid js -->
