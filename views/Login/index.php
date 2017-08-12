@@ -56,7 +56,7 @@
                         		</div>
                             </div>
                             <div class="form-bottom">
-			             <form action="<?=actionLink('login','api/Login')?>" method="post">
+			             <form action="<?=actionLink('login','Login')?>" method="post">
 								<?=Framework\Request::CSRF()?>	
 			                    	<div class="form-group">
 			                    		<label class="sr-only" for="form-username">Username</label>
