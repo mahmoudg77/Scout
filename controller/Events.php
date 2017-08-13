@@ -3,7 +3,7 @@ namespace App\Controllers;
 
 class Events extends BaseController
 {
-    protected  $model="App\Models\lookup\Events";
+    protected  $model="App\Models\Content\Events";
     protected $authRequired=true;
 
     function index1($request){

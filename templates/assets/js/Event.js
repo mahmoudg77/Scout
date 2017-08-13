@@ -1,5 +1,8 @@
 $(document).ready(function () {
 	$('[data-toggle="popover"]').popover();
+	$('#interA').on('click',function(){
+		$('#interest').toggleClass('fa fa-star-o fa-4x fa fa-star fa-4x');
+	})
 });
 var _self = this;
 $("#eventmage").on("change", function () {
@@ -9,7 +12,7 @@ $("#eventmage").on("change", function () {
 	$("#review").attr("src", this.files[0].name);
 
 });
-//});
+
 
 function readURL(input) {
 	if (input.files && input.files[0]) {

@@ -1,4 +1,4 @@
-<?include(PATH.'templates/navHeader.php');?>
+<?if(!$request->isAjax())include(PATH.'templates/navHeader.php');?>
 
 <section id="blog-page">
 	<div class="container">
@@ -32,12 +32,6 @@
 							<span class="comments">
 										<i class="fa fa-comments"></i>18 Comments
 									</span>
-						
-
-							<span class="post-view">
-										<i class="fa fa-eye"></i>265 Views
-									</span>
-						
 
 							<span class="author">
 										<i class="fa fa-user"></i><a href="#">Admin/User</a>
@@ -345,4 +339,4 @@
 
 			</div>
 			<!-- End Widget Section -->
-			<?include(PATH.'templates/footer.php');?>
+<?if(!$request->isAjax())include(PATH.'templates/footer.php');?>
