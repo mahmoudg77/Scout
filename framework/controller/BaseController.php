@@ -51,20 +51,29 @@ class BaseController{
 
             $data= $data::find($request->get['id']);
             if(!$data){
-              header("HTTP/1.0 404 Not Found");
-          		return $this->view("Error/index",['ErrorNumber'=>404]);
+                if($request->UseApi())
+                {
+                    return json_error("Not found item");
+                }
+                header("HTTP/1.0 404 Not Found");
+                return $this->view("Error/index",['ErrorNumber'=>404]);
             }
             $data->mode='view';
+            if($request->UseApi())
+            {
+                return json_success("Getting success",$data);
+             }
 
-           //if($request->isAjax() ){
+            //if($request->isAjax() ){
            //     return json_success("Success",$data);
            // }else{
                 return $this->view(compact('data'));
             //}
         }catch(Exception $ex){
-            // if($request->isAjax() ){
-            //    return json_error($ex->getMessage());
-            // }else{
+            if($request->isAjax() ){
+               return json_error($ex->getMessage());
+            }
+            //else{
                 echo $ex->getMessage();
             // }
         }
@@ -80,11 +89,19 @@ class BaseController{
 
         $data= $data::find($request->get['id']);
         if(!$data){
+            if($request->UseApi())
+            {
+                return json_error("Not found item");
+            }
           header("HTTP/1.0 404 Not Found");
           return $this->view("Error/index",['ErrorNumber'=>404]);
         }
         $data->mode='edit';
 
+        if($request->UseApi())
+        {
+            return json_success("Getting success",$data);
+        }
          return $this->view(compact('data'));
     }
     function postAdd($request){
