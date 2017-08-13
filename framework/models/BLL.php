@@ -645,18 +645,17 @@ var $mode="view";
     public function jsonSerialize(){
         global $context;
         foreach($this->fields as $key=>$value) {
-            //print_r($value);
-            echo $this->depth;
+             
             if($value['serialize']){
-                $hash=spl_object_hash($this);//$value['relation']['class']."->".$key."(".$this->data[$this->col_pk].")";//$value['relation']['class']."->".$key."(".$this->data[$this->col_pk].")";
-              if (!isset($this->record[$hash])) {//if (!in_array($hash,$context->SERIALIZED_OBJECTS)) {
-                     //$context->SERIALIZED_OBJECTS[]=$hash;
+                $hash=(get_class($this)."(".$this->data[$this->col_pk].")"."->".$key);//$value['relation']['class']."->".$key."(".$this->data[$this->col_pk].")";//$value['relation']['class']."->".$key."(".$this->data[$this->col_pk].")";
+ 
+                    if (!in_array($hash,$context->SERIALIZED_OBJECTS)) {//if (!isset($this->record[$hash])) {//
+                     $context->SERIALIZED_OBJECTS[]=$hash;
                      $this->$key;
-                     $this->record[$hash]=true;
+                    
                 }
             }
             else{
-                //echo  $key,$value['serialize']."\r\n";
                  $this->data[$key]=null;
                  $this->relatedField[$key]=null;
             }
