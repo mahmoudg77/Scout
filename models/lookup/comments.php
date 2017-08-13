@@ -1,11 +1,11 @@
 <?
-namespace App\Models\Content;
+namespace App\Models\Lookup;
 
 use Framework\Database;
 use Framework\BLL;
 
-class SinglePost extends BLL{
-	var $tablename="posts";
+class comments extends BLL{
+	var $tablename="comments";
 	var $col_pk="id";
 
 	var $fields=[
