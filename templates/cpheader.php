@@ -125,7 +125,7 @@
     <!-- Logo -->
     <a href="<?=actionLink("","Dashboard")?>" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini">Scout</span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>Scout</b></span>
     </a>
@@ -239,8 +239,8 @@
               <li class="user-header">
                 <img src="<?=$context->user->accid->PersonalImage->thumb?>" class="img-circle" alt="User Image">
                 <p>
-                  <?=USER_NAME?> - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  <?=USER_NAME?>
+                  <small></small>
                 </p>
               </li>
               <!-- Menu Body -->

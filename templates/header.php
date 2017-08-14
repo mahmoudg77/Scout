@@ -39,6 +39,7 @@
 	<link rel="stylesheet" href="<?=assets('css/media-queries.css')?>">
 
 	<link rel="stylesheet" type="text/css" href="<?=assets('css/register.component.css')?>">
+    <link href="<?=assets('css/bootstrap-datepicker.min.css')?>" rel="stylesheet" />
 
 	<script type="text/javascript" src="<?=assets('js/registrationform.js')?>"></script>
 	<link href='https://fonts.googleapis.com/css?family=Metal Mania' rel='stylesheet'>
