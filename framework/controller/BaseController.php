@@ -21,24 +21,39 @@ class BaseController{
 
  		}
     }
+
     function getModel(){
         return $this->model;
     }
+
     function getClass(){
         return $this->class;
     }
+
     function index($request){
           return $this->view();
     }
-    function add($request){
-         return $this->view();
+
+    //Get list of all records in table.
+    function all($request){
+       global $context;
+        $i= new $this->model;
+
+       if(!$this->authRequired){
+            $i->supperUser();
+       }
+
+       $data=$i->get();
+
+       if($request->UseApi() ){
+              json_success("Success",$data);//where(['id','<','50'])->orderBy('id','desc')->limit(2,1)->
+        }else{
+            return $this->view(compact('data'));
+        }
+
     }
 
-    function find($request){
-         return $this->item($request);
-    }
-
-
+    //Get one record by ID.
     function item($request){
         try{
             $data= new $this->model;
@@ -79,6 +94,50 @@ class BaseController{
         }
     }
 
+    //GET : open empty form to add new record
+    function add($request){
+         return $this->view();
+    }
+    //POST : send form data to insert record
+    function postAdd($request){
+         global $context;
+         $data= new $this->model;
+          foreach($data->fields as $key=>$field){
+              if($field['type']!='One2many' && $field['type']!='Many2many' ){
+                    $data->data[$key]=$request->post[$key];
+              }
+          }
+
+          if(!$data->insert()){
+                    if($request->isAjax()) return json_error($data->error);
+                    throw new \Exception($data->error);
+                }
+          if($request->isAjax()) return json_success("Save Success !!".$data->error,$data);
+
+
+            redirectTo($context->controller_path."/all");
+    }
+    //BODY : send form data to insert record
+    function bodyAdd($request){
+        global $context;
+        $data= new $this->model;
+        foreach($data->fields as $key=>$field){
+            if($field['type']!='One2many' && $field['type']!='Many2many' ){
+                $data->data[$key]=$request->body[$key];
+            }
+        }
+
+        if(!$data->insert()){
+            if($request->isAjax()) return json_error($data->error);
+            throw new \Exception($data->error);
+        }
+        if($request->isAjax()) return json_success("Save Success !!".$data->error,$data);
+
+
+        redirectTo($context->controller_path."/all");
+    }
+
+    //GET : get one record by ID and open edit form to update record
     function edit($request){
         //get edit
         $data= new $this->model;
@@ -104,24 +163,7 @@ class BaseController{
         }
          return $this->view(compact('data'));
     }
-    function postAdd($request){
-         global $context;
-         $data= new $this->model;
-          foreach($data->fields as $key=>$field){
-              if($field['type']!='One2many' && $field['type']!='Many2many' ){
-                    $data->data[$key]=$request->post[$key];
-              }
-          }
-
-          if(!$data->insert()){
-                    if($request->isAjax()) return json_error($data->error);
-                    throw new \Exception($data->error);
-                }
-          if($request->isAjax()) return json_success("Save Success !!".$data->error,$data);
-
-
-            redirectTo($context->controller_path."/all");
-    }
+    //POST : send form data to update record
     function postEdit($request){
         global $context;
         $data=new $this->model;
@@ -141,11 +183,90 @@ class BaseController{
             redirectTo($context->controller_path."/all");
 
     }
-     function search($request){
+    //BODY : send form data to update record
+    function bodyEdit($request){
+        global $context;
+        $data=new $this->model;
+
+        foreach($data->fields as $key=>$field){
+            if($field['type']!='One2many' && $field['type']!='Many2many')
+                $data->data[$key]=$request->body[$key];
+        }
+        //print_r($data);
+        if(!$data->update()){
+            if($request->isAjax()) return json_error($data->error);
+            throw new \Exception($data->error);
+        }
+        if($request->isAjax()) return json_success("Save Success !!");
+
+
+        redirectTo($context->controller_path."/all");
+
+    }
+
+    //POST : delete record by id
+    function postDelete($request){
+          global $context;
+            $data= new $this->model;
+            $validate=new Validator();
+            $validate->validate($request->post,[$data->col_pk=>'Requierd|Integer']);
+
+          if(count($request->post)==0){
+             echo "Invalid Request !!";
+          }else{
+
+              $data->data[$data->col_pk]=$request->post[$data->col_pk];
+              if(!$data->delete()){
+                    if($request->isAjax()) return json_error($data->error);
+                    throw new \Exception($data->error);
+                }
+                if($request->isAjax()) return json_success("Delete Success !!");
+               redirectTo($context->controller_path."/all");
+          }
+
+    }
+    //POST : destroy record by id
+    function postDestroy($request){
+        global $context;
+
+      if(count($request->post)==0){
+         echo "Invalid Request !!";
+      }else{
+          $data=new $this->model;
+          $data->data[$data->col_pk]=$request->post[$data->col_pk];
+
+        if(!$data->destroy()){
+                    if($request->isAjax()) return json_error($data->error);
+                    throw new \Exception($data->error);
+                }
+                if($request->isAjax()) return json_success("Deleted forever Success !!");
+               redirectTo($context->controller_path."/all");      }
+
+    }
+    //POST : restore record by id
+    function postRestore($request){
+        global $context;
+
+      if(count($request->post)==0){
+         echo "Invalid Request !!";
+      }else{
+          $data=new $this->model;
+          $data->data[$data->col_pk]=$request->post[$data->col_pk];
+
+        if(!$data->restore()){
+                    if($request->isAjax()) return json_error($data->error);
+                    throw new \Exception($data->error);
+                }
+                if($request->isAjax()) return json_success("Restore Success !!");
+               redirectTo($context->controller_path."/all");
+
+         }
+      }
+
+    function search($request){
 
      }
-
-     function postSearch($request){
+    function postSearch($request){
         global $context;
 
       if(count($request->post)>0){
@@ -178,109 +299,8 @@ class BaseController{
 
     }
 
-
-     function postDelete($request){
-          global $context;
-            $data= new $this->model;
-            $validate=new Validator();
-            $validate->validate($request->post,[$data->col_pk=>'Requierd|Integer']);
-
-          if(count($request->post)==0){
-             echo "Invalid Request !!";
-          }else{
-
-              $data->data[$data->col_pk]=$request->post[$data->col_pk];
-              if(!$data->delete()){
-                    if($request->isAjax()) return json_error($data->error);
-                    throw new \Exception($data->error);
-                }
-                if($request->isAjax()) return json_success("Delete Success !!");
-               redirectTo($context->controller_path."/all");
-          }
-
-    }
-    function postDestroy($request){
-        global $context;
-
-      if(count($request->post)==0){
-         echo "Invalid Request !!";
-      }else{
-          $data=new $this->model;
-          $data->data[$data->col_pk]=$request->post[$data->col_pk];
-
-        if(!$data->destroy()){
-                    if($request->isAjax()) return json_error($data->error);
-                    throw new \Exception($data->error);
-                }
-                if($request->isAjax()) return json_success("Deleted forever Success !!");
-               redirectTo($context->controller_path."/all");      }
-
-    }
-    function postRestore($request){
-        global $context;
-
-      if(count($request->post)==0){
-         echo "Invalid Request !!";
-      }else{
-          $data=new $this->model;
-          $data->data[$data->col_pk]=$request->post[$data->col_pk];
-
-        if(!$data->restore()){
-                    if($request->isAjax()) return json_error($data->error);
-                    throw new \Exception($data->error);
-                }
-                if($request->isAjax()) return json_success("Restore Success !!");
-               redirectTo($context->controller_path."/all");
-
-         }
-      }
-
-
-    // function find1($request){
-    //     try{
-    //         $validate=new Validator();
-    //         $validate->validate($request->get,['id'=>'Requierd|Integer']);
-    //
-    //         $id=$request->get['id'];
-    //           $i= $this->model;
-    //           $data=$i::find($id);
-    //           $data->mode='view';
-    //           $prop=$request->get['prop'];
-    //
-    //            if(isset($prop)){
-    //                 $data->$prop;
-    //
-    //               if($data->$prop){
-    //
-    //                  $d=$data->$prop;
-    //
-    //                 if($request->UseApi() ){
-    //                     return json_success("Success",$d);
-    //                 }else{
-    //                     $type=get_class($d[0]);
-    //                     $s=new $type;
-    //                     return view('BaseController/list',['data'=>$d]);
-    //                 }
-    //               }else{
-    //                   throw new Exception("Invalid Request !");
-    //                   exit();
-    //               }
-    //
-    //           }
-    //        if($request->UseApi() ){
-    //             return json_success("Success",$data);
-    //         }else{
-    //             return $this->view(compact('data'));
-    //         }
-    //     }catch(Exception $ex){
-    //         if($request->UseApi() ){
-    //             return json_error($ex->getMessage());
-    //         }else{
-    //             echo $ex->getMessage();
-    //         }
-    //     }
-    // }
-     function kanban($request){
+   
+    function kanban($request){
           $i= new $this->model;
           $data=$i->get();
 
@@ -291,25 +311,8 @@ class BaseController{
         }
     }
 
-     function all($request){
-       global $context;
-        $i= new $this->model;
 
-       if(!$this->authRequired){
-            $i->supperUser();
-       }
-
-       $data=$i->get();
-
-       if($request->UseApi() ){
-              json_success("Success",$data);//where(['id','<','50'])->orderBy('id','desc')->limit(2,1)->
-        }else{
-            return $this->view(compact('data'));
-        }
-
-    }
-
-   function view(){
+    function view(){
        global $request;
         $args=func_get_args();
         if(count($args)==0){
@@ -363,7 +366,9 @@ class BaseController{
 
     }
 
-
+    function find($request){
+         return $this->item($request);
+    }
 
 }
 
