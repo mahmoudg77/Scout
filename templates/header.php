@@ -52,21 +52,7 @@
 	<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,300' rel='stylesheet' type='text/css'>
 	<!-- Modernizer Script for old Browsers -->
 	<script src="<?=assets('js/modernizr-2.6.2.min.js')?>"></script>
-	<script>
-		( function ( i, s, o, g, r, a, m ) {
-			i[ 'GoogleAnalyticsObject' ] = r;
-			i[ r ] = i[ r ] || function () {
-				( i[ r ].q = i[ r ].q || [] ).push( arguments )
-			}, i[ r ].l = 1 * new Date();
-			a = s.createElement( o ),
-				m = s.getElementsByTagName( o )[ 0 ];
-			a.async = 1;
-			a.src = g;
-			m.parentNode.insertBefore( a, m )
-		} )( window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga' );
-		ga( 'create', 'UA-33223163-1', 'auto' ); // UA-33223163-1 this Analytics tracking on ahmedshams mail
-		ga( 'send', 'pageview' );
-	</script>
+	
 </head>
 
 <body id="body">
@@ -204,10 +190,9 @@
 					</li>
 					<li><a href="#our-team">Team</a>
 					</li>
-					<li><a href="#pricing">Pricing</a>
-					</li>
-					<li><a href="#blog">Blog</a>
-					</li>
+                    <li>
+                        <a href="#our-team">Events</a>
+                    </li>
 					<li><a href="#contact-us">Contact</a>
 					</li>
 					<li><a data-toggle="modal" href="#myModal">Login</a>
@@ -235,19 +220,23 @@
 								<?=Framework\Request::CSRF()?>
 								<div class="form-group">
 									<label for="pwd">E-mail:</label>
-									<input style="background-color:#636466;border-radius: 20px;" type="text" class="form-control" id="email" name="email" placeholder="Enter your username">
+									<input required style="background-color:#636466;border-radius: 20px;" type="text" class="form-control" id="email" name="email" placeholder="Enter your username">
 								</div>
 								<div class="form-group">
 									<label for="pwd">Password:</label>
-									<input style="background-color:#636466; border-radius: 20px;" type="password" class="form-control" name="password" id="password" placeholder="Enter your password">
+									<input required style="background-color:#636466; border-radius: 20px;" type="password" class="form-control" name="password" id="password" placeholder="Enter your password">
 								</div>
-								<button style="border-radius: 20px;" type="submit" class="btn btn-success btn-block">Submit</button>
-								<div class="checkbox">
+								<button style="border-radius: 20px;" type="submit" class="btn btn-success btn-block">Login</button>
+								<!--<div class="checkbox">
 									<label><input type="checkbox"> Remember me</label>
-								</div>
-								<label>forgot<a href="#"> Password</a></label>
-								<label style="float:right">Create<a href="<?=actionLink("","ProfileReg")?>"> Account</a></label>
+								</div>-->
+								<!--<label>forgot<a href="#"> Password</a></label>-->
 							</form>
+                            <center>
+                                <label>------------------------------ <strong>Or</strong> ----------------------------------</label>
+                                </br>
+                                <label><a class="btn btn-default" href="<?=actionLink("","ProfileReg")?>">Create Account</a></label>
+                            </center>
 						</div>
 						<div class="modal-footer">
 							<button style="border-radius: 20px;" type="submit" name="submit" class="btn btn-danger" data-dismiss="modal">Close</button>

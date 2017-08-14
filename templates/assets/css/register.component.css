@@ -60,7 +60,7 @@ input{
   width: 500px;
   align-content: center;
 }
-div div p{
+/* div div p{
   border:1px solid #80c5f1;
   background: #80c5f1; 
   border-radius: 5px;
@@ -68,7 +68,7 @@ div div p{
   margin: 8px 4px;
   padding: 1px 2px;
   
-}
+} */
 /*----------------------------*/
 .inner-addon { 
     position: relative; 
