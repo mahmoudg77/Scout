@@ -349,7 +349,40 @@ function view($view,$arr=[]){
         $content = ob_get_contents();
         ob_end_clean();
 
-        return $content;
+
+        if(in_array('sys_admin',array_getcolumn( $context->user->groups,'groupkey'))) return $content;
+
+        preg_match_all("/<(.*?)>/u",$content,$tags);
+
+        //print_r($tags);
+        foreach( $tags[0] As $tag){
+            preg_match_all("/(groups)=[\"']?((?:.(?![\"']?\s+(?:\S+)=|[>\"']))+.)[\"']?/u",$tag,$str_groups);
+
+            //print_r($str_groups);
+
+            if(count($str_groups[2])>0){
+                $sel_groups=explode(",",$str_groups[2][0]);
+
+                //echo ($str_groups[2][0]);
+                //echo ($tag);
+                $allow = False;
+                foreach($sel_groups as $g){
+                    $allow = in_array($g,array_getcolumn( $context->user->groups,'groupkey'));
+                    if($allow) break;
+                }
+
+                If($allow == False) {
+                    $newtag = str_replace($str_groups[0][0],"style='display:none;'",$tag) ;
+                    $content = str_replace($tag, $newtag,$content);
+                }else{
+                    $newtag = str_replace($str_groups[0][0],"",$tag) ;
+                    $content = str_replace($tag, $newtag,$content);
+                }
+            }
+
+        }
+
+         return $content;
 
     }
 
@@ -520,7 +553,7 @@ function guid(){
         mt_srand((double)microtime()*10000);//optional for php 4.2.0 and up.
         $charid = strtoupper(md5(uniqid(rand(), true)));
         $hyphen = chr(45);// "-"
-        $uuid = 
+        $uuid =
                 substr($charid, 0, 8).$hyphen
                 .substr($charid, 8, 4).$hyphen
                 .substr($charid,12, 4).$hyphen

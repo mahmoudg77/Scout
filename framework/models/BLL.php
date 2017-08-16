@@ -358,9 +358,6 @@ var $mode="view";
 		 if($where!=null)$t->where($where);
 		$rows= $t->where($classid ,$this->$thisid)->supperUser()->get();
 
-
-	    //echo $t->tablename,$classid ,$this->$thisid,"\n\r";
-	   // if(!$rows) $rows=[$t];
 		return $rows;
 
 	}
@@ -375,11 +372,7 @@ var $mode="view";
     if($where!=null)$t->where($where);
 
    		$rows= $t->where($classid,$this->data[$foraginkey])->limit(1)->supperUser()->get();
-			// echo $t->tablename,$classid,$this->data[$foraginkey].'</br>';
-		 // if(!$rows) $rows=[$t];
-	    //print_r([$classid,$this->data[$foraginkey]]);
-			//if($classid=="Profile_ID" && $this->data[$foraginkey]=="3") print_r($rows);
-
+		
 		return $rows[0];
 
 	}
@@ -554,9 +547,7 @@ var $mode="view";
 		return $returned;
 
 
-	   //   echo ($str_whr==""?"":" where ".$str_whr).($str_order==""?"":" order by ".$str_order).($this->limit==""?"":" limit ".$this->limit.($this->offset==""?"":",".$this->offset));
-	//	return $TYPE::select_where_static(($str_whr==""?"":" where ".$str_whr).($str_order==""?"":" order by ".$str_order).($this->limit==""?"":" limit ".$this->limit.($this->offset==""?"":",".$this->offset)));
-	}
+		}
 
 
 
@@ -576,7 +567,7 @@ var $mode="view";
 
 
 	    }
-	   //echo $str_whr;
+	 
 	    return $str_whr;
 
 	}
@@ -636,7 +627,7 @@ var $mode="view";
 		$TYPE=get_called_class();
 		$data=new 	$TYPE;
  		$list=$data->where($data->col_pk,$id)->get();
-		//$list= $TYPE::select_where_static("where id=".$id);
+		
 		return $list[0];
 	}
 
@@ -676,8 +667,7 @@ var $mode="view";
 	function DrawField($field,$widget="",$mode="",$attrs=[]){
 	    global $context;
         if($mode=="")$mode=$this->mode;
-        // if($mode=="")$mode="view";
-
+       
         if($widget==""){
             // Default widget
             if(in_array($this->fields[$field]['type'],['Many2one','Boolean'])){
@@ -695,8 +685,7 @@ var $mode="view";
             }
         }
         
-		//echo $this->fields[$field]['type'];
-        // include_once('Request.php');
+		
         switch($mode){
             case "edit":
             case "add":
@@ -783,7 +772,7 @@ var $mode="view";
                 break;
             default:
                 if($this->fields[$field]['type']=='Many2one'){
-                    //print_r( $this->fields[$field]);
+                
                 ?>
                         <a target="_blank" class="open-modal" href="/<?=LANG?>/<?=$this->fields[$field]['relation']['controller']?>/item/<?=$this->$field->id?>" <?foreach($attrs as $key=>$attr){?><?=' '.$key.'="'.$attr.'" '?><?}?>><?=$this->$field->name?></a>
                 <?
@@ -806,7 +795,7 @@ var $mode="view";
                              <?}
                             break;
 
-                       case "tags":
+                       case "link":
                             if(array_key_exists('class',$attrs)){$attrs['class'].=' btn-link ';}else{$attrs['class'].=' btn-link ';}
                             ?>
                               <form target="_blank" action="/<?=LANG?>/<?=$this->fields[$field]['relation']['controller']?>/search" method="post" >
@@ -874,7 +863,7 @@ trait NotifyModel {
 
 
 trait ApprovelModel {
-   
+    //protected $workflowSteps=1;
     function __construct(){
         $this->fields['approval_request']=['name'=>'approval_request',
                                        'type'=>'int',
@@ -895,8 +884,6 @@ trait ApprovelModel {
     }
    
   
-
-        
      function approve() {
          global $context;
          $this->approval_by=intval($context->user->id);
