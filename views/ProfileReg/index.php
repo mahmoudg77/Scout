@@ -6,39 +6,38 @@
           <?=Framework\Request::CSRF()?>
             <span>User Info</span>
             <div class="container-fluid " id="userInfo">
-                <div class="form-group profReg">
-                    <label class="col-sm-2 control-label"  for="firstname">First name</label>
+				<div>
+                    <label class="col-sm-2 control-label  profReg" for="firstname">First name</label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control" id="firstName" name="firstname" required />
+                        <input type="text" class="form-control" id="firstName" name="firstname" required/>
                     </div>
                 </div>
-
-                <div class="form-group profReg">
-                    <label class="col-sm-3 control-label" for="secondname">Second name</label>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label  profReg" for="secondname">Second name</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" id="secondname" name="secondname" required/>
                     </div>
                 </div>
-                <div class="form-group profReg ">
-                    <label class="col-sm-2 control-label" for="thirdname">Third name</label>
+                <div class="form-group  ">
+                    <label class="col-sm-2 control-label  profReg" for="thirdname">Third name</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" id="thirdname" name="thirdname" required/>
                     </div>
                 </div>
 
-                <div class="form-group profReg">
-                    <label class="col-sm-3 control-label" for="fourthname">Fourth name</label>
+                <div class="form-group ">
+                    <label class="col-sm-3 control-label  profReg" for="fourthname">Fourth name</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" id="fourthname" name="fourthname" required />
                     </div>
                 </div>
-                <div class="form-group profReg  ">
-                    <label class="col-sm-2 control-label" for="nationalId">National ID</label>
+                <div class="form-group   ">
+                    <label class="col-sm-2 control-label  profReg" for="nationalId">National ID</label>
                     <div class="col-sm-3">
-                        <input type="number" class="form-control" id="nationalId" name="nationalId" required/>
+                        <input type="number" class="form-control no-spin" id="nationalId" name="nationalId" required/>
                     </div>
 
-                    <label class="col-sm-3 control-label" for="birthdate">Birthdate</label>
+                    <label class="col-sm-3 control-label  profReg" for="birthdate">Birthdate</label>
                     <div class="col-sm-3">
                         <input type="date" class="form-control date" id="birthdate" name="birthdate" required/>
                     </div>
@@ -46,17 +45,17 @@
 
                 <div class="row"></div>
 
-                <div class="form-group profReg">
-                    <label class="col-sm-2 control-label" for="email">Email</label>
+                <div class="form-group ">
+                    <label class="col-sm-2 control-label  profReg" for="email">Email</label>
                     <div class="col-sm-9 ">
                         <input type="email" class="form-control" id="email" name="email" required/>
                     </div>
                 </div>
 
                 <div class="row"></div>
-                <div class="form-group profReg" id="phNos">
-                         <label class="col-sm-2 control-label" for="phone">Phone</label>
-                        <div class="form-group profReg">
+                <div class="form-group " id="phNos">
+                         <label class="col-sm-2 control-label  profReg" for="phone">Phone</label>
+                        <div class="form-group ">
                             <div class="col-sm-5 col-md-offset-0">
                                 <div class="input-group">
   									<input type="text" class="form-control" id="phone" name="phone" required/>
@@ -98,8 +97,8 @@
                 </div>
 
                 <div class="row"></div>
-                <div class="form-group profReg  col-md-offset-0">
-                    <label class="col-sm-2 control-label" for="address">Address</label>
+                <div class="form-group   col-md-offset-0">
+                    <label class="col-sm-2 control-label  profReg" for="address">Address</label>
                     <!--t3diiiiiiiiiiiiiiiiilll-->
                     <div class="col-sm-9">
                        <input type="text" class="form-control" id="address" name="address" required/>
@@ -133,9 +132,9 @@
                 </div>
 
                 <div class="row"></div>
-                <div class="form-group profReg">
+                <div class="form-group ">
                     <!-- <form name="form" role="form"> -->
-                        <label class="col-sm-2 control-label">Hobbies</label>
+                        <label class="col-sm-2 control-label  profReg">Hobbies</label>
                         <div class="col-sm-5">
 
                         <div class="input-group">
@@ -160,8 +159,8 @@
                 </div>
 
                 <div class="row"></div>
-                <div class="form-group profReg">
-                    <label class="col-sm-2 control-label">Gender </label>
+                <div class="form-group ">
+                    <label class="col-sm-2 control-label  profReg">Gender </label>
                     <div>
 
                         <div class="col-sm-9">
@@ -170,12 +169,12 @@
                         </div>
                     </div>
 
-                    <label class="col-sm-2 control-label">Profile Img</label>
+                    <label class="col-sm-2 control-label  profReg">Profile Img</label>
                     <div class="col-sm-4">
                         <input id="proimage" type="file" style="width:200px;" name="proImg" required>
                     </div>
 
-                    <label class="col-sm-2 control-label" for="covimage">Cover img</label>
+                    <label class="col-sm-2 control-label  profReg" for="covimage">Cover img</label>
                     <div class="col-sm-3">
                         <input id="covimage" type="file" style="width:200px;" name="cvrImg" required>
                     </div>
@@ -185,7 +184,7 @@
             <!--=========================================================================================-->
             <span>Scout Info</span>
             <div class="container-fluid" id="Scoutinfo">
-                <div class="form-group profReg">
+                <div class="form-group ">
                     <label class="col-sm-2" for="position">Position</label>
                     <div class="col-sm-5">
                         <div class="styled-select blue semi-square">
@@ -209,9 +208,9 @@
                 </div>
 
                 <div class="row"></div>
-                <div class="form-group profReg">
+                <div class="form-group ">
                     <!-- <form name="form" role="form"> -->
-                        <label class="col-sm-2 control-label" for="campains">Campains</label>
+                        <label class="col-sm-2 control-label  profReg" for="campains">Campains</label>
                         <div class="col-sm-5">
 
                             <div class="input-group">
@@ -245,9 +244,9 @@
                 </div>
 
                 <div class="row"></div>
-                <div class="form-group profReg">
+                <div class="form-group ">
                     <!-- <form name="form" role="form"> -->
-                        <label class="col-sm-2 control-label">Trains</label>
+                        <label class="col-sm-2 control-label  profReg">Trains</label>
                         <div class="col-sm-5">
 
                             <div class="input-group">
@@ -280,9 +279,9 @@
                 </div>
 
                 <div class="row"></div>
-                <div class="form-group profReg">
+                <div class="form-group ">
                     <!-- <form name="form" role="form"> -->
-                        <label class="col-sm-2 control-label">Experience</label>
+                        <label class="col-sm-2 control-label  profReg">Experience</label>
                         <div class="col-sm-5">
 
                              <div class="input-group">
@@ -310,10 +309,10 @@
             </div>
 
             <!--=========================================================================================-->
-            <div class="form-group profReg">
+            <div class="form-group ">
                 <div class="col-sm-9 col-sm-offset-3">
                     <input type="submit" class="btn btn-info" value="Register"/>
-                    <a href="#" class="btn btn-link">Cancel</a>
+                    <a href="<?=actionLink("","Home")?>" class="btn btn-link">Cancel</a>
                 </div>
             </div>
         </form>
