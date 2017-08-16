@@ -6,33 +6,33 @@
           <?=Framework\Request::CSRF()?>
             <span>User Info</span>
             <div class="container-fluid " id="userInfo">
-                <div class="labelCSS">
+                <div class="form-group profReg">
                     <label class="col-sm-2 control-label"  for="firstname">First name</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" id="firstName" name="firstname" required />
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group profReg">
                     <label class="col-sm-3 control-label" for="secondname">Second name</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" id="secondname" name="secondname" required/>
                     </div>
                 </div>
-                <div class="form-group ">
+                <div class="form-group profReg ">
                     <label class="col-sm-2 control-label" for="thirdname">Third name</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" id="thirdname" name="thirdname" required/>
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group profReg">
                     <label class="col-sm-3 control-label" for="fourthname">Fourth name</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" id="fourthname" name="fourthname" required />
                     </div>
                 </div>
-                <div class="form-group  ">
+                <div class="form-group profReg  ">
                     <label class="col-sm-2 control-label" for="nationalId">National ID</label>
                     <div class="col-sm-3">
                         <input type="number" class="form-control" id="nationalId" name="nationalId" required/>
@@ -46,7 +46,7 @@
 
                 <div class="row"></div>
 
-                <div class="form-group">
+                <div class="form-group profReg">
                     <label class="col-sm-2 control-label" for="email">Email</label>
                     <div class="col-sm-9 ">
                         <input type="email" class="form-control" id="email" name="email" required/>
@@ -54,9 +54,9 @@
                 </div>
 
                 <div class="row"></div>
-                <div class="form-group" id="phNos">
+                <div class="form-group profReg" id="phNos">
                          <label class="col-sm-2 control-label" for="phone">Phone</label>
-                        <div class="form-group">
+                        <div class="form-group profReg">
                             <div class="col-sm-5 col-md-offset-0">
                                 <div class="input-group">
   									<input type="text" class="form-control" id="phone" name="phone" required/>
@@ -98,7 +98,7 @@
                 </div>
 
                 <div class="row"></div>
-                <div class="form-group  col-md-offset-0">
+                <div class="form-group profReg  col-md-offset-0">
                     <label class="col-sm-2 control-label" for="address">Address</label>
                     <!--t3diiiiiiiiiiiiiiiiilll-->
                     <div class="col-sm-9">
@@ -133,7 +133,7 @@
                 </div>
 
                 <div class="row"></div>
-                <div class="form-group">
+                <div class="form-group profReg">
                     <!-- <form name="form" role="form"> -->
                         <label class="col-sm-2 control-label">Hobbies</label>
                         <div class="col-sm-5">
@@ -160,7 +160,7 @@
                 </div>
 
                 <div class="row"></div>
-                <div class="form-group">
+                <div class="form-group profReg">
                     <label class="col-sm-2 control-label">Gender </label>
                     <div>
 
@@ -185,7 +185,7 @@
             <!--=========================================================================================-->
             <span>Scout Info</span>
             <div class="container-fluid" id="Scoutinfo">
-                <div class="form-group">
+                <div class="form-group profReg">
                     <label class="col-sm-2" for="position">Position</label>
                     <div class="col-sm-5">
                         <div class="styled-select blue semi-square">
@@ -209,7 +209,7 @@
                 </div>
 
                 <div class="row"></div>
-                <div class="form-group">
+                <div class="form-group profReg">
                     <!-- <form name="form" role="form"> -->
                         <label class="col-sm-2 control-label" for="campains">Campains</label>
                         <div class="col-sm-5">
@@ -245,7 +245,7 @@
                 </div>
 
                 <div class="row"></div>
-                <div class="form-group">
+                <div class="form-group profReg">
                     <!-- <form name="form" role="form"> -->
                         <label class="col-sm-2 control-label">Trains</label>
                         <div class="col-sm-5">
@@ -280,7 +280,7 @@
                 </div>
 
                 <div class="row"></div>
-                <div class="form-group">
+                <div class="form-group profReg">
                     <!-- <form name="form" role="form"> -->
                         <label class="col-sm-2 control-label">Experience</label>
                         <div class="col-sm-5">
@@ -310,7 +310,7 @@
             </div>
 
             <!--=========================================================================================-->
-            <div class="form-group">
+            <div class="form-group profReg">
                 <div class="col-sm-9 col-sm-offset-3">
                     <input type="submit" class="btn btn-info" value="Register"/>
                     <a href="#" class="btn btn-link">Cancel</a>

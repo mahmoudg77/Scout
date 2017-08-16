@@ -15,7 +15,7 @@
   padding:10px 0;
   margin-bottom: 12px;
 }
-label{
+.profReg label{
   margin-top: 10px;
 
 }
@@ -52,7 +52,6 @@ input{
   outline:none;
 }
 .containeer{
-  border: 1px solid silver;
   border: 1px solid silver;
   border-radius: 9px;
 
