@@ -1,5 +1,5 @@
 <?
-namespace App\Models\Lookup;
+namespace App\Models\Content;
 
 use Framework\Database;
 use Framework\BLL;
