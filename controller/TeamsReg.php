@@ -10,6 +10,14 @@ class TeamsReg extends BaseController
     protected  $model="App\Models\Lookup\TeamsReg";
     protected $authRequired=true;
 
+    function index($request){
+        global $context;
+		if(!$context->user->allow($this->model,"add")){
+			header("HTTP/1.0 404 Not Found");
+            return $this->view("Error/index",['ErrorNumber'=>401]);
+		}
+        parent::index($request);
+    }
   function postAdd($request)
 	{
       $teams=new App\Models\Admin\Teams;

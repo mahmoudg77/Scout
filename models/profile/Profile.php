@@ -78,7 +78,7 @@ class Profile extends BLL{
                 }
                    $user->mode="edit";
 
-                return ['DoActionRequired'=>true,'form'=>view("Users/userinfo",['data'=>$user])];
+                return ['DoActionRequired'=>true,'form'=>view("Users/add",['data'=>$user])];
             }
 
             //  function approve(){

@@ -142,7 +142,7 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
-          <li class="dropdown messages-menu">
+          <li class="dropdown messages-menu"  groups="sys_admin">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
               <span class="label label-success">4</span>
@@ -172,7 +172,7 @@
             </ul>
           </li>
           <!-- Notifications: style can be found in dropdown.less -->
-          <li class="dropdown notifications-menu">
+          <li class="dropdown notifications-menu"  groups="sys_admin">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
               <span class="label label-warning">10</span>
@@ -194,7 +194,7 @@
             </ul>
           </li>
           <!-- Tasks: style can be found in dropdown.less -->
-          <li class="dropdown tasks-menu">
+          <li class="dropdown tasks-menu"  groups="sys_admin">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-flag-o"></i>
               <span class="label label-danger">9</span>
@@ -301,7 +301,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="treeview">
+        <li class="treeview" groups="sys_admin">
   			<a href="#">
   				<i class="fa fa-files-o"></i>
   				<span>Profile</span>
@@ -309,7 +309,7 @@
                     <i class="fa fa-angle-right pull-right"></i>
                   </span>
   			</a>
-			   <ul class="treeview-menu">
+			   <ul class="treeview-menu" >
       			<li><a class="menu-item"  href="<?=actionLink("all","Profile")?>"><i class="fa fa-circle-o"></i> Profiles</a></li>
       			<li><a class="menu-item"  href="<?=actionLink("all","Comp")?>"><i class="fa fa-circle-o"></i> Camps</a></li>
       			<li><a class="menu-item"  href="<?=actionLink("all","CompUserLog")?>"><i class="fa fa-circle-o"></i> Comps Log</a></li>
@@ -319,7 +319,7 @@
 		    </ul>
 	    </li>
 
-      <li class="treeview">
+      <li class="treeview"  groups="team_admin,branch_admin,office_admin,org_admin,country_admin">
       <a href="#">
         <i class="fa fa-files-o"></i>
         <span>Register</span>
@@ -327,13 +327,13 @@
                   <i class="fa fa-angle-right pull-right"></i>
                 </span>
       </a>
-       <ul class="treeview-menu">
-         <li><a class="menu-item" href="<?=actionLink("","TeamsReg")?>"><i class="fa fa-circle-o"></i> Forms</a></li>
-         <li><a class="menu-item" href="<?=actionLink("all","Waitinglist")?>"><i class="fa fa-circle-o"></i> Approvels</a></li>
+       <ul class="treeview-menu" >
+         <li><a class="menu-item" href="<?=actionLink("","TeamsReg")?>" groups="team_admin"><i class="fa fa-circle-o" ></i> Team Register</a></li>
+         <li><a class="menu-item" href="<?=actionLink("all","Waitinglist")?>"  groups="branch_admin,office_admin,org_admin,country_admin"><i class="fa fa-circle-o"></i> Approvels</a></li>
       </ul>
     </li>
 
-    <li class="treeview">
+    <li class="treeview"  groups="sys_admin">
     <a href="#">
       <i class="fa fa-files-o"></i>
       <span>Administrator</span>
@@ -347,7 +347,7 @@
        <li><a class="menu-item" href="<?=actionLink("all","RegisteryUserLog")?>"><i class="fa fa-circle-o"></i> Register User</a></li>
     </ul>
   </li>
-  <li class="treeview">
+  <li class="treeview"  groups="sys_admin">
     <a href="#">
       <i class="fa fa-files-o"></i>
       <span>Setting</span>
@@ -363,7 +363,7 @@
        <li><a class="menu-item" href="<?=actionLink("all","Studies")?>"><i class="fa fa-circle-o"></i> Studies</a></li>
     </ul>
   </li>
-  <li class="treeview">
+  <li class="treeview"  groups="sys_admin">
     <a href="#">
       <i class="fa fa-files-o"></i>
       <span>Media</span>
@@ -375,7 +375,7 @@
        <li><a class="menu-item" href="<?=actionLink("all","Images")?>"><i class="fa fa-circle-o"></i> Images</a></li>
     </ul>
   </li>
-<li class="treeview">
+<li class="treeview"  groups="sys_admin">
     <a href="#">
         <i class="fa fa-files-o"></i>
         <span>Security</span>
