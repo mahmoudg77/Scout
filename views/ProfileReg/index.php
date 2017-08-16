@@ -40,7 +40,7 @@
 
                     <label class="col-sm-3 control-label" for="birthdate">Birthdate</label>
                     <div class="col-sm-3">
-                        <input type="date" class="form-control" id="birthdate" name="birthdate" required/>
+                        <input type="date" class="form-control date" id="birthdate" name="birthdate" required/>
                     </div>
                 </div>
 
@@ -322,12 +322,11 @@
 
     <?if(!$request->isAjax())include(PATH.'templates/footer.php');?>
 <script>
-$(function(){
-  $("#phoneField").click(function(e){
-    alert("OK");
-      e.preventDefault();
-      addfield($(this).attr("id"));
-  });
+    $(function () {
+        $("#phoneField").click(function (e) {
+            e.preventDefault();
+            addfield($(this).attr("id"));
+        });
 
-})
+    });
 </script>

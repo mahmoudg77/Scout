@@ -12,11 +12,11 @@
 							<ul>
 								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+								<!--<li><a href="#"><i class="fa fa-google-plus"></i></a></li>-->
 								<li><a href="#"><i class="fa fa-youtube"></i></a></li>
-								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+								<!--<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
 								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-								<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+								<li><a href="#"><i class="fa fa-pinterest"></i></a></li>-->
 							</ul>
 						</div>
 						<!--/. End Footer Social Links -->
@@ -81,7 +81,8 @@
 		<!--<script src="<?=assets('js/grid.js')?>"></script>-->
 		<!-- Custom js -->
 		<script src="<?=assets('js/custom.js')?>"></script>
-		<script src="<?=assets('js/.js')?>"></script>
+ <script src="<?=assets('js/bootstrap-datepicker.min.js')?>"></script>
+
 		<!-- Ajax Form-->
 		<script src="http://malsup.github.com/jquery.form.js"></script>
 <script>
@@ -104,6 +105,10 @@ $(function(){
 	$("#btnLogin").click(function(event){
 		event.preventDefault();
  		$("#myModal").modal();
+	});
+	$('input[type="date"]').datepicker({
+	    format: "yyyy-mm-dd",
+	    language: "ar"
 	});
 })
 </script>
