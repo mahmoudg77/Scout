@@ -3,7 +3,7 @@ namespace App\Controllers;
 
 class CreateEvent extends BaseController
 {
-    protected  $model="App\Models\Content\CreateEvent";
+    protected  $model="App\Models\lookup\CreatePost";
     protected $authRequired=true;
 
     function index1($request){
