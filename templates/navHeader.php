@@ -37,8 +37,9 @@
 	<link rel="stylesheet" href="<?=assets('css/main.css')?>">
 	<!-- Media Queries -->
 	<link rel="stylesheet" href="<?=assets('css/media-queries.css')?>">
-	
+
 	<link rel="stylesheet" href="<?=assets('css/Events.css')?>">
+	<link rel="stylesheet" href="<?=assets('css/flostingpoint.css')?>">
 
 	<link rel="stylesheet" type="text/css" href="<?=assets('css/register.component.css')?>">
 
@@ -72,13 +73,14 @@
 </head>
 
 <body id="body">
+
 	<!--
 	    Start Preloader
 	    ==================================== -->
 	<!--<div id="loading-mask">-->
-		<!--<div class="loading-img">-->
-<!--			<img alt="Arab Scout" src="<?=assets('img/loader 2.gif')?>"/>-->
-		<!--</div>
+	<!--<div class="loading-img">-->
+	<!--			<img alt="Arab Scout" src="<?=assets('img/loader 2.gif')?>"/>-->
+	<!--</div>
 	</div>-->
 	<!--
         End Preloader
@@ -96,13 +98,7 @@
                               <span class="icon-bar"></span>
                               <span class="icon-bar"></span>
                           </button>
-
-
-
-
-
-
-
+			
 				<!-- /responsive nav button -->
 
 				<!-- logo -->
@@ -111,13 +107,7 @@
         							<img src="<?=assets('img/ArabScoutHeaderLogo.png')?>" alt="ArabScout" />
         						</h1>
         					</a>
-
-
-
-
-
-
-
+			
 				<!-- /logo -->
 			</div>
 
@@ -148,11 +138,30 @@
 
 		</div>
 	</header>
+<!--
+	<a id="fixedA"><i class="fa fa-plus-circle fa-4x" aria-hidden="true"></i></a>
+		<a id="AE"><i class="fa fa-plus-circle fa-3x demo" aria-hidden="true"></i></a>
+		<a id="AP"><i class="fa fa-plus-circle fa-3x demo" aria-hidden="true"></i></a>
+-->
+<div id="container-floating">
+
+  <a class="nd3 nds" data-toggle="tooltip" data-placement="left" data-original-title="contract@gmail.com"><img class="reminder">
+    <p class="letter">P</p>
+  </a>
+  <a class="nd1 nds" data-toggle="tooltip" data-placement="left" data-original-title="Edoardo@live.it"><img class="reminder">
+    <p class="letter">E</p>
+  </a>
+  <div id="floating-button" data-toggle="tooltip" data-placement="left" data-original-title="Create" onclick="newmail()">
+    <p class="plus">+</p>
+    <img class="edit" src="https://ssl.gstatic.com/bt/C3341AA7A1A076756462EE2E5CD71C11/1x/bt_compose2_1x.png">
+  </div>
+
+</div>
+
 	<div class="page-content">
 		<div class="row">
 			<div id="myModal" class="modal fade" role="dialog">
 				<div class="modal-dialog ">
-
 					<!-- Modal content-->
 					<div class="w3-modal-content w3-animate-opacity" style="border-radius: 20px; background-color:#333439;">
 						<div class="modal-header">

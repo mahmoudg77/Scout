@@ -28,3 +28,12 @@ function readURL(input) {
 		reader.readAsDataURL(input.files[0]);
 	}
 };
+
+$("#fixedA").on('click',function(){
+	alert("addP/E");
+    $("#AE").animate({margin: "0 100px 60px 0"});
+	alert("addP/E");
+	$("#AP").animate({margin: "0 100px 60px 0"});
+	alert("addP/E");
+});
+

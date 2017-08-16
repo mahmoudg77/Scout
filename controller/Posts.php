@@ -1,9 +1,9 @@
 <?
 namespace App\Controllers;
 
-class CreateEvent extends BaseController
+class Posts extends BaseController
 {
-    protected  $model="App\Models\Content\CreateEvent";
+    protected  $model="App\Models\Content\Posts";
     protected $authRequired=true;
 
     function index1($request){
