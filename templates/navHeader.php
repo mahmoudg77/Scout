@@ -40,6 +40,7 @@
 
 	<link rel="stylesheet" href="<?=assets('css/Events.css')?>">
 	<link rel="stylesheet" href="<?=assets('css/flostingpoint.css')?>">
+	<link rel="stylesheet" href="<?=assets('css/Card.css')?>">
 
 	<link rel="stylesheet" type="text/css" href="<?=assets('css/register.component.css')?>">
 
@@ -118,17 +119,11 @@
 					</li>
 					<li><a href="#about">About Us</a>
 					</li>
-					<li><a href="#services">Services</a>
-					</li>
-					<li><a href="#showcase">Portfolio</a>
-					</li>
-					<li><a href="#our-team">Team</a>
-					</li>
-					<li><a href="#pricing">Pricing</a>
-					</li>
-					<li><a href="#blog">Blog</a>
-					</li>
+                    <li><a href="#our-team">Events</a>
+                    </li>
 					<li><a href="#contact-us">Contact</a>
+					</li>
+					<li><a href="<?=actionLink("","ProfileReg")?>">Register</a>
 					</li>
 					<li><a data-toggle="modal" href="#myModal">Login</a>
 					</li>
