@@ -12,6 +12,7 @@ class TeamsReg extends BaseController
 
     function index($request){
         global $context;
+       
 		if(!$context->user->allow($this->model,"add")){
 			header("HTTP/1.0 404 Not Found");
             return $this->view("Error/index",['ErrorNumber'=>401]);
