@@ -456,6 +456,7 @@ var $mode="view";
 	    }else{
 	         $this->order_arr[]=$args;
 	    }
+	   
            return $this;
 	}
 
@@ -483,9 +484,8 @@ var $mode="view";
 
 		if(!$this->withSupperUser){
 		   if(!$context->user) throw new Exception("401 Access Denied !");
-
-		   if(!$context->user->allow($TYPE,"view")) throw new Exception("403 Not Authorized !");
-
+ 		   if(!$context->user->allow($TYPE,"view")) throw new Exception("403 Not Authorized !");
+            
             //print_r($context->user);
             $filter= $context->user->allowfilter($TYPE,'view');
 
@@ -520,6 +520,10 @@ var $mode="view";
   		$stmt=$this->Database->prepare("select * from `$this->tablename` ".($str_whr==""?"":" where ".$str_whr).
   		                            ($str_order==""?"":" order by ".$str_order).
   		                            ($this->limit==""?"":" limit ".$this->limit.($this->offset==""?"":",".$this->offset)));
+  		                            
+  		                            /*echo "select * from `$this->tablename` ".($str_whr==""?"":" where ".$str_whr).
+  		                            ($str_order==""?"":" order by ".$str_order).
+  		                            ($this->limit==""?"":" limit ".$this->limit.($this->offset==""?"":",".$this->offset));*/
   	    if(! $stmt->execute($this->where_values)){
 					// echo $this->tablename , ":",$stmt->errorInfo()[2];
 				}
@@ -586,7 +590,15 @@ var $mode="view";
     	        if(count($con)==3){
     	            if($con[1]=='like' || $con[1]=='not like'){
     	                $w=$con[0].' '.$con[1].' ?';
-    	                 $this->where_values[]="'%".$con[2]."%'";
+    	                 $this->where_values[]="%".$con[2]."%";
+    	            }
+    	            else if($con[1]=='llike'){
+    	                $w=$con[0].' like ?';
+    	                 $this->where_values[]=$con[2]."%";
+    	            }
+    	            else if($con[1]=='rlike' ){
+    	                $w=$con[0].' like ?';
+    	                 $this->where_values[]="%".$con[2];
     	            }
     	            else if($con[1]=='in' || $con[1]=='not in'){
     	                 $w=json_encode($con[2]);
@@ -614,18 +626,22 @@ var $mode="view";
 	    if(count($this->order_arr)==0)return "";
 	    foreach($this->order_arr as $order){
     	        if(count($order)==1){
-    	            $str_order.=($str_order==""?"":" ,").$order[0]."=1";
+    	            $str_order.=($str_order==""?"":" ,").$order[0];
     	        }
 
     	        if(count($order)==2){
     	            $str_order.=($str_order==""?"":" , ").$order[0]." ".$order[1];
     	        }
 	    }
+	   
         return $str_order;
 	}
-	static function find($id){
+	static function find($id,$supperUser=false){
 		$TYPE=get_called_class();
 		$data=new 	$TYPE;
+		if($supperUser){
+		    $data->supperUser();
+		}
  		$list=$data->where($data->col_pk,$id)->get();
 		
 		return $list[0];

@@ -1,6 +1,6 @@
 <?
 namespace App\Models\Profile;
-
+use App;
 use Framework\Database;
 use Framework\BLL;
 
@@ -66,34 +66,37 @@ class Profile extends BLL{
 
             function onApproved(){
                 global $context;
-                $obj =new \App\Models\Auth\User;
-                $user=$obj->where('accid',$this->id)->limit(1)->get();
-                if(count($user)>0){
-                     $user=$user[0];
-                }else{
-                     $user=new \App\Models\Auth\User;
-                     $user->name=$this->name;
-                     $user->email=$this->emails[0]->contactValue;
-                     $user->accid=$this->id;
+                $user=new App\Models\Auth\User;
+                if(count($user->supperUser()->where('accid',$this->id)->limit(1)->get())==0){
+                    $user=new App\Models\Auth\User;
+                    $user->email=$this->National_Number;
+                    $user->password=md5('pwd_'.substr($this->National_Number,-4));
+                    $user->name=$this->name;
+                    $user->token=guid();
+                    $user->accid=$this->id;
+                    if(!$user->supperUser()->insert()){
+                        $message= $user->error;
+                    }
                 }
-                   $user->mode="edit";
-
-                return ['DoActionRequired'=>true,'form'=>view("Users/add",['data'=>$user])];
+               
+                if($this->serial==''){
+                    $reg=new App\Models\Admin\RegisteryUserLog;
+                    $lst=$reg->supperUser()->where('userId',$this->id)->orderBy('id')->limit(1)->get();
+                    //$message.= count($lst).",";
+                    if(count($lst)>0){
+                       // echo $lst[0]->teamId->getNewProfileSerial()."-";
+                        $this->serial=$lst[0]->teamId->getNewProfileSerial();
+                        if(!$this->update()){
+                            $message.=$this->error;
+                        }
+                    }
+                }
+                if(isset($message)) return ['type'=>'error','message'=>$message];
+                
+                return true;
+                //return ['DoActionRequired'=>true,'form'=>view("Users/add",['data'=>$user])];
             }
 
-            //  function approve(){
-			// 	 $this->approved_by=USER_ID;
-			// 	 $this->approval_request=1;
-			// 	 $this->approved_at=Date("Y-m-d H:i:s");
-			// 	 return $this->update();
-			 //
-			//  }
-			//  function reject(){
-			// 	 $this->approved_by=USER_ID;
-			// 	 $this->approval_request=0;
-			// 	 $this->approved_at=Date("Y-m-d H:i:s");
-			// 	 return $this->update();
-			//  }
-
+           
 }
 ?>

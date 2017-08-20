@@ -19,7 +19,10 @@ class Waitinglist extends BaseController
 
     function index($request){
       $obj=new $this->model;
-      $data=$obj->where('is_done','-1')->get();
+      $alldata=$obj->where('is_done','-1')->get();
+      $data=[];
+      foreach($alldata as $itm)if($itm->model_id->approval_request==-1) $data[] =$itm;         
+       
       return $this->view('all',compact('data'));
     }
 
@@ -40,7 +43,9 @@ class Waitinglist extends BaseController
     }
     function all($request){
         $obj=new $this->model;
-        $data=$obj->where('is_done','-1')->get();
+        $alldata=$obj->where('is_done','-1')->get();
+        foreach($alldata as $itm)if($itm->model_id->approval_request==-1) $data[] =$itm;         
+
         return $this->view('all',compact('data'));
     }
     function postApprove($request){

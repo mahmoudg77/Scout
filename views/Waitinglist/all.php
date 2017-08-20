@@ -20,6 +20,7 @@
                        
                     </tr></thead>
                     <?foreach($data as $key=>$row){
+                        
                       ?>
                     <tr>
                         <td><?$row->DrawField('userId')?></td>

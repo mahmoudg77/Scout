@@ -35,7 +35,7 @@ class User extends BLL{
         $class->supperUser();
 		$models=explode("\\",$model);
 		$itm="";
-		$new_models=[];
+		$new_models=[$model];
 		foreach($models as $m){
 			$itm.=(($itm=="")?"":"\\").$m;
 			$new_models[]=$itm."\*";
@@ -45,7 +45,8 @@ class User extends BLL{
 				   ->where("accesstype",$access)
 				   ->where("groupid","in",array_getcolumn($this->groups,"id"))
 				   ->get();
-    	return count($arr)>0 ? true:false;
+		//print_r($new_models);
+     	return count($arr)>0 ? true:false;
     }
 
     function allowfilter($model,$access,$groupkey=''){
