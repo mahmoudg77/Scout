@@ -77,7 +77,6 @@ class TeamsReg extends BaseController
 
 	$profile=new App\Models\Profile\Profile;
 	$LeaderId=$profile->where('Profile_ID',$request->post['leader_profileid'])->supperUser()->get();
-
     $Teams=new App\Models\Lookup\TeamsReg;
 	$Teams->TeamId=$TeamId->id;
 	$Teams->LeaderId=$LeaderId[0]->id;

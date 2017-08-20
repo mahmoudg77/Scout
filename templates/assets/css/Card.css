@@ -1,11 +1,22 @@
 .card {
 	
-	margin: auto;
 	background: #B68CB7;
 	width: 339px;
 	height: 215px;
 	border-radius: 15px;
 	padding: 0;
+	margin: 30px 15px;
+	float: left;
+}
+.cardB {
+	
+	background: #B68CB7;
+	width: 339px;
+	height: 215px;
+	border-radius: 15px;
+	padding: 0;
+	margin: 30px 15px;
+	float: left;
 }
 .image {
 	font-size: 12px;
