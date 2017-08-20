@@ -40,6 +40,7 @@
 
 	<link rel="stylesheet" href="<?=assets('css/Events.css')?>">
 	<link rel="stylesheet" href="<?=assets('css/flostingpoint.css')?>">
+	<link rel="stylesheet" href="<?=assets('css/Card.css')?>">
 
 	<link rel="stylesheet" type="text/css" href="<?=assets('css/register.component.css')?>">
 
@@ -118,17 +119,11 @@
 					</li>
 					<li><a href="#about">About Us</a>
 					</li>
-					<li><a href="#services">Services</a>
-					</li>
-					<li><a href="#showcase">Portfolio</a>
-					</li>
-					<li><a href="#our-team">Team</a>
-					</li>
-					<li><a href="#pricing">Pricing</a>
-					</li>
-					<li><a href="#blog">Blog</a>
-					</li>
+                    <li><a href="#our-team">Events</a>
+                    </li>
 					<li><a href="#contact-us">Contact</a>
+					</li>
+					<li><a href="<?=actionLink("","ProfileReg")?>">Register</a>
 					</li>
 					<li><a data-toggle="modal" href="#myModal">Login</a>
 					</li>
@@ -143,20 +138,7 @@
 		<a id="AE"><i class="fa fa-plus-circle fa-3x demo" aria-hidden="true"></i></a>
 		<a id="AP"><i class="fa fa-plus-circle fa-3x demo" aria-hidden="true"></i></a>
 -->
-<div id="container-floating">
 
-  <a class="nd3 nds" data-toggle="tooltip" data-placement="left" data-original-title="contract@gmail.com"><img class="reminder">
-    <p class="letter">P</p>
-  </a>
-  <a class="nd1 nds" data-toggle="tooltip" data-placement="left" data-original-title="Edoardo@live.it"><img class="reminder">
-    <p class="letter">E</p>
-  </a>
-  <div id="floating-button" data-toggle="tooltip" data-placement="left" data-original-title="Create" onclick="newmail()">
-    <p class="plus">+</p>
-    <img class="edit" src="https://ssl.gstatic.com/bt/C3341AA7A1A076756462EE2E5CD71C11/1x/bt_compose2_1x.png">
-  </div>
-
-</div>
 
 	<div class="page-content">
 		<div class="row">
