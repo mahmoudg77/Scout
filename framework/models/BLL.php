@@ -131,20 +131,27 @@ var $mode="view";
                             }
                         }
                         break;
+                    case "calculated":
+                        $fun=$this->fields[$name]['compute'];
+                     
+                        if(method_exists(get_called_class(),$fun)){
+                            $this->data[$name]=  $this->$fun();
+                            return $this->data[$name];
+                        }
+                       
+                        break;
                     default:
                         if($this->data_exists($name)){
                             return $this->data[$name];
                         }else{
-                            $TYPE=get_called_class();
+                            
                             if(method_exists(get_called_class(),$name)){
                                 $this->data[$name]= $this->$name();
                                 return $this->data[$name];
                             }
                         }
                         break;
-
             }
-
 	    }else{
 	         $TYPE=get_called_class();
                 if(method_exists(get_called_class(),$name)){
