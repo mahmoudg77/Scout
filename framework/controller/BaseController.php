@@ -53,6 +53,78 @@ class BaseController{
 
     }
 
+    //Get list of filtered records in table.
+    function filter($request){
+        global $context;
+        $i= new $this->model;
+
+        if(!$this->authRequired){
+            $i->supperUser();
+        }
+
+        foreach($request->get as $key=>$value){
+            if($i->field_exists($key)){
+                $i->where($key,$value);
+            }
+        }
+
+        $data=$i->get();
+
+        if($request->UseApi() ){
+            json_success("Success",$data);//where(['id','<','50'])->orderBy('id','desc')->limit(2,1)->
+        }else{
+            return $this->view(compact('data'));
+        }
+    }
+
+    //Get list of filtered records in table.
+    function postFilter($request){
+        global $context;
+        $i= new $this->model;
+
+        if(!$this->authRequired){
+            $i->supperUser();
+        }
+
+        foreach($request->post as $key=>$value){
+            if($i->field_exists($key)){
+                $i->where($key,$value);
+            }
+        }
+
+        $data=$i->get();
+
+        if($request->UseApi() ){
+            json_success("Success",$data);//where(['id','<','50'])->orderBy('id','desc')->limit(2,1)->
+        }else{
+            return $this->view(compact('data'));
+        }
+    }
+
+    //Get list of filtered records in table.
+    function bodyFilter($request){
+        global $context;
+        $i= new $this->model;
+
+        if(!$this->authRequired){
+            $i->supperUser();
+        }
+
+        foreach($request->body as $key=>$value){
+            if($i->field_exists($key)){
+                $i->where($key,$value);
+            }
+        }
+
+        $data=$i->get();
+
+        if($request->UseApi() ){
+            json_success("Success",$data);//where(['id','<','50'])->orderBy('id','desc')->limit(2,1)->
+        }else{
+            return $this->view(compact('data'));
+        }
+    }
+
     //Get one record by ID.
     function item($request){
         try{
@@ -299,7 +371,7 @@ class BaseController{
 
     }
 
-   
+
     function kanban($request){
           $i= new $this->model;
           $data=$i->get();

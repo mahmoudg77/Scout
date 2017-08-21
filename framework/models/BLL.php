@@ -651,15 +651,24 @@ var $mode="view";
 	// From JsonSerializable
     public function jsonSerialize(){
         global $context;
+
         foreach($this->fields as $key=>$value) {
-             
-            if($value['serialize']){
+            
+            
+            if($value['serialize'] ){
                 $hash=(get_class($this)."(".$this->data[$this->col_pk].")"."->".$key);//$value['relation']['class']."->".$key."(".$this->data[$this->col_pk].")";//$value['relation']['class']."->".$key."(".$this->data[$this->col_pk].")";
  
-                    if (!in_array($hash,$context->SERIALIZED_OBJECTS)) {//if (!isset($this->record[$hash])) {//
+                if (!in_array($hash,$context->SERIALIZED_OBJECTS)) {//if (!isset($this->record[$hash])) {//
+                     
                      $context->SERIALIZED_OBJECTS[]=$hash;
                      $this->$key;
-                    
+                     if($context->request->UseApi() && in_array($value['type'],['One2many','Many2many'])){
+                         $this->{$key."_count"}=count($this->relatedField[$key]);
+                         $this->relatedField[$key]=null;
+                     }
+                     if($context->request->UseApi() && in_array($value['type'],['Many2one'])){
+                         $this->relatedField[$key]=$this->data[$key];
+                     }
                 }
             }
             else{

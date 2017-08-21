@@ -80,6 +80,7 @@ try{
             $user=$user[0];
             $context->user=$user;
             $context->userid=$user->data[$user->col_pk];
+           
         }
     }elseif(isset($_SESSION['USER_TOKEN'])){
          $user=new User();
