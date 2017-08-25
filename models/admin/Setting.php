@@ -12,6 +12,6 @@ class Setting extends BLL{
 
   	    ];
 
-     
+
 }
 ?>

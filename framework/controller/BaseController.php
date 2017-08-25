@@ -387,6 +387,7 @@ class BaseController{
     function view(){
        global $request;
         $args=func_get_args();
+
         if(count($args)==0){
           $view='';
           $arr=[];
@@ -407,6 +408,7 @@ class BaseController{
             $arr=$args[1];
         }
 
+
         if($view==''){
             $trace = debug_backtrace();
             $method = $trace[1]['function'];
@@ -419,17 +421,19 @@ class BaseController{
             }
             $view=str_replace("App\\Controllers\\","",$this->class)."/$method";
          }
-        elseif(strpos("/",$view)===false){
-
+        elseif(count(explode("/",$view))<2){
             $cntrl=get_called_class();
             $view=$cntrl."/".$view;
             $view=str_replace("App\\Controllers\\","",$view);
         }
-		 //echo PATH.'views/'.str_replace("App\\Controllers\\","",$view).'.php';
+
+
+        //echo PATH.'views/'.str_replace("App\\Controllers\\","",$view).'.php';
          if(!file_exists(PATH.'views/'.str_replace("App\\Controllers\\","",$view).'.php')){
 
           $view="BaseController/$method";
         }
+
 
          echo view($view,$arr);
 

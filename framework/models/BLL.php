@@ -27,7 +27,7 @@ var $mode="view";
 		global $Database;
 		try{
             $this->Database=$Database;
-
+            if($this->tablename=="") return;
 		    $q = $this->Database->prepare("DESCRIBE ".$this->tablename);
             $q->execute();
 
@@ -528,17 +528,17 @@ var $mode="view";
   		                            ($str_order==""?"":" order by ".$str_order).
   		                            ($this->limit==""?"":" limit ".$this->limit.($this->offset==""?"":",".$this->offset)));
   		                            
-  		                            /*echo "select * from `$this->tablename` ".($str_whr==""?"":" where ".$str_whr).
+  		                             /*echo "select * from `$this->tablename` ".($str_whr==""?"":" where ".$str_whr).
   		                            ($str_order==""?"":" order by ".$str_order).
-  		                            ($this->limit==""?"":" limit ".$this->limit.($this->offset==""?"":",".$this->offset));*/
+  		                            ($this->limit==""?"":" limit ".$this->limit.($this->offset==""?"":",".$this->offset)); */
   	    if(! $stmt->execute($this->where_values)){
 					// echo $this->tablename , ":",$stmt->errorInfo()[2];
 				}
   		$rows = $stmt->fetchAll();
 		//$query=$db->result;
-		$returned=array();
-
-		if(!$rows)return $returned;
+		 $returned=array();
+        //return $rows;
+		 if(!$rows)return $returned;
 
 		foreach($rows as $row){
 			//Get dynamic object from class name
@@ -695,6 +695,43 @@ var $mode="view";
         return $newarray;
     }
 
+    static function query($sql){
+		
+ 		// Get class name 
+		$TYPE=get_called_class();
+		$d=new $TYPE;
+		if(!$sql)return $returned;
+        $stmt=$d->Database->prepare($sql);
+		
+        if(! $stmt->execute()){
+              echo $stmt->errorInfo()[2];
+            
+
+        }
+        $rows = $stmt->fetchAll();
+         $returned=array();
+        //return $rows;
+        if(!$rows)return $returned;
+
+		foreach($rows as $row){
+			//Get dynamic object from class name
+			$obj =new $TYPE;
+
+			$obj->data=array();
+
+			foreach($row as $key=>$value)
+			    if(!is_numeric($key)){
+			        $obj->$key=$value;
+			        $obj->mode='view';
+			    }
+            //print_r($obj);
+			$returned[]=$obj;
+		}
+
+		return $returned;
+
+
+	}
 
 	function DrawField($field,$widget="",$mode="",$attrs=[]){
 	    global $context;

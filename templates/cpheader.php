@@ -391,12 +391,24 @@
         <li><a class="menu-item" href="<?=actionLink("all","UserGroupRel")?>"><i class="fa fa-circle-o"></i> Users in Groups</a></li>
     </ul>
 </li>
-
-        <!-- <li><a href=""><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-        <li class="header">LABELS</li>
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Register Form</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li> -->
+<li class="treeview" groups="sys_admin">
+    <a href="#">
+        <i class="fa fa-files-o"></i>
+        <span>Setting</span>
+        <span class="pull-right-container">
+            <i class="fa fa-angle-right pull-right"></i>
+        </span>
+    </a>
+    <ul class="treeview-menu">
+        <li><a class="menu-item" href="<?=actionLink("add","Setting")?>"><i class="fa fa-circle-o"></i> Add New</a></li>
+        <li><a class="menu-item" href="<?=actionLink("index","Setting",["group"=>"General"])?>"><i class="fa fa-circle-o"></i> General</a></li>
+        <li><a class="menu-item" href="<?=actionLink("index","Setting",["group"=>"Events"])?>"><i class="fa fa-circle-o"></i> Events</a></li>
+        <li><a class="menu-item" href="<?=actionLink("index","Setting",["group"=>"Posts"])?>"><i class="fa fa-circle-o"></i> Posts</a></li>
+        <li><a class="menu-item" href="<?=actionLink("index","Setting",["group"=>"Profile"])?>"><i class="fa fa-circle-o"></i> Profile</a></li>
+        <li><a class="menu-item" href="<?=actionLink("index","Setting",["group"=>"SMS"])?>"><i class="fa fa-circle-o"></i> SMS Api</a></li>
+    </ul>
+</li>
+      
       </ul>
     </section>
     <!-- /.sidebar -->
