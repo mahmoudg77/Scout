@@ -33,12 +33,7 @@ class Profile extends BLL{
                     'type'=>'One2many',
                     'relation'=>['class'=>'App\Models\Media\Images','classid'=>'model_id','where'=>['model_name','App\Models\Profile\Profile'],'controller'=>'Images'],
                         ],
-             'mobile'=>[
-                    'name'=>"Mobile",
-                    'serialize'=>true,
-                    'type'=>'calculated',
-                    'compute'=>'phones',
-                        ],
+
              ];
 
 			function name()
@@ -56,15 +51,16 @@ class Profile extends BLL{
 			}
 
             function emails(){
-			    $p=array_filtercolumn($this->Contacts,[["contactTypeId",2]]);
+			    $p=array_filtercolumn($this->Contacts,[["contactTypeId",'2']]);
 			    return $p[0];
             }
             function phones(){
-			    $p=array_filtercolumn($this->Contacts,[["contactTypeId",3]]);
+			    $p=array_filtercolumn($this->Contacts,[["contactTypeId",'3']]);
+                //print_r($this->Contacts);
 			    return $p[0];
             }
             function addresss(){
-			    $p=array_filtercolumn($this->Contacts,[["contactTypeId",1]]);
+			    $p=array_filtercolumn($this->Contacts,[["contactTypeId",'1']]);
 			    return $p[0];
             }
 
@@ -84,7 +80,7 @@ class Profile extends BLL{
                     if(!$user->supperUser()->insert()){
                        echo $user->error;
                     }
-                      if( $this->phones->contactValue!=''){
+                    if( $this->phones->contactValue!=''){
 
                         try
                         {
