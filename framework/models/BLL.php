@@ -188,7 +188,7 @@ var $mode="view";
     	        $this->data['created_at']=Date("Y-m-d H:i:s");
     	    }
     		foreach($this->fields as $key=>$value){
-              if(!in_array($value['type'],['One2many','Many2many'] ) && !in_array($key,['updated_at','updated_by','deleted_at','deleted_by','is_deleted']) && $this->data_exists($key)){
+              if(!in_array($value['type'],['One2many','Many2many','calculated'] ) && !in_array($key,['updated_at','updated_by','deleted_at','deleted_by','is_deleted']) && $this->data_exists($key)){
 					if($key!=$this->col_pk){
             			$fields_statment.=(($fields_statment=="")?"":",")."`".$key."`";
             			$values_statment.=(($values_statment=="")?"":",").":".$key;
@@ -230,7 +230,7 @@ var $mode="view";
     	    }
 
     		foreach($this->fields as $key=>$value){
-              if(!in_array($value['type'],['One2many','Many2many'] ) && !in_array($key,['created_at','created_by','deleted_at','deleted_by','is_deleted']) && $this->data_exists($key)){
+              if(!in_array($value['type'],['One2many','Many2many','calculated'] ) && !in_array($key,['created_at','created_by','deleted_at','deleted_by','is_deleted']) && $this->data_exists($key)){
     		        if($key!=$this->col_pk){
             			$set_statment.=(($set_statment=="")?"":",")."`".$key."`=:".$key;
             			$values[":".$key]=$this->data[$key];

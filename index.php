@@ -47,6 +47,7 @@ try{
          include('controller/'.str_replace(".","/",$controller__path).'.php');
     }
 
+    $SET=new App\Models\Admin\Setting;
 
 
      $class=explode(".",$controller__path);

@@ -338,7 +338,7 @@ function sendmail($from,$to,$subject,$body,$otherheader=""){
 }
 
 function view($view,$arr=[]){
-        global $context,$request;
+    global $context,$request,$SET;
 
         //echo json_encode($context->user);
         foreach($arr as $key=>$value){

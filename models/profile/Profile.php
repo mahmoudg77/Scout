@@ -32,8 +32,13 @@ class Profile extends BLL{
                     'serialize'=>true,
                     'type'=>'One2many',
                     'relation'=>['class'=>'App\Models\Media\Images','classid'=>'model_id','where'=>['model_name','App\Models\Profile\Profile'],'controller'=>'Images'],
-                ],
-
+                        ],
+             'mobile'=>[
+                    'name'=>"Mobile",
+                    'serialize'=>true,
+                    'type'=>'calculated',
+                    'compute'=>'phones',
+                        ],
              ];
 
 			function name()
@@ -64,8 +69,10 @@ class Profile extends BLL{
             }
 
 
+
             function onApproved(){
-                global $context;
+
+                global $context,$SET;
                 $user=new App\Models\Auth\User;
                 if(count($user->supperUser()->where('accid',$this->id)->limit(1)->get())==0){
                     $user=new App\Models\Auth\User;
@@ -75,10 +82,38 @@ class Profile extends BLL{
                     $user->token=guid();
                     $user->accid=$this->id;
                     if(!$user->supperUser()->insert()){
-                        $message= $user->error;
+                       echo $user->error;
+                    }
+                      if( $this->phones->contactValue!=''){
+
+                        try
+                        {
+
+                            $smsurl=$SET->getSetting('sms_api_link','SMS');
+                            $smsurl=str_replace("{mobiles}",$this->mobile, $smsurl);
+                            $message="Hello, ".$this->First_Name."\n";
+                            $message="Your profile hase been approved.\n";
+                            $message.="Username: ".$user->email."\n";
+                            $message.="Password: ".'pwd_'.substr($this->National_Number,-4)."\n";
+
+
+                            $smsurl=str_replace("{msg}",urldecode($message) , $smsurl);
+                            $smsurl=str_replace("{mobiles}",$this->mobile, $smsurl);
+
+
+                            $jsoncode = file_get_contents($smsurl);
+
+                        }
+                        catch (\Exception $ex)
+                        {
+                            echo $ex->getMessage();
+                        }
+
+
+
                     }
                 }
-               
+
                 if($this->serial==''){
                     $reg=new App\Models\Admin\RegisteryUserLog;
                     $lst=$reg->supperUser()->where('userId',$this->id)->orderBy('id')->limit(1)->get();
@@ -92,11 +127,11 @@ class Profile extends BLL{
                     }
                 }
                 if(isset($message)) return ['type'=>'error','message'=>$message];
-                
+
                 return true;
                 //return ['DoActionRequired'=>true,'form'=>view("Users/add",['data'=>$user])];
             }
 
-           
+
 }
 ?>

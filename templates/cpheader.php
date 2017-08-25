@@ -5,7 +5,7 @@
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Arabscout|  <?=str_replace("App\Controllers\\","",CONTROLLER_PATH)?></title>
+  <title><?=$SET->getSetting("site_name")?>|  <?=str_replace("App\Controllers\\","",CONTROLLER_PATH)?></title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
