@@ -9,13 +9,14 @@ class Profile extends BaseController
     protected  $model="App\Models\Profile\Profile";
     protected $authRequired=true;
 
+    
 
     function form($request){
         $id=$request->get['id'];
         $NathionalID=$request->get['NationalID'];
 
         //print_r($request);
-      
+
         if(isset($id) && intval($id)>0){
             $Profile=App\Models\Profile\Profile::find($id);
         }
@@ -123,7 +124,7 @@ class Profile extends BaseController
                         }
                     }
 
-                    
+
                      if(isset($request->files['proImg']['filename'])){
                         $image=new App\Models\Media\Images($Profile,"Personal",$request->files['proImg']);
                         $image->upload();
