@@ -13,7 +13,32 @@ class Profile extends BLL{
 
 
 	var $fields=[
-			'Comps'=>['name'=>'Comps',
+
+            'mobile'        =>['name'=>'Mobile'     ,'type'=>'calculated','compute'=>'phones'       ,'serialize'=>true],
+
+            'team_id'=>['name'=>'Team',
+			 		'type'=>'Many2one',
+			 		'serialize'=>true,
+			 		'relation'=>['class'=>"App\Models\Admin\Teams",'classid'=>'id','where'=>['level_type','5'],'controller'=>'Teams']],
+            'office_id'=>['name'=>'Office',
+			 		'type'=>'Many2one',
+			 		'serialize'=>true,
+			 		'relation'=>['class'=>"App\Models\Admin\Teams",'classid'=>'id','where'=>['level_type','4'],'controller'=>'Teams']],
+            'branch_id'=>['name'=>'Branch',
+			 		'type'=>'Many2one',
+			 		'serialize'=>true,
+			 		'relation'=>['class'=>"App\Models\Admin\Teams",'classid'=>'id','where'=>['level_type','3'],'controller'=>'Teams']],
+            'org_id'=>['name'=>'Orgnize',
+			 		'type'=>'Many2one',
+			 		'serialize'=>true,
+			 		'relation'=>['class'=>"App\Models\Admin\Teams",'classid'=>'id','where'=>['level_type','2'],'controller'=>'Teams']],
+            'country_id'=>['name'=>'Country',
+			 		'type'=>'Many2one',
+			 		'serialize'=>true,
+			 		'relation'=>['class'=>"App\Models\Admin\Teams",'classid'=>'id','where'=>['level_type','1'],'controller'=>'Teams']],
+
+
+			 'Comps'=>['name'=>'Comps',
 					'type'=>'Many2many',
 					'serialize'=>true,
 					'relation'=>['class'=>"App\Models\Profile\Comp",'classid'=>'campId','table'=>'App\Models\Profile\CompUserLog','thisid'=>'userId','controller'=>'Comp']],
@@ -27,6 +52,7 @@ class Profile extends BLL{
 			 		'type'=>'Many2many',
 			 		'serialize'=>true,
 			 		'relation'=>['class'=>"App\Models\Lookup\Hobbies",'classid'=>'hobbiesId','table'=>'App\Models\Profile\HobbyUserLog','thisid'=>'userId','controller'=>'Hobbies']],
+
              'Images'=>[
                     'name'=>"Image",
                     'serialize'=>true,
@@ -52,19 +78,18 @@ class Profile extends BLL{
 
             function emails(){
 			    $p=array_filtercolumn($this->Contacts,[["contactTypeId",'2']]);
-			    return $p[0];
+			    return $p[0]->contactValue;
             }
             function phones(){
 			    $p=array_filtercolumn($this->Contacts,[["contactTypeId",'3']]);
-                //print_r($this->Contacts);
-			    return $p[0];
+						//print_r($this->Contacts);
+						 //print_r($p);
+			    return $p[0]->contactValue;
             }
             function addresss(){
 			    $p=array_filtercolumn($this->Contacts,[["contactTypeId",'1']]);
-			    return $p[0];
+			    return $p[0]->contactValue;
             }
-
-
 
             function onApproved(){
 
@@ -80,25 +105,27 @@ class Profile extends BLL{
                     if(!$user->supperUser()->insert()){
                        echo $user->error;
                     }
-                    if( $this->phones->contactValue!=''){
+                    //echo $this->phones();
+                    if( $this->mobile!=''){
 
                         try
                         {
 
                             $smsurl=$SET->getSetting('sms_api_link','SMS');
+
                             $smsurl=str_replace("{mobiles}",$this->mobile, $smsurl);
-                            $message="Hello, ".$this->First_Name."\n";
-                            $message="Your profile hase been approved.\n";
-                            $message.="Username: ".$user->email."\n";
-                            $message.="Password: ".'pwd_'.substr($this->National_Number,-4)."\n";
+                            $message="Hello, ".$this->First_Name."\r\n";
+                            $message="Your profile hase been approved.\r\n";
+                            $message.="Username: ".$user->email."\r\n";
+                            $message.="Password: ".'pwd_'.substr($this->National_Number,-4)."\r\n";
 
 
-                            $smsurl=str_replace("{msg}",urldecode($message) , $smsurl);
+                            $smsurl=str_replace("{msg}",urlencode($message) , $smsurl);
                             $smsurl=str_replace("{mobiles}",$this->mobile, $smsurl);
 
-
+                            // echo $smsurl;
                             $jsoncode = file_get_contents($smsurl);
-
+                            //echo $jsoncode;
                         }
                         catch (\Exception $ex)
                         {
@@ -110,9 +137,16 @@ class Profile extends BLL{
                     }
                 }
 
+                $reg=new App\Models\Admin\RegisteryUserLog;
+                $lst=$reg->supperUser()->where('userId',$this->id)->where('approval_request','1')->orderBy('id')->limit(1)->get();
+
+                $this->team_id      =$lst[0]->teamId->id;
+                $this->office_id    =$lst[0]->teamId->parentId->id;
+                $this->branch_id    =$lst[0]->teamId->parentId->parentId->id;
+                $this->org_id       =$lst[0]->teamId->parentId->parentId->parentId->id;
+                $this->country_id   =$lst[0]->teamId->parentId->parentId->parentId->parentId->id;
+
                 if($this->serial==''){
-                    $reg=new App\Models\Admin\RegisteryUserLog;
-                    $lst=$reg->supperUser()->where('userId',$this->id)->orderBy('id')->limit(1)->get();
                     //$message.= count($lst).",";
                     if(count($lst)>0){
                        // echo $lst[0]->teamId->getNewProfileSerial()."-";
@@ -122,6 +156,19 @@ class Profile extends BLL{
                         }
                     }
                 }
+
+                //$message.= count($lst).",";
+                if(count($lst)>0){
+                    // echo $lst[0]->teamId->getNewProfileSerial()."-";
+                    $this->pcode=$lst[0]->teamId->getNewProfileCode();
+                    if(!$this->update()){
+                        $message.=$this->error;
+                    }
+                }
+
+
+
+
                 if(isset($message)) return ['type'=>'error','message'=>$message];
 
                 return true;

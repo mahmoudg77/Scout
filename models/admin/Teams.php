@@ -53,7 +53,22 @@ class Teams extends BLL{
                 return $this->serial.str_pad(1, 2, "0", STR_PAD_LEFT);
             }
         }
+        function getNewProfileCode(){
+            $obj=new \App\Models\Profile\Profile;
+            //echo $this->serial."-";
+            $last=$obj->supperUser()->where('pcode','llike',$this->serial)->withDeleted()->orderBy("pcode","desc")->limit(1)->get();
 
+            if(count($last)>0){
+                // $fmt = new \NumberFormatter( 'de_DE', \NumberFormatter::TYPE_INT64);
+                $newsn=floatval($last[0]->pcode);//$fmt->parse($last[0]->serial, \NumberFormatter::TYPE_INT64);
+
+                // echo $last[0]->serial,"-",$newsn;
+                // exit();
+                return str_pad($newsn+1, strlen($last[0]->pcode), "0", STR_PAD_LEFT);
+            }else{
+                return $this->serial.str_pad(1, 2, "0", STR_PAD_LEFT);
+            }
+        }
 		function getNewSerial($parentid){
 			$obj=new \App\Models\Admin\Teams;
             if($parentid->id>0){

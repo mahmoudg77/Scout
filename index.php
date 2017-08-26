@@ -119,7 +119,7 @@ try{
       }elseif($request->isPost()){
           $method="post".ucwords($context->method);
       }else{
-         
+
           $method=$context->method;
       }
       //print_r($context->controller);

@@ -16,8 +16,8 @@ class Setting extends BLL{
 
     function getAllSetting(){
         global $context;
-        $cLang=$context->lang;
-        if(!$context->lang) $cLang="en";
+        $cLang=LANG;
+        if($cLang=='LANG') $cLang="en";
         $data=$this->where('lang','in',['*',$cLang])->supperUser()->get();
         foreach($data as $setting)
 		{

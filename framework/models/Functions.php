@@ -434,7 +434,7 @@ function view($view,$arr=[]){
         $new_array = array_filter($array, function($index)use($array,$whr){
                          if(!is_array($whr)) return;
 
-     	                        foreach($whr as $con){
+     	                      foreach($whr as $con){
                                     if(count($con)==3){
                                         $opr=$con[1];
                                         $column_name=$con[0];
@@ -448,37 +448,42 @@ function view($view,$arr=[]){
                                         $column_name=$con[0];
                                         $value=true;
                                     }
-                                     switch($opr){
-                                        case "=":
-                                            if($array[$index]->$column_name!=$value) return false;
-                                            break;
-                                        case "<":
-                                            if(!$array[$index]->$column_name<$value) return false;
-                                            break;
-                                        case ">":
-                                            if(!$array[$index]->$column_name>$value) return false;
-                                            break;
-                                        case "<=":
-                                            if(!$array[$index]->$column_name<=$value) return false;
-                                            break;
-                                        case ">=":
-                                            if(!$array[$index]->$column_name>=$value) return false;
-                                            break;
-                                        case "like":
-                                            if(strpos($value,$array[$index]->$column_name)===false) return false;
-                                            break;
-                                        case "not like":
-                                            if(strpos($value,$array[$index]->$column_name)===true) return false;
-                                            break;
-                                        case "in":
-                                            if(!in_array($array[$index]->$column_name,$value)) return false;
-                                            break;
-                                        case "not in":
-                                            if(in_array($array[$index]->$column_name,$value)) return false;
-                                            break;
+                                    if(is_object($array[$index]->$column_name)){
+                                        $field=$array[$index]->$column_name->id;
+                                    }else{
+                                        $field=$array[$index]->$column_name;
                                     }
-
+                                    switch($opr){
+                                    case "=":
+                                        if($field!=$value) return false;
+                                        break;
+                                    case "<":
+                                        if(!$field<$value) return false;
+                                        break;
+                                    case ">":
+                                        if(!$field>$value) return false;
+                                        break;
+                                    case "<=":
+                                        if(!$field<=$value) return false;
+                                        break;
+                                    case ">=":
+                                        if(!$field>=$value) return false;
+                                        break;
+                                    case "like":
+                                        if(strpos($value,$field)===false) return false;
+                                        break;
+                                    case "not like":
+                                        if(strpos($value,$field)===true) return false;
+                                        break;
+                                    case "in":
+                                        if(!in_array($field,$value)) return false;
+                                        break;
+                                    case "not in":
+                                        if(in_array($field,$value)) return false;
+                                        break;
                                 }
+
+                           }
 
 
                     return true;
