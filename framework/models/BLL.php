@@ -980,19 +980,26 @@ trait ApprovelModel {
     }
     function insert() {
         global $context;
+        
+        $this->approval_request=-1;
+        $this->approval_by=0;
+
        if(!parent::insert()){
            return false;
        }
+       
         $approve_request=new \App\Models\Notify\Waitinglist;
         $approve_request->userId=intval($context->user->id);
         $approve_request->model_name=$this->model;
         $approve_request->model_id=$this->id;
         $approve_request->is_done=-1;
-
+        
         if(!$approve_request->supperUser()->insert()){
             $this->error=$approve_request->error;
+            
             return false;
         }
+       
         return true;
     }
 

@@ -25,8 +25,8 @@ class TeamsReg extends BaseController
     }
     function myTeam($request){
         $profile=new App\Models\Profile\Profile;
-        
-        return $this->view();
+        $data=$profile->get();
+        return $this->view("Profile/all",compact('data'));
     }
 
 

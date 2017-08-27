@@ -329,6 +329,7 @@
       </a>
        <ul class="treeview-menu" >
          <li><a class="menu-item" href="<?=actionLink("","TeamsReg")?>" groups="team_admin"><i class="fa fa-circle-o" ></i> Team Register</a></li>
+         <li><a class="menu-item" href="<?=actionLink("myTeam","TeamsReg")?>" groups="team_admin"><i class="fa fa-circle-o"></i> My Team</a></li>
          <li><a class="menu-item" href="<?=actionLink("all","Waitinglist")?>"  groups="branch_admin,office_admin,org_admin,country_admin"><i class="fa fa-circle-o"></i> Approvels</a></li>
       </ul>
     </li>

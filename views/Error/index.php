@@ -11,7 +11,9 @@
 	case 401:
 		echo "Not authorized";
 		break;
-	
+    default:
+       echo $ErrorMessage;
+        break;
 }?>
  </div>
 <?include(PATH.'templates/footer.php');?>

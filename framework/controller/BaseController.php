@@ -212,115 +212,150 @@ class BaseController{
     //GET : get one record by ID and open edit form to update record
     function edit($request){
         //get edit
-        $data= new $this->model;
-        $validate=new Validator();
-        $validate->validate($request->get,['id'=>'Requierd|Integer']);
+
+        	$obj= new $this->model;
+            $validate=new Validator();
+            $validate->validate($request->get,['id'=>'Requierd|Integer']);
 
 
 
-        $data= $data::find($request->get['id']);
-        if(!$data){
+            $data= $obj::find($request->get['id']);
+
+            if(!$data){
+                header("HTTP/1.0 404 Not Found");
+                if($request->UseApi())
+                {
+                    return json_error("Not found item");
+                }
+
+                return $this->view("Error/index",['ErrorNumber'=>404]);
+            }
+            $data->mode='edit';
+
             if($request->UseApi())
             {
-                return json_error("Not found item");
+                return json_success("Getting success",$data);
             }
-          header("HTTP/1.0 404 Not Found");
-          return $this->view("Error/index",['ErrorNumber'=>404]);
-        }
-        $data->mode='edit';
+            return $this->view(compact('data'));
 
-        if($request->UseApi())
-        {
-            return json_success("Getting success",$data);
-        }
-         return $this->view(compact('data'));
+
+
     }
     //POST : send form data to update record
     function postEdit($request){
         global $context;
         $data=new $this->model;
-
-          foreach($data->fields as $key=>$field){
+        try
+        {
+            foreach($data->fields as $key=>$field){
             if($field['type']!='One2many' && $field['type']!='Many2many')
                 $data->data[$key]=$request->post[$key];
-          }
-          //print_r($data);
-          if(!$data->update()){
-                    if($request->isAjax()) return json_error($data->error);
-                    throw new \Exception($data->error);
-                }
-                if($request->isAjax()) return json_success("Save Success !!");
+            }
+
+              //print_r($data);
+            if(!$data->update()){
+
+               if($request->isAjax()) return json_error($data->error);
+                throw new \Exception($data->error);
+
+            }
+
+
+            if($request->isAjax()) return json_success("Save Success !!");
 
 
             redirectTo($context->controller_path."/all");
-
+        }
+        catch (\Exception $ex)
+        {
+            if($request->isAjax()) return json_error($ex->getMessage().$obj->error);
+            return $this->view("Error/index",['ErrorNumber'=>0,'ErrorMessage'=>$ex->getMessage().$obj->error]);
+        }
     }
     //BODY : send form data to update record
     function bodyEdit($request){
         global $context;
-        $data=new $this->model;
+        try{
+            $data=new $this->model;
 
-        foreach($data->fields as $key=>$field){
-            if($field['type']!='One2many' && $field['type']!='Many2many')
-                $data->data[$key]=$request->body[$key];
+            foreach($data->fields as $key=>$field){
+                if($field['type']!='One2many' && $field['type']!='Many2many')
+                    $data->data[$key]=$request->body[$key];
+            }
+            //print_r($data);
+            if(!$data->update()){
+                if($request->isAjax()) return json_error($data->error);
+                throw new \Exception($data->error);
+            }
+            if($request->isAjax()) return json_success("Save Success !!");
+
+
+            redirectTo($context->controller_path."/all");
         }
-        //print_r($data);
-        if(!$data->update()){
-            if($request->isAjax()) return json_error($data->error);
-            throw new \Exception($data->error);
+        catch (\Exception $ex)
+        {
+            if($request->isAjax()) return json_error($ex->getMessage().$obj->error);
+            return $this->view("Error/index",['ErrorNumber'=>0,'ErrorMessage'=>$ex->getMessage().$obj->error]);
         }
-        if($request->isAjax()) return json_success("Save Success !!");
-
-
-        redirectTo($context->controller_path."/all");
-
     }
 
     //POST : delete record by id
     function postDelete($request){
           global $context;
-            $data= new $this->model;
-            $validate=new Validator();
-            $validate->validate($request->post,[$data->col_pk=>'Requierd|Integer']);
+          try{
+                $data= new $this->model;
+                $validate=new Validator();
+                $validate->validate($request->post,[$data->col_pk=>'Requierd|Integer']);
 
-          if(count($request->post)==0){
-             echo "Invalid Request !!";
-          }else{
+                if(count($request->post)==0){
+                    return $this->view("Error/index",['ErrorNumber'=>0,'ErrorMessage'=>"Invalid Request !!"]);
+                }else{
 
-              $data->data[$data->col_pk]=$request->post[$data->col_pk];
-              if(!$data->delete()){
-                    if($request->isAjax()) return json_error($data->error);
-                    throw new \Exception($data->error);
+                    $data->data[$data->col_pk]=$request->post[$data->col_pk];
+                    if(!$data->delete()){
+                        if($request->isAjax()) return json_error($data->error);
+                        throw new \Exception($data->error);
+                    }
+                    if($request->isAjax()) return json_success("Delete Success !!");
+                    redirectTo($context->controller_path."/all");
                 }
-                if($request->isAjax()) return json_success("Delete Success !!");
-               redirectTo($context->controller_path."/all");
-          }
 
+        }
+        catch (\Exception $ex)
+        {
+            if($request->isAjax()) return json_error($ex->getMessage().$obj->error);
+            return $this->view("Error/index",['ErrorNumber'=>0,'ErrorMessage'=>$ex->getMessage().$obj->error]);
+        }
     }
     //POST : destroy record by id
     function postDestroy($request){
         global $context;
+        try{
+          if(count($request->post)==0){
+              return $this->view("Error/index",['ErrorNumber'=>0,'ErrorMessage'=>"Invalid Request !!"]);
+          }else{
+              $data=new $this->model;
+              $data->data[$data->col_pk]=$request->post[$data->col_pk];
 
-      if(count($request->post)==0){
-         echo "Invalid Request !!";
-      }else{
-          $data=new $this->model;
-          $data->data[$data->col_pk]=$request->post[$data->col_pk];
-
-        if(!$data->destroy()){
-                    if($request->isAjax()) return json_error($data->error);
-                    throw new \Exception($data->error);
-                }
-                if($request->isAjax()) return json_success("Deleted forever Success !!");
-               redirectTo($context->controller_path."/all");      }
-
+                if(!$data->destroy()){
+                        if($request->isAjax()) return json_error($data->error);
+                        throw new \Exception($data->error);
+                    }
+                    if($request->isAjax()) return json_success("Deleted forever Success !!");
+                   redirectTo($context->controller_path."/all");      }
+        }
+        catch (\Exception $ex)
+        {
+            if($request->isAjax()) return json_error($ex->getMessage().$obj->error);
+            return $this->view("Error/index",['ErrorNumber'=>0,'ErrorMessage'=>$ex->getMessage().$obj->error]);
+        }
     }
     //POST : restore record by id
     function postRestore($request){
         global $context;
 
       if(count($request->post)==0){
-         echo "Invalid Request !!";
+          return $this->view("Error/index",['ErrorNumber'=>0,'ErrorMessage'=>"Invalid Request !!"]);
       }else{
           $data=new $this->model;
           $data->data[$data->col_pk]=$request->post[$data->col_pk];

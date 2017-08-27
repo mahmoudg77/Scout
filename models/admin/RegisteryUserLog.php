@@ -32,6 +32,8 @@ class RegisteryUserLog extends BLL{
         return $this->userId->name."(". $this->regId->name.")";
     }
     function onApproved(){
+        $this->is_done=1;
+        $this->update();
         return $this->userId->approve();
     }
 

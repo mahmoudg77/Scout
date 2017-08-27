@@ -17,7 +17,9 @@
                 <?}?>
             <? }
               }?>
+            <?if($context->user->allow($data->model,"edit")){?>
             <tr><td></td><td><input class="btn btn-success" type="submit" value="Save"/></td></tr>
+            <?}?>
         </table>
      </form>
 

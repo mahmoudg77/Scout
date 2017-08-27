@@ -8,7 +8,9 @@
         <h2> </h2>
     </div>
     <div class="col-ld-6 pull-right" style="padding: 10 0px;">
+        <?if($context->user->allow($data[0]->model,"add")){?>
         <a class="btn btn-primary btn-md open-modal" href="<?=actionLink('add')?>">Create New</a>
+        <?}?>
     </div>
 
 
@@ -21,21 +23,30 @@
                         <th><?=ucwords(str_replace("_"," ",$key))?>
                         </th><?}
              }?>
+                       
+                     <th>View</th>
+                        <?if($context->user->allow($data[0]->model,"edit")){?>
                         <th>Edit</th>
-                        <th>View</th>
+                       <?}?>
+                        <?if($context->user->allow($data[0]->model,"delete")){?>
                         <th>Delete</th>
+                        <?}?>
                     </tr></thead><?foreach($data as $key=>$row){?>
                     <tr><?foreach($row->fields as $key=>$field){
 			        if($field['visible']){ ?>
                         <td><?$row->DrawField($key)?>
                         </td><?}
                             }?>
-                        <td>
+                      
+                      <td>
                             <a class="btn btn-primary open-modal" href="<?=actionLink('item','',['id'=>$row->{$row->col_pk}])?>">view</a>
                         </td>
+                        <?if($context->user->allow($row->model,"edit")){?>
                         <td>
                             <a class="btn btn-default open-modal" href="<?=actionLink('edit','',['id'=>$row->{$row->col_pk}])?>">Edit</a>
                         </td>
+                     <?}?>
+                        <?if($context->user->allow($row->model,"delete")){?>
                         <td><?if(!$row->is_deleted){?>
                             <form action="<?=actionLink('delete')?>" method="post" class="ajax-form"><?=Framework\Request::CSRF()?>
                                 <input type="hidden" name="<?=$row->col_pk?>" value="<?=$row->{$row->col_pk}?>" />
@@ -50,6 +61,7 @@
                                 <input type="submit" class="btn btn-danger" value="Delete forever" />
                             </form><?}?>
                         </td>
+                    <?}?>
                     </tr><?
                      }
                       ?>

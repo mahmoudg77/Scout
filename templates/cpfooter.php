@@ -129,11 +129,11 @@
                 );
         });
 
-$("body").on("click",".open-modal",function(e){
-    e.preventDefault();
-    $("#formModel .modal-body").html("<center><h2>L o a d i n g . . .</h2><img style='width:200px' src='<?=assets("img/loader 2.gif")?>' /></center>");
-    var btn=$(this);
-    $("#formModel .modal-body").load(btn.attr("href"),function(data, status, xhr){
+    $("body").on("click",".open-modal",function(e){
+        e.preventDefault();
+        $("#formModel .modal-body").html("<center><h2>L o a d i n g . . .</h2><img style='width:200px' src='<?=assets("img/loader 2.gif")?>' /></center>");
+        var btn=$(this);
+        $("#formModel .modal-body").load(btn.attr("href"),function(data, status, xhr){
             $("#formModel").modal();
             if (status == "error") {
                         $("#myModal .modal-body").html("<div class='alert alert-danger'><strong>Sorry; </strong>" + xhr.status + " " + xhr.statusText + "</div>");
@@ -177,25 +177,11 @@ $("body").on("click",".open-modal",function(e){
                                     });
                                 }
                             });
-    });
+            });
 
     
-});
-        $("#btn-testajax").click(function () {
-
-            alert("test");
-            $.ajax({
-                type: "get",
-                url: "/en/Dashboard/getUser?userid=7",
-                data: "",
-                success: function (d) {
-                    alert(d);
-                },
-                error: function (d) {
-                    alert(d.responseText);
-                }
-            });
-        });
+    });
+       
 });
 </script>
 </body>
