@@ -10,18 +10,19 @@ class User extends BLL{
 
 	var $fields=[
 	    'accid'=>['name'=>'Profile',
-	            'default'=>'2',
 	            'compute'=>'',
 	            'type'=>'Many2one',
 	            'serialize'=>true,
 	            'relation'=>['class'=>"App\Models\Profile\Profile",'classid'=>'Profile_ID','controller'=>'Profile']],
 	     'groups'=>['name'=>'Groups',
-	            'default'=>'2',
 	            'compute'=>'',
 	            'type'=>'Many2many',
 	            'serialize'=>true,
 	            'relation'=>['class'=>"App\Models\Auth\UserGroup",'table'=>"App\Models\Auth\UserGroupRel",'classid'=>'groupid','thisid'=>'userid','controller'=>'UserGroup']],
-	    ];
+	    'password'=>['name'=>'Password','type'=>'varchar','serialize'=>false],
+        'token'=>['name'=>'token','type'=>'varchar','serialize'=>false],
+        'remember_token'=>['name'=>'remember_token','type'=>'varchar','serialize'=>false],
+                ];
 
     function joined($g){
 

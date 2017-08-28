@@ -1,9 +1,9 @@
 <?
 namespace App\Controllers;
 
-class SingleEvent extends BaseController
+class SinglePost extends BaseController
 {
-    protected  $model="App\Models\Content\SingleEvent";
+    protected  $model="App\Models\content\SinglePost";
     protected $authRequired=true;
 
     function index1($request){

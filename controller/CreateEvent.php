@@ -1,9 +1,9 @@
 <?
 namespace App\Controllers;
 
-class SingleEvent extends BaseController
+class CreateEvent extends BaseController
 {
-    protected  $model="App\Models\Content\SingleEvent";
+    protected  $model="App\Models\lookup\CreateEvent";
     protected $authRequired=true;
 
     function index1($request){

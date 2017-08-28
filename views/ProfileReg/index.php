@@ -251,7 +251,7 @@
                         <div class="col-sm-5">
 
                             <div class="input-group">
-  								 <select class="form-control" id="trains" name="trainList">
+  							<select class="form-control" id="trains" name="trainList">
 							<?
                             	$Studies= new App\Models\Lookup\Studies;
                             	foreach($Studies->supperUser()->get() as $item){

@@ -16,7 +16,8 @@ protected $offset;
 protected $order_arr;
 protected $where_values=[];
 protected $withSupperUser=false;
-static $record = array();
+private $record = array();
+
 var $error="";
 var  $data=array();
 var  $relatedField=array();
@@ -37,9 +38,11 @@ var $mode="view";
                  if(!array_key_exists($field['Field'],$this->fields)) {
                      preg_match_all("/\d+/",$field['Type'],$sizes);
                      $visible=true;
+                     $serialize=true;
                      if(in_array($field['Field'],['created_at','created_by','updated_at','updated_by','deleted_at','deleted_by','is_deleted'])){
-											  $visible=false;
-											}
+							$visible=false;
+						}
+
 			//print_r($field);
                      $this->fields[$field['Field']]=[
 	                     				'name'=>$field['Field'],
@@ -47,6 +50,7 @@ var $mode="view";
 	                     				'size'=>$sizes[0][0],
 	                     				'default'=>'',
 	                     				'visible'=>$visible,
+                                        'serialize'=>$serialize,
 										 'required'=>$field['Null']=='NO'?true:false,
 	                     			    ];
                  }
@@ -56,12 +60,15 @@ var $mode="view";
             {
                 if(!$value['type']<>"Many2many" && !$value['type']<>"One2many"){
                     $this->data[$key]=$value['default'];
-										$this->fields[$key]['sequence']=0;
+					$this->fields[$key]['sequence']=0;
                 }else{
-									  $this->fields[$key]['sequence']=555;
-								}
+					$this->fields[$key]['sequence']=555;
+				}
                 if(!array_key_exists('visible',$value)){
                  	$this->fields[$key]['visible']=true;
+                }
+                if(!array_key_exists('serialize',$value)){
+                    $this->fields[$key]['serialize']=true;
                 }
 				if(!array_key_exists('required',$value)){
                  	$this->fields[$key]['required']=false;
@@ -371,7 +378,7 @@ var $mode="view";
 			// echo $t->tablename,$classid,$this->data[$foraginkey].'</br>';
 		 // if(!$rows) $rows=[$t];
 	    //print_r([$classid,$this->data[$foraginkey]]);
-			if($classid=="Profile_ID" && $this->data[$foraginkey]=="3") print_r($rows);
+			//if($classid=="Profile_ID" && $this->data[$foraginkey]=="3") print_r($rows);
 
 		return $rows[0];
 
@@ -638,16 +645,31 @@ var $mode="view";
     public function jsonSerialize(){
         global $context;
         foreach($this->fields as $key=>$value) {
+             
             if($value['serialize']){
-                $hash=$value['relation']['class']."->".$key."(".$this->data[$this->col_pk].")";
-                 if (!in_array($hash,$context->SERIALIZED_OBJECTS)) {
-                    $context->SERIALIZED_OBJECTS[]=$hash;
-                      $this->$key;
+                $hash=(get_class($this)."(".$this->data[$this->col_pk].")"."->".$key);//$value['relation']['class']."->".$key."(".$this->data[$this->col_pk].")";//$value['relation']['class']."->".$key."(".$this->data[$this->col_pk].")";
+ 
+                    if (!in_array($hash,$context->SERIALIZED_OBJECTS)) {//if (!isset($this->record[$hash])) {//
+                     $context->SERIALIZED_OBJECTS[]=$hash;
+                     $this->$key;
+                    
                 }
             }
+            else{
+                 $this->data[$key]=null;
+                 $this->relatedField[$key]=null;
+            }
+
+
         }
 
-        return array_merge($this->data,$this->relatedField);
+        $newarray=array_merge($this->data,$this->relatedField);
+        array_walk_recursive($newarray,function(&$val){
+            $val = $val;
+        });
+
+
+        return $newarray;
     }
 
 
