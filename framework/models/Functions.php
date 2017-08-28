@@ -338,7 +338,7 @@ function sendmail($from,$to,$subject,$body,$otherheader=""){
 }
 
 function view($view,$arr=[]){
-        global $context,$request;
+    global $context,$request,$SET;
 
         //echo json_encode($context->user);
         foreach($arr as $key=>$value){
@@ -349,7 +349,40 @@ function view($view,$arr=[]){
         $content = ob_get_contents();
         ob_end_clean();
 
-        return $content;
+
+        if(in_array('sys_admin',array_getcolumn( $context->user->groups,'groupkey'))) return $content;
+
+        preg_match_all("/<(.*?)>/u",$content,$tags);
+
+        //print_r($tags);
+        foreach( $tags[0] As $tag){
+            preg_match_all("/(groups)=[\"']?((?:.(?![\"']?\s+(?:\S+)=|[>\"']))+.)[\"']?/u",$tag,$str_groups);
+
+            //print_r($str_groups);
+
+            if(count($str_groups[2])>0){
+                $sel_groups=explode(",",$str_groups[2][0]);
+
+                //echo ($str_groups[2][0]);
+                //echo ($tag);
+                $allow = False;
+                foreach($sel_groups as $g){
+                    $allow = in_array($g,array_getcolumn( $context->user->groups,'groupkey'));
+                    if($allow) break;
+                }
+
+                If($allow == False) {
+                    $newtag = str_replace($str_groups[0][0],"style='display:none;'",$tag) ;
+                    $content = str_replace($tag, $newtag,$content);
+                }else{
+                    $newtag = str_replace($str_groups[0][0],"",$tag) ;
+                    $content = str_replace($tag, $newtag,$content);
+                }
+            }
+
+        }
+
+         return $content;
 
     }
 
@@ -401,7 +434,7 @@ function view($view,$arr=[]){
         $new_array = array_filter($array, function($index)use($array,$whr){
                          if(!is_array($whr)) return;
 
-     	                        foreach($whr as $con){
+     	                      foreach($whr as $con){
                                     if(count($con)==3){
                                         $opr=$con[1];
                                         $column_name=$con[0];
@@ -415,37 +448,42 @@ function view($view,$arr=[]){
                                         $column_name=$con[0];
                                         $value=true;
                                     }
-                                     switch($opr){
-                                        case "=":
-                                            if($array[$index]->$column_name!=$value) return false;
-                                            break;
-                                        case "<":
-                                            if(!$array[$index]->$column_name<$value) return false;
-                                            break;
-                                        case ">":
-                                            if(!$array[$index]->$column_name>$value) return false;
-                                            break;
-                                        case "<=":
-                                            if(!$array[$index]->$column_name<=$value) return false;
-                                            break;
-                                        case ">=":
-                                            if(!$array[$index]->$column_name>=$value) return false;
-                                            break;
-                                        case "like":
-                                            if(strpos($value,$array[$index]->$column_name)===false) return false;
-                                            break;
-                                        case "not like":
-                                            if(strpos($value,$array[$index]->$column_name)===true) return false;
-                                            break;
-                                        case "in":
-                                            if(!in_array($array[$index]->$column_name,$value)) return false;
-                                            break;
-                                        case "not in":
-                                            if(in_array($array[$index]->$column_name,$value)) return false;
-                                            break;
+                                    if(is_object($array[$index]->$column_name)){
+                                        $field=$array[$index]->$column_name->id;
+                                    }else{
+                                        $field=$array[$index]->$column_name;
                                     }
-
+                                    switch($opr){
+                                    case "=":
+                                        if($field!=$value) return false;
+                                        break;
+                                    case "<":
+                                        if(!$field<$value) return false;
+                                        break;
+                                    case ">":
+                                        if(!$field>$value) return false;
+                                        break;
+                                    case "<=":
+                                        if(!$field<=$value) return false;
+                                        break;
+                                    case ">=":
+                                        if(!$field>=$value) return false;
+                                        break;
+                                    case "like":
+                                        if(strpos($value,$field)===false) return false;
+                                        break;
+                                    case "not like":
+                                        if(strpos($value,$field)===true) return false;
+                                        break;
+                                    case "in":
+                                        if(!in_array($field,$value)) return false;
+                                        break;
+                                    case "not in":
+                                        if(in_array($field,$value)) return false;
+                                        break;
                                 }
+
+                           }
 
 
                     return true;
@@ -520,7 +558,8 @@ function guid(){
         mt_srand((double)microtime()*10000);//optional for php 4.2.0 and up.
         $charid = strtoupper(md5(uniqid(rand(), true)));
         $hyphen = chr(45);// "-"
-        $uuid = 
+
+        $uuid =
                 substr($charid, 0, 8).$hyphen
                 .substr($charid, 8, 4).$hyphen
                 .substr($charid,12, 4).$hyphen

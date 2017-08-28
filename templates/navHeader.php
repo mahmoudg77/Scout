@@ -37,8 +37,10 @@
 	<link rel="stylesheet" href="<?=assets('css/main.css')?>">
 	<!-- Media Queries -->
 	<link rel="stylesheet" href="<?=assets('css/media-queries.css')?>">
-	
+
 	<link rel="stylesheet" href="<?=assets('css/Events.css')?>">
+	<link rel="stylesheet" href="<?=assets('css/flostingpoint.css')?>">
+	<link rel="stylesheet" href="<?=assets('css/Card.css')?>">
 
 	<link rel="stylesheet" type="text/css" href="<?=assets('css/register.component.css')?>">
 
@@ -72,13 +74,14 @@
 </head>
 
 <body id="body">
+
 	<!--
 	    Start Preloader
 	    ==================================== -->
 	<!--<div id="loading-mask">-->
-		<!--<div class="loading-img">-->
-<!--			<img alt="Arab Scout" src="<?=assets('img/loader 2.gif')?>"/>-->
-		<!--</div>
+	<!--<div class="loading-img">-->
+	<!--			<img alt="Arab Scout" src="<?=assets('img/loader 2.gif')?>"/>-->
+	<!--</div>
 	</div>-->
 	<!--
         End Preloader
@@ -96,13 +99,7 @@
                               <span class="icon-bar"></span>
                               <span class="icon-bar"></span>
                           </button>
-
-
-
-
-
-
-
+			
 				<!-- /responsive nav button -->
 
 				<!-- logo -->
@@ -111,13 +108,7 @@
         							<img src="<?=assets('img/ArabScoutHeaderLogo.png')?>" alt="ArabScout" />
         						</h1>
         					</a>
-
-
-
-
-
-
-
+			
 				<!-- /logo -->
 			</div>
 
@@ -128,17 +119,11 @@
 					</li>
 					<li><a href="#about">About Us</a>
 					</li>
-					<li><a href="#services">Services</a>
-					</li>
-					<li><a href="#showcase">Portfolio</a>
-					</li>
-					<li><a href="#our-team">Team</a>
-					</li>
-					<li><a href="#pricing">Pricing</a>
-					</li>
-					<li><a href="#blog">Blog</a>
-					</li>
+                    <li><a href="#our-team">Events</a>
+                    </li>
 					<li><a href="#contact-us">Contact</a>
+					</li>
+					<li><a href="<?=actionLink("","ProfileReg")?>">Register</a>
 					</li>
 					<li><a data-toggle="modal" href="#myModal">Login</a>
 					</li>
@@ -148,11 +133,17 @@
 
 		</div>
 	</header>
+<!--
+	<a id="fixedA"><i class="fa fa-plus-circle fa-4x" aria-hidden="true"></i></a>
+		<a id="AE"><i class="fa fa-plus-circle fa-3x demo" aria-hidden="true"></i></a>
+		<a id="AP"><i class="fa fa-plus-circle fa-3x demo" aria-hidden="true"></i></a>
+-->
+
+
 	<div class="page-content">
 		<div class="row">
 			<div id="myModal" class="modal fade" role="dialog">
 				<div class="modal-dialog ">
-
 					<!-- Modal content-->
 					<div class="w3-modal-content w3-animate-opacity" style="border-radius: 20px; background-color:#333439;">
 						<div class="modal-header">

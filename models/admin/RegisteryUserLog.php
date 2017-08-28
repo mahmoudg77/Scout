@@ -16,29 +16,26 @@ class RegisteryUserLog extends BLL{
 				'serialize'=>true,
 				'relation'=>['class'=>"App\Models\admin\Register",'classid'=>'id','controller'=>'Register']],
 
-
 		'userId'=>['name'=>'User',
 				'type'=>'Many2one',
 				'serialize'=>true,
 				'relation'=>['class'=>"App\Models\Profile\Profile",'classid'=>'Profile_ID','controller'=>'Profile']],
+
+		'teamId'=>['name'=>'Team',
+				'type'=>'Many2one',
+				'serialize'=>true,
+				'relation'=>['class'=>"App\Models\Admin\Teams",'classid'=>'id','controller'=>'Teams']],
+
 		];
 
     function name(){
         return $this->userId->name."(". $this->regId->name.")";
     }
-
-
-// 		$reguser=new App\Models\Admin\RegisteryUserLog;
-//
-// 		$reguser->regId=1;
-// 		$reguser->userId=55;
-// 		$reguser->insert();
-// //50
-// 		$reguser=new App\Models\Admin\RegisteryUserLog;
-// 		$data=$reguser->find(50);
-//
-// 		echo $data->userId->First_Name;
-// 		echo $reguser->regId->Year;
+    function onApproved(){
+        $this->is_done=1;
+        $this->update();
+        return $this->userId->approve();
+    }
 
 
 }

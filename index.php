@@ -47,6 +47,7 @@ try{
          include('controller/'.str_replace(".","/",$controller__path).'.php');
     }
 
+    $SET=new App\Models\Admin\Setting;
 
 
      $class=explode(".",$controller__path);
@@ -80,6 +81,7 @@ try{
             $user=$user[0];
             $context->user=$user;
             $context->userid=$user->data[$user->col_pk];
+
         }
     }elseif(isset($_SESSION['USER_TOKEN'])){
          $user=new User();
@@ -92,22 +94,24 @@ try{
     }
 
 
-     if(file_exists(PATH.'controller/'.str_replace(".","/",$context->controller_path).'.php') || file_exists(PATH.'framework/controller/'.str_replace(".","/",$context->controller_path).'.php')){
+    if(file_exists(PATH.'controller/'.str_replace(".","/",$context->controller_path).'.php') || file_exists(PATH.'framework/controller/'.str_replace(".","/",$context->controller_path).'.php')){
 
-         $context->controller=new $context->controller_name;
+        $context->controller=new $context->controller_name;
 
      }else{
 
          header("HTTP/1.0 404 Not Found");
-         $Error=new App\Controllers\BaseController();
-         return $Error->view("Error/index",['ErrorNumber'=>404]);
+
+          $Error=new App\Controllers\BaseController;
+          return $Error->view("Error/index",['ErrorNumber'=>404]);
+         //return redirectTo("Error/?number=404");
 	}
 
 
 
 
 
-     GV();
+    GV();
 
      $context->SERIALIZED_OBJECTS=[];
       if($request->isBody()){
@@ -115,6 +119,7 @@ try{
       }elseif($request->isPost()){
           $method="post".ucwords($context->method);
       }else{
+
           $method=$context->method;
       }
       //print_r($context->controller);

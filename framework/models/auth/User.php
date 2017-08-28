@@ -9,7 +9,11 @@ class User extends BLL{
 	public $col_pk="id";
 
 	var $fields=[
-	    'accid'=>['name'=>'Profile',
+        'profileName'=>['name'=>'Profile Name','type'=>'calculated','compute'=>'getprofilename','serialize'=>true],
+        'PersonalImage'=>['name'=>'Personal Image','type'=>'calculated','compute'=>'getPersonalImage','serialize'=>true],
+        'CoverImage'=>['name'=>'Cover Image','type'=>'calculated','compute'=>'getCoverImage','serialize'=>true],
+	    
+        'accid'=>['name'=>'Profile',
 	            'compute'=>'',
 	            'type'=>'Many2one',
 	            'serialize'=>true,
@@ -25,17 +29,24 @@ class User extends BLL{
                 ];
 
     function joined($g){
-
     	foreach($this->groups as $group) if($group->groupkey==$g) return true;
     	return false;
     }
-
+    function getprofilename(){
+        return $this->accid->name;
+    }
+    function getPersonalImage(){
+        return $this->accid->PersonalImage()->thumb;
+    }
+    function getCoverImage(){
+        return $this->accid->CoverImage()->thumb;
+    }
     function allow($model,$access){
         $class=new AccessRight;
         $class->supperUser();
 		$models=explode("\\",$model);
 		$itm="";
-		$new_models=[];
+		$new_models=[$model];
 		foreach($models as $m){
 			$itm.=(($itm=="")?"":"\\").$m;
 			$new_models[]=$itm."\*";
@@ -45,7 +56,8 @@ class User extends BLL{
 				   ->where("accesstype",$access)
 				   ->where("groupid","in",array_getcolumn($this->groups,"id"))
 				   ->get();
-    	return count($arr)>0 ? true:false;
+		//print_r($new_models);
+     	return count($arr)>0 ? true:false;
     }
 
     function allowfilter($model,$access,$groupkey=''){

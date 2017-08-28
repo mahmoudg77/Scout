@@ -73,4 +73,31 @@ textarea{
 	font-size: 30px;
 	text-align: center;
 	color : #1FB919;
+
+}
+
+
+
+/**********************************************************************/
+#fixedA{
+	position:fixed;
+	right:0;
+	bottom: 0;
+	margin: 0 55px 55px 0;
+}
+
+.demo{
+	position:fixed;
+	right:0;
+	bottom: 0;
+	margin: 0 60px 60px 0;
+}
+#AE{
+	position: absolute;
+	
+}
+#AP{
+	position: absolute;
+	
+	 
 }

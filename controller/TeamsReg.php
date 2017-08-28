@@ -10,6 +10,26 @@ class TeamsReg extends BaseController
     protected  $model="App\Models\Lookup\TeamsReg";
     protected $authRequired=true;
 
+    function index($request){
+        global $context;
+
+       	if(!$context->user){
+			header("HTTP/1.0 404 Not Found");
+            return $this->view("Error/index",['ErrorNumber'=>404]);
+		}
+ 		if(!$context->user->allow($this->model,"add")){
+			header("HTTP/1.0 403 Not Authorized !");
+            return $this->view("Error/index",['ErrorNumber'=>403]);
+		}
+        parent::index($request);
+    }
+    function myTeam($request){
+        $profile=new App\Models\Profile\Profile;
+        $data=$profile->get();
+        return $this->view("Profile/all",compact('data'));
+    }
+
+
   function postAdd($request)
 	{
       $teams=new App\Models\Admin\Teams;
@@ -38,6 +58,8 @@ class TeamsReg extends BaseController
 			}
 
 		}
+    try{
+
 
 
     // will creat team id only in parent and child
@@ -50,7 +72,6 @@ class TeamsReg extends BaseController
             exit();
         }
     }
-
 
     $TeamId->name=$request->post['teamName'];
     $TeamId->parentId=$request->post['office'];
@@ -69,14 +90,10 @@ class TeamsReg extends BaseController
 
 	$profile=new App\Models\Profile\Profile;
 	$LeaderId=$profile->where('Profile_ID',$request->post['leader_profileid'])->supperUser()->get();
-
     $Teams=new App\Models\Lookup\TeamsReg;
 	$Teams->TeamId=$TeamId->id;
 	$Teams->LeaderId=$LeaderId[0]->id;
 	$Teams->TeamCatId=$request->post['category'];
-
-
-
 
 	if($request->post['assist_profileid']){
         $leaderAssist=$profile->where('Profile_ID',$request->post['assist_profileid'])->supperUser()->get();
@@ -92,9 +109,9 @@ class TeamsReg extends BaseController
         $Teams->ASLeaderId=0;
     }
 
-
     $Teams->NoOfTeam=count($request->post['profileid']);
 
+     //Save the team in database
     if(!$Teams->insert()) {
         if($request->isAjax()){
             return json_error($Teams->error);
@@ -103,15 +120,86 @@ class TeamsReg extends BaseController
             exit();
         }
     }
-	foreach($request->post['profileid'] as $profileid){
-		//$FoundTeamMem=new;
-		$user= App\Models\Profile\Profile::find(intval($profileid));
+
+
+    //Register Leader
+    $user= App\Models\Profile\Profile::find($LeaderId[0]->id,true);
+
+    $Register= new App\Models\Admin\RegisteryUserLog;
+    $Register->userId= $user->id;
+
+    $Reg_rec=new App\Models\Admin\Register;
+    $Reg_rec=$Reg_rec->where('regFrom','<=',Date("Y-m-d"))->where('regTo','>=',Date("Y-m-d"))->supperUser()->limit(1)->get();
+
+    $Register->regId=$Reg_rec[0]->id;
+    $Register->teamId=$TeamId->id;
+
+
+    if(!$Register->insert()) {
+        if($request->isAjax()){
+            return json_error($Register->error);
+        }else{
+            echo $Register->error;
+            exit();
+        }
+    }
+
+    //Register First Leader Assistant
+    if($Teams->AFLeaderId>0){
+        $user= App\Models\Profile\Profile::find($Teams->AFLeaderId,true);
 
         $Register= new App\Models\Admin\RegisteryUserLog;
         $Register->userId= $user->id;
 
         $Reg_rec=new App\Models\Admin\Register;
-        $Reg_rec=$Reg_rec->where('regFrom','<=',Date("Y-m-d"))->where('regTo','>=',Date("Y-m-d"))->limit(1)->get();
+        $Reg_rec=$Reg_rec->where('regFrom','<=',Date("Y-m-d"))->where('regTo','>=',Date("Y-m-d"))->supperUser()->limit(1)->get();
+
+        $Register->regId=$Reg_rec[0]->id;
+        $Register->teamId=$TeamId->id;
+
+        if(!$Register->insert()) {
+            if($request->isAjax()){
+                return json_error($Register->error);
+            }else{
+                echo $Register->error;
+                exit();
+            }
+        }
+    }
+
+    //Register Second Leader Assistant
+     if($Teams->AFLeaderId>0){
+        $user= App\Models\Profile\Profile::find($Teams->ASLeaderId,true);
+
+        $Register= new App\Models\Admin\RegisteryUserLog;
+        $Register->userId= $user->id;
+
+        $Reg_rec=new App\Models\Admin\Register;
+        $Reg_rec=$Reg_rec->where('regFrom','<=',Date("Y-m-d"))->where('regTo','>=',Date("Y-m-d"))->supperUser()->limit(1)->get();
+
+        $Register->regId=$Reg_rec[0]->id;
+        $Register->teamId=$TeamId->id;
+
+        if(!$Register->insert()) {
+            if($request->isAjax()){
+                return json_error($Register->error);
+            }else{
+                echo $Register->error;
+                exit();
+            }
+        }
+    }
+
+      //Register Team Members
+	foreach($request->post['profileid'] as $profileid){
+		//$FoundTeamMem=new;
+		$user= App\Models\Profile\Profile::find(intval($profileid),true);
+
+        $Register= new App\Models\Admin\RegisteryUserLog;
+        $Register->userId= $user->id;
+
+        $Reg_rec=new App\Models\Admin\Register;
+        $Reg_rec=$Reg_rec->where('regFrom','<=',Date("Y-m-d"))->where('regTo','>=',Date("Y-m-d"))->supperUser()->limit(1)->get();
 
         $Register->regId=$Reg_rec[0]->id;
         $Register->teamId=$TeamId->id;
@@ -132,9 +220,18 @@ class TeamsReg extends BaseController
             return json_success("Save team success !!");
         }else{
             echo "Save team success !!";
-
+            exit();
         }
-
+}catch(\Exception $ex){
+    if($request->isAjax())
+			{
+			  return json_error($ex->getMessage());
+			}
+			else
+			{
+			   echo $ex->getMessage();
+			}
+}
 
 }
 

@@ -12,11 +12,11 @@
 							<ul>
 								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+								<!--<li><a href="#"><i class="fa fa-google-plus"></i></a></li>-->
 								<li><a href="#"><i class="fa fa-youtube"></i></a></li>
-								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+								<!--<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
 								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-								<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+								<li><a href="#"><i class="fa fa-pinterest"></i></a></li>-->
 							</ul>
 						</div>
 						<!--/. End Footer Social Links -->
@@ -25,12 +25,115 @@
 				</div> <!-- end row -->
 			</div> <!-- end container -->
 		</footer> <!-- end footer -->
+<div id="container-floating">
 
+  <a class="nd3 nds" href="#editFormP" data-toggle="modal" data-placement="left" data-original-title="contract@gmail.com"><img class="reminder">
+    <p class="letter">P</p>
+  </a>
+  <a class="nd1 nds" href="#editFormE" data-toggle="modal" data-placement="left" data-original-title="Edoardo@live.it"><img class="reminder">
+    <p class="letter">E</p>
+  </a>
+  <div id="floating-button" data-toggle="tooltip" data-placement="left" data-original-title="Create" onclick="newmail()">
+    <p class="plus">+</p>
+    <img class="edit" src="https://ssl.gstatic.com/bt/C3341AA7A1A076756462EE2E5CD71C11/1x/bt_compose2_1x.png">
+  </div>
+
+</div>
+<div id="modals">
+	
+	<div id="editFormE" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Create Event!</h4>
+				</div>
+				<div class="modal-body">
+					<div id="eventedit">
+						<div id="view">
+							<img id="ImgReview"/>
+						</div>
+						<form action="">
+							<div class="form-group">
+								<label for="eventName">Event Name :</label>
+								<input type="text" class="form-control" id="eventName" required>
+							</div>
+							<div class="form-group">
+								<label for="eventName">Event tag :</label>
+								<input type="text" class="form-control" id="eventName">
+							</div>
+							<div class="form-group">
+								<label for="Description">Dexcription :</label>
+								<textarea id="description" name="Text1" cols="70" rows="2"></textarea>
+							</div>
+							<div class="form-group">
+								<label for="eventName">Event Image :</label>
+								<input id="eventmage" type="file" accept="image/jpeg" style="width:200px;" name="eventImg" required>
+							</div>
+							<div class="form-group">
+								<div id="sub">
+									<input style="border-radius: 20px; width: 56%;" type="submit" class="btn btn-success"/>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" style="border-radius: 20px;" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="editFormP" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Create Post!</h4>
+				</div>
+				<div class="modal-body">
+					<div id="eventedit">
+						<div id="view1">
+							<img id="ImgReview1"/>
+						</div>
+						<form action="">
+							<div class="form-group">
+								<label for="eventName">Post Name :</label>
+								<input type="text" class="form-control" id="eventName" required>
+							</div>
+							<div class="form-group">
+								<label for="Description">Description :</label>
+								<textarea id="description" name="Text1" cols="70" rows="2"></textarea>
+							</div>
+							<div class="form-group">
+								<label for="postName">Post Image :</label>
+								<input id="postmage" type="file" accept="image/jpeg" style="width:200px;" name="حخسفImg" required>
+							</div>
+							<div class="form-group">
+								<div id="sub">
+									<input style="border-radius: 20px; width: 56%;" type="submit" class="btn btn-success"/>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" style="border-radius: 20px;" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 		<!-- Back to Top
 		============================== -->
+<!--
 		<a href="javascript:;" id="scrollUp">
 			<i class="fa fa-angle-up fa-2x"></i>
 		</a>
+-->
 
 		<!-- end Footer Area
 		========================================== -->
@@ -81,7 +184,8 @@
 		<!--<script src="<?=assets('js/grid.js')?>"></script>-->
 		<!-- Custom js -->
 		<script src="<?=assets('js/custom.js')?>"></script>
-		<script src="<?=assets('js/.js')?>"></script>
+ <script src="<?=assets('js/bootstrap-datepicker.min.js')?>"></script>
+
 		<!-- Ajax Form-->
 		<script src="http://malsup.github.com/jquery.form.js"></script>
 <script>
@@ -104,6 +208,10 @@ $(function(){
 	$("#btnLogin").click(function(event){
 		event.preventDefault();
  		$("#myModal").modal();
+	});
+	$('input[type="date"]').datepicker({
+	    format: "yyyy-mm-dd",
+	    language: "ar"
 	});
 })
 </script>

@@ -1,4 +1,4 @@
-<?if(!$request->isAjax())include(PATH.'templates/AdminHeader.php');?>
+<?if(!$request->isAjax())include(PATH.'templates/cpheader.php');?>
 
  
 
@@ -13,11 +13,13 @@
                                   </td></tr>
                         <?}?>
                     <?}}?>
+                    <?if($context->user->allow($data->model,"add")){?>
                     <tr><td></td><td><input class="btn btn-success" type="submit" value="Save"/></td></tr>
+                    <?}?>
                 </table>
              </form>
 
  
 
 
- <?if(!$request->isAjax())include(PATH.'templates/AdminFooter.php');?>
+ <?if(!$request->isAjax())include(PATH.'templates/cpfooter.php');?>

@@ -1,3 +1,8 @@
+.no-spin::-webkit-inner-spin-button, .no-spin::-webkit-outer-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+    -moz-appearance:textfield !important;
+}
 #header{
   font-size: 84px;
   text-align: center;
@@ -14,7 +19,7 @@
   padding:10px 0;
   margin-bottom: 12px;
 }
-label{
+.profReg {
   margin-top: 10px;
 
 }
@@ -52,7 +57,6 @@ input{
 }
 .containeer{
   border: 1px solid silver;
-  border: 1px solid silver;
   border-radius: 9px;
 
 }
@@ -60,7 +64,7 @@ input{
   width: 500px;
   align-content: center;
 }
-div div p{
+/*div div p{
   border:1px solid #80c5f1;
   background: #80c5f1; 
   border-radius: 5px;
@@ -68,7 +72,7 @@ div div p{
   margin: 8px 4px;
   padding: 1px 2px;
   
-}
+}*/
 /*----------------------------*/
 .inner-addon { 
     position: relative; 

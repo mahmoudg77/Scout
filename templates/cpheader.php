@@ -5,7 +5,7 @@
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Arabscout|  <?=str_replace("App\Controllers\\","",CONTROLLER_PATH)?></title>
+  <title><?=$SET->getSetting("site_name")?>|  <?=str_replace("App\Controllers\\","",CONTROLLER_PATH)?></title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -125,7 +125,7 @@
     <!-- Logo -->
     <a href="<?=actionLink("","Dashboard")?>" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini">Scout</span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>Scout</b></span>
     </a>
@@ -142,7 +142,7 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
-          <li class="dropdown messages-menu">
+          <li class="dropdown messages-menu"  groups="sys_admin">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
               <span class="label label-success">4</span>
@@ -172,7 +172,7 @@
             </ul>
           </li>
           <!-- Notifications: style can be found in dropdown.less -->
-          <li class="dropdown notifications-menu">
+          <li class="dropdown notifications-menu"  groups="sys_admin">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
               <span class="label label-warning">10</span>
@@ -194,7 +194,7 @@
             </ul>
           </li>
           <!-- Tasks: style can be found in dropdown.less -->
-          <li class="dropdown tasks-menu">
+          <li class="dropdown tasks-menu"  groups="sys_admin">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-flag-o"></i>
               <span class="label label-danger">9</span>
@@ -239,8 +239,8 @@
               <li class="user-header">
                 <img src="<?=$context->user->accid->PersonalImage->thumb?>" class="img-circle" alt="User Image">
                 <p>
-                  <?=USER_NAME?> - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  <?=USER_NAME?>
+                  <small></small>
                 </p>
               </li>
               <!-- Menu Body -->
@@ -301,7 +301,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="treeview">
+        <li class="treeview" groups="sys_admin">
   			<a href="#">
   				<i class="fa fa-files-o"></i>
   				<span>Profile</span>
@@ -309,7 +309,7 @@
                     <i class="fa fa-angle-right pull-right"></i>
                   </span>
   			</a>
-			   <ul class="treeview-menu">
+			   <ul class="treeview-menu" >
       			<li><a class="menu-item"  href="<?=actionLink("all","Profile")?>"><i class="fa fa-circle-o"></i> Profiles</a></li>
       			<li><a class="menu-item"  href="<?=actionLink("all","Comp")?>"><i class="fa fa-circle-o"></i> Camps</a></li>
       			<li><a class="menu-item"  href="<?=actionLink("all","CompUserLog")?>"><i class="fa fa-circle-o"></i> Comps Log</a></li>
@@ -319,7 +319,7 @@
 		    </ul>
 	    </li>
 
-      <li class="treeview">
+      <li class="treeview"  groups="team_admin,branch_admin,office_admin,org_admin,country_admin">
       <a href="#">
         <i class="fa fa-files-o"></i>
         <span>Register</span>
@@ -327,13 +327,14 @@
                   <i class="fa fa-angle-right pull-right"></i>
                 </span>
       </a>
-       <ul class="treeview-menu">
-         <li><a class="menu-item" href="<?=actionLink("","TeamsReg")?>"><i class="fa fa-circle-o"></i> Forms</a></li>
-         <li><a class="menu-item" href="<?=actionLink("all","Waitinglist")?>"><i class="fa fa-circle-o"></i> Approvels</a></li>
+       <ul class="treeview-menu" >
+         <li><a class="menu-item" href="<?=actionLink("","TeamsReg")?>" groups="team_admin"><i class="fa fa-circle-o" ></i> Team Register</a></li>
+         <li><a class="menu-item" href="<?=actionLink("myTeam","TeamsReg")?>" groups="team_admin"><i class="fa fa-circle-o"></i> My Team</a></li>
+         <li><a class="menu-item" href="<?=actionLink("all","Waitinglist")?>"  groups="branch_admin,office_admin,org_admin,country_admin"><i class="fa fa-circle-o"></i> Approvels</a></li>
       </ul>
     </li>
 
-    <li class="treeview">
+    <li class="treeview"  groups="sys_admin">
     <a href="#">
       <i class="fa fa-files-o"></i>
       <span>Administrator</span>
@@ -347,7 +348,7 @@
        <li><a class="menu-item" href="<?=actionLink("all","RegisteryUserLog")?>"><i class="fa fa-circle-o"></i> Register User</a></li>
     </ul>
   </li>
-  <li class="treeview">
+  <li class="treeview"  groups="sys_admin">
     <a href="#">
       <i class="fa fa-files-o"></i>
       <span>Setting</span>
@@ -363,7 +364,7 @@
        <li><a class="menu-item" href="<?=actionLink("all","Studies")?>"><i class="fa fa-circle-o"></i> Studies</a></li>
     </ul>
   </li>
-  <li class="treeview">
+  <li class="treeview"  groups="sys_admin">
     <a href="#">
       <i class="fa fa-files-o"></i>
       <span>Media</span>
@@ -375,7 +376,7 @@
        <li><a class="menu-item" href="<?=actionLink("all","Images")?>"><i class="fa fa-circle-o"></i> Images</a></li>
     </ul>
   </li>
-<li class="treeview">
+<li class="treeview"  groups="sys_admin">
     <a href="#">
         <i class="fa fa-files-o"></i>
         <span>Security</span>
@@ -391,12 +392,24 @@
         <li><a class="menu-item" href="<?=actionLink("all","UserGroupRel")?>"><i class="fa fa-circle-o"></i> Users in Groups</a></li>
     </ul>
 </li>
-
-        <!-- <li><a href=""><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-        <li class="header">LABELS</li>
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Register Form</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li> -->
+<li class="treeview" groups="sys_admin">
+    <a href="#">
+        <i class="fa fa-files-o"></i>
+        <span>Setting</span>
+        <span class="pull-right-container">
+            <i class="fa fa-angle-right pull-right"></i>
+        </span>
+    </a>
+    <ul class="treeview-menu">
+        <li><a class="menu-item" href="<?=actionLink("add","Setting")?>"><i class="fa fa-circle-o"></i> Add New</a></li>
+        <li><a class="menu-item" href="<?=actionLink("index","Setting",["group"=>"General"])?>"><i class="fa fa-circle-o"></i> General</a></li>
+        <li><a class="menu-item" href="<?=actionLink("index","Setting",["group"=>"Events"])?>"><i class="fa fa-circle-o"></i> Events</a></li>
+        <li><a class="menu-item" href="<?=actionLink("index","Setting",["group"=>"Posts"])?>"><i class="fa fa-circle-o"></i> Posts</a></li>
+        <li><a class="menu-item" href="<?=actionLink("index","Setting",["group"=>"Profile"])?>"><i class="fa fa-circle-o"></i> Profile</a></li>
+        <li><a class="menu-item" href="<?=actionLink("index","Setting",["group"=>"SMS"])?>"><i class="fa fa-circle-o"></i> SMS Api</a></li>
+    </ul>
+</li>
+      
       </ul>
     </section>
     <!-- /.sidebar -->

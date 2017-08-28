@@ -1,0 +1,1 @@
+﻿ALTER TABLE `profile` ADD `serial` VARCHAR(20) NULL AFTER `approval_at`, ADD UNIQUE `serial` (`serial`); 

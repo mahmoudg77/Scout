@@ -38,14 +38,19 @@ class Login extends BaseController
 
                 $user=$data[0];
 
-                $user->api_token=guid();
-                $user->supperUser()->update();
+
+
+
                 if(!$request->UseApi()){
                    $_SESSION['USER_TOKEN']=$user->token;
-               }
+                }else{
+                    $user->api_token=guid();
+                    $user->supperUser()->update();
+                }
 
 
-               if($request->isAjax()){
+                if($request->isAjax()){
+
                     return  json_success("Login Success",$user);
                 }else{
                     return redirectTo("Dashboard");

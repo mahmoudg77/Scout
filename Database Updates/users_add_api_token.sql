@@ -1,1 +1,2 @@
-﻿ALTER TABLE `users` ADD `api_tokrn` VARCHAR(100) NULL AFTER `token`;
+ALTER TABLE `users` ADD `api_token` VARCHAR(100) NULL AFTER `token`;
+

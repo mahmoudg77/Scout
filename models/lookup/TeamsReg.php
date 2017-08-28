@@ -1,11 +1,11 @@
 <?
 namespace App\Models\Lookup;
-
+use App;
 use Framework\Database;
 use Framework\BLL;
 
 class TeamsReg extends BLL{
-	var $tablename="TeamInfo";
+	var $tablename="teaminfo";
 	var $col_pk="id";
 
     use \Framework\NotifyModel;
@@ -13,10 +13,10 @@ class TeamsReg extends BLL{
 
     var $fields=[
             'TeamCatId'=>['name'=>'Category',
-                        'serialize'=>true,
-                        'type'=>'Many2one',
-                        'relation'=>['class'=>'App\Models\Lookup\Levels','classid'=>'id','controller'=>'Levels']
-                        ],
+                    'serialize'=>true,
+                    'type'=>'Many2one',
+                    'relation'=>['class'=>'App\Models\Lookup\Levels','classid'=>'id','controller'=>'Levels']
+                    ],
             'TeamId'=>['name'=>'Team Path',
                     'serialize'=>true,
                     'type'=>'Many2one',
@@ -40,6 +40,27 @@ class TeamsReg extends BLL{
 	    ];
     function name(){
         return  $this->TeamId->fullName("\\",false) . "(" . $this->TeamCatId->name . ")";
+    }
+    function onApproved(){
+         global $context;
+        $registerlog=new App\Models\Admin\RegisteryUserLog;
+        $data=$registerlog->supperUser()->where('teamId',$this->TeamId->id)->get();
+        
+        foreach($data as $itm){
+            //$profile=$registerlog->;
+            
+            $r= $itm->approve();
+            
+            if($r!=true){
+               $message.=$r['message'];
+            }
+                
+                
+        }
+        if(isset($message)){
+            return ['type'=>'error','message'=>$message];
+        }
+        return true;
     }
 }
 ?>
