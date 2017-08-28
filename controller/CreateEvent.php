@@ -1,4 +1,5 @@
 <?
+
 namespace App\ Controllers;
 
 class CreateEvent extends BaseController {
@@ -46,3 +47,4 @@ class CreateEvent extends BaseController {
 	}
 }
 ?>
+

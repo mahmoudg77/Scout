@@ -28,6 +28,7 @@ function readURL(input) {
 		reader.readAsDataURL(input.files[0]);
 	}
 };
+ 
 
 $("#fixedA").on('click',function(){
 	alert("addP/E");
@@ -61,3 +62,4 @@ function readURL(input) {
 		reader.readAsDataURL(input.files[0]);
 	}
 };
+

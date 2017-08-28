@@ -379,7 +379,7 @@ var $mode="view";
     if($where!=null)$t->where($where);
 
    		$rows= $t->where($classid,$this->data[$foraginkey])->limit(1)->supperUser()->get();
-		
+
 		return $rows[0];
 
 	}
@@ -660,6 +660,7 @@ var $mode="view";
         global $context;
 
         foreach($this->fields as $key=>$value) {
+
             
             
             if($value['serialize'] ){
@@ -676,6 +677,7 @@ var $mode="view";
                      if($context->request->UseApi() && in_array($value['type'],['Many2one'])){
                          $this->relatedField[$key]=$this->data[$key];
                      }
+
                 }
             }
             else{

@@ -50,6 +50,7 @@ class Login extends BaseController
 
 
                 if($request->isAjax()){
+
                     return  json_success("Login Success",$user);
                 }else{
                     return redirectTo("Dashboard");

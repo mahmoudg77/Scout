@@ -3,6 +3,7 @@
 	<div id="view">
 		<img id="ImgReview"/>
 	</div>
+
 	<form name="form" class="ajax-form" action="" method="post" role="form" enctype="multipart/form-data">
 	<?=Framework\Request::CSRF()?>
 		<div class="form-group">
@@ -14,6 +15,7 @@
 			<div class="info">
 				<input type="text" class="form-control" name="eventTag">
 <!--				<a data-toggle="popover" title="Event tag" data-content="ex : Scout is our life" data-placement="left"><i class="fa fa-info-circle" aria-hidden="true"></i></a>-->
+
 			</div>
 		</div>
 		<div class="form-group">
@@ -26,7 +28,7 @@
 		</div>
 		<div class="form-group">
 			<div id="sub">
-				
+
 				<input type="submit" class="btn btn-success btn-lg btn-block" value="Submit"/>
 			</div>
 		</div>
