@@ -14,24 +14,30 @@
 				<div class="clearfix">
 
 					<!-- single blog post -->
+					<?
+						foreach($Data as $SinglePost){
+					?>
 					<article class="col-md-3 col-sm-6 col-xs-12 clearfix wow fadeInUp" data-wow-duration="500ms">
-						<div >
+						<div>
 							<div class="media-wrapper">
-								<img src="<?=assets('img/portfolio/wide-port1.jpg')?>" alt="amazing caves coverimage" class="img-responsive">
+								<img src="<?=$SinglePost->Images[0]->thumb?>" alt="amazing caves coverimage" class="img-responsive">
 							</div>
-
 							<div class="excerpt">
-								<p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non skateboard dolor brunch.</p>
-								<a class="btn btn-transparent" href="single-post.html">Read more</a>
+								<h3><?=$SinglePost->tittle?></h3>
+								<p><?=$SinglePost->description?></p>
+								<a class="btn btn-transparent" href="/en/Posts/item/<?=$SinglePost->id?>">Read more</a>
 							</div>
 						</div>
 					</article>
+					<?
+						}
+					?>
 					<!-- /single blog post -->
 					<!-- end single blog post -->
 				</div>
 
 				<div class="all-post text-center">
-					<a class="btn btn-transparent" href="blog.html">View All Post</a>
+					<a class="btn btn-transparent" href="/en/Posts/index1">View All Post</a>
 				</div>
 
 			</div>
