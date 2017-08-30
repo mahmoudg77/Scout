@@ -11,7 +11,12 @@ class CreateEvent extends BLL{
 	var $col_pk="id";
 
 	var $fields=[
-
+			 'Images'=>[
+                    'name'=>"Image",
+                    'serialize'=>true,
+                    'type'=>'One2many',
+                    'relation'=>['class'=>'App\Models\Media\Images','classid'=>'model_id','where'=>		['model_name','App\Models\Content\CreateEvent'],'controller'=>'Images'],
+                ],
 	    ];
 }
 ?>

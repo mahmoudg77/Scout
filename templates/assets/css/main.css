@@ -1258,9 +1258,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #gallery-post .owl-prev,
-#post-thumb .owl-prev,
+# .owl-prev,
 #gallery-post .owl-next,
-#post-thumb .owl-next {
+# .owl-next {
     padding: 5px 17px;
     position: absolute;
     top: 45%;
@@ -1272,31 +1272,31 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #gallery-post .owl-prev,
-#post-thumb .owl-prev {
+# .owl-prev {
     left: -45px;
 }
 
 #gallery-post .owl-next,
-#post-thumb .owl-next {
+# .owl-next {
     right: -45px;
 }
 
 #gallery-post:hover .owl-prev,
-#post-thumb:hover .owl-prev {
+#:hover .owl-prev {
     left: 0;
 }
 
 #gallery-post:hover .owl-next,
-#post-thumb:hover .owl-next {
+#:hover .owl-next {
     right: 0;
 }
 
 #gallery-post,
-#post-thumb {
+# {
     overflow-x: hidden;
 }
 
-#post-thumb .owl-buttons {
+# .owl-buttons {
     color: #fff;
 }
 
@@ -1568,7 +1568,7 @@ blockquote {
 }
 
 .comment-wrap {
-	border: 1px solid #4e595f;
+	border-top: 1px solid #4e595f;
 	border-radius: 1px;
 	margin-left: 20px;
 	padding: 10px;
@@ -1581,7 +1581,7 @@ blockquote {
 }
 
 .author-comment {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     overflow: hidden;
 }
 

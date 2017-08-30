@@ -40,7 +40,7 @@ class ProfileReg extends BaseController
 	
     $con=new App\Models\Profile\Profile;
     
-    $found=  $con->where('National_Number','=',$request->post['nationalId'])->supperUser()->get();
+    $found=  $con->('National_Number','=',$request->post['nationalId'])->supperUser()->get();
 
      if(count($found)>0){
       if($request->isAjax()){
