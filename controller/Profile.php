@@ -10,12 +10,13 @@ class Profile extends BaseController
     protected $authRequired=true;
 
 
+
     function form($request){
         $id=$request->get['id'];
         $NathionalID=$request->get['NationalID'];
 
         //print_r($request);
-      
+
         if(isset($id) && intval($id)>0){
             $Profile=App\Models\Profile\Profile::find($id);
         }
@@ -68,7 +69,7 @@ class Profile extends BaseController
            }
 
                     $contact=new App\Models\Profile\ContactUser;
-                    if(isset($request->post['address'])){
+                    if(isset($request->post['address'])  && $request->post['address']!=''){
                         $contact->contactTypeId=1;
                         $contact->userId=$Profile->Profile_ID;
                         $contact->contactValue=$request->post['address'];
@@ -81,7 +82,7 @@ class Profile extends BaseController
                             }
                         }
                     }
-                    if(isset($request->post['email'])){
+                    if(isset($request->post['email']) && $request->post['email']!=''){
                         $contact->contactTypeId=2;
                         $contact->userId=$Profile->Profile_ID;
                         $contact->contactValue=$request->post['email'];
@@ -94,7 +95,7 @@ class Profile extends BaseController
                             }
                         }
                     }
-                    if(isset($request->post['phone'])){
+                    if(isset($request->post['phone']) && $request->post['phone']!=''){
                         $contact->contactTypeId=3;
                         $contact->userId=$Profile->Profile_ID;
                         $contact->contactValue=$request->post['phone'];
@@ -108,7 +109,7 @@ class Profile extends BaseController
                         }
                     }
 
-                    if(isset($request->post['secondphone'])){
+                    if(isset($request->post['secondphone']) && $request->post['secondphone']!=''){
                         $contact->contactTypeId=3;
                         $contact->userId=$Profile->Profile_ID;
                         $contact->contactValue=$request->post['secondphone'];
@@ -123,7 +124,7 @@ class Profile extends BaseController
                         }
                     }
 
-                    
+
                      if(isset($request->files['proImg']['filename'])){
                         $image=new App\Models\Media\Images($Profile,"Personal",$request->files['proImg']);
                         $image->upload();

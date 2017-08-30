@@ -5,8 +5,9 @@ class Error extends BaseController
     protected  $model="";
 
     function index($request){
+        
         $ErrorNumber=$request->get['number'];
-        return $this->view('Error/index',compact('ErrorNumber'));
+        return $this->view(compact('ErrorNumber'));
     }
 
 

@@ -114,7 +114,8 @@ class ProfileReg extends BaseController
 		$Contacts->contactTypeId=1;//ID Of Address
 		$Contacts->contactValue=$request->post['address'];
 		$Contacts->supperUser()->insert();
-		//Phone
+		
+        //Phone
 		$Contacts->userId=$profile->Profile_ID;
 		$Contacts->contactTypeId=3;//ID Of Phone
 		$Contacts->contactValue=$request->post['phone'];

@@ -27,7 +27,7 @@ var $mode="view";
 		global $Database;
 		try{
             $this->Database=$Database;
-
+            if($this->tablename=="") return;
 		    $q = $this->Database->prepare("DESCRIBE ".$this->tablename);
             $q->execute();
 
@@ -131,20 +131,27 @@ var $mode="view";
                             }
                         }
                         break;
+                    case "calculated":
+                        $fun=$this->fields[$name]['compute'];
+                     
+                        if(method_exists(get_called_class(),$fun)){
+                            $this->data[$name]=  $this->$fun();
+                            return $this->data[$name];
+                        }
+                       
+                        break;
                     default:
                         if($this->data_exists($name)){
                             return $this->data[$name];
                         }else{
-                            $TYPE=get_called_class();
+                            
                             if(method_exists(get_called_class(),$name)){
                                 $this->data[$name]= $this->$name();
                                 return $this->data[$name];
                             }
                         }
                         break;
-
             }
-
 	    }else{
 	         $TYPE=get_called_class();
                 if(method_exists(get_called_class(),$name)){
@@ -181,7 +188,7 @@ var $mode="view";
     	        $this->data['created_at']=Date("Y-m-d H:i:s");
     	    }
     		foreach($this->fields as $key=>$value){
-              if(!in_array($value['type'],['One2many','Many2many'] ) && !in_array($key,['updated_at','updated_by','deleted_at','deleted_by','is_deleted']) && $this->data_exists($key)){
+              if(!in_array($value['type'],['One2many','Many2many','calculated'] ) && !in_array($key,['updated_at','updated_by','deleted_at','deleted_by','is_deleted']) && $this->data_exists($key)){
 					if($key!=$this->col_pk){
             			$fields_statment.=(($fields_statment=="")?"":",")."`".$key."`";
             			$values_statment.=(($values_statment=="")?"":",").":".$key;
@@ -223,7 +230,7 @@ var $mode="view";
     	    }
 
     		foreach($this->fields as $key=>$value){
-              if(!in_array($value['type'],['One2many','Many2many'] ) && !in_array($key,['created_at','created_by','deleted_at','deleted_by','is_deleted']) && $this->data_exists($key)){
+              if(!in_array($value['type'],['One2many','Many2many','calculated'] ) && !in_array($key,['created_at','created_by','deleted_at','deleted_by','is_deleted']) && $this->data_exists($key)){
     		        if($key!=$this->col_pk){
             			$set_statment.=(($set_statment=="")?"":",")."`".$key."`=:".$key;
             			$values[":".$key]=$this->data[$key];
@@ -456,6 +463,7 @@ var $mode="view";
 	    }else{
 	         $this->order_arr[]=$args;
 	    }
+	   
            return $this;
 	}
 
@@ -483,9 +491,8 @@ var $mode="view";
 
 		if(!$this->withSupperUser){
 		   if(!$context->user) throw new Exception("401 Access Denied !");
-
-		   if(!$context->user->allow($TYPE,"view")) throw new Exception("403 Not Authorized !");
-
+ 		   if(!$context->user->allow($TYPE,"view")) throw new Exception("403 Not Authorized !");
+            
             //print_r($context->user);
             $filter= $context->user->allowfilter($TYPE,'view');
 
@@ -520,14 +527,18 @@ var $mode="view";
   		$stmt=$this->Database->prepare("select * from `$this->tablename` ".($str_whr==""?"":" where ".$str_whr).
   		                            ($str_order==""?"":" order by ".$str_order).
   		                            ($this->limit==""?"":" limit ".$this->limit.($this->offset==""?"":",".$this->offset)));
+  		                            
+  		                             /*echo "select * from `$this->tablename` ".($str_whr==""?"":" where ".$str_whr).
+  		                            ($str_order==""?"":" order by ".$str_order).
+  		                            ($this->limit==""?"":" limit ".$this->limit.($this->offset==""?"":",".$this->offset)); */
   	    if(! $stmt->execute($this->where_values)){
 					// echo $this->tablename , ":",$stmt->errorInfo()[2];
 				}
   		$rows = $stmt->fetchAll();
 		//$query=$db->result;
-		$returned=array();
-
-		if(!$rows)return $returned;
+		 $returned=array();
+        //return $rows;
+		 if(!$rows)return $returned;
 
 		foreach($rows as $row){
 			//Get dynamic object from class name
@@ -586,7 +597,15 @@ var $mode="view";
     	        if(count($con)==3){
     	            if($con[1]=='like' || $con[1]=='not like'){
     	                $w=$con[0].' '.$con[1].' ?';
-    	                 $this->where_values[]="'%".$con[2]."%'";
+    	                 $this->where_values[]="%".$con[2]."%";
+    	            }
+    	            else if($con[1]=='llike'){
+    	                $w=$con[0].' like ?';
+    	                 $this->where_values[]=$con[2]."%";
+    	            }
+    	            else if($con[1]=='rlike' ){
+    	                $w=$con[0].' like ?';
+    	                 $this->where_values[]="%".$con[2];
     	            }
     	            else if($con[1]=='in' || $con[1]=='not in'){
     	                 $w=json_encode($con[2]);
@@ -614,18 +633,22 @@ var $mode="view";
 	    if(count($this->order_arr)==0)return "";
 	    foreach($this->order_arr as $order){
     	        if(count($order)==1){
-    	            $str_order.=($str_order==""?"":" ,").$order[0]."=1";
+    	            $str_order.=($str_order==""?"":" ,").$order[0];
     	        }
 
     	        if(count($order)==2){
     	            $str_order.=($str_order==""?"":" , ").$order[0]." ".$order[1];
     	        }
 	    }
+	   
         return $str_order;
 	}
-	static function find($id){
+	static function find($id,$supperUser=false){
 		$TYPE=get_called_class();
 		$data=new 	$TYPE;
+		if($supperUser){
+		    $data->supperUser();
+		}
  		$list=$data->where($data->col_pk,$id)->get();
 		
 		return $list[0];
@@ -635,15 +658,24 @@ var $mode="view";
 	// From JsonSerializable
     public function jsonSerialize(){
         global $context;
+
         foreach($this->fields as $key=>$value) {
-             
-            if($value['serialize']){
+            
+            
+            if($value['serialize'] ){
                 $hash=(get_class($this)."(".$this->data[$this->col_pk].")"."->".$key);//$value['relation']['class']."->".$key."(".$this->data[$this->col_pk].")";//$value['relation']['class']."->".$key."(".$this->data[$this->col_pk].")";
  
-                    if (!in_array($hash,$context->SERIALIZED_OBJECTS)) {//if (!isset($this->record[$hash])) {//
+                if (!in_array($hash,$context->SERIALIZED_OBJECTS)) {//if (!isset($this->record[$hash])) {//
+                     
                      $context->SERIALIZED_OBJECTS[]=$hash;
                      $this->$key;
-                    
+                     if($context->request->UseApi() && in_array($value['type'],['One2many','Many2many'])){
+                         $this->{$key."_count"}=count($this->relatedField[$key]);
+                         $this->relatedField[$key]=null;
+                     }
+                     if($context->request->UseApi() && in_array($value['type'],['Many2one'])){
+                         $this->relatedField[$key]=$this->data[$key];
+                     }
                 }
             }
             else{
@@ -663,6 +695,43 @@ var $mode="view";
         return $newarray;
     }
 
+    static function query($sql){
+		
+ 		// Get class name 
+		$TYPE=get_called_class();
+		$d=new $TYPE;
+		if(!$sql)return $returned;
+        $stmt=$d->Database->prepare($sql);
+		
+        if(! $stmt->execute()){
+              echo $stmt->errorInfo()[2];
+            
+
+        }
+        $rows = $stmt->fetchAll();
+         $returned=array();
+        //return $rows;
+        if(!$rows)return $returned;
+
+		foreach($rows as $row){
+			//Get dynamic object from class name
+			$obj =new $TYPE;
+
+			$obj->data=array();
+
+			foreach($row as $key=>$value)
+			    if(!is_numeric($key)){
+			        $obj->$key=$value;
+			        $obj->mode='view';
+			    }
+            //print_r($obj);
+			$returned[]=$obj;
+		}
+
+		return $returned;
+
+
+	}
 
 	function DrawField($field,$widget="",$mode="",$attrs=[]){
 	    global $context;
@@ -911,19 +980,26 @@ trait ApprovelModel {
     }
     function insert() {
         global $context;
+        
+        $this->approval_request=-1;
+        $this->approval_by=0;
+
        if(!parent::insert()){
            return false;
        }
+       
         $approve_request=new \App\Models\Notify\Waitinglist;
         $approve_request->userId=intval($context->user->id);
         $approve_request->model_name=$this->model;
         $approve_request->model_id=$this->id;
         $approve_request->is_done=-1;
-
+        
         if(!$approve_request->supperUser()->insert()){
             $this->error=$approve_request->error;
+            
             return false;
         }
+       
         return true;
     }
 

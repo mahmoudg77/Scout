@@ -5,7 +5,7 @@
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Arabscout|  <?=str_replace("App\Controllers\\","",CONTROLLER_PATH)?></title>
+  <title><?=$SET->getSetting("site_name")?>|  <?=str_replace("App\Controllers\\","",CONTROLLER_PATH)?></title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -329,6 +329,7 @@
       </a>
        <ul class="treeview-menu" >
          <li><a class="menu-item" href="<?=actionLink("","TeamsReg")?>" groups="team_admin"><i class="fa fa-circle-o" ></i> Team Register</a></li>
+         <li><a class="menu-item" href="<?=actionLink("myTeam","TeamsReg")?>" groups="team_admin"><i class="fa fa-circle-o"></i> My Team</a></li>
          <li><a class="menu-item" href="<?=actionLink("all","Waitinglist")?>"  groups="branch_admin,office_admin,org_admin,country_admin"><i class="fa fa-circle-o"></i> Approvels</a></li>
       </ul>
     </li>
@@ -391,12 +392,24 @@
         <li><a class="menu-item" href="<?=actionLink("all","UserGroupRel")?>"><i class="fa fa-circle-o"></i> Users in Groups</a></li>
     </ul>
 </li>
-
-        <!-- <li><a href=""><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-        <li class="header">LABELS</li>
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Register Form</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li> -->
+<li class="treeview" groups="sys_admin">
+    <a href="#">
+        <i class="fa fa-files-o"></i>
+        <span>Setting</span>
+        <span class="pull-right-container">
+            <i class="fa fa-angle-right pull-right"></i>
+        </span>
+    </a>
+    <ul class="treeview-menu">
+        <li><a class="menu-item" href="<?=actionLink("add","Setting")?>"><i class="fa fa-circle-o"></i> Add New</a></li>
+        <li><a class="menu-item" href="<?=actionLink("index","Setting",["group"=>"General"])?>"><i class="fa fa-circle-o"></i> General</a></li>
+        <li><a class="menu-item" href="<?=actionLink("index","Setting",["group"=>"Events"])?>"><i class="fa fa-circle-o"></i> Events</a></li>
+        <li><a class="menu-item" href="<?=actionLink("index","Setting",["group"=>"Posts"])?>"><i class="fa fa-circle-o"></i> Posts</a></li>
+        <li><a class="menu-item" href="<?=actionLink("index","Setting",["group"=>"Profile"])?>"><i class="fa fa-circle-o"></i> Profile</a></li>
+        <li><a class="menu-item" href="<?=actionLink("index","Setting",["group"=>"SMS"])?>"><i class="fa fa-circle-o"></i> SMS Api</a></li>
+    </ul>
+</li>
+      
       </ul>
     </section>
     <!-- /.sidebar -->
