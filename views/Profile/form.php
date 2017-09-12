@@ -16,7 +16,7 @@
     <div class=" col-sm-12  col-md-6">
         <div class="input-group">
             <span class="input-group-addon">Third Name</span>
-            <input id="thirdName" type="text" class="form-control" name="thirdName" value="<?=$Profile->Third_Name?>"  />
+            <input id="thirdName" type="text" class="form-control" name="thirdName" value="<?=$Profile->Third_Name?>" required />
         </div>
         <div class="input-group ">
             <span class="input-group-addon">Fourth Name</span>
@@ -35,7 +35,7 @@
             <span class="input-group-addon">
                 <i aria-hidden="true">BirthDate</i>
             </span>
-            <input id="birthdate" type="date" class="form-control date" onblur="checkDate(this.value,this.id)" name="birthdate" value="<?=$Profile->Birth_Date?>" required />
+            <input id="birthdate" type="date" class="form-control date" <?if($v_date==true){?> onblur="checkDate(this.value,this.id)" <?}?> name="birthdate" value="<?=$Profile->Birth_Date?>" required />
         </div>
     </div>
     <div class="col-xs-12">
@@ -49,7 +49,7 @@
             <span class="input-group-addon">
                 <i aria-hidden="true">Address</i>
             </span>
-            <input id="address" type="text" class="form-control" name="address" value="<?=$Profile->Address[0]?>"  />
+            <input id="address" type="text" class="form-control" name="address" value="<?=$Profile->Address[0]?>"  required />
         </div>
         <div class="input-group ">
             <span class="input-group-addon">
@@ -89,6 +89,8 @@
             <span class="input-group-addon">Cover Img</span>
             <input id="coverImg" type="file" name="coverImg"  />
         </div>
+       <div class="alert alert-warning"><strong>Notice:</strong>Personal image must be newst image otherwise your profile will declined.</div>
+
     </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">

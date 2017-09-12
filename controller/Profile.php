@@ -14,7 +14,10 @@ class Profile extends BaseController
     function form($request){
         $id=$request->get['id'];
         $NathionalID=$request->get['NationalID'];
-
+        $v_date=true;
+        if(isset($request->get['vDate'])){
+         $v_date=$request->get['vDate'];
+        }
         //print_r($request);
 
         if(isset($id) && intval($id)>0){

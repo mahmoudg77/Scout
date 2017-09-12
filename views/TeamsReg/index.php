@@ -17,7 +17,7 @@
 					<div class="input-group ">
 						<span class="input-group-addon"><i class="fa fa-address-card-o" aria-hidden="true"></i></span>
                         <input type="hidden" id="assist_profileid" name="assist_profileid" />
-						<input id="leaderAssistNId" type="text" class="form-control" name="leaderAssistNId" placeholder="Leader Assist National ID" required>
+						<input id="leaderAssistNId" type="text" class="form-control" name="leaderAssistNId" placeholder="Leader Assist National ID" >
                         <span class="input-group-addon btn-getin"><a href=""><i class="fa fa-address-card" aria-hidden="true"></i></a></span>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                     </div>
                 </div>
 
-<div class="row">
+            <div class="row">
 				<div class="col col-md-6">
 					<div class="input-group  ">
 						<span class="input-group-addon"><i class="fa fa-id-card" aria-hidden="true"></i></span>
@@ -60,14 +60,14 @@
 								}
                             }?>
 						</select>
-	</div>
+	        </div>
 
 					<div class="input-group">
 						<span class="input-group-addon"><i aria-hidden="true">Organization</i></span>
 						<select id="organization" type="text" class="form-control teams-tree" name="organization"  data-childs="#branch" required>
 							<option value="">يجب اختيار البلد اولا</option>
 						</select>
-    </div>
+            </div>
 					<div class="input-group">
 						<span class="input-group-addon"><i aria-hidden="true">Branch</i></span>
 						<select id="branch" type="text" class="form-control teams-tree" name="branch"   data-childs="#office" required>
@@ -75,7 +75,7 @@
 						</select>
                         </div>
 					<div class="input-group">
-						<span class="input-group-addon"><i aria-hidden="true">Office</i></span>
+						<span class="input-group-addon"><i aria-hidden="true">Al-Hay2a</i></span>
 						<select id="office" type="text" class="form-control" name="office"  required >
 							<option value="">يجب اختيار الفرع اولا</option>
 						</select>
@@ -235,6 +235,7 @@
 
                               //});
                               addNewProfile({
+                                  DOBValidate:false,
                                   nid: select.val(),
                                   success: function (data) {
                                       if (data.type == "success") {
@@ -282,6 +283,7 @@
                           } else {
 
                               addNewProfile({
+                                  DOBValidate:false,
                                   nid: select.val(),
                                   success: function (data) {
                                       if(data.type=="success"){
@@ -334,6 +336,7 @@
               var select = $(this);
 
               getProfile({
+                 
                   element: select,
                   beforeSubmit: function () {
                       //console.log(select.val());
@@ -366,6 +369,7 @@
                               //    $("#BoyScout").modal();
                               //});
                               addNewProfile({
+                                  DOBValidate:true,
                                   nid: select.val(),
                                   success: function (data) {
                                       if (data.type == "success") {
@@ -395,7 +399,9 @@
 
           function addNewProfile(obj) {
                 $("#BoyScout .modal-body").html("<center><h2>L o a d i n g . . .</h2><img style='width:200px' src='<?=assets("img/loader 2.gif")?>' /></center>");
-              $("#BoyScout .modal-body").load("<?=actionLink("form","Profile")?>?NationalID=" + obj.nid, function () {
+                
+                
+                $("#BoyScout .modal-body").load("<?=actionLink("form","Profile")?>?NationalID=" + obj.nid + (('DOBValidate' in obj)?"&vDate="+obj.DOBValidate:""), function () {
                 $("#BoyScout").modal();
 
                 $('#BoyScout input[type="date"]').datepicker({

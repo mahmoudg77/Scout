@@ -28,7 +28,7 @@
                 <div class="form-group ">
                     <label class="col-sm-3 control-label  profReg" for="fourthname">Fourth name</label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control" id="fourthname" name="fourthname" required />
+                        <input type="text" class="form-control" id="fourthname" name="fourthname" />
                     </div>
                 </div>
                 <div class="form-group   ">
