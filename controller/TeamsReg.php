@@ -158,6 +158,8 @@ class TeamsReg extends BaseController
         $Register->teamId=$TeamId->id;
 
         if(!$Register->insert()) {
+            $user->TempTeamID=$Teams->id;
+            $user->update();
             if($request->isAjax()){
                 return json_error($Register->error);
             }else{
@@ -181,6 +183,8 @@ class TeamsReg extends BaseController
         $Register->teamId=$TeamId->id;
 
         if(!$Register->insert()) {
+            $user->TempTeamID=$Teams->id;
+            $user->update();
             if($request->isAjax()){
                 return json_error($Register->error);
             }else{
@@ -205,6 +209,8 @@ class TeamsReg extends BaseController
         $Register->teamId=$TeamId->id;
 
         if(!$Register->insert()) {
+            $user->TempTeamID=$Teams->id;
+            $user->update();
             if($request->isAjax()){
                 return json_error($Register->error);
             }else{

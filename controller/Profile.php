@@ -14,9 +14,9 @@ class Profile extends BaseController
     function form($request){
         $id=$request->get['id'];
         $NathionalID=$request->get['NationalID'];
-        $v_date=true;
+        $v_date=1;
         if(isset($request->get['vDate'])){
-         $v_date=$request->get['vDate'];
+         $v_date=intval($request->get['vDate']);
         }
         //print_r($request);
 
@@ -33,7 +33,7 @@ class Profile extends BaseController
             $Profile->National_Number=$NathionalID;
         }
       //print_r($Profile);
-        return $this->view(compact('Profile'));
+        return $this->view(compact('Profile','v_date'));
     }
 
     function postForm($request){

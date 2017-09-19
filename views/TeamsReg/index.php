@@ -235,7 +235,7 @@
 
                               //});
                               addNewProfile({
-                                  DOBValidate:false,
+                                  DOBValidate:0,
                                   nid: select.val(),
                                   success: function (data) {
                                       if (data.type == "success") {
@@ -283,7 +283,7 @@
                           } else {
 
                               addNewProfile({
-                                  DOBValidate:false,
+                                  DOBValidate:0,
                                   nid: select.val(),
                                   success: function (data) {
                                       if(data.type=="success"){
@@ -369,7 +369,7 @@
                               //    $("#BoyScout").modal();
                               //});
                               addNewProfile({
-                                  DOBValidate:true,
+                                  DOBValidate:1,
                                   nid: select.val(),
                                   success: function (data) {
                                       if (data.type == "success") {
