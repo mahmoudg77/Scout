@@ -37,6 +37,11 @@ class TeamsReg extends BLL{
                     'type'=>'Many2one',
                     'relation'=>['class'=>'App\Models\Profile\Profile','classid'=>'Profile_ID','controller'=>'Profile'],
                     ],
+            'members'=>['name'=>'Members',
+                    'serialize'=>true,
+                    'type'=>'One2many',
+                    'relation'=>['class'=>'App\Models\Profile\Profile','classid'=>'TempTeamID','controller'=>'Profile'],
+                    ],
 	    ];
     function name(){
         return  $this->TeamId->fullName("\\",false) . "(" . $this->TeamCatId->name . ")";
