@@ -37,7 +37,7 @@
                         <td><?=($row->approval_request==0)?'<label class="label-danger">Rejected</label>':($row->approvel_request==0?'<label class="label label-success">Approved</label>':'<label class="label label-default">Waiting</label>')?></td> 
                       
                       <td>
-                            <a class="btn btn-primary open-modal" href="<?=actionLink('item','',['id'=>$row->{$row->col_pk}])?>">view</a>
+                            <a class="btn btn-primary printurl" href="<?=actionLink('viewprint','',['id'=>$row->{$row->col_pk}])?>">Print</a>
                         </td>
                         <?if($context->user->allow($row->model,"edit")){?>
                         <td>

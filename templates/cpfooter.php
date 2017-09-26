@@ -182,6 +182,12 @@
     
     });
        
+    $("body").on("click",".printurl",function(e){
+        e.preventDefault();
+        console.log($(this).attr("href"));
+         var myWindow = window.open($(this).attr("href"), "MsgWindow", "width=1024,height=800");
+             
+    });
 });
 </script>
 </body>

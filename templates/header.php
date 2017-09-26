@@ -8,9 +8,9 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="description" content="Arab Scout">
+	<meta name="description" content="cairo sea scout">
 	<meta name="author" content="IntoEgy Programming Departement">
-	<title>Arab Scout</title>
+	<title>cairo sea scout</title>
 
 	<!-- Mobile Specific Meta
 		================================================== -->
@@ -62,7 +62,7 @@
 	    ==================================== -->
 	<!--<div id="loading-mask">-->
 		<!--<div class="loading-img">-->
-<!--			<img alt="Arab Scout" src="<?=assets('img/loader 2.gif')?>"/>-->
+<!--			<img alt="cairo sea scout" src="<?=assets('img/loader 2.gif')?>"/>-->
 		<!--</div>
 	</div>-->
 	<!--
@@ -83,8 +83,8 @@
 						<div class="bg-img bg-img-1"></div>
 						<div class="carousel-caption">
 							<div>
-								<img class="wow fadeInUp" src="<?=assets('img/ArabScout.png')?>" alt="ArabScout">
-								<h2 data-wow-duration="500ms" data-wow-delay="500ms" class="heading animated fadeInRight">Welcome To Arab Scout</h2>
+								<img class="wow fadeInUp" src="<?=assets('img/cairoseascout.png')?>" alt="cairoseascout">
+								<h2 data-wow-duration="500ms" data-wow-delay="500ms" class="heading animated fadeInRight">Welcome To cairo sea scout</h2>
 							</div>
 						</div>
 					</div>
@@ -97,8 +97,8 @@
 						<div class="bg-img bg-img-2"></div>
 						<div class="carousel-caption">
 							<div>
-								<h2 class="heading animated fadeInDown">Arab Scout Registeration SOON</h2>
-								<h3 class="animated fadeInUp">With Most Arab Scouting members</h3>
+								<h2 class="heading animated fadeInDown">cairo sea scout Registeration SOON</h2>
+								<h3 class="animated fadeInUp">With Most cairo sea scouting members</h3>
 								<a class="btn btn-green animated fadeInUp" href="#">Get Started</a>
 							</div>
 						</div>
@@ -165,7 +165,7 @@
 				<!-- logo -->
 				<a class="navbar-brand" href="#body">
         						<h1 id="logo">
-        							<img src="<?=assets('img/ArabScoutHeaderLogo.png')?>" alt="ArabScout" />
+        							<img src="<?=assets('img/cairoseascoutHeaderLogo.png')?>" alt="cairoseascout" />
         						</h1>
         					</a>
 
@@ -208,8 +208,8 @@
 					<div class="w3-modal-content w3-animate-opacity" style="border-radius: 20px; background-color:#333439;">
 						<div class="modal-header">
 							<!--							<button type="button" class="close" data-dismiss="modal">&times;</button>-->
-							<img src="/templates/assets/img/ArabScoutHeaderLogo.png" style="display: block; margin-left: auto;
-    							margin-right: auto; width:45%; " alt="ArabScout" data-pin-nopin="true">
+							<img src="/templates/assets/img/cairoseascoutHeaderLogo.png" style="display: block; margin-left: auto;
+    							margin-right: auto; width:45%; " alt="cairoseascout" data-pin-nopin="true">
 						</div>
 						<div class="modal-body">
 							<form action="<?=actionLink('login','Login')?>" method="post">

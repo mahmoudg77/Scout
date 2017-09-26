@@ -23,6 +23,14 @@ class TeamsReg extends BaseController
 		}
         parent::index($request);
     }
+
+    function viewprint($request){
+        $team=new $this->model;
+        $data=$team->find($request->get['id']);
+
+        return $this->view(compact('data'));
+    }
+
     function myTeam($request){
         $profile=new App\Models\Profile\Profile;
         $data=$profile->get();
