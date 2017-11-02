@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `setting` (
   `setting_group` varchar(100) NOT NULL DEFAULT 'General Setting',
   PRIMARY KEY (`id`),
   KEY `lang` (`lang`),
-  KEY `setting_group` (`group`)
+  KEY `setting_group` (`setting_group`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=79 ;
 
 --
